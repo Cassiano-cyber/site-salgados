@@ -3,57 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salgados Personalizados - Carrinho de Compras</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Delícias Salgadas</title>
 </head>
 <body>
     <header>
-        <h1>Delícias Salgadas</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#cardapio">Cardápio</a></li>
-                <li><a href="#promocoes">Promoções</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+        <img src="https://www.designi.com.br/images/preview/10006042.jpg" alt="Logo Pizzaria" class="logo">
+        <h1>Salgados Personalizados</h1>
     </header>
+    <main>
+        <section class="menu">
+            <h2>Nosso Cardápio de Salgados</h2>
+            <div class="menu-item">
+                <img src="https://cdn.pixabay.com/photo/2024/03/03/03/34/ai-generated-8609737_1280.jpg" alt="Salgado de Carne">
+                <h3>Salgado de Carne</h3>
+                <p>R$ 10,00</p>
+                <button class="add-to-cart" data-name="Salgado de Carne" data-price="10.00">Adicionar ao Carrinho</button>
+            </div>
+            <div class="menu-item">
+                <img src="https://cdn.pixabay.com/photo/2023/06/28/07/55/ai-generated-8135514_1280.jpg" alt="Salgado de Frango">
+                <h3>Salgado de Frango</h3>
+                <p>R$ 12,00</p>
+                <button class="add-to-cart" data-name="Salgado de Frango" data-price="12.00">Adicionar ao Carrinho</button>
+            </div>
+            <div class="menu-item">
+                <img src="https://cdn.pixabay.com/photo/2024/03/01/04/02/ai-generated-8605493_1280.jpg" alt="Salgado de Queijo">
+                <h3>Salgado de Queijo</h3>
+                <p>R$ 8,00</p>
+                <button class="add-to-cart" data-name="Salgado de Queijo" data-price="8.00">Adicionar ao Carrinho</button>
+            </div>
+        </section>
 
-    <section id="home">
-        <h2>Bem-vindo às Delícias Salgadas!</h2>
-        <p>Aproveite nossos salgados fresquinhos e deliciosos.</p>
-    </section>
-
-    <section id="cardapio">
-        <h2>Cardápio</h2>
-        <ul>
-            <li>Coxinha - R$ 5,00</li>
-            <li>Empada - R$ 4,50</li>
-            <li>Pastel - R$ 6,00</li>
-            <li>Bolinho de Bacalhau - R$ 7,00</li>
-        </ul>
-    </section>
-
-    <section id="promocoes">
-        <h2>Promoções</h2>
-        <p>Compre 10 salgados e ganhe 1 grátis!</p>
-    </section>
-
-    <section id="contato">
-        <h2>Contato</h2>
-        <form id="contactForm">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            <label for="message">Mensagem:</label>
-            <textarea id="message" required></textarea>
-            <button type="submit">Enviar</button>
-        </form>
-    </section>
+        <section class="cart">
+            <h2>Seu Carrinho</h2>
+            <ul id="cart"></ul>
+            <p>Total: R$ <span id="total">0.00</span></p>
+            <button id="checkoutButton">Finalizar Pedido</button>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2023 Delícias Salgadas. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Salgados Deliciosos</p>
     </footer>
 
     <script src="script.js"></script>
