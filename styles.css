@@ -1,108 +1,169 @@
-body {
-    font-family: Arial, sans-serif;
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Dramaturgia+Cuba&family=Dancing+Script:wght@400;700&display=swap');
+
+/* Variáveis Globais */
+:root {
+    --primary-color: #ff6347;
+    --secondary-color: #ffd700;
+    --background-color: #f9f9f9;
+    --text-color: #333;
+    --accent-color: #ff9900;
+    --white: #ffffff;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+/* Reset Básico */
+body, h1, h2, h3, p, ul, li, button {
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #ff6347;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-header .logo {
-    width: 150px;
-    margin-bottom: 10px;
-}
-
-h1 {
-    font-size: 2.5em;
+/* Estilo Geral */
+body {
+    font-family: 'Dramaturgia Cuba', Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
     margin: 0;
 }
 
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1.5em 0;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+header h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+}
+
+/* Menu Principal */
 main {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
     padding: 20px;
+    justify-content: center;
 }
 
-.menu, .cart {
-    width: 45%;
-}
-
+/* Card de Produtos */
 .menu-item {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
     text-align: center;
-    margin-bottom: 20px;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .menu-item img {
     width: 100%;
     height: auto;
-    max-width: 300px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
 }
 
 .menu-item h3 {
-    font-size: 1.5em;
-    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
 }
 
 .menu-item p {
-    font-size: 1.2em;
-    margin: 10px 0;
+    margin-bottom: 15px;
+    color: var(--text-color);
 }
 
+/* Botões */
 button {
-    background-color: #ff6347;
+    background-color: var(--primary-color);
+    color: var(--white);
     border: none;
-    color: white;
+    border-radius: var(--border-radius);
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 1em;
-    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #d9534f;
+    background-color: var(--accent-color);
+    transform: scale(1.05);
 }
 
+button:active {
+    transform: scale(0.95);
+}
+
+/* Carrinho */
 .cart {
-    background-color: white;
+    background-color: var(--white);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-ul {
-    list-style-type: none;
-    padding-left: 0;
+.cart ul {
+    list-style: none;
+    padding: 0;
 }
 
-ul li {
-    font-size: 1.2em;
-    margin: 10px 0;
+.cart ul li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
+    font-size: 1rem;
 }
 
 .delete-item {
-    background-color: transparent;
+    background: none;
     border: none;
-    color: red;
-    font-size: 1.5em;
+    color: var(--primary-color);
     cursor: pointer;
+    font-size: 1.5rem;
+    transition: color 0.3s;
 }
 
 .delete-item:hover {
-    color: darkred;
+    color: var(--accent-color);
 }
 
+/* Footer */
 footer {
+    background-color: var(--primary-color);
+    color: var(--white);
     text-align: center;
-    padding: 20px;
-    background-color: #ff6347;
-    color: white;
+    padding: 1em 0;
+    font-size: 1rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-item {
+        max-width: 100%;
+    }
+
+    footer {
+        font-size: 0.9rem;
+    }
 }
