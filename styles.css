@@ -78,7 +78,7 @@ main {
     max-height: 600px; /* Ajuste a altura máxima conforme necessário */
     object-fit: contain; /* Mantém a proporção da imagem e ajusta dentro do contêiner */
     border: 2px solid #000; /* Borda para as imagens */
-    border-radius: 80px; /* Arredonda os cantos da borda */
+    border-radius: 60px; /* Arredonda os cantos da borda */
 }
 
 .carousel-item.active {
