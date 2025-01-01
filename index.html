@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio e Carrinho de Compras</title>
     <link rel="stylesheet" href="styles.css">
+    <title>Cardápio de Salgados</title>
 </head>
 <body>
     <header>
-        <h1>Cardápio Delicioso</h1>
-        <p>Os melhores salgados, feitos com amor!</p>
+        <h1>Cardápio de Salgados</h1>
+        <p>Escolha o que deseja e peça agora!</p>
     </header>
 
+    <nav>
+        <ul>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#carrinho">Carrinho</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+
     <main>
-        <section class="menu">
+        <section id="menu" class="menu">
             <h2 class="menu-title">Nosso Cardápio</h2>
             <div class="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
+                    <div class="carousel-item">
                         <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de Costela">
                         <h3>Coxinha de Costela</h3>
                         <p>R$ 10,00</p>
@@ -36,13 +44,13 @@
                         <button class="add-to-cart" data-name="Enroladinho de Salsicha" data-price="8.00">Adicionar</button>
                     </div>
                 </div>
-                <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
-                <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
+                <button class="carousel-control prev" onclick="prevSlide()">❮</button>
+                <button class="carousel-control next" onclick="nextSlide()">❯</button>
             </div>
         </section>
 
-        <section class="cart">
-            <h2>Seu Carrinho</h2>
+        <section id="carrinho" class="cart">
+            <h2>Carrinho</h2>
             <ul id="cart"></ul>
             <p>Total: R$ <span id="total">0.00</span></p>
             <button id="checkoutButton">Finalizar Pedido</button>
@@ -50,7 +58,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Cardápio Delicioso</p>
+        <p>&copy; 2024 Salgados Online. Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js"></script>
