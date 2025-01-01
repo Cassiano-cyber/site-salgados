@@ -72,3 +72,26 @@ document.getElementById('checkoutButton').addEventListener('click', () => {
 
     window.open(whatsappUrl, '_blank');
 });
+let currentIndex = 0;
+
+function updateCarousel() {
+    const inner = document.querySelector('.carousel-inner');
+    const items = document.querySelectorAll('.carousel-item');
+    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Loop de slides (opcional)
+    if (currentIndex >= items.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = items.length - 1;
+}
+
+function nextSlide() {
+    const items = document.querySelectorAll('.carousel-item');
+    currentIndex = (currentIndex + 1) % items.length;
+    updateCarousel();
+}
+
+function prevSlide() {
+    const items = document.querySelectorAll('.carousel-item');
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    updateCarousel();
+}
