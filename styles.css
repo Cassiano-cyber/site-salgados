@@ -165,6 +165,71 @@ button:hover {
 button:active {
     transform: scale(0.95);
 }
+/* Carrossel */
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 300%;
+}
+
+.carousel-item {
+    min-width: 100%;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.carousel-item img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel-item h3 {
+    font-family: 'Leckerli One', cursive;
+    margin-top: 10px;
+    font-size: 1.5em;
+}
+
+.carousel-item p {
+    font-family: 'Leckerli One', cursive;
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 2em;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.carousel-control.prev {
+    left: 10px;
+}
+
+.carousel-control.next {
+    right: 10px;
+}
+
+.carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
 
 /* Carrinho */
 .cart {
