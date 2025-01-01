@@ -74,24 +74,32 @@ document.getElementById('checkoutButton').addEventListener('click', () => {
 });
 let currentIndex = 0;
 
-function updateCarousel() {
-    const inner = document.querySelector('.carousel-inner');
-    const items = document.querySelectorAll('.carousel-item');
-    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+let currentIndex = 0;
 
-    // Loop de slides (opcional)
-    if (currentIndex >= items.length) currentIndex = 0;
-    if (currentIndex < 0) currentIndex = items.length - 1;
-}
-
-function nextSlide() {
+function showSlide(index) {
     const items = document.querySelectorAll('.carousel-item');
-    currentIndex = (currentIndex + 1) % items.length;
-    updateCarousel();
+    const totalItems = items.length;
+
+    if (index < 0) {
+        currentIndex = totalItems - 1;
+    } else if (index >= totalItems) {
+        currentIndex = 0;
+    } else {
+        currentIndex = index;
+    }
+
+    const carouselInner = document.querySelector('.carousel-inner');
+    carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 
 function prevSlide() {
-    const items = document.querySelectorAll('.carousel-item');
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
-    updateCarousel();
+    showSlide(currentIndex - 1);
 }
+
+function nextSlide() {
+    showSlide(currentIndex + 1);
+}
+
+setInterval(() => {
+    nextSlide();
+}, 5000);  // Auto slide every 5 seconds
