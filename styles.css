@@ -1,5 +1,5 @@
 /* Importação de fontes */
-@import url('https://fonts.googleapis.com/css2?family=Dramaturgia+Cuba&family=Leckerli+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Leckerli+One&display=swap');
 
 /* Variáveis Globais */
 :root {
@@ -11,7 +11,7 @@
     --white: #ffffff;
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     --border-radius: 12px;
-    --header-font: 'Dramaturgia Cuba', cursive;
+    --header-font: 'Dancing Script', cursive;
     --product-font: 'Leckerli One', cursive;
 }
 
@@ -40,10 +40,10 @@ header {
     padding: 2em 0;
     text-align: center;
     box-shadow: var(--box-shadow);
-    font-family: var(--header-font);
 }
 
 header h1 {
+    font-family: var(--header-font);
     font-size: 3rem;
     margin-bottom: 0.5em;
 }
@@ -89,6 +89,15 @@ main {
     justify-content: center;
 }
 
+/* Títulos do Cardápio */
+.menu-title {
+    font-family: var(--header-font);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1em;
+    color: var(--primary-color);
+}
+
 /* Card de Produtos */
 .menu-item {
     background-color: var(--white);
@@ -124,6 +133,14 @@ main {
     margin-bottom: 1em;
 }
 
+.menu-item .price {
+    font-family: var(--product-font);
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-top: 0.5em;
+}
+
 /* Botões */
 button {
     background-color: var(--primary-color);
@@ -135,8 +152,8 @@ button {
     font-family: var(--header-font);
     font-size: 1.2rem;
     transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s;
-    margin: 0 auto; /* Centraliza o botão */
-    display: block; /* Garante alinhamento correto em todos os dispositivos */
+    margin: 0 auto;
+    display: block;
 }
 
 button:hover {
