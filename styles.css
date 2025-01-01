@@ -166,44 +166,41 @@ button:active {
     transform: scale(0.95);
 }
 /* Carrossel */
+.menu {
+    text-align: center;
+    margin: 30px 0;
+}
+
 .carousel {
     position: relative;
-    width: 100%;
-    max-width: 800px;
+    width: 80%;
     margin: 0 auto;
-    overflow: hidden;
 }
 
 .carousel-inner {
     display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 300%;
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.5s ease;
 }
 
 .carousel-item {
     min-width: 100%;
-    text-align: center;
-    padding: 20px;
     box-sizing: border-box;
 }
 
 .carousel-item img {
     width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
+    height: auto;
 }
 
 .carousel-item h3 {
-    font-family: 'Leckerli One', cursive;
-    margin-top: 10px;
-    font-size: 1.5em;
+    font-size: 1.5rem;
+    margin: 10px 0;
 }
 
 .carousel-item p {
-    font-family: 'Leckerli One', cursive;
-    font-size: 1.2em;
-    margin: 5px 0;
+    font-size: 1rem;
 }
 
 .carousel-control {
@@ -214,22 +211,19 @@ button:active {
     color: white;
     border: none;
     padding: 10px;
-    font-size: 2em;
     cursor: pointer;
-    border-radius: 50%;
+    font-size: 2rem;
+    z-index: 10;
 }
 
-.carousel-control.prev {
+.prev {
     left: 10px;
 }
 
-.carousel-control.next {
+.next {
     right: 10px;
 }
 
-.carousel-control:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
 
 /* Carrinho */
 .cart {
