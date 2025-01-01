@@ -5,151 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio e Carrinho de Compras</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family:'Dancing script';
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-        }
-        header {
-            background-color: #ff6600;
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        header img.logo {
-            height: 50px;
-            width: auto;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        .menu {
-            padding: 20px;
-        }
-        .menu h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .menu-item img {
-            height: 80px;
-            width: auto;
-            border-radius: 5px;
-        }
-        .menu-item h3 {
-            margin: 0 10px;
-            font-size: 1.2rem;
-            color: #333;
-        }
-        .menu-item p {
-            margin: 0;
-            color: #666;
-        }
-        .menu-item button {
-            background-color: #ff6600;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .menu-item button:hover {
-            background-color: #e65c00;
-        }
-        .cart {
-            padding: 20px;
-            background: #fff;
-            margin: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .cart h2 {
-            margin-top: 0;
-        }
-        #cart {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 10px;
-        }
-        #cart li {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        #total {
-            font-weight: bold;
-            color: #333;
-        }
-        #checkoutButton {
-            display: inline-block;
-            background-color: #ff6600;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #checkoutButton:hover {
-            background-color: #e65c00;
-        }
-        footer {
-            text-align: center;
-            background: #333;
-            color: white;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
     <header>
-        <img src="https://www.designi.com.br/images/preview/10006042.jpg" alt="Logo" class="logo">
         <h1>Cardápio Delicioso</h1>
+        <p>Os melhores salgados, feitos com amor!</p>
     </header>
 
     <main>
-       <section class="menu">
-    <h2>Nosso Cardápio</h2>
-    <div class="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de Costela">
-                <h3>Coxinha de Costela</h3>
-                <p>R$ 10,00</p>
+        <section class="menu">
+            <h2 class="menu-title">Nosso Cardápio</h2>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de Costela">
+                        <h3>Coxinha de Costela</h3>
+                        <p>R$ 10,00</p>
+                        <button class="add-to-cart" data-name="Coxinha de Costela" data-price="10.00">Adicionar</button>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de Frango">
+                        <h3>Empada de Frango</h3>
+                        <p>R$ 12,00</p>
+                        <button class="add-to-cart" data-name="Empada de Frango" data-price="12.00">Adicionar</button>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de Salsicha">
+                        <h3>Enroladinho de Salsicha</h3>
+                        <p>R$ 8,00</p>
+                        <button class="add-to-cart" data-name="Enroladinho de Salsicha" data-price="8.00">Adicionar</button>
+                    </div>
+                </div>
+                <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
             </div>
-            <div class="carousel-item active">
-                <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de Frango">
-                <h3>Empada de Frango</h3>
-                <p>R$ 12,00</p>
-            </div>
-            <div class="carousel-item active">
-                <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de Salsicha">
-                <h3>Enroladinho de Salsicha</h3>
-                <p>R$ 8,00</p>
-            </div>
-        </div>
-        <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
-        <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
-    </div>
-</section>
+        </section>
 
         <section class="cart">
             <h2>Seu Carrinho</h2>
