@@ -28,7 +28,6 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
 
         cart.push({ name, price });
         total += price;
-
         updateCart();
     });
 });
@@ -45,7 +44,7 @@ document.getElementById('checkoutButton').addEventListener('click', () => {
         return;
     }
 
-    let orderDetails = `Pedido:\n`;
+    let orderDetails = 'Pedido:\n';
     cart.forEach(item => {
         orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
     });
@@ -60,18 +59,10 @@ let currentIndex = 0;
 
 function showSlide(index) {
     const items = document.querySelectorAll('.carousel-item');
-    const totalItems = items.length;
+    items.forEach(item => item.classList.remove('active'));
 
-    if (index < 0) {
-        currentIndex = totalItems - 1;
-    } else if (index >= totalItems) {
-        currentIndex = 0;
-    } else {
-        currentIndex = index;
-    }
-
-    const carouselInner = document.querySelector('.carousel-inner');
-    carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+    currentIndex = (index + items.length) % items.length;
+    items[currentIndex].classList.add('active');
 }
 
 function prevSlide() {
@@ -81,6 +72,8 @@ function prevSlide() {
 function nextSlide() {
     showSlide(currentIndex + 1);
 }
+
+showSlide(currentIndex);
 
 setInterval(() => {
     nextSlide();
