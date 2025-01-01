@@ -40,6 +40,7 @@ header {
     padding: 2em 0;
     text-align: center;
     box-shadow: var(--box-shadow);
+    font-family: var(--header-font);
 }
 
 header h1 {
