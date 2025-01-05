@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
 :root {
-    --primary-color: #ff7f50; /* Laranja para header */
-    --secondary-color: #ffd700; /* Amarelo ouro */
+    --primary-color: #ff7f50;
+    --secondary-color: #ffd700;
     --background-color: #f9f9f9;
     --text-color: #333;
-    --button-color: #ffa07a; /* Laranja claro para botões */
-    --button-hover-color: #ff6347; /* Laranja vibrante no hover */
+    --button-color: #ffa07a;
+    --button-hover-color: #ff6347;
     --white: #ffffff;
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     --border-radius: 12px;
@@ -25,41 +25,34 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    font-size: 1.2rem;
 }
 
 header {
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 2rem 0;
     text-align: center;
-    box-shadow: var(--box-shadow);
+    padding: 2rem 0;
 }
 
 header h1 {
     font-size: 2.5rem;
-    margin-bottom: 0.5rem;
 }
 
 header p {
     font-size: 1.2rem;
-    margin-top: 0.5rem;
 }
 
 main {
-    padding: 2rem;
     display: flex;
-    gap: 2rem;
     justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem;
 }
 
-/* Estilo do carrossel */
 .carousel {
-    flex: 4; /* Ocupa 80% */
+    flex: 4;
     position: relative;
     overflow: hidden;
-    margin: 2rem auto;
-    max-width: 600px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
@@ -67,22 +60,18 @@ main {
 .carousel-inner {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    width: 100%;
 }
 
 .carousel-item {
     flex: 0 0 100%;
+    display: none;
     text-align: center;
     padding: 1.5rem;
     background-color: var(--white);
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease;
 }
 
 .carousel-item.active {
     display: block;
-    opacity: 1;
 }
 
 .carousel-item img {
@@ -90,13 +79,6 @@ main {
     max-width: 300px;
     height: auto;
     border-radius: var(--border-radius);
-    margin-bottom: 1rem;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.carousel-item img:hover {
-    transform: scale(1.05);
 }
 
 .carousel-control {
@@ -105,13 +87,11 @@ main {
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: var(--white);
-    border: none;
-    border-radius: var(--border-radius);
     font-size: 2rem;
+    border: none;
     cursor: pointer;
+    z-index: 10;
     padding: 0.5rem 1rem;
-    z-index: 100;
-    transition: background-color 0.3s ease;
 }
 
 .carousel-control.prev {
@@ -122,106 +102,44 @@ main {
     right: 10px;
 }
 
-.carousel-control:hover {
-    background-color: var(--primary-color);
-}
-
-/* Estilo do carrinho */
 .cart {
-    flex: 1; /* Ocupa 20% */
-    padding: 1.5rem;
+    flex: 1;
     background-color: var(--white);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    text-align: center;
+    padding: 1.5rem;
 }
 
 .cart h2 {
     font-size: 1.5rem;
-    color: var(--primary-color);
     margin-bottom: 1rem;
+    color: var(--primary-color);
 }
 
 .cart ul {
     list-style: none;
     padding: 0;
-    margin: 1rem 0;
 }
 
 .cart ul li {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .cart ul li span {
     font-size: 1rem;
-    color: var(--text-color);
 }
 
-.cart ul li input {
-    width: 40px;
-    text-align: center;
-    border: 1px solid var(--primary-color);
-    border-radius: var(--border-radius);
-    padding: 0.2rem;
-    font-size: 1rem;
-    margin-left: 0.5rem;
-}
-
-.cart ul li input:focus {
-    outline: none;
-    border-color: var(--button-hover-color);
-}
-
-.delete-item {
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.delete-item:hover {
-    color: var(--button-hover-color);
-}
-
-/* Botões */
 button {
     background-color: var(--button-color);
     color: var(--white);
     border: none;
     border-radius: var(--border-radius);
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem;
     cursor: pointer;
-    font-family: var(--header-font);
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
     background-color: var(--button-hover-color);
-    transform: scale(1.05);
-    box-shadow: var(--box-shadow);
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-
-    .carousel {
-        max-width: 100%;
-    }
-
-    .cart {
-        margin-top: 2rem;
-    }
 }
