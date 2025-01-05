@@ -50,13 +50,13 @@ main {
 }
 
 .carousel {
-    width: 90%; /* Aumenta a largura para ocupar 90% do contêiner pai */
-    max-width: 1200px; /* Define um limite máximo para a largura */
+    width: 100%; /* O carrossel ocupará toda a largura do espaço disponível */
+    max-width: 700px; /* Defina um limite máximo para não ficar exageradamente grande */
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    margin: 0 auto; /* Centraliza o carrossel na página */
+    margin: 0 auto; /* Centraliza o carrossel */
 }
 
 
@@ -85,12 +85,11 @@ main {
 
 .carousel-item img {
     max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: 300px; /* Altura consistente */
+    height: auto; /* Ajusta a altura proporcionalmente */
     object-fit: cover;
     border-radius: var(--border-radius);
 }
+
 
 
 .carousel-control {
