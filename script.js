@@ -1,80 +1,91 @@
-let cart = [];
-let total = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    let cart = [];
+    let total = 0;
+    let currentIndex = 0;
 
-function updateCart() {
-    const cartList = document.getElementById("cart");
-    cartList.innerHTML = '';
+    // Atualiza o carrinho
+    function updateCart() {
+        const cartList = document.getElementById('cart');
+        cartList.innerHTML = '';
 
-    cart.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+        cart.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
 
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = '🗑️';
-        deleteButton.classList.add('delete-item');
-        deleteButton.addEventListener('click', () => removeItem(index));
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '🗑️';
+            deleteButton.classList.add('delete-item');
+            deleteButton.addEventListener('click', () => removeItem(index));
 
-        li.appendChild(deleteButton);
-        cartList.appendChild(li);
-    });
+            li.appendChild(deleteButton);
+            cartList.appendChild(li);
+        });
 
-    document.getElementById("total").textContent = total.toFixed(2);
-}
-
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', () => {
-        const name = button.getAttribute('data-name');
-        const price = parseFloat(button.getAttribute('data-price'));
-
-        cart.push({ name, price });
-        total += price;
-        updateCart();
-    });
-});
-
-function removeItem(index) {
-    total -= cart[index].price;
-    cart.splice(index, 1);
-    updateCart();
-}
-
-document.getElementById('checkoutButton').addEventListener('click', () => {
-    if (cart.length === 0) {
-        alert('Carrinho vazio! Adicione itens ao carrinho.');
-        return;
+        document.getElementById('total').textContent = total.toFixed(2);
     }
 
-    let orderDetails = 'Pedido:\n';
-    cart.forEach(item => {
-        orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
+    // Adiciona item ao carrinho
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+            const name = button.getAttribute('data-name');
+            const price = parseFloat(button.getAttribute('data-price'));
+
+            cart.push({ name, price });
+            total += price;
+            updateCart();
+        });
     });
-    orderDetails += `\nTotal: R$ ${total.toFixed(2)}`;
 
-    const phoneNumber = '+5517996780618';
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
-    window.open(whatsappUrl, '_blank');
+    // Remove item do carrinho
+    function removeItem(index) {
+        total -= cart[index].price;
+        cart.splice(index, 1);
+        updateCart();
+    }
+
+    // Finaliza o pedido via WhatsApp
+    document.getElementById('checkoutButton').addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Carrinho vazio! Adicione itens ao carrinho.');
+            return;
+        }
+
+        let orderDetails = 'Pedido:\n';
+        cart.forEach(item => {
+            orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
+        });
+        orderDetails += `\nTotal: R$ ${total.toFixed(2)}`;
+
+        const phoneNumber = '+5517996780618';
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
+        window.open(whatsappUrl, '_blank');
+    });
+
+    // Carrossel - Mostra o slide atual
+    function showSlide(index) {
+        const items = document.querySelectorAll('.carousel-item');
+        items.forEach(item => item.style.display = 'none'); // Esconde todos os slides
+
+        currentIndex = (index + items.length) % items.length; // Garante índice válido
+        items[currentIndex].style.display = 'block'; // Mostra o slide atual
+    }
+
+    // Navegação do carrossel
+    function prevSlide() {
+        showSlide(currentIndex - 1);
+    }
+
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+
+    // Inicia o carrossel
+    document.querySelector('.carousel-control.prev').addEventListener('click', prevSlide);
+    document.querySelector('.carousel-control.next').addEventListener('click', nextSlide);
+    showSlide(currentIndex);
+
+    // Avanço automático do carrossel
+    setInterval(() => {
+        nextSlide();
+    }, 5000);
 });
-
-let currentIndex = 0;
-
-function showSlide(index) {
-    const items = document.querySelectorAll('.carousel-item');
-    items.forEach(item => item.classList.remove('active'));
-
-    currentIndex = (index + items.length) % items.length;
-    items[currentIndex].classList.add('active');
-}
-
-function prevSlide() {
-    showSlide(currentIndex - 1);
-}
-
-function nextSlide() {
-    showSlide(currentIndex + 1);
-}
-
-showSlide(currentIndex);
-
-setInterval(() => {
-    nextSlide();
-}, 5000);
