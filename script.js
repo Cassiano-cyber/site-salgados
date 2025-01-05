@@ -1,87 +1,38 @@
-let cart = [];
-let total = 0;
-
-function updateCart() {
-    const cartList = document.getElementById("cart");
-    cartList.innerHTML = '';
-
-    cart.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = '🗑️';
-        deleteButton.classList.add('delete-item');
-        deleteButton.addEventListener('click', () => removeItem(index));
-
-        li.appendChild(deleteButton);
-        cartList.appendChild(li);
-    });
-
-    document.getElementById("total").textContent = total.toFixed(2);
-}
-
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', () => {
-        const name = button.getAttribute('data-name');
-        const price = parseFloat(button.getAttribute('data-price'));
-
-        cart.push({ name, price });
-        total += price;
-        updateCart();
-    });
-});
-
-function removeItem(index) {
-    total -= cart[index].price;
-    cart.splice(index, 1);
-    updateCart();
-}
-
-document.getElementById('checkoutButton').addEventListener('click', () => {
-    if (cart.length === 0) {
-        alert('Carrinho vazio! Adicione itens ao carrinho.');
-        return;
-    }
-
-    let orderDetails = 'Pedido:\n';
-    cart.forEach(item => {
-        orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
-    });
-    orderDetails += `\nTotal: R$ ${total.toFixed(2)}`;
-
-    const phoneNumber = '+5517996780618';
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
-    window.open(whatsappUrl, '_blank');
-});
-
-// Carrossel
 let currentIndex = 0;
 
+// Função para mostrar o slide atual
 function showSlide(index) {
     const items = document.querySelectorAll('.carousel-item');
-    items.forEach(item => item.classList.remove('active'));
-
-    currentIndex = (index + items.length) % items.length;
-    items[currentIndex].classList.add('active');
+    items.forEach((item, i) => {
+        item.classList.remove('active');
+        if (i === index) {
+            item.classList.add('active');
+        }
+    });
 }
 
-function prevSlide() {
-    showSlide(currentIndex - 1);
+// Função para avançar e retroceder o slide
+function changeSlide(step) {
+    const items = document.querySelectorAll('.carousel-item');
+    currentIndex = (currentIndex + step + items.length) % items.length; // Garantir índice válido
+    showSlide(currentIndex);
 }
 
-function nextSlide() {
-    showSlide(currentIndex + 1);
-}
+// Eventos dos botões
+document.querySelector('.prev').addEventListener('click', () => changeSlide(-1));
+document.querySelector('.next').addEventListener('click', () => changeSlide(1));
 
-// Vincula os botões aos eventos de navegação
-document.querySelector('.prev').addEventListener('click', prevSlide);
-document.querySelector('.next').addEventListener('click', nextSlide);
+// Auto-avançar o carrossel
+let autoSlide = setInterval(() => changeSlide(1), 5000);
 
-// Inicia o carrossel com o slide atual
+// Pausar auto-avançar ao interagir
+document.querySelector('.carousel').addEventListener('mouseenter', () => {
+    clearInterval(autoSlide);
+});
+
+document.querySelector('.carousel').addEventListener('mouseleave', () => {
+    autoSlide = setInterval(() => changeSlide(1), 5000);
+});
+
+// Inicializa o carrossel no índice 0
 showSlide(currentIndex);
-
-// Avança o slide a cada 5 segundos automaticamente
-setInterval(() => {
-    nextSlide();
-}, 5000);
