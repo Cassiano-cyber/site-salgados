@@ -56,10 +56,6 @@ main {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
-.carousel-container {
-    width: 100%;
-    margin: 0 auto; /* Ajuste conforme necessário */
-}
 
 .carousel-inner {
     display: flex;
@@ -110,7 +106,7 @@ main {
     background-color: var(--white);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    padding: 1.5rem; 
+    padding: 1.5rem;
 }
 
 .cart h2 {
@@ -127,11 +123,18 @@ main {
 .cart ul li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 0.5rem;
 }
 
 .cart ul li span {
     font-size: 1rem;
+}
+
+.cart ul li .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 button {
@@ -145,4 +148,18 @@ button {
 
 button:hover {
     background-color: var(--button-hover-color);
+}
+
+#checkoutButton {
+    background-color: var(--secondary-color);
+    font-weight: bold;
+}
+
+#checkoutButton:hover {
+    background-color: var(--primary-color);
+}
+
+.cart .quantity-input {
+    width: 40px;
+    text-align: center;
 }
