@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Leckerli+One&display=swap');
 
 :root {
-    --primary-color: #ff6347;
-    --secondary-color: #ffd700;
+    --primary-color: #ff6347; /* Laranja vibrante */
+    --secondary-color: #ffd700; /* Amarelo ouro */
     --background-color: #f9f9f9;
     --text-color: #333;
-    --accent-color: #ff9900;
+    --accent-color: #ff7f50; /* Laranja suave */
     --white: #ffffff;
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     --border-radius: 12px;
     --header-font: 'Dancing Script', cursive;
     --product-font: 'Leckerli One', cursive;
+    --base-font: 'Arial', sans-serif;
 }
 
 * {
@@ -19,90 +20,112 @@
     box-sizing: border-box;
 }
 
-.menu{
-text-align: center;
-}
-
 body {
-    font-family: var(--header-font);
+    font-family: var(--base-font);
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 header {
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 2em 0;
+    padding: 2rem 0;
     text-align: center;
     box-shadow: var(--box-shadow);
+    font-family: var(--header-font);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 2em;
+    gap: 2rem;
+    margin-top: 1rem;
 }
 
 nav ul li a {
     color: var(--secondary-color);
     text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
 }
 
 main {
-    padding: 2em;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
+/* Carrossel */
 .carousel {
     position: relative;
     text-align: center;
-    margin: 30px auto;
-    width: 80%;
+    width: 100%;
+    max-width: 60%;
+    margin: 0 auto;
 }
 
 .carousel-inner {
     display: flex;
     overflow: hidden;
     width: 100%;
+    gap: 1rem;
     transition: transform 0.5s ease;
 }
 
-.carousel-item {
-    display: none;
-    width: 100%;
-}
 .carousel-item img {
-    max-width: 100%;
-    max-height: 600px; /* Ajuste a altura máxima conforme necessário */
-    object-fit: contain; /* Mantém a proporção da imagem e ajusta dentro do contêiner */
-    border: 2px solid #000; /* Borda para as imagens */
-    border-radius: 60px; /* Arredonda os cantos da borda */
+    width: 100%;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--primary-color);
+    object-fit: cover;
 }
 
-.carousel-item.active {
-    display: block;
+.carousel-item h3 {
+    font-family: var(--product-font);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-top: 0.5rem;
+}
+
+.carousel-item p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
 }
 
 .carousel-control {
     position: absolute;
     top: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 2rem;
-    cursor: pointer;
     transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--white);
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 10;
 }
 
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
+.carousel-control:hover {
+    background-color: var(--accent-color);
 }
 
 /* Botões */
@@ -111,19 +134,17 @@ button {
     color: var(--white);
     border: none;
     border-radius: var(--border-radius);
-    padding: 12px 24px;
+    padding: 0.8rem 1.5rem;
     cursor: pointer;
     font-family: var(--header-font);
-    font-size: 1.2rem;
-    transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s;
-    margin: 1em auto;
-    display: inline-block;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
     background-color: var(--accent-color);
     transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
 }
 
 button:active {
@@ -132,32 +153,40 @@ button:active {
 
 /* Carrinho */
 .cart {
-    margin-top: 20px;
-    padding: 2em;
-    border-radius: var(--border-radius);
+    flex: 1;
+    padding: 2rem;
     background-color: var(--white);
+    border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     text-align: center;
+}
+
+.cart h2 {
+    font-family: var(--product-font);
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
 .cart ul {
     list-style: none;
     padding: 0;
+    margin: 1rem 0;
 }
 
 .cart ul li {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1em;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .delete-item {
     background: none;
     border: none;
     color: var(--primary-color);
-    cursor: pointer;
     font-size: 1.5rem;
-    transition: color 0.3s;
+    cursor: pointer;
 }
 
 .delete-item:hover {
@@ -168,8 +197,23 @@ footer {
     background-color: var(--primary-color);
     color: var(--white);
     text-align: center;
-    padding: 1.5em 0;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
     font-family: var(--header-font);
     font-size: 1rem;
-    margin-top: 2em;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .carousel {
+        max-width: 100%;
+    }
+
+    .cart {
+        margin-top: 2rem;
+    }
 }
