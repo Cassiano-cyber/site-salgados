@@ -55,6 +55,7 @@ document.getElementById('checkoutButton').addEventListener('click', () => {
     window.open(whatsappUrl, '_blank');
 });
 
+// Carrossel
 let currentIndex = 0;
 
 function showSlide(index) {
@@ -73,11 +74,14 @@ function nextSlide() {
     showSlide(currentIndex + 1);
 }
 
+// Vincula os botões aos eventos de navegação
 document.querySelector('.prev').addEventListener('click', prevSlide);
 document.querySelector('.next').addEventListener('click', nextSlide);
 
+// Inicia o carrossel com o slide atual
 showSlide(currentIndex);
 
+// Avança o slide a cada 5 segundos automaticamente
 setInterval(() => {
     nextSlide();
 }, 5000);
