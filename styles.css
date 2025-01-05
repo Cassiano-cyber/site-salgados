@@ -1,17 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Leckerli+One&display=swap');
 
 :root {
-    --primary-color: #ff6347; /* Laranja vibrante */
-    --secondary-color: #ffd700; /* Amarelo ouro */
+    --primary-color: #ff6347; /* Tom de laranja já definido */
+    --secondary-color: #ffd700;
     --background-color: #f9f9f9;
     --text-color: #333;
-    --accent-color: #ff7f50; /* Laranja suave */
+    --accent-color: #ff7f50; /* Um laranja mais suave para os hovers */
     --white: #ffffff;
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     --border-radius: 12px;
     --header-font: 'Dancing Script', cursive;
     --product-font: 'Leckerli One', cursive;
-    --base-font: 'Arial', sans-serif;
 }
 
 * {
@@ -21,38 +20,26 @@
 }
 
 body {
-    font-family: var(--base-font);
+    font-family: 'Arial', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 header {
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 2rem 0;
+    padding: 2em 0;
     text-align: center;
     box-shadow: var(--box-shadow);
-    font-family: var(--header-font);
-}
-
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-
-header p {
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
+    gap: 2em;
 }
 
 nav ul li a {
@@ -68,47 +55,33 @@ nav ul li a:hover {
 }
 
 main {
-    padding: 2rem;
+    padding: 2em;
     display: flex;
-    gap: 2rem;
+    gap: 2em;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-/* Carrossel */
 .carousel {
     position: relative;
     text-align: center;
     width: 100%;
     max-width: 60%;
-    margin: 0 auto;
 }
 
 .carousel-inner {
     display: flex;
     overflow: hidden;
     width: 100%;
-    gap: 1rem;
     transition: transform 0.5s ease;
+    gap: 1rem;
 }
 
 .carousel-item img {
-    width: 100%;
+    max-width: 100%;
     border-radius: var(--border-radius);
     border: 2px solid var(--primary-color);
     object-fit: cover;
-}
-
-.carousel-item h3 {
-    font-family: var(--product-font);
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-top: 0.5rem;
-}
-
-.carousel-item p {
-    font-size: 1rem;
-    margin: 0.5rem 0;
 }
 
 .carousel-control {
@@ -119,25 +92,23 @@ main {
     color: var(--white);
     border: none;
     font-size: 2rem;
-    padding: 0.5rem;
+    padding: 0.5em;
     cursor: pointer;
-    z-index: 10;
 }
 
 .carousel-control:hover {
     background-color: var(--accent-color);
 }
 
-/* Botões */
 button {
     background-color: var(--primary-color);
     color: var(--white);
     border: none;
     border-radius: var(--border-radius);
-    padding: 0.8rem 1.5rem;
+    padding: 0.8em 1.5em;
     cursor: pointer;
     font-family: var(--header-font);
-    font-size: 1rem;
+    font-size: 1.2rem;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
@@ -151,27 +122,18 @@ button:active {
     transform: scale(0.95);
 }
 
-/* Carrinho */
 .cart {
     flex: 1;
-    padding: 2rem;
+    padding: 2em;
     background-color: var(--white);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     text-align: center;
 }
 
-.cart h2 {
-    font-family: var(--product-font);
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
 .cart ul {
     list-style: none;
     padding: 0;
-    margin: 1rem 0;
 }
 
 .cart ul li {
@@ -197,10 +159,8 @@ footer {
     background-color: var(--primary-color);
     color: var(--white);
     text-align: center;
-    padding: 1.5rem 0;
-    margin-top: 2rem;
-    font-family: var(--header-font);
-    font-size: 1rem;
+    padding: 1.5em 0;
+    margin-top: 2em;
 }
 
 /* Responsividade */
