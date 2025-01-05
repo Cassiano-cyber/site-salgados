@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Leckerli+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
 :root {
-    --primary-color: #ff6347; /* Tom de laranja já definido */
-    --secondary-color: #ffd700;
+    --primary-color: #ff7f50; /* Laranja para header */
+    --secondary-color: #ffd700; /* Amarelo ouro */
     --background-color: #f9f9f9;
     --text-color: #333;
-    --accent-color: #ff7f50; /* Um laranja mais suave para os hovers */
+    --button-color: #ffa07a; /* Laranja claro para botões */
+    --button-hover-color: #ff6347; /* Laranja vibrante no hover */
     --white: #ffffff;
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     --border-radius: 12px;
     --header-font: 'Dancing Script', cursive;
-    --product-font: 'Leckerli One', cursive;
+    --base-font: 'Dancing Script', cursive;
 }
 
 * {
@@ -20,7 +21,7 @@
 }
 
 body {
-    font-family: --header-font;
+    font-family: var(--base-font);
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -30,16 +31,27 @@ body {
 header {
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 2em 0;
+    padding: 2rem 0;
     text-align: center;
     box-shadow: var(--box-shadow);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 2em;
+    gap: 2rem;
+    margin-top: 1rem;
 }
 
 nav ul li a {
@@ -51,37 +63,69 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: var(--accent-color);
+    color: var(--button-hover-color);
 }
 
 main {
-    padding: 2em;
+    padding: 2rem;
     display: flex;
-    gap: 2em;
+    gap: 2rem;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
+/* Carrossel */
+.menu {
+    flex: 1;
+    text-align: center;
+}
+
+.menu-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
 .carousel {
     position: relative;
-    text-align: center;
     width: 100%;
-    max-width: 60%;
+    overflow: hidden;
+    margin: 0 auto;
 }
 
 .carousel-inner {
     display: flex;
-    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
     width: 100%;
-    transition: transform 0.5s ease;
-    gap: 1rem;
+}
+
+.carousel-item {
+    min-width: 100%;
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 .carousel-item img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 300px;
     border-radius: var(--border-radius);
-    border: 2px solid var(--primary-color);
+    margin: 0 auto 1rem;
     object-fit: cover;
+}
+
+.carousel-item h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+.carousel-item p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin: 0.5rem 0;
 }
 
 .carousel-control {
@@ -91,29 +135,36 @@ main {
     background-color: rgba(0, 0, 0, 0.5);
     color: var(--white);
     border: none;
+    border-radius: var(--border-radius);
     font-size: 2rem;
-    padding: 0.5em;
     cursor: pointer;
+    padding: 0.5rem 1rem;
+    z-index: 100;
 }
 
-.carousel-control:hover {
-    background-color: var(--accent-color);
+.carousel-control.prev {
+    left: 10px;
 }
 
+.carousel-control.next {
+    right: 10px;
+}
+
+/* Botões */
 button {
-    background-color: var(--primary-color);
+    background-color: var(--button-color);
     color: var(--white);
     border: none;
     border-radius: var(--border-radius);
-    padding: 0.8em 1.5em;
+    padding: 0.8rem 1.5rem;
     cursor: pointer;
     font-family: var(--header-font);
-    font-size: 1.2rem;
+    font-size: 1rem;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-    background-color: var(--accent-color);
+    background-color: var(--button-hover-color);
     transform: scale(1.05);
     box-shadow: var(--box-shadow);
 }
@@ -122,18 +173,26 @@ button:active {
     transform: scale(0.95);
 }
 
+/* Carrinho */
 .cart {
     flex: 1;
-    padding: 2em;
+    padding: 2rem;
     background-color: var(--white);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     text-align: center;
 }
 
+.cart h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
 .cart ul {
     list-style: none;
     padding: 0;
+    margin: 1rem 0;
 }
 
 .cart ul li {
@@ -152,25 +211,21 @@ button:active {
 }
 
 .delete-item:hover {
-    color: var(--accent-color);
+    color: var(--button-hover-color);
 }
 
 footer {
     background-color: var(--primary-color);
     color: var(--white);
     text-align: center;
-    padding: 1.5em 0;
-    margin-top: 2em;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-
-    .carousel {
-        max-width: 100%;
+    .carousel-item {
+        padding: 1rem;
     }
 
     .cart {
