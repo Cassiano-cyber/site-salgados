@@ -54,7 +54,77 @@ main {
     flex-wrap: wrap;
 }
 
-/* Estilo geral do carrossel */
+/* Estilo do carrinho */
+.cart {
+    flex: 1;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+.cart h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.cart ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.cart ul li span {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.delete-item {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.delete-item:hover {
+    color: var(--button-hover-color);
+}
+
+/* Estilo dos botões */
+button {
+    background-color: var(--button-color);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-family: var(--header-font);
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-color);
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Carrossel */
 .carousel {
     position: relative;
     width: 100%;
@@ -67,23 +137,23 @@ main {
 
 .carousel-inner {
     display: flex;
-    transition: transform 0.5s ease-in-out; /* Transição suave ao mudar de slide */
+    transition: transform 0.5s ease-in-out;
     width: 100%;
 }
 
 .carousel-item {
-    flex: 0 0 100%; /* Cada slide ocupa 100% da largura do carrossel */
+    flex: 0 0 100%;
     text-align: center;
     padding: 1.5rem;
     background-color: var(--white);
-    display: none; /* Esconde todos os slides inicialmente */
+    display: none;
     opacity: 0;
-    transition: opacity 0.5s ease; /* Transição suave de opacidade */
+    transition: opacity 0.5s ease;
 }
 
 .carousel-item.active {
-    display: block; /* Exibe o slide ativo */
-    opacity: 1; /* Torna o slide ativo visível */
+    display: block;
+    opacity: 1;
 }
 
 .carousel-item img {
@@ -93,26 +163,13 @@ main {
     border-radius: var(--border-radius);
     margin-bottom: 1rem;
     object-fit: cover;
-    transition: transform 0.3s ease; /* Animação suave ao interagir */
+    transition: transform 0.3s ease;
 }
 
 .carousel-item img:hover {
-    transform: scale(1.05); /* Ampliação ao passar o mouse */
+    transform: scale(1.05);
 }
 
-.carousel-item h3 {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin: 0.5rem 0;
-}
-
-.carousel-item p {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin: 0.5rem 0;
-}
-
-/* Botões de controle do carrossel */
 .carousel-control {
     position: absolute;
     top: 50%;
@@ -137,17 +194,7 @@ main {
 }
 
 .carousel-control:hover {
-    background-color: var(--primary-color); /* Destaque ao passar o mouse */
-}
-
-/* Transições e interatividade adicionais */
-.carousel:hover .carousel-control {
-    opacity: 1; /* Mostra os botões de controle ao passar o mouse no carrossel */
-    transition: opacity 0.3s ease;
-}
-
-.carousel-inner:hover {
-    animation-play-state: paused; /* Pausa a transição automática ao interagir */
+    background-color: var(--primary-color);
 }
 
 /* Responsividade */
