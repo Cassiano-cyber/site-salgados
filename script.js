@@ -27,6 +27,24 @@ function addToCart(name, price) {
     updateCart();
 }
 
+// Remover item do carrinho
+function removeFromCart(name) {
+    const itemIndex = cart.findIndex(item => item.name === name);
+    if (itemIndex !== -1) {
+        cart.splice(itemIndex, 1);
+        updateCart();
+    }
+}
+
+// Atualizar quantidade de itens no carrinho
+function updateQuantity(name, newQuantity) {
+    const item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity = Math.max(1, newQuantity); // Não permite valores menores que 1
+        updateCart();
+    }
+}
+
 // Atualizar o carrinho
 function updateCart() {
     const cartList = document.getElementById('cart');
@@ -36,8 +54,27 @@ function updateCart() {
 
     cart.forEach(item => {
         total += item.price * item.quantity;
+
         const li = document.createElement('li');
-        li.innerHTML = `${item.name} x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}`;
+
+        li.innerHTML = `
+            <span>${item.name}</span>
+            <div class="actions">
+                <input class="quantity-input" type="number" value="${item.quantity}" min="1">
+                <button class="delete-item">🗑️</button>
+            </div>
+            <span>R$ ${(item.price * item.quantity).toFixed(2)}</span>
+        `;
+
+        // Eventos para os controles
+        li.querySelector('.quantity-input').addEventListener('change', (e) => {
+            updateQuantity(item.name, parseInt(e.target.value));
+        });
+
+        li.querySelector('.delete-item').addEventListener('click', () => {
+            removeFromCart(item.name);
+        });
+
         cartList.appendChild(li);
     });
 
