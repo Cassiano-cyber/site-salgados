@@ -4,33 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore o nosso cardápio de salgados deliciosos. Faça seu pedido online e aproveite!">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Cardápio de Salgados</title>
     <style>
-        /* Ajuste básico para layout */
         body {
-            font-family: Dramaturgia Cuba;
+            font-family: 'Dancing Script', cursive;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         header {
             text-align: center;
-            padding: 1rem;
-            background-color: #f8f8f8;
+            padding: 1.5rem;
+            background-color: #ff7f50; /* Laranja */
+            color: #ffffff;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
         }
         main {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
+            flex-wrap: wrap;
             padding: 2rem;
         }
         .menu, .cart {
             flex: 1;
             margin: 1rem;
             padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 12px;
         }
         .menu {
             max-width: 60%;
@@ -44,45 +53,55 @@
         }
         .carousel-inner {
             display: flex;
-            gap: 1rem;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease-in-out;
         }
         .carousel-item {
-            min-width: 200px;
+            min-width: 100%;
             text-align: center;
+            padding: 1rem;
         }
-        .carousel img {
+        .carousel-item img {
             width: 100%;
-            border-radius: 8px;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
+            max-width: 300px;
+            border-radius: 12px;
         }
         .carousel-control {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
             border: none;
             font-size: 1.5rem;
             padding: 0.5rem;
             cursor: pointer;
+            border-radius: 50%;
             z-index: 10;
         }
         .carousel-control.prev {
-            left: 0;
+            left: 10px;
         }
         .carousel-control.next {
-            right: 0;
+            right: 10px;
+        }
+        button {
+            background-color: #ffa07a; /* Laranja claro */
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6347; /* Laranja vibrante */
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #ff7f50;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -102,21 +121,21 @@
                              alt="Deliciosa Coxinha de Costela com recheio suculento" loading="lazy">
                         <h3>Coxinha de Costela</h3>
                         <p>R$ 10,00</p>
-                        <button class="btn-primary add-to-cart" data-name="Coxinha de Costela" data-price="10.00">Adicionar</button>
+                        <button class="add-to-cart" data-name="Coxinha de Costela" data-price="10.00">Adicionar</button>
                     </article>
                     <article class="carousel-item">
                         <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" 
                              alt="Empada de Frango com massa crocante" loading="lazy">
                         <h3>Empada de Frango</h3>
                         <p>R$ 12,00</p>
-                        <button class="btn-primary add-to-cart" data-name="Empada de Frango" data-price="12.00">Adicionar</button>
+                        <button class="add-to-cart" data-name="Empada de Frango" data-price="12.00">Adicionar</button>
                     </article>
                     <article class="carousel-item">
                         <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" 
                              alt="Enroladinho de Salsicha com massa macia" loading="lazy">
                         <h3>Enroladinho de Salsicha</h3>
                         <p>R$ 8,00</p>
-                        <button class="btn-primary add-to-cart" data-name="Enroladinho de Salsicha" data-price="8.00">Adicionar</button>
+                        <button class="add-to-cart" data-name="Enroladinho de Salsicha" data-price="8.00">Adicionar</button>
                     </article>
                 </div>
                 <button class="carousel-control prev" onclick="prevSlide()" aria-label="Slide anterior">❮</button>
@@ -129,14 +148,12 @@
             <h2>Carrinho</h2>
             <ul id="cart"></ul>
             <p>Total: R$ <span id="total">0.00</span></p>
-            <button id="checkoutButton" class="btn-primary">Finalizar Pedido</button>
+            <button id="checkoutButton">Finalizar Pedido</button>
         </section>
     </main>
-
     <footer>
         <p>&copy; 2024 Salgados Online. Todos os direitos reservados.</p>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
