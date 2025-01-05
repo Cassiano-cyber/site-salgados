@@ -156,6 +156,7 @@ button {
     border-radius: var(--border-radius);
     padding: 0.8rem;
     cursor: pointer;
+    font-family: var(--header-font);
 }
 
 button:hover {
@@ -165,6 +166,7 @@ button:hover {
 #checkoutButton {
     background-color: var(--primary-color);
     font-weight: bold;
+    font-family: var(--header-font);
 }
 
 #checkoutButton:hover {
