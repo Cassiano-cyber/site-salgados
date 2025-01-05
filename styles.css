@@ -75,10 +75,12 @@ main {
 }
 
 .carousel-item img {
-    width: 100%;
-    height: auto;
+    width: 100%; /* Garante que as imagens ocupem toda a largura do contêiner */
+    height: 300px; /* Define uma altura fixa para todas as imagens */
+    object-fit: cover; /* Ajusta a imagem para preencher o espaço sem distorção */
     border-radius: var(--border-radius);
 }
+
 
 .carousel-control {
     position: absolute;
