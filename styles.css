@@ -51,83 +51,12 @@ main {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
-    flex-wrap: wrap;
 }
 
-/* Estilo do carrinho */
-.cart {
-    flex: 1;
-    padding: 2rem;
-    background-color: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    text-align: center;
-}
-
-.cart h2 {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.cart ul {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-.cart ul li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.cart ul li span {
-    font-size: 1.2rem;
-    color: var(--text-color);
-}
-
-.delete-item {
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.delete-item:hover {
-    color: var(--button-hover-color);
-}
-
-/* Estilo dos botões */
-button {
-    background-color: var(--button-color);
-    color: var(--white);
-    border: none;
-    border-radius: var(--border-radius);
-    padding: 0.8rem 1.5rem;
-    cursor: pointer;
-    font-family: var(--header-font);
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-button:hover {
-    background-color: var(--button-hover-color);
-    transform: scale(1.05);
-    box-shadow: var(--box-shadow);
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-/* Carrossel */
+/* Estilo do carrossel */
 .carousel {
+    flex: 4; /* Ocupa 80% */
     position: relative;
-    width: 100%;
     overflow: hidden;
     margin: 2rem auto;
     max-width: 600px;
@@ -197,13 +126,102 @@ button:active {
     background-color: var(--primary-color);
 }
 
+/* Estilo do carrinho */
+.cart {
+    flex: 1; /* Ocupa 20% */
+    padding: 1.5rem;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+.cart h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.cart ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.cart ul li span {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.cart ul li input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 0.2rem;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.cart ul li input:focus {
+    outline: none;
+    border-color: var(--button-hover-color);
+}
+
+.delete-item {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.delete-item:hover {
+    color: var(--button-hover-color);
+}
+
+/* Botões */
+button {
+    background-color: var(--button-color);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-family: var(--header-font);
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-color);
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
     .carousel {
         max-width: 100%;
     }
 
-    .carousel-item img {
-        max-width: 200px;
+    .cart {
+        margin-top: 2rem;
     }
 }
