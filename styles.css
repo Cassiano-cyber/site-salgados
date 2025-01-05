@@ -46,26 +46,6 @@ header p {
     margin-top: 0.5rem;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-nav ul li a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: var(--button-hover-color);
-}
-
 main {
     padding: 2rem;
     display: flex;
@@ -74,46 +54,50 @@ main {
     flex-wrap: wrap;
 }
 
-/* Carrossel */
-.menu {
-    flex: 1;
-    text-align: center;
-}
-
-.menu-title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-}
-
+/* Estilo geral do carrossel */
 .carousel {
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin: 0 auto;
+    margin: 2rem auto;
+    max-width: 600px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 .carousel-inner {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out; /* Transição suave ao mudar de slide */
     width: 100%;
 }
 
 .carousel-item {
-    min-width: 100%;
+    flex: 0 0 100%; /* Cada slide ocupa 100% da largura do carrossel */
     text-align: center;
-    padding: 2rem;
+    padding: 1.5rem;
     background-color: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    display: none; /* Esconde todos os slides inicialmente */
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Transição suave de opacidade */
+}
+
+.carousel-item.active {
+    display: block; /* Exibe o slide ativo */
+    opacity: 1; /* Torna o slide ativo visível */
 }
 
 .carousel-item img {
     width: 100%;
     max-width: 300px;
+    height: auto;
     border-radius: var(--border-radius);
-    margin: 0 auto 1rem;
+    margin-bottom: 1rem;
     object-fit: cover;
+    transition: transform 0.3s ease; /* Animação suave ao interagir */
+}
+
+.carousel-item img:hover {
+    transform: scale(1.05); /* Ampliação ao passar o mouse */
 }
 
 .carousel-item h3 {
@@ -128,6 +112,7 @@ main {
     margin: 0.5rem 0;
 }
 
+/* Botões de controle do carrossel */
 .carousel-control {
     position: absolute;
     top: 50%;
@@ -140,6 +125,7 @@ main {
     cursor: pointer;
     padding: 0.5rem 1rem;
     z-index: 100;
+    transition: background-color 0.3s ease;
 }
 
 .carousel-control.prev {
@@ -150,85 +136,27 @@ main {
     right: 10px;
 }
 
-/* Botões */
-button {
-    background-color: var(--button-color);
-    color: var(--white);
-    border: none;
-    border-radius: var(--border-radius);
-    padding: 0.8rem 1.5rem;
-    cursor: pointer;
-    font-family: var(--header-font);
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+.carousel-control:hover {
+    background-color: var(--primary-color); /* Destaque ao passar o mouse */
 }
 
-button:hover {
-    background-color: var(--button-hover-color);
-    transform: scale(1.05);
-    box-shadow: var(--box-shadow);
+/* Transições e interatividade adicionais */
+.carousel:hover .carousel-control {
+    opacity: 1; /* Mostra os botões de controle ao passar o mouse no carrossel */
+    transition: opacity 0.3s ease;
 }
 
-button:active {
-    transform: scale(0.95);
-}
-
-/* Carrinho */
-.cart {
-    flex: 1;
-    padding: 2rem;
-    background-color: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    text-align: center;
-}
-
-.cart h2 {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.cart ul {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-.cart ul li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.delete-item {
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.delete-item:hover {
-    color: var(--button-hover-color);
-}
-
-footer {
-    background-color: var(--primary-color);
-    color: var(--white);
-    text-align: center;
-    padding: 1.5rem 0;
-    margin-top: 2rem;
+.carousel-inner:hover {
+    animation-play-state: paused; /* Pausa a transição automática ao interagir */
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .carousel-item {
-        padding: 1rem;
+    .carousel {
+        max-width: 100%;
     }
 
-    .cart {
-        margin-top: 2rem;
+    .carousel-item img {
+        max-width: 200px;
     }
 }
