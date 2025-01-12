@@ -1,4 +1,4 @@
-let currentIndex = 0;
+let currentIndex = 0; 
 const cart = [];
 
 // Função para atualizar o carrossel
@@ -81,9 +81,11 @@ function updateCart() {
     totalDisplay.textContent = total.toFixed(2);
 }
 
-// Configurar botões
+// Configurar botões do carrossel e promoções
 document.querySelector('.prev').addEventListener('click', () => changeSlide(-1));
 document.querySelector('.next').addEventListener('click', () => changeSlide(1));
+
+// Adicionar funcionalidade aos botões "Adicionar" no carrossel e promoções
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', () => {
         const name = button.getAttribute('data-name');
