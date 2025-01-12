@@ -14,28 +14,28 @@
         <p>Escolha o que deseja e peça agora!</p>
     </header>
     <main>
-        <!-- Carrossel (lado esquerdo) -->
+        <!-- Carrossel de Produtos -->
         <section id="menu" class="menu">
             <h2>Nosso Cardápio</h2>
             <div class="carousel">
                 <div class="carousel-inner">
                     <article class="carousel-item active">
                         <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" 
-                             alt="Deliciosa Coxinha de Costela com recheio suculento" loading="lazy">
+                             alt="Coxinha de Costela" loading="lazy">
                         <h3>Coxinha de Costela</h3>
                         <p>R$ 10,00</p>
                         <button class="add-to-cart" data-name="Coxinha de Costela" data-price="10.00">Adicionar</button>
                     </article>
                     <article class="carousel-item">
                         <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" 
-                             alt="Empada de Frango com massa crocante" loading="lazy">
+                             alt="Empada de Frango" loading="lazy">
                         <h3>Empada de Frango</h3>
                         <p>R$ 12,00</p>
                         <button class="add-to-cart" data-name="Empada de Frango" data-price="12.00">Adicionar</button>
                     </article>
                     <article class="carousel-item">
                         <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" 
-                             alt="Enroladinho de Salsicha com massa macia" loading="lazy">
+                             alt="Enroladinho de Salsicha" loading="lazy">
                         <h3>Enroladinho de Salsicha</h3>
                         <p>R$ 8,00</p>
                         <button class="add-to-cart" data-name="Enroladinho de Salsicha" data-price="8.00">Adicionar</button>
@@ -46,7 +46,29 @@
             </div>
         </section>
 
-        <!-- Carrinho (lado direito) -->
+        <!-- Seção de Promoções -->
+        <section id="promocoes" class="promotions">
+            <h2>Promoções Especiais</h2>
+            <div class="promotions-grid">
+                <article class="promotion-item">
+                    <h3>Combo Família</h3>
+                    <p>10 Coxinhas + 5 Empadas por apenas R$ 50,00!</p>
+                    <button>Adicionar ao Carrinho</button>
+                </article>
+                <article class="promotion-item">
+                    <h3>Happy Hour</h3>
+                    <p>3 Enroladinhos + 2 Coxinhas por R$ 25,00!</p>
+                    <button>Adicionar ao Carrinho</button>
+                </article>
+                <article class="promotion-item">
+                    <h3>Fome da Tarde</h3>
+                    <p>Combo de 5 Salgados sortidos por R$ 40,00!</p>
+                    <button>Adicionar ao Carrinho</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Carrinho -->
         <section id="carrinho" class="cart">
             <h2>Carrinho</h2>
             <ul id="cart"></ul>
