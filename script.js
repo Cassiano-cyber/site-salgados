@@ -89,6 +89,30 @@ document.querySelector('.next').addEventListener('click', () => changeSlide(1));
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', () => {
         const name = button.getAttribute('data-name');
+        function createFireworkParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('firework-particle');
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+    particle.style.animationDelay = `${Math.random()}s`;
+    return particle;
+}
+
+function createFireworks() {
+    const container = document.querySelector('.fireworks-container');
+    for (let i = 0; i < 15; i++) {
+        const particle = createFireworkParticle();
+        container.appendChild(particle);
+        setTimeout(() => container.removeChild(particle), 2000);
+    }
+}
+
+document.querySelector('#checkoutButton').addEventListener('click', () => {
+    createFireworks();
+    alert("Pedido finalizado com sucesso!");
+});
+
         const price = parseFloat(button.getAttribute('data-price'));
         addToCart(name, price);
     });
