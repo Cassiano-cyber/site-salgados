@@ -117,24 +117,14 @@
     </footer>
 
     <script>
-        // Ícones SVG da coxinha e empada
+        // Ícones SVG da coxinha
         const coxinhaSVG = `
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#FFC107">
             <path d="M256 0c-61.9 0-112 50.1-112 112 0 66.5 90.4 163.6 105.2 179.8 3.6 3.9 8.5 6.2 13.8 6.2s10.2-2.3 13.8-6.2C277.6 275.6 368 178.5 368 112c0-61.9-50.1-112-112-112zM256 272c-8.8 0-16-7.2-16-16 0-8.8 7.2-16 16-16s16 7.2 16 16c0 8.8-7.2 16-16 16z" />
             <path d="M256 64c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48z" />
           </svg>
         `;
-
-        const empadaSVG = `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#FF5722">
-            <path d="M256 0c-88.4 0-160 71.6-160 160s160 352 160 352 160-263.6 160-352-71.6-160-160-160zM256 432c-61.8 0-112-50.2-112-112s50.2-112 112-112 112 50.2 112 112-50.2 112-112 112z" />
-          </svg>
-        `;
-
-        // Alternar entre os ícones
-        let useCoxinha = true; // Variável para alternar entre coxinha e empada
-
-        function createFirework(x, y) {
+    function createFirework(x, y) {
             for (let i = 0; i < 10; i++) {
                 const firework = document.createElement('div');
                 firework.className = 'firework';
@@ -142,7 +132,7 @@
                 firework.style.top = `${y}px`;
 
                 // Inserir o ícone alternado
-                firework.innerHTML = useCoxinha ? coxinhaSVG : empadaSVG;
+                firework.innerHTML = useCoxinha ? coxinhaSVG;
 
                 // Direções aleatórias para cada partícula
                 firework.style.setProperty('--x', Math.random() * 2 - 1); // Direção X
@@ -153,10 +143,6 @@
                 // Remover partícula após a animação
                 firework.addEventListener('animationend', () => firework.remove());
             }
-
-            // Alternar entre coxinha e empada
-            useCoxinha = !useCoxinha;
-        }
 
         // Ativar fogos de artifício ao clicar
         document.addEventListener('click', (e) => {
