@@ -19,15 +19,16 @@
             width: 30px;
             height: 30px;
             animation: explode 1s ease-out forwards;
+            transform-origin: center;
         }
 
         @keyframes explode {
             0% {
-                transform: scale(0.5) translate(0, 0);
+                transform: scale(0.5) translate(0, 0) rotate(0deg);
                 opacity: 1;
             }
             100% {
-                transform: scale(1.5) translate(calc(100px * var(--x)), calc(100px * var(--y)));
+                transform: scale(1.5) translate(calc(100px * var(--x)), calc(100px * var(--y))) rotate(calc(360 * var(--rotation)));
                 opacity: 0;
             }
         }
@@ -131,19 +132,25 @@
                 firework.style.left = `${x}px`;
                 firework.style.top = `${y}px`;
 
-                // Incluir o ícone de coxinha
+                // Adicionando rotação aleatória
+                const rotation = Math.random() * 2; // Gira entre 0 e 2 voltas
+                firework.style.setProperty('--rotation', rotation);
+
+                // Inserir o SVG da coxinha
                 firework.innerHTML = coxinhaSVG;
 
+                // Direções aleatórias para cada partícula
                 firework.style.setProperty('--x', Math.random() * 2 - 1); // Direção X
                 firework.style.setProperty('--y', Math.random() * 2 - 1); // Direção Y
 
                 document.body.appendChild(firework);
 
-                // Remover o fogo de artifício após a animação
+                // Remover partícula após animação
                 firework.addEventListener('animationend', () => firework.remove());
             }
         }
 
+        // Ativar fogos de artifício ao clicar
         document.addEventListener('click', (e) => {
             createFirework(e.clientX, e.clientY);
         });
