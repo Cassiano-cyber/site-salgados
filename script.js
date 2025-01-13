@@ -4,15 +4,19 @@ let points = 0;
 
 function showSlide(index) {
     const items = document.querySelectorAll('.carousel-item');
+    const carouselInner = document.querySelector('.carousel-inner');
+    const slideWidth = items[0].clientWidth;
+
+    currentIndex = (index + items.length) % items.length;
+    carouselInner.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
     items.forEach((item, i) => {
-        item.classList.toggle('active', i === index);
+        item.classList.toggle('active', i === currentIndex);
     });
 }
 
 function changeSlide(step) {
-    const items = document.querySelectorAll('.carousel-item');
-    currentIndex = (currentIndex + step + items.length) % items.length;
-    showSlide(currentIndex);
+    showSlide(currentIndex + step);
 }
 
 function addToCart(name, price) {
@@ -29,6 +33,8 @@ function addToCart(name, price) {
 function removeFromCart(name) {
     const itemIndex = cart.findIndex(item => item.name === name);
     if (itemIndex !== -1) {
+        const removedItem = cart[itemIndex];
+        points -= Math.floor(removedItem.price / 2) * removedItem.quantity;
         cart.splice(itemIndex, 1);
         updateCart();
     }
@@ -37,7 +43,9 @@ function removeFromCart(name) {
 function updateQuantity(name, newQuantity) {
     const item = cart.find(item => item.name === name);
     if (item) {
+        points -= Math.floor(item.price / 2) * item.quantity;
         item.quantity = Math.max(1, newQuantity);
+        points += Math.floor(item.price / 2) * item.quantity;
         updateCart();
     }
 }
@@ -53,7 +61,6 @@ function updateCart() {
         total += item.price * item.quantity;
 
         const li = document.createElement('li');
-
         li.innerHTML = `
             <span>${item.name}</span>
             <div class="actions">
@@ -75,7 +82,7 @@ function updateCart() {
     });
 
     totalDisplay.textContent = total.toFixed(2);
-    pointsDisplay.textContent = points;
+    pointsDisplay.textContent = Math.max(0, points); // Evita números negativos.
 }
 
 function toggleTheme() {
@@ -107,4 +114,5 @@ window.addEventListener('DOMContentLoaded', () => {
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
     }
+    showSlide(currentIndex); // Certifica-se de exibir o primeiro slide corretamente.
 });
