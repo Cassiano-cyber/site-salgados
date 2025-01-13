@@ -97,8 +97,9 @@ main {
 
 .carousel-item {
     min-width: 100%;
-    text-align: center;
+    flex-shrink: 0;
 }
+
 
 .carousel-item img {
     max-width: 100%;
