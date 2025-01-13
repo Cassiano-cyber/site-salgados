@@ -7,32 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Cardápio de Salgados</title>
-    <style>
-        body {
-            background-color: #000;
-            overflow: hidden;
-            margin: 0;
-        }
-
-        .firework {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            animation: explode 1s ease-out forwards;
-            transform-origin: center;
-        }
-
-        @keyframes explode {
-            0% {
-                transform: scale(0.5) translate(0, 0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1.5) translate(calc(100px * var(--x)), calc(100px * var(--y))) rotate(calc(360 * var(--rotation)));
-                opacity: 0;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -117,43 +91,6 @@
         <p>&copy; 2024 Salgados Online. Todos os direitos reservados.</p>
     </footer>
 
-    <script>
-        const coxinhaSVG = `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#FFC107">
-            <path d="M256 0c-61.9 0-112 50.1-112 112 0 66.5 90.4 163.6 105.2 179.8 3.6 3.9 8.5 6.2 13.8 6.2s10.2-2.3 13.8-6.2C277.6 275.6 368 178.5 368 112c0-61.9-50.1-112-112-112zM256 272c-8.8 0-16-7.2-16-16 0-8.8 7.2-16 16-16s16 7.2 16 16c0 8.8-7.2 16-16 16z" />
-            <path d="M256 64c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48z" />
-          </svg>
-        `;
-        
-        function createFirework(x, y) {
-            for (let i = 0; i < 10; i++) {
-                const firework = document.createElement('div');
-                firework.className = 'firework';
-                firework.style.left = `${x}px`;
-                firework.style.top = `${y}px`;
-
-                // Adicionando rotação aleatória
-                const rotation = Math.random() * 2; // Gira entre 0 e 2 voltas
-                firework.style.setProperty('--rotation', rotation);
-
-                // Inserir o SVG da coxinha
-                firework.innerHTML = coxinhaSVG;
-
-                // Direções aleatórias para cada partícula
-                firework.style.setProperty('--x', Math.random() * 2 - 1); // Direção X
-                firework.style.setProperty('--y', Math.random() * 2 - 1); // Direção Y
-
-                document.body.appendChild(firework);
-
-                // Remover partícula após animação
-                firework.addEventListener('animationend', () => firework.remove());
-            }
-        }
-
-        // Ativar fogos de artifício ao clicar
-        document.addEventListener('click', (e) => {
-            createFirework(e.clientX, e.clientY);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
