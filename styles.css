@@ -1,13 +1,14 @@
+/* Importação da Fonte */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 :root {
     --primary-color: #ff7f50;
     --secondary-color: #ffd700;
     --background-color: #f9f9f9;
     --dark-background: #4b0e0e; /* Fundo vinho */
-    --dark-header-bg: #79052c; /* Fundo do header no dark mode */
-    --dark-button: #79052c; /* Botões no dark mode */
-    --dark-first-button: #4b0e0e; /* Primeiro botão no dark mode */
+    --dark-header-bg: #79052c; /* Cor do header e botões fora do header */
+    --dark-first-button: #4b0e0e; /* Cor do botão no header */
     --dark-text: #ffffff; /* Texto branco puro no dark mode */
-    --dark-card-text: #000; /* Letra preta dentro de quadros brancos no dark mode */
+    --dark-card-text: #000; /* Texto preto dentro de quadros brancos no dark mode */
     --text-color: #333;
     --button-color: #ffa07a;
     --button-hover-color: #ff6347;
@@ -65,12 +66,12 @@ button:hover {
 }
 
 body.dark-mode button {
-    background-color: var(--dark-button); /* Cor dos botões no dark mode */
+    background-color: var(--dark-header-bg); /* Botões fora do header no dark mode */
     color: var(--dark-text); /* Texto branco puro */
 }
 
 body.dark-mode button:first-of-type {
-    background-color: var(--dark-first-button); /* Cor do primeiro botão no dark mode */
+    background-color: var(--dark-first-button); /* Botão no header */
     color: var(--dark-text); /* Texto branco puro */
 }
 
@@ -120,7 +121,7 @@ body.dark-mode .cart {
 }
 
 body.dark-mode .carousel-control {
-    background-color: var(--dark-button);
+    background-color: var(--dark-header-bg); /* Botões do carrossel no dark mode */
     color: var(--dark-text);
 }
 
@@ -166,27 +167,27 @@ body.dark-mode .carousel-control {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    padding: 0.5rem 0;
 }
 
-.cart .actions {
+.cart li .actions {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
 }
 
-.cart .quantity-input {
-    width: 50px;
+.cart li input {
+    width: 3rem;
     text-align: center;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    padding: 0.3rem;
 }
 
-/* Ajustes para dispositivos móveis */
-@media (max-width: 768px) {
-    .carousel-inner {
-        transform: scale(0.9);
-    }
-
-    .carousel-item img {
-        max-height: 180px;
-        object-fit: cover;
-    }
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: var(--primary-color);
+    color: var(--white);
 }
