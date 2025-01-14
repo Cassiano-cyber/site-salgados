@@ -4,8 +4,9 @@
     --primary-color: #ff7f50;
     --secondary-color: #ffd700;
     --background-color: #f9f9f9;
-    --dark-background: #2b1d1a;
-    --dark-text: #ffdab9;
+    --dark-background: #4b0e0e; /* Vinho */
+    --dark-text: #ffdab9; /* Letra clara no dark mode */
+    --dark-card-text: #000; /* Letra preta dentro de quadros brancos no dark mode */
     --text-color: #333;
     --button-color: #ffa07a;
     --button-hover-color: #ff6347;
@@ -25,8 +26,8 @@ body {
 }
 
 body.dark-mode {
-    background-color: var(--dark-background);
-    color: var(--dark-text);
+    background-color: var(--dark-background); /* Fundo vinho */
+    color: var(--dark-text); /* Texto claro */
 }
 
 header {
@@ -116,6 +117,18 @@ button:hover {
     right: 10px;
 }
 
+/* Quadros brancos */
+.promotion-item, 
+.cart {
+    background-color: var(--white);
+    color: var(--text-color);
+}
+
+body.dark-mode .promotion-item,
+body.dark-mode .cart {
+    color: var(--dark-card-text); /* Texto preto dentro dos quadros brancos no dark mode */
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .carousel-inner {
@@ -145,7 +158,6 @@ button:hover {
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
     padding: 1rem;
-    background: var(--white);
 }
 
 .promotion-item img {
