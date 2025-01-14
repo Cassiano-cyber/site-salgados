@@ -4,7 +4,10 @@
     --primary-color: #ff7f50;
     --secondary-color: #ffd700;
     --background-color: #f9f9f9;
-    --dark-background: #4b0e0e; /* Vinho */
+    --dark-background: #4b0e0e; /* Fundo vinho */
+    --dark-header-bg: #79052c; /* Fundo do header no dark mode */
+    --dark-button: #79052c; /* Botões no dark mode */
+    --dark-first-button: #4b0e0e; /* Primeiro botão no dark mode */
     --dark-text: #ffdab9; /* Letra clara no dark mode */
     --dark-card-text: #000; /* Letra preta dentro de quadros brancos no dark mode */
     --text-color: #333;
@@ -37,6 +40,10 @@ header {
     padding: 2rem 0;
 }
 
+body.dark-mode header {
+    background-color: var(--dark-header-bg); /* Fundo vinho escuro no dark mode */
+}
+
 header h1 {
     font-size: 2.5rem;
 }
@@ -59,62 +66,16 @@ button:hover {
     background-color: var(--button-hover-color);
 }
 
+body.dark-mode button {
+    background-color: var(--dark-button); /* Cor dos botões no dark mode */
+}
+
+body.dark-mode button:first-of-type {
+    background-color: var(--dark-first-button); /* Cor do primeiro botão no dark mode */
+}
+
 #toggleTheme {
     margin-top: 1rem;
-}
-
-.main {
-    padding: 1rem;
-}
-
-.menu h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
-.carousel {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-}
-
-.carousel-inner {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    flex: 0 0 100%;
-    text-align: center;
-    padding: 1rem;
-}
-
-.carousel-item img {
-    max-width: 100%;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-}
-
-.carousel-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: var(--white);
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.carousel-control.prev {
-    left: 10px;
-}
-
-.carousel-control.next {
-    right: 10px;
 }
 
 /* Quadros brancos */
@@ -129,7 +90,8 @@ body.dark-mode .cart {
     color: var(--dark-card-text); /* Texto preto dentro dos quadros brancos no dark mode */
 }
 
-/* Mobile adjustments */
+
+/* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
     .carousel-inner {
         transform: scale(0.9);
@@ -139,70 +101,4 @@ body.dark-mode .cart {
         max-height: 180px;
         object-fit: cover;
     }
-}
-
-.promotions {
-    margin: 2rem auto;
-    text-align: center;
-}
-
-.promotions-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.promotion-item {
-    flex: 0 1 calc(33.333% - 1rem);
-    box-shadow: var(--box-shadow);
-    border-radius: var(--border-radius);
-    padding: 1rem;
-}
-
-.promotion-item img {
-    max-width: 100%;
-    border-radius: var(--border-radius);
-    margin-bottom: 0.5rem;
-}
-
-.cart {
-    margin: 2rem auto;
-    padding: 1rem;
-    max-width: 600px;
-    border: 1px solid var(--button-color);
-    border-radius: var(--border-radius);
-    background-color: var(--white);
-    box-shadow: var(--box-shadow);
-}
-
-.cart ul {
-    list-style: none;
-    padding: 0;
-}
-
-.cart ul li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--button-color);
-}
-
-.cart ul li:last-child {
-    border-bottom: none;
-}
-
-.cart .actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.quantity-input {
-    width: 50px;
-    text-align: center;
-    border: 1px solid var(--button-color);
-    border-radius: var(--border-radius);
-    padding: 0.2rem;
 }
