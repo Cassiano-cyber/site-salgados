@@ -56,19 +56,19 @@
             <h2>Promoções Especiais</h2>
             <div class="promotions-grid">
                 <div class="promotion-item">
-                    <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Promoção Coxinha de Frango + Refrigerante">
+                    <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Promoção Coxinha de Frango + Refrigerante" />
                     <h3>Combo Coxinha + Refrigerante</h3>
                     <p>De R$ 20,00 por R$ 15,00</p>
                     <button class="add-to-cart" data-name="Combo Coxinha" data-price="15.00" aria-label="Adicionar Combo Coxinha ao carrinho">Adicionar</button>
                 </div>
                 <div class="promotion-item">
-                    <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada Gourmet com 10% de desconto">
+                    <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada Gourmet com 10% de desconto" />
                     <h3>Empada Gourmet</h3>
                     <p>De R$ 15,00 por R$ 13,50</p>
                     <button class="add-to-cart" data-name="Empada Gourmet" data-price="13.50" aria-label="Adicionar Empada Gourmet ao carrinho">Adicionar</button>
                 </div>
                 <div class="promotion-item">
-                    <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho de Salsicha com desconto especial">
+                    <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho de Salsicha com desconto especial" />
                     <h3>Enroladinho Especial</h3>
                     <p>De R$ 10,00 por R$ 8,50</p>
                     <button class="add-to-cart" data-name="Enroladinho Especial" data-price="8.50" aria-label="Adicionar Enroladinho Especial ao carrinho">Adicionar</button>
@@ -101,6 +101,26 @@
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
+            },
+            keyboard: {
+                enabled: true, // Habilita o controle pelo teclado
+                onlyInViewport: true,
+            },
+            autoplay: {
+                delay: 3000, // Tempo entre os slides em milissegundos
+                disableOnInteraction: false, // Continua mesmo após interação do usuário
+            },
+            slidesPerView: 1, // Quantidade de slides visíveis
+            spaceBetween: 20, // Espaço entre os slides
+            breakpoints: {
+                640: {
+                    slidesPerView: 2, // Para telas menores que 640px
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 3, // Para telas maiores que 768px
+                    spaceBetween: 15,
+                },
             },
         });
     </script>
