@@ -1,3 +1,6 @@
+// Variável global para rastrear o índice atual do carrossel
+let currentIndex = 0;
+
 // Alterna entre temas claro e escuro
 function toggleTheme() {
     const body = document.body;
@@ -30,6 +33,10 @@ function changeCarouselItem(direction) {
         updateCarousel();
     }
 }
+
+// Carrinho de compras
+let cart = [];
+let total = 0;
 
 // Atualiza o carrinho
 function updateCart() {
