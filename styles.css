@@ -33,6 +33,35 @@ body.dark-mode {
     color: var(--dark-text);
 }
 
+/* Alteração no botão "Finalizar Pedido" para laranja */
+#checkoutButton {
+    background-color: var(--primary-color); /* cor laranja */
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#checkoutButton:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* Alteração das cores do carrinho no dark-mode */
+body.dark-mode .cart {
+    background-color: var(--dark-background);
+}
+
+body.dark-mode .cart h2,
+body.dark-mode .cart-list li p {
+    color: var(--dark-card-text); /* texto preto no dark-mode */
+}
+
+/* Header */
 header {
     background-color: var(--primary-color);
     color: var(--white);
@@ -262,39 +291,14 @@ button:hover {
     background-color: var(--button-hover-color);
 }
 
-#checkoutButton {
-    background-color: #4CAF50;
-    color: var(--white);
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-}
-
-#checkoutButton:hover {
-    background-color: #45a049;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    background-color: var(--primary-color);
-    color: var(--white);
-}
-
 /* Responsividade */
 @media (max-width: 768px) {
-    .swiper-slide {
-        padding: 15px;
-    }
-
     .swiper-container {
         height: 300px;
+    }
+
+    .swiper-slide {
+        padding: 15px;
     }
 
     .promotions-grid {
