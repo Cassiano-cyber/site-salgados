@@ -101,8 +101,14 @@ body.dark-mode .cart {
 }
 
 .carousel-item {
-    flex: 0 0 100%;
-    text-align: center;
+    position: absolute;
+    width: 100%;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+.carousel-item:not(:first-child) {
+    transform: translateX(100%);
+    opacity: 0;
+    z-index: 0;
 }
 
 .carousel-item img {
