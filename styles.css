@@ -156,16 +156,6 @@ body.dark-mode .cart {
     right: 1rem;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .carousel-control {
-        width: 2rem;
-        height: 2rem;
-        font-size: 1.2rem;
-    }
-}
-
-
 /* Promoções */
 .promotions-grid {
     display: flex;
