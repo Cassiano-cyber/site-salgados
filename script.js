@@ -22,8 +22,20 @@ function updateCarousel() {
     const totalItems = items.length;
 
     items.forEach((item, index) => {
-        item.style.transform = `translateX(${(index - currentIndex) * 100}%)`;
-        item.style.transition = 'transform 0.5s ease-in-out';
+        if (index === currentIndex) {
+            item.style.transform = 'translateX(0)';
+            item.style.opacity = '1';
+            item.style.zIndex = '1';
+        } else if (index < currentIndex) {
+            item.style.transform = 'translateX(-100%)';
+            item.style.opacity = '0';
+            item.style.zIndex = '0';
+        } else {
+            item.style.transform = 'translateX(100%)';
+            item.style.opacity = '0';
+            item.style.zIndex = '0';
+        }
+        item.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out';
     });
 }
 
