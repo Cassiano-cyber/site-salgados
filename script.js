@@ -1,126 +1,90 @@
-let currentIndex = 0;
-const cart = [];
-let points = 0;
-
-function showSlide(index) {
-    const items = document.querySelectorAll('.carousel-item');
-    if (items.length === 0) return;
-
-    items.forEach((item, i) => {
-        item.classList.toggle('active', i === index);
-    });
-}
-
-function changeSlide(step) {
-    const items = document.querySelectorAll('.carousel-item');
-    if (items.length === 0) return;
-
-    currentIndex = (currentIndex + step + items.length) % items.length;
-    document.querySelector('.carousel-inner').style.transform = `translateX(-${currentIndex * 100}%)`;
-}
-
-function addToCart(name, price) {
-    if (!name || !price) return;
-
-    const existingItem = cart.find(item => item.name === name);
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        cart.push({ name, price, quantity: 1 });
-    }
-    points += Math.floor(price / 2);
-    updateCart();
-}
-
-function removeFromCart(name) {
-    const itemIndex = cart.findIndex(item => item.name === name);
-    if (itemIndex !== -1) {
-        const item = cart[itemIndex];
-        points -= Math.floor(item.price / 2) * item.quantity;
-        cart.splice(itemIndex, 1);
-        updateCart();
-    }
-}
-
-function updateQuantity(name, newQuantity) {
-    if (!name || newQuantity < 1) return;
-
-    const item = cart.find(item => item.name === name);
-    if (item) {
-        const oldPoints = Math.floor(item.price / 2) * item.quantity;
-        item.quantity = Math.max(1, newQuantity);
-        const newPoints = Math.floor(item.price / 2) * item.quantity;
-        points += newPoints - oldPoints;
-        updateCart();
-    }
-}
-
-function updateCart() {
-    const cartList = document.getElementById('cart');
-    const totalDisplay = document.getElementById('total');
-    const pointsDisplay = document.getElementById('points');
-
-    if (!cartList || !totalDisplay || !pointsDisplay) return;
-
-    cartList.innerHTML = '';
-    let total = 0;
-
-    cart.forEach(item => {
-        total += item.price * item.quantity;
-
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <span>${item.name}</span>
-            <div class="actions">
-                <input class="quantity-input" type="number" value="${item.quantity}" min="1">
-                <button class="delete-item">🗑️</button>
-            </div>
-            <span>R$ ${(item.price * item.quantity).toFixed(2)}</span>
-        `;
-
-        li.querySelector('.quantity-input').addEventListener('change', (e) => {
-            updateQuantity(item.name, parseInt(e.target.value));
-        });
-
-        li.querySelector('.delete-item').addEventListener('click', () => {
-            removeFromCart(item.name);
-        });
-
-        cartList.appendChild(li);
-    });
-
-    totalDisplay.textContent = total.toFixed(2);
-    pointsDisplay.textContent = Math.max(points, 0);
-}
-
+// Função para alternar entre os temas claro e escuro
 function toggleTheme() {
-    const isDarkMode = document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    document.body.classList.toggle('dark-mode');
+
+    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', currentTheme);
 }
 
-document.querySelector('.prev')?.addEventListener('click', () => changeSlide(-1));
-document.querySelector('.next')?.addEventListener('click', () => changeSlide(1));
-
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', () => {
-        const name = button.getAttribute('data-name');
-        const price = parseFloat(button.getAttribute('data-price'));
-        addToCart(name, price);
-    });
-});
-
-document.getElementById('toggleTheme')?.addEventListener('click', toggleTheme);
-
-document.getElementById('checkoutButton')?.addEventListener('click', () => {
-    alert("Pedido finalizado com sucesso! Pontos acumulados: " + points);
-    points = 0;
-    cart.length = 0;
-    updateCart();
-});
-
-window.addEventListener('DOMContentLoaded', () => {
+// Função para inicializar o tema com base no armazenamento local
+function initializeTheme() {
     const savedTheme = localStorage.getItem('theme');
+
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
     }
+}
+
+// Carrossel
+let currentIndex = 0;
+function updateCarousel() {
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
+
+    items.forEach((item, index) => {
+        item.style.transform = `translateX(${(index - currentIndex) * 100}%)`;
+        item.style.transition = 'transform 0.5s ease-in-out';
+    });
+}
+
+function nextCarouselItem() {
+    const items = document.querySelectorAll('.carousel-item');
+    if (items.length > 0) {
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel();
+    }
+}
+
+function prevCarouselItem() {
+    const items = document.querySelectorAll('.carousel-item');
+    if (items.length > 0) {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateCarousel();
+    }
+}
+
+// Eventos do Carrinho
+function addToCart(itemName, itemPrice) {
+    const cart = document.querySelector('.cart ul');
+
+    if (cart) {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${itemName} - R$ ${itemPrice.toFixed(2)}`;
+        cart.appendChild(listItem);
+    }
+}
+
+function clearCart() {
+    const cart = document.querySelector('.cart ul');
+
+    if (cart) {
+        cart.innerHTML = '';
+    }
+}
+
+// Inicialização do Documento
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar tema
+    initializeTheme();
+
+    // Configurar botão de alternância de tema
+    const themeToggleBtn = document.getElementById('toggleTheme');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+
+    // Configurar controle do carrossel
+    const nextBtn = document.querySelector('.carousel-control.next');
+    const prevBtn = document.querySelector('.carousel-control.prev');
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextCarouselItem);
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevCarouselItem);
+    }
+
+    // Exibir os itens do carrossel corretamente
+    updateCarousel();
 });
