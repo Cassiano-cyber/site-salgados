@@ -43,24 +43,58 @@ function prevCarouselItem() {
     }
 }
 
-// Eventos do Carrinho
-function addToCart(itemName, itemPrice) {
-    const cart = document.querySelector('.cart ul');
+// Carrinho de compras
+let cart = [];
+let total = 0;
 
-    if (cart) {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${itemName} - R$ ${itemPrice.toFixed(2)}`;
-        cart.appendChild(listItem);
-    }
+function updateCart() {
+    const cartList = document.querySelector('.cart ul');
+    cartList.innerHTML = '';
+
+    cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '🗑️';
+        deleteButton.classList.add('delete-item');
+        deleteButton.addEventListener('click', () => removeItem(index));
+
+        li.appendChild(deleteButton);
+        cartList.appendChild(li);
+    });
+
+    document.getElementById("total").textContent = total.toFixed(2);
 }
 
-function clearCart() {
-    const cart = document.querySelector('.cart ul');
-
-    if (cart) {
-        cart.innerHTML = '';
-    }
+function addToCart(name, price) {
+    cart.push({ name, price });
+    total += price;
+    updateCart();
 }
+
+function removeItem(index) {
+    total -= cart[index].price;
+    cart.splice(index, 1);
+    updateCart();
+}
+
+document.getElementById('checkoutButton').addEventListener('click', () => {
+    if (cart.length === 0) {
+        alert('Carrinho vazio! Adicione itens ao carrinho.');
+        return;
+    }
+
+    let orderDetails = 'Pedido:\n';
+    cart.forEach(item => {
+        orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
+    });
+    orderDetails += `\nTotal: R$ ${total.toFixed(2)}`;
+
+    const phoneNumber = '+5517996780618';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
+    window.open(whatsappUrl, '_blank');
+});
 
 // Inicialização do Documento
 document.addEventListener('DOMContentLoaded', () => {
@@ -87,4 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Exibir os itens do carrossel corretamente
     updateCarousel();
+
+    // Configurar botões de adicionar ao carrinho
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+            const name = button.getAttribute('data-name');
+            const price = parseFloat(button.getAttribute('data-price'));
+
+            addToCart(name, price);
+        });
+    });
 });
