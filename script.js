@@ -1,145 +1,94 @@
-// Função para alternar entre os temas claro e escuro
+// Alterna entre temas claro e escuro
 function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-
-    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
     localStorage.setItem('theme', currentTheme);
 }
 
-// Função para inicializar o tema com base no armazenamento local
+// Inicializa o tema com base no localStorage
 function initializeTheme() {
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme === 'dark') {
+    if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
     }
 }
 
-// Carrossel
-let currentIndex = 0;
+// Atualiza o estado do carrossel
 function updateCarousel() {
     const items = document.querySelectorAll('.carousel-item');
-    const totalItems = items.length;
-
     items.forEach((item, index) => {
-        if (index === currentIndex) {
-            item.style.transform = 'translateX(0)';
-            item.style.opacity = '1';
-            item.style.zIndex = '1';
-        } else if (index < currentIndex) {
-            item.style.transform = 'translateX(-100%)';
-            item.style.opacity = '0';
-            item.style.zIndex = '0';
-        } else {
-            item.style.transform = 'translateX(100%)';
-            item.style.opacity = '0';
-            item.style.zIndex = '0';
-        }
-        item.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out';
+        item.classList.toggle('active', index === currentIndex);
     });
 }
 
-function nextCarouselItem() {
+// Alterna para o próximo ou anterior item do carrossel
+function changeCarouselItem(direction) {
     const items = document.querySelectorAll('.carousel-item');
-    if (items.length > 0) {
-        currentIndex = (currentIndex + 1) % items.length;
-        updateCarousel();
-    }
+    currentIndex = (currentIndex + direction + items.length) % items.length;
+    updateCarousel();
 }
 
-function prevCarouselItem() {
-    const items = document.querySelectorAll('.carousel-item');
-    if (items.length > 0) {
-        currentIndex = (currentIndex - 1 + items.length) % items.length;
-        updateCarousel();
-    }
-}
-
-// Carrinho de compras
-let cart = [];
-let total = 0;
-
+// Atualiza o carrinho
 function updateCart() {
     const cartList = document.querySelector('.cart ul');
-    cartList.innerHTML = '';
-
-    cart.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = '🗑️';
-        deleteButton.classList.add('delete-item');
-        deleteButton.addEventListener('click', () => removeItem(index));
-
-        li.appendChild(deleteButton);
-        cartList.appendChild(li);
-    });
+    cartList.innerHTML = cart.map((item, index) => `
+        <li>
+            ${item.name} - R$ ${item.price.toFixed(2)}
+            <button class="delete-item" data-index="${index}">🗑️</button>
+        </li>
+    `).join('');
 
     document.getElementById("total").textContent = total.toFixed(2);
+    document.querySelectorAll('.delete-item').forEach(button => {
+        button.addEventListener('click', () => removeItem(button.dataset.index));
+    });
 }
 
+// Adiciona um item ao carrinho
 function addToCart(name, price) {
+    if (isNaN(price)) {
+        console.error("Preço inválido:", price);
+        return;
+    }
     cart.push({ name, price });
     total += price;
     updateCart();
+    alert(`${name} foi adicionado ao carrinho!`);
 }
 
+// Remove um item do carrinho
 function removeItem(index) {
     total -= cart[index].price;
     cart.splice(index, 1);
     updateCart();
 }
 
-document.getElementById('checkoutButton').addEventListener('click', () => {
-    if (cart.length === 0) {
+// Envia o pedido para o WhatsApp
+function checkout() {
+    if (!cart.length) {
         alert('Carrinho vazio! Adicione itens ao carrinho.');
         return;
     }
-
-    let orderDetails = 'Pedido:\n';
-    cart.forEach(item => {
-        orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
-    });
-    orderDetails += `\nTotal: R$ ${total.toFixed(2)}`;
-
+    const orderDetails = cart.map(item => `- ${item.name} - R$ ${item.price.toFixed(2)}`).join('\n');
     const phoneNumber = '+5517996780618';
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(`Pedido:\n${orderDetails}\n\nTotal: R$ ${total.toFixed(2)}`)}`;
     window.open(whatsappUrl, '_blank');
-});
+}
 
-// Inicialização do Documento
+// Inicializa o documento
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar tema
     initializeTheme();
-
-    // Configurar botão de alternância de tema
-    const themeToggleBtn = document.getElementById('toggleTheme');
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', toggleTheme);
-    }
-
-    // Configurar controle do carrossel
-    const nextBtn = document.querySelector('.carousel-control.next');
-    const prevBtn = document.querySelector('.carousel-control.prev');
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', nextCarouselItem);
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', prevCarouselItem);
-    }
-
-    // Exibir os itens do carrossel corretamente
     updateCarousel();
 
-    // Configurar botões de adicionar ao carrinho
+    document.getElementById('toggleTheme').addEventListener('click', toggleTheme);
+    document.querySelector('.carousel-control.next').addEventListener('click', () => changeCarouselItem(1));
+    document.querySelector('.carousel-control.prev').addEventListener('click', () => changeCarouselItem(-1));
+    document.getElementById('checkoutButton').addEventListener('click', checkout);
+
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', () => {
             const name = button.getAttribute('data-name');
             const price = parseFloat(button.getAttribute('data-price'));
-
             addToCart(name, price);
         });
     });
