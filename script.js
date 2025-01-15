@@ -37,6 +37,7 @@ function changeCarouselItem(direction) {
 // Carrinho de compras
 let cart = [];
 let total = 0;
+let points = 0; // Variável para acumular pontos
 
 // Atualiza o carrinho
 function updateCart() {
@@ -57,6 +58,7 @@ function updateCart() {
     });
 
     document.getElementById('total').textContent = total.toFixed(2);
+    document.getElementById('points').textContent = points; // Atualiza os pontos
 }
 
 // Adiciona item ao carrinho
@@ -67,12 +69,14 @@ function addToCart(name, price) {
     }
     cart.push({ name, price });
     total += price;
+    points += Math.floor(price); // Acumula 1 ponto para cada R$ 1,00
     updateCart();
     alert(`${name} foi adicionado ao carrinho!`);
 }
 
 // Remove item do carrinho
 function removeItem(index) {
+    points -= Math.floor(cart[index].price); // Remove os pontos correspondentes
     total -= cart[index].price;
     cart.splice(index, 1);
     updateCart();
@@ -124,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
         });
-        orderDetails += `\nTotal: R$ ${total.toFixed(2)}`;
+        orderDetails += `\nTotal: R$ ${total.toFixed(2)}\nPontos acumulados: ${points}`;
 
         const phoneNumber = '+5517996780618';
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
