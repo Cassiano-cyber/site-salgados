@@ -1,14 +1,15 @@
 /* Importação da Fonte */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
 :root {
     --primary-color: #ff7f50;
     --secondary-color: #ffd700;
     --background-color: #f9f9f9;
-    --dark-background: #4b0e0e; /* Fundo vinho */
-    --dark-header-bg: #79052c; /* Cor do header e botões fora do header */
-    --dark-first-button: #4b0e0e; /* Cor do botão no header */
-    --dark-text: #ffffff; /* Texto branco puro no dark mode */
-    --dark-card-text: #000; /* Texto preto dentro de quadros brancos no dark mode */
+    --dark-background: #4b0e0e;
+    --dark-header-bg: #79052c;
+    --dark-first-button: #4b0e0e;
+    --dark-text: #ffffff;
+    --dark-card-text: #000;
     --text-color: #333;
     --button-color: #ffa07a;
     --button-hover-color: #ff6347;
@@ -28,8 +29,8 @@ body {
 }
 
 body.dark-mode {
-    background-color: var(--dark-background); /* Fundo vinho */
-    color: var(--dark-text); /* Texto branco puro */
+    background-color: var(--dark-background);
+    color: var(--dark-text);
 }
 
 header {
@@ -40,7 +41,7 @@ header {
 }
 
 body.dark-mode header {
-    background-color: var(--dark-header-bg); /* Fundo vinho escuro no dark mode */
+    background-color: var(--dark-header-bg);
 }
 
 header h1 {
@@ -66,13 +67,13 @@ button:hover {
 }
 
 body.dark-mode button {
-    background-color: var(--dark-header-bg); /* Botões fora do header no dark mode */
-    color: var(--dark-text); /* Texto branco puro */
+    background-color: var(--dark-header-bg);
+    color: var(--dark-text);
 }
 
 body.dark-mode button:first-of-type {
-    background-color: var(--dark-first-button); /* Botão no header */
-    color: var(--dark-text); /* Texto branco puro */
+    background-color: var(--dark-first-button);
+    color: var(--dark-text);
 }
 
 #toggleTheme {
@@ -87,7 +88,7 @@ body.dark-mode button:first-of-type {
 
 body.dark-mode .promotion-item,
 body.dark-mode .cart {
-    color: var(--dark-card-text); /* Texto preto dentro dos quadros brancos no dark mode */
+    color: var(--dark-card-text);
 }
 
 /* Carrossel */
@@ -121,7 +122,7 @@ body.dark-mode .cart {
 }
 
 body.dark-mode .carousel-control {
-    background-color: var(--dark-header-bg); /* Botões do carrossel no dark mode */
+    background-color: var(--dark-header-bg);
     color: var(--dark-text);
 }
 
