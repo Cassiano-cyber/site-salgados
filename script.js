@@ -1,11 +1,11 @@
-// Variável global para rastrear o índice atual do carrossel
-let currentIndex = 0;
+let cart = [];
+let total = 0;
+let points = 0;
 
 // Alterna entre temas claro e escuro
 function toggleTheme() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
-    const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+    document.body.classList.toggle('dark-mode');
+    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
     localStorage.setItem('theme', currentTheme);
 }
 
@@ -16,35 +16,6 @@ function initializeTheme() {
         document.body.classList.add('dark-mode');
     }
 }
-
-// Atualiza o carrossel
-function updateCarousel() {
-    const swiper = new Swiper('.swiper-container', {
-        loop: true,
-        slidesPerView: 1,  // Exibir apenas um item por vez
-        spaceBetween: 10,   // Ajuste a distância entre os slides
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-    });
-}
-
-// Alterna para o próximo ou anterior item do carrossel
-function changeCarouselItem(direction) {
-    const swiper = new Swiper('.swiper-container');
-    swiper.slideTo(currentIndex + direction);
-    currentIndex = (currentIndex + direction + swiper.slides.length) % swiper.slides.length;
-}
-
-// Carrinho de compras
-let cart = [];
-let total = 0;
-let points = 0; // Variável para acumular pontos
 
 // Atualiza o carrinho
 function updateCart() {
@@ -57,7 +28,6 @@ function updateCart() {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '🗑️';
-        deleteButton.classList.add('delete-item');
         deleteButton.addEventListener('click', () => removeItem(index));
 
         li.appendChild(deleteButton);
@@ -65,33 +35,26 @@ function updateCart() {
     });
 
     document.getElementById('total').textContent = total.toFixed(2);
-    document.getElementById('points').textContent = points; // Atualiza os pontos
+    document.getElementById('points').textContent = points;
 }
 
 // Adiciona item ao carrinho
 function addToCart(name, price) {
-    if (isNaN(price)) {
-        console.error('Preço inválido:', price);
-        return;
-    }
     cart.push({ name, price });
     total += price;
     points += Math.floor(price); // Acumula 1 ponto para cada R$ 1,00
     updateCart();
-    alert(`${name} foi adicionado ao carrinho!`);
 }
 
 // Remove item do carrinho
 function removeItem(index) {
-    if (index >= 0 && index < cart.length) {
-        points -= Math.floor(cart[index].price); // Remove os pontos correspondentes
-        total -= cart[index].price;
-        cart.splice(index, 1);
-        updateCart();
-    }
+    points -= Math.floor(cart[index].price); // Remove os pontos correspondentes
+    total -= cart[index].price;
+    cart.splice(index, 1);
+    updateCart();
 }
 
-// Finaliza o pedido enviando para o WhatsApp
+// Finaliza o pedido
 function checkout() {
     if (cart.length === 0) {
         alert('Carrinho vazio! Adicione itens ao carrinho.');
@@ -109,33 +72,35 @@ function checkout() {
     window.open(whatsappUrl, '_blank');
 }
 
-// Inicializa o documento
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa o tema
     initializeTheme();
 
-    // Botão de alternância de tema
-    const themeToggleBtn = document.getElementById('toggleTheme');
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', toggleTheme);
-    }
+    // Botão para alternar tema
+    document.getElementById('toggleTheme').addEventListener('click', toggleTheme);
 
-    // Inicializa o carrossel (com um item por vez)
-    updateCarousel();
+    // Configura o carrossel
+    new Swiper('.swiper-container', {
+        loop: true,
+        slidesPerView: 1,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
 
-    // Configura botões de adicionar ao carrinho
+    // Adiciona itens ao carrinho
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', () => {
             const name = button.getAttribute('data-name');
             const price = parseFloat(button.getAttribute('data-price'));
-
             addToCart(name, price);
         });
     });
 
     // Botão de finalizar pedido
-    const checkoutButton = document.getElementById('checkoutButton');
-    if (checkoutButton) {
-        checkoutButton.addEventListener('click', checkout);
-    }
+    document.getElementById('checkoutButton').addEventListener('click', checkout);
 });
