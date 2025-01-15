@@ -6,14 +6,15 @@ function toggleTheme() {
     localStorage.setItem('theme', currentTheme);
 }
 
-// Inicializa o tema com base no localStorage
+// Inicializa o tema com base no armazenamento local
 function initializeTheme() {
-    if (localStorage.getItem('theme') === 'dark') {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
     }
 }
 
-// Atualiza o estado do carrossel
+// Atualiza o carrossel
 function updateCarousel() {
     const items = document.querySelectorAll('.carousel-item');
     items.forEach((item, index) => {
@@ -24,30 +25,37 @@ function updateCarousel() {
 // Alterna para o próximo ou anterior item do carrossel
 function changeCarouselItem(direction) {
     const items = document.querySelectorAll('.carousel-item');
-    currentIndex = (currentIndex + direction + items.length) % items.length;
-    updateCarousel();
+    if (items.length > 0) {
+        currentIndex = (currentIndex + direction + items.length) % items.length;
+        updateCarousel();
+    }
 }
 
 // Atualiza o carrinho
 function updateCart() {
     const cartList = document.querySelector('.cart ul');
-    cartList.innerHTML = cart.map((item, index) => `
-        <li>
-            ${item.name} - R$ ${item.price.toFixed(2)}
-            <button class="delete-item" data-index="${index}">🗑️</button>
-        </li>
-    `).join('');
+    cartList.innerHTML = '';
 
-    document.getElementById("total").textContent = total.toFixed(2);
-    document.querySelectorAll('.delete-item').forEach(button => {
-        button.addEventListener('click', () => removeItem(button.dataset.index));
+    cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '🗑️';
+        deleteButton.classList.add('delete-item');
+        deleteButton.addEventListener('click', () => removeItem(index));
+
+        li.appendChild(deleteButton);
+        cartList.appendChild(li);
     });
+
+    document.getElementById('total').textContent = total.toFixed(2);
 }
 
-// Adiciona um item ao carrinho
+// Adiciona item ao carrinho
 function addToCart(name, price) {
     if (isNaN(price)) {
-        console.error("Preço inválido:", price);
+        console.error('Preço inválido:', price);
         return;
     }
     cart.push({ name, price });
@@ -56,40 +64,63 @@ function addToCart(name, price) {
     alert(`${name} foi adicionado ao carrinho!`);
 }
 
-// Remove um item do carrinho
+// Remove item do carrinho
 function removeItem(index) {
     total -= cart[index].price;
     cart.splice(index, 1);
     updateCart();
 }
 
-// Envia o pedido para o WhatsApp
-function checkout() {
-    if (!cart.length) {
-        alert('Carrinho vazio! Adicione itens ao carrinho.');
-        return;
-    }
-    const orderDetails = cart.map(item => `- ${item.name} - R$ ${item.price.toFixed(2)}`).join('\n');
-    const phoneNumber = '+5517996780618';
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(`Pedido:\n${orderDetails}\n\nTotal: R$ ${total.toFixed(2)}`)}`;
-    window.open(whatsappUrl, '_blank');
-}
-
 // Inicializa o documento
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa o tema
     initializeTheme();
+
+    // Botão de alternância de tema
+    const themeToggleBtn = document.getElementById('toggleTheme');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+
+    // Configura controles do carrossel
+    const nextBtn = document.querySelector('.carousel-control.next');
+    const prevBtn = document.querySelector('.carousel-control.prev');
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => changeCarouselItem(1));
+    }
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => changeCarouselItem(-1));
+    }
+
+    // Inicializa o carrossel
     updateCarousel();
 
-    document.getElementById('toggleTheme').addEventListener('click', toggleTheme);
-    document.querySelector('.carousel-control.next').addEventListener('click', () => changeCarouselItem(1));
-    document.querySelector('.carousel-control.prev').addEventListener('click', () => changeCarouselItem(-1));
-    document.getElementById('checkoutButton').addEventListener('click', checkout);
-
+    // Configura botões de adicionar ao carrinho
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', () => {
             const name = button.getAttribute('data-name');
             const price = parseFloat(button.getAttribute('data-price'));
+
             addToCart(name, price);
         });
+    });
+
+    // Botão de finalizar pedido
+    document.getElementById('checkoutButton').addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Carrinho vazio! Adicione itens ao carrinho.');
+            return;
+        }
+
+        let orderDetails = 'Pedido:\n';
+        cart.forEach(item => {
+            orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
+        });
+        orderDetails += `\nTotal: R$ ${total.toFixed(2)}`;
+
+        const phoneNumber = '+5517996780618';
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
+        window.open(whatsappUrl, '_blank');
     });
 });
