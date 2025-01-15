@@ -1,9 +1,9 @@
 /* Importação da Fonte */ @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 /* Variáveis de Cores */
 :root {
-    --primary-color: #ff7f50;
+    --primary-color: #eb5a07;
     --secondary-color: #ffd700;
-    --wine-background: #800000;  /* Cor vinho */
+    --wine-dark-color: #800000;
     --background-color: #f9f9f9;
     --dark-background: #2f2f2f;
     --dark-text: #fff;
@@ -29,12 +29,12 @@ body {
 
 body.dark-mode {
     background-color: var(--dark-background);
-    color: var(--dark-text);
+    color: var(--wine-dark-color);
 }
 
 /* Cabeçalho */
 header {
-    background-color: var(--wine-background);
+    background-color: var(--primary-color);
     color: white;
     text-align: center;
     padding: 30px 20px;
@@ -55,7 +55,7 @@ button {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 1rem;
 }
 
@@ -125,11 +125,12 @@ button:hover {
     color: var(--wine-background);
     border-radius: 50%;
     padding: 10px;
+    text-align: center;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    background-color: var(--wine-background);
+    background-color: var(--secondary-color);
     color: white;
 }
 
