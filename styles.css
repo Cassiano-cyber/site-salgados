@@ -6,7 +6,7 @@
     --wine-dark-color: #800000;
     --background-color: #f9f9f9;
     --dark-background: #800000;
-    --dark-text: #fff;
+    --ligth-text: #fff;
     --text-color: #333;
     --button-color: #ffa07a;
     --button-hover-color: #ff6347;
@@ -71,7 +71,7 @@ button:hover {
 
 #menu h2 {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: var(--ligth-text);
     margin-bottom: 20px;
 }
 
