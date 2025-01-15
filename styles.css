@@ -111,11 +111,13 @@ body.dark-mode .cart {
     flex: 0 0 100%;
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
     opacity: 0;
+    visibility: hidden;
     z-index: 0;
 }
 
 .carousel-item.active {
     opacity: 1;
+    visibility: visible;
     z-index: 1;
 }
 
