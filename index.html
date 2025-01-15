@@ -50,6 +50,39 @@
                 <div class="swiper-pagination"></div>
             </div>
         </section>
+
+        <!-- Seção de Promoções -->
+        <section class="promotions">
+            <h2>Promoções Especiais</h2>
+            <div class="promotions-grid">
+                <div class="promotion-item">
+                    <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Promoção Coxinha de Frango + Refrigerante">
+                    <h3>Combo Coxinha + Refrigerante</h3>
+                    <p>De R$ 20,00 por R$ 15,00</p>
+                    <button class="add-to-cart" data-name="Combo Coxinha" data-price="15.00" aria-label="Adicionar Combo Coxinha ao carrinho">Adicionar</button>
+                </div>
+                <div class="promotion-item">
+                    <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada Gourmet com 10% de desconto">
+                    <h3>Empada Gourmet</h3>
+                    <p>De R$ 15,00 por R$ 13,50</p>
+                    <button class="add-to-cart" data-name="Empada Gourmet" data-price="13.50" aria-label="Adicionar Empada Gourmet ao carrinho">Adicionar</button>
+                </div>
+                <div class="promotion-item">
+                    <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho de Salsicha com desconto especial">
+                    <h3>Enroladinho Especial</h3>
+                    <p>De R$ 10,00 por R$ 8,50</p>
+                    <button class="add-to-cart" data-name="Enroladinho Especial" data-price="8.50" aria-label="Adicionar Enroladinho Especial ao carrinho">Adicionar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carrinho -->
+        <section id="carrinho" class="cart">
+            <h2>Carrinho</h2>
+            <ul class="cart-list"></ul>
+            <p>Total: R$ <span id="total">0,00</span></p>
+            <button id="checkoutButton" aria-label="Finalizar pedido">Finalizar Pedido</button>
+        </section>
     </main>
 
     <footer>
