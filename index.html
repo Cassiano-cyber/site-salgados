@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <h1>Cardápio de Salgados</h1>
+        <h1>Bem-vindo ao Cardápio de Salgados</h1>
         <p>Escolha o que deseja e peça agora!</p>
-        <button id="toggleTheme">Alternar Tema</button>
+        <button id="toggleTheme" aria-label="Alternar entre tema claro e escuro">Alternar Tema</button>
     </header>
 
     <main>
@@ -26,21 +26,21 @@
                              alt="Coxinha de Costela" loading="lazy">
                         <h3>Coxinha de Costela</h3>
                         <p>R$ 10,00</p>
-                        <button class="add-to-cart" data-name="Coxinha de Costela" data-price="10.00">Adicionar</button>
+                        <button class="add-to-cart" data-name="Coxinha de Costela" data-price="10.00" aria-label="Adicionar Coxinha de Costela ao carrinho">Adicionar</button>
                     </article>
                     <article class="carousel-item">
                         <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" 
                              alt="Empada de Frango" loading="lazy">
                         <h3>Empada de Frango</h3>
                         <p>R$ 12,00</p>
-                        <button class="add-to-cart" data-name="Empada de Frango" data-price="12.00">Adicionar</button>
+                        <button class="add-to-cart" data-name="Empada de Frango" data-price="12.00" aria-label="Adicionar Empada de Frango ao carrinho">Adicionar</button>
                     </article>
                     <article class="carousel-item">
                         <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" 
                              alt="Enroladinho de Salsicha" loading="lazy">
                         <h3>Enroladinho de Salsicha</h3>
                         <p>R$ 8,00</p>
-                        <button class="add-to-cart" data-name="Enroladinho de Salsicha" data-price="8.00">Adicionar</button>
+                        <button class="add-to-cart" data-name="Enroladinho de Salsicha" data-price="8.00" aria-label="Adicionar Enroladinho de Salsicha ao carrinho">Adicionar</button>
                     </article>
                 </div>
                 <button class="carousel-control prev" aria-label="Slide anterior">&lsaquo;</button>
@@ -57,21 +57,21 @@
                          alt="Promoção Coxinha de Frango + Refrigerante" />
                     <h3>Combo Coxinha + Refrigerante</h3>
                     <p>De R$ 20,00 por R$ 15,00</p>
-                    <button class="add-to-cart" data-name="Combo Coxinha" data-price="15.00">Adicionar</button>
+                    <button class="add-to-cart" data-name="Combo Coxinha" data-price="15.00" aria-label="Adicionar Combo Coxinha ao carrinho">Adicionar</button>
                 </div>
                 <div class="promotion-item">
                     <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" 
                          alt="Empada Gourmet com 10% de desconto" />
                     <h3>Empada Gourmet</h3>
                     <p>De R$ 15,00 por R$ 13,50</p>
-                    <button class="add-to-cart" data-name="Empada Gourmet" data-price="13.50">Adicionar</button>
+                    <button class="add-to-cart" data-name="Empada Gourmet" data-price="13.50" aria-label="Adicionar Empada Gourmet ao carrinho">Adicionar</button>
                 </div>
                 <div class="promotion-item">
                     <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" 
                          alt="Enroladinho de Salsicha com desconto especial" />
                     <h3>Enroladinho Especial</h3>
                     <p>De R$ 10,00 por R$ 8,50</p>
-                    <button class="add-to-cart" data-name="Enroladinho Especial" data-price="8.50">Adicionar</button>
+                    <button class="add-to-cart" data-name="Enroladinho Especial" data-price="8.50" aria-label="Adicionar Enroladinho Especial ao carrinho">Adicionar</button>
                 </div>
             </div>
         </section>
@@ -79,10 +79,9 @@
         <!-- Carrinho -->
         <section id="carrinho" class="cart">
             <h2>Carrinho</h2>
-            <ul id="cart"></ul>
+            <ul class="cart-list"></ul>
             <p>Total: R$ <span id="total">0.00</span></p>
-            <p>Pontos Acumulados: <span id="points">0</span></p>
-            <button id="checkoutButton">Finalizar Pedido</button>
+            <button id="checkoutButton" aria-label="Finalizar pedido">Finalizar Pedido</button>
         </section>
     </main>
 
