@@ -90,51 +90,79 @@ body.dark-mode .promotion-item,
 body.dark-mode .cart {
     color: var(--dark-card-text);
 }
-
 /* Carrossel */
-.carousel-inner {
-    display: flex;
+.carousel {
+    position: relative;
     overflow: hidden;
     width: 100%;
-    transform: translateX(0);
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    position: absolute;
-    width: 100%;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-}
-.carousel-item:not(:first-child) {
-    transform: translateX(100%);
-    opacity: 0;
-    z-index: 0;
-}
-
-.carousel-item img {
-    max-width: 100%;
+    max-width: 1200px;
+    margin: auto;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
 
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 0;
+    z-index: 0;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.carousel-item img {
+    width: 100%;
+    border-radius: var(--border-radius);
+}
+
 .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     background-color: var(--button-color);
     color: var(--white);
     border: none;
     border-radius: 50%;
     font-size: 1.5rem;
-    padding: 0.5rem 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-}
-
-body.dark-mode .carousel-control {
-    background-color: var(--dark-header-bg);
-    color: var(--dark-text);
+    z-index: 2;
 }
 
 .carousel-control:hover {
     background-color: var(--button-hover-color);
 }
+
+.carousel-control.prev {
+    left: 1rem;
+}
+
+.carousel-control.next {
+    right: 1rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .carousel-control {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.2rem;
+    }
+}
+
 
 /* Promoções */
 .promotions-grid {
