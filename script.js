@@ -4,6 +4,8 @@ let points = 0;
 
 function showSlide(index) {
     const items = document.querySelectorAll('.carousel-item');
+    if (items.length === 0) return;
+
     items.forEach((item, i) => {
         item.classList.toggle('active', i === index);
     });
@@ -11,11 +13,15 @@ function showSlide(index) {
 
 function changeSlide(step) {
     const items = document.querySelectorAll('.carousel-item');
+    if (items.length === 0) return;
+
     currentIndex = (currentIndex + step + items.length) % items.length;
     document.querySelector('.carousel-inner').style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 
 function addToCart(name, price) {
+    if (!name || !price) return;
+
     const existingItem = cart.find(item => item.name === name);
     if (existingItem) {
         existingItem.quantity++;
@@ -37,6 +43,8 @@ function removeFromCart(name) {
 }
 
 function updateQuantity(name, newQuantity) {
+    if (!name || newQuantity < 1) return;
+
     const item = cart.find(item => item.name === name);
     if (item) {
         const oldPoints = Math.floor(item.price / 2) * item.quantity;
@@ -51,6 +59,9 @@ function updateCart() {
     const cartList = document.getElementById('cart');
     const totalDisplay = document.getElementById('total');
     const pointsDisplay = document.getElementById('points');
+
+    if (!cartList || !totalDisplay || !pointsDisplay) return;
+
     cartList.innerHTML = '';
     let total = 0;
 
@@ -87,8 +98,9 @@ function toggleTheme() {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
 }
 
-document.querySelector('.prev').addEventListener('click', () => changeSlide(-1));
-document.querySelector('.next').addEventListener('click', () => changeSlide(1));
+document.querySelector('.prev')?.addEventListener('click', () => changeSlide(-1));
+document.querySelector('.next')?.addEventListener('click', () => changeSlide(1));
+
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', () => {
         const name = button.getAttribute('data-name');
@@ -97,9 +109,9 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
     });
 });
 
-document.getElementById('toggleTheme').addEventListener('click', toggleTheme);
+document.getElementById('toggleTheme')?.addEventListener('click', toggleTheme);
 
-document.getElementById('checkoutButton').addEventListener('click', () => {
+document.getElementById('checkoutButton')?.addEventListener('click', () => {
     alert("Pedido finalizado com sucesso! Pontos acumulados: " + points);
     points = 0;
     cart.length = 0;
