@@ -19,19 +19,26 @@ function initializeTheme() {
 
 // Atualiza o carrossel
 function updateCarousel() {
-    const items = document.querySelectorAll('.carousel-item');
-    items.forEach((item, index) => {
-        item.classList.toggle('active', index === currentIndex);
+    const swiper = new Swiper('.swiper-container', {
+        loop: true,
+        slidesPerView: 1,  // Exibir apenas um item por vez
+        spaceBetween: 10,   // Ajuste a distância entre os slides
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
     });
 }
 
 // Alterna para o próximo ou anterior item do carrossel
 function changeCarouselItem(direction) {
-    const items = document.querySelectorAll('.carousel-item');
-    if (items.length > 0) {
-        currentIndex = (currentIndex + direction + items.length) % items.length;
-        updateCarousel();
-    }
+    const swiper = new Swiper('.swiper-container');
+    swiper.slideTo(currentIndex + direction);
+    currentIndex = (currentIndex + direction + swiper.slides.length) % swiper.slides.length;
 }
 
 // Carrinho de compras
@@ -113,18 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggleBtn.addEventListener('click', toggleTheme);
     }
 
-    // Configura controles do carrossel
-    const nextBtn = document.querySelector('.carousel-control.next');
-    const prevBtn = document.querySelector('.carousel-control.prev');
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => changeCarouselItem(1));
-    }
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => changeCarouselItem(-1));
-    }
-
-    // Inicializa o carrossel
+    // Inicializa o carrossel (com um item por vez)
     updateCarousel();
 
     // Configura botões de adicionar ao carrinho
