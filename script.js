@@ -76,10 +76,30 @@ function addToCart(name, price) {
 
 // Remove item do carrinho
 function removeItem(index) {
-    points -= Math.floor(cart[index].price); // Remove os pontos correspondentes
-    total -= cart[index].price;
-    cart.splice(index, 1);
-    updateCart();
+    if (index >= 0 && index < cart.length) {
+        points -= Math.floor(cart[index].price); // Remove os pontos correspondentes
+        total -= cart[index].price;
+        cart.splice(index, 1);
+        updateCart();
+    }
+}
+
+// Finaliza o pedido enviando para o WhatsApp
+function checkout() {
+    if (cart.length === 0) {
+        alert('Carrinho vazio! Adicione itens ao carrinho.');
+        return;
+    }
+
+    let orderDetails = 'Pedido:\n';
+    cart.forEach(item => {
+        orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
+    });
+    orderDetails += `\nTotal: R$ ${total.toFixed(2)}\nPontos acumulados: ${points}`;
+
+    const phoneNumber = '+5517996780618';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 // Inicializa o documento
@@ -118,20 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Botão de finalizar pedido
-    document.getElementById('checkoutButton').addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert('Carrinho vazio! Adicione itens ao carrinho.');
-            return;
-        }
-
-        let orderDetails = 'Pedido:\n';
-        cart.forEach(item => {
-            orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
-        });
-        orderDetails += `\nTotal: R$ ${total.toFixed(2)}\nPontos acumulados: ${points}`;
-
-        const phoneNumber = '+5517996780618';
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
-        window.open(whatsappUrl, '_blank');
-    });
+    const checkoutButton = document.getElementById('checkoutButton');
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', checkout);
+    }
 });
