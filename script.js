@@ -1,17 +1,27 @@
 let cart = [];
 let total = 0;
-let points = 0;
 
 function toggleTheme() {
     document.body.classList.toggle("dark-mode");
     const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
     localStorage.setItem("theme", currentTheme);
+    updateThemeButton();
 }
 
 function initializeTheme() {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
         document.body.classList.add("dark-mode");
+    }
+    updateThemeButton();
+}
+
+function updateThemeButton() {
+    const button = document.getElementById("toggleTheme");
+    if (document.body.classList.contains("dark-mode")) {
+        button.textContent = "🌞 Modo Claro";
+    } else {
+        button.textContent = "🌙 Modo Escuro";
     }
 }
 
@@ -25,6 +35,7 @@ function updateCart() {
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "🗑️";
+        deleteButton.title = "Remover item";
         deleteButton.addEventListener("click", () => removeItem(index));
 
         li.appendChild(deleteButton);
@@ -38,9 +49,11 @@ function addToCart(name, price) {
     cart.push({ name, price });
     total += price;
     updateCart();
+    alert(`${name} foi adicionado ao carrinho!`);
 }
 
 function removeItem(index) {
+    alert(`${cart[index].name} foi removido do carrinho.`);
     total -= cart[index].price;
     cart.splice(index, 1);
     updateCart();
@@ -63,12 +76,8 @@ function checkout() {
     window.open(whatsappUrl, "_blank");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    initializeTheme();
-
-    document.getElementById("toggleTheme").addEventListener("click", toggleTheme);
-
-    const slides = document.querySelectorAll(".swiper-slide");
+function initializeCarousel() {
+    const slides = document.querySelectorAll(".carousel-slide");
     let currentSlide = 0;
 
     function showSlide(index) {
@@ -77,17 +86,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    document.querySelector(".swiper-button-next").addEventListener("click", () => {
+    document.querySelector(".carousel-button.next").addEventListener("click", () => {
         currentSlide = (currentSlide + 1) % slides.length;
         showSlide(currentSlide);
     });
 
-    document.querySelector(".swiper-button-prev").addEventListener("click", () => {
+    document.querySelector(".carousel-button.prev").addEventListener("click", () => {
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
         showSlide(currentSlide);
     });
 
     showSlide(currentSlide);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    initializeTheme();
+    initializeCarousel();
+
+    document.getElementById("toggleTheme").addEventListener("click", toggleTheme);
 
     document.querySelectorAll(".add-to-cart").forEach((button) => {
         button.addEventListener("click", () => {
