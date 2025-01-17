@@ -115,3 +115,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("checkoutButton").addEventListener("click", checkout);
 });
+
