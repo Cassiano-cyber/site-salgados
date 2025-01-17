@@ -5,9 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore o nosso cardápio de salgados deliciosos. Faça seu pedido online e aproveite!">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>Cardápio de Salgados</title>
+    <style>
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .carousel-slide img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+        .carousel-button:focus {
+            outline: 2px solid white;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -20,34 +59,31 @@
         <!-- Carrossel de Produtos -->
         <section id="menu" class="menu">
             <h2>Nosso Cardápio</h2>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Slide 1 -->
-                    <div class="swiper-slide">
+            <div class="carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
                         <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de Costela" loading="lazy">
                         <h3>Coxinha de Costela</h3>
                         <p>R$ 10,00</p>
                         <button class="add-to-cart" data-name="Coxinha de Costela" data-price="10.00" aria-label="Adicionar Coxinha de Costela ao carrinho">Adicionar</button>
                     </div>
-                    <!-- Slide 2 -->
-                    <div class="swiper-slide">
+                    <div class="carousel-slide">
                         <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de Frango" loading="lazy">
                         <h3>Empada de Frango</h3>
                         <p>R$ 12,00</p>
                         <button class="add-to-cart" data-name="Empada de Frango" data-price="12.00" aria-label="Adicionar Empada de Frango ao carrinho">Adicionar</button>
                     </div>
-                    <!-- Slide 3 -->
-                    <div class="swiper-slide">
+                    <div class="carousel-slide">
                         <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de Salsicha" loading="lazy">
                         <h3>Enroladinho de Salsicha</h3>
                         <p>R$ 8,00</p>
                         <button class="add-to-cart" data-name="Enroladinho de Salsicha" data-price="8.00" aria-label="Adicionar Enroladinho de Salsicha ao carrinho">Adicionar</button>
                     </div>
                 </div>
-                <!-- Controles -->
-                <div class="swiper-button-prev" aria-label="Slide anterior"></div>
-                <div class="swiper-button-next" aria-label="Próximo slide"></div>
-                <div class="swiper-pagination"></div>
+                <div class="carousel-buttons">
+                    <button class="carousel-button prev" aria-label="Slide anterior">&#8249;</button>
+                    <button class="carousel-button next" aria-label="Próximo slide">&#8250;</button>
+                </div>
             </div>
         </section>
 
@@ -89,40 +125,31 @@
         <p>&copy; 2024 Salgados Online. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
     <script>
-        const swiper = new Swiper('.swiper-container', {
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            keyboard: {
-                enabled: true, // Habilita o controle pelo teclado
-                onlyInViewport: true,
-            },
-            autoplay: {
-                delay: 3000, // Tempo entre os slides em milissegundos
-                disableOnInteraction: false, // Continua mesmo após interação do usuário
-            },
-            slidesPerView: 1, // Quantidade de slides visíveis
-            spaceBetween: 20, // Espaço entre os slides
-            breakpoints: {
-                640: {
-                    slidesPerView: 2, // Para telas menores que 640px
-                    spaceBetween: 10,
-                },
-                768: {
-                    slidesPerView: 3, // Para telas maiores que 768px
-                    spaceBetween: 15,
-                },
-            },
+        const track = document.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.querySelector('.carousel-button.next');
+        const prevButton = document.querySelector('.carousel-button.prev');
+
+        let currentSlideIndex = 0;
+
+        function updateCarousel() {
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            track.style.transform = `translateX(-${currentSlideIndex * slideWidth}px)`;
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            updateCarousel();
         });
+
+        prevButton.addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        });
+
+        window.addEventListener('resize', updateCarousel);
+        updateCarousel();
     </script>
 </body>
 </html>
