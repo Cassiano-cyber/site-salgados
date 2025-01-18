@@ -125,31 +125,6 @@
         <p>&copy; 2024 Salgados Online. Todos os direitos reservados.</p>
     </footer>
 
-    <script>
-        const track = document.querySelector('.carousel-track');
-        const slides = Array.from(track.children);
-        const nextButton = document.querySelector('.carousel-button.next');
-        const prevButton = document.querySelector('.carousel-button.prev');
-
-        let currentSlideIndex = 0;
-
-        function updateCarousel() {
-            const slideWidth = slides[0].getBoundingClientRect().width;
-            track.style.transform = `translateX(-${currentSlideIndex * slideWidth}px)`;
-        }
-
-        nextButton.addEventListener('click', () => {
-            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-            updateCarousel();
-        });
-
-        prevButton.addEventListener('click', () => {
-            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-            updateCarousel();
-        });
-
-        window.addEventListener('resize', updateCarousel);
-        updateCarousel();
-    </script>
+     <script src="script.js"></script>
 </body>
 </html>
