@@ -3,8 +3,8 @@ let total = 0;
 
 function toggleTheme() {
     document.body.classList.toggle("dark-mode");
-    const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
-    localStorage.setItem("theme", currentTheme);
+    const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+    localStorage.setItem("theme", theme);
     updateThemeButton();
 }
 
@@ -18,31 +18,30 @@ function initializeTheme() {
 
 function updateThemeButton() {
     const button = document.getElementById("toggleTheme");
-    if (document.body.classList.contains("dark-mode")) {
-        button.textContent = "🌞 Modo Claro";
-    } else {
-        button.textContent = "🌙 Modo Escuro";
+    if (button) {
+        button.textContent = document.body.classList.contains("dark-mode")
+            ? "🌞 Modo Claro"
+            : "🌙 Modo Escuro";
     }
 }
 
 function updateCart() {
     const cartList = document.querySelector(".cart-list");
-    cartList.innerHTML = "";
+    const totalElement = document.getElementById("total");
 
-    cart.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.textContent = `${item.name} - R$ ${item.price.toFixed(2)}`;
+    if (cartList) {
+        cartList.innerHTML = "";
+        cart.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.innerHTML = `${item.name} - R$ ${item.price.toFixed(2)} 
+                <button onclick="removeItem(${index})">🗑️</button>`;
+            cartList.appendChild(li);
+        });
+    }
 
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "🗑️";
-        deleteButton.title = "Remover item";
-        deleteButton.addEventListener("click", () => removeItem(index));
-
-        li.appendChild(deleteButton);
-        cartList.appendChild(li);
-    });
-
-    document.getElementById("total").textContent = total.toFixed(2);
+    if (totalElement) {
+        totalElement.textContent = `R$ ${total.toFixed(2)}`;
+    }
 }
 
 function addToCart(name, price) {
@@ -53,7 +52,6 @@ function addToCart(name, price) {
 }
 
 function removeItem(index) {
-    alert(`${cart[index].name} foi removido do carrinho.`);
     total -= cart[index].price;
     cart.splice(index, 1);
     updateCart();
@@ -80,11 +78,11 @@ function initializeCarousel() {
     const slides = document.querySelectorAll(".carousel-slide");
     let currentSlide = 0;
 
-    function showSlide(index) {
+    const showSlide = (index) => {
         slides.forEach((slide, i) => {
-            slide.style.display = i === index ? "block" : "none";
+            slide.classList.toggle("active", i === index);
         });
-    }
+    };
 
     document.querySelector(".carousel-button.next").addEventListener("click", () => {
         currentSlide = (currentSlide + 1) % slides.length;
@@ -115,4 +113,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("checkoutButton").addEventListener("click", checkout);
 });
-
