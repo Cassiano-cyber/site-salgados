@@ -110,10 +110,10 @@ button:hover {
     background-color: var(--button-color);
     color: white;
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: 2rem;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .swiper-slide button:hover {
@@ -139,11 +139,11 @@ button:hover {
 }
 
 .swiper-button-next {
-    right: 10px;
+    right: 20px;
 }
 
 .swiper-button-prev {
-    left: 10px;
+    left: 20px;
 }
 
 .swiper-button-next:hover,
