@@ -113,7 +113,7 @@ button:hover {
     font-size: 2rem;
     border: none;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 0.5rem;
 }
 
 .swiper-slide button:hover {
@@ -136,6 +136,7 @@ button:hover {
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+    border-radius: 0.5rem;
 }
 
 .swiper-button-next {
