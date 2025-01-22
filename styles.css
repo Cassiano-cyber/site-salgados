@@ -8,7 +8,7 @@
     --wine-dark-color: #800000;
     --background-color: #f9f9f9;
     --dark-background: #800000;
-    --ligth-text: #fff;
+    --light-text: #fff;
     --text-color: #333;
     --button-color: #ffa07a;
     --button-hover-color: #ff6347;
@@ -31,7 +31,27 @@ body {
 
 body.dark-mode {
     background-color: var(--dark-background);
-    color: var(--ligth-text);
+    color: var(--light-text);
+}
+
+/* Botões Gerais */
+button {
+    background-color: var(--button-color);
+    color: var(--light-text);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-color);
+}
+
+button:focus {
+    outline: 2px solid var(--highlight-color);
 }
 
 /* Cabeçalho */
@@ -51,20 +71,6 @@ header p {
     font-size: 1.2rem;
 }
 
-button {
-    background-color: var(--button-color);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-button:hover {
-    background-color: var(--button-hover-color);
-}
-
 /* Menu e Carrossel */
 #menu {
     padding: 40px 20px;
@@ -73,83 +79,72 @@ button:hover {
 
 #menu h2 {
     font-size: 2rem;
-    color: var(--ligth-text);
+    color: var(--primary-color);
     margin-bottom: 20px;
 }
 
-.swiper-container {
-    width: 100%;
-    margin: 0 auto;
+/* Ajuste de cores para o modo escuro */
+body.dark-mode #menu h2 {
+    color: var(--light-text);
 }
 
-.swiper-slide {
+
+.carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 20px auto;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
     text-align: center;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.swiper-slide img {
-    max-width: 100%;
-    height: auto;
+.carousel-slide img {
+    width: 100%;
     border-radius: 10px;
 }
 
-.swiper-slide h3 {
-    font-size: 1.5rem;
-    color: var(--primary-color);
+.carousel-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
-.swiper-slide p {
-    font-size: 1.2rem;
-    color: var(--primary-color);
-}
-
-.swiper-slide button {
-    background-color: var(--button-color);
+.carousel-button {
+    background-color: var(--primary-color);
     color: white;
-    padding: 10px 20px;
-    font-size: 2rem;
     border: none;
+    padding: 10px;
     cursor: pointer;
-    border-radius: 0.5rem;
+    border-radius: 50%;
 }
 
-.swiper-slide button:hover {
+.carousel-button:hover {
     background-color: var(--button-hover-color);
 }
 
-/* Controles do Carrossel */
-.swiper-button-next,
-.swiper-button-prev {
-    background-color: transparent;
-    color: var(--primary-color);
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
+/* Botões "Adicionar" */
+.carousel-slide button {
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
     cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    border-radius: 0.5rem;
-}
-
-.swiper-button-next {
-    right: 20px;
-}
-
-.swiper-button-prev {
-    left: 20px;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-    color: var(--button-hover-color);
+    border: none;
 }
 
 /* Promoções */
@@ -167,7 +162,7 @@ button:hover {
 
 .promotions-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
@@ -199,9 +194,8 @@ button:hover {
     background-color: var(--button-color);
     color: white;
     padding: 10px 20px;
-    border: none;
-    cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .promotion-item button:hover {
@@ -222,7 +216,7 @@ button:hover {
 }
 
 .cart-list {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     margin-bottom: 20px;
 }
@@ -253,64 +247,10 @@ button:hover {
     padding: 10px 20px;
     border: none;
     font-size: 1.2rem;
-    cursor: pointer;
     width: 100%;
     border-radius: 5px;
 }
 
 #checkoutButton:hover {
     background-color: var(--button-hover-color);
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .promotions-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.8rem;
-    }
-
-    header p {
-        font-size: 1rem;
-    }
-
-    .swiper-slide {
-        padding: 10px;
-    }
-
-    .swiper-slide h3 {
-        font-size: 1.3rem;
-    }
-
-    .swiper-slide p {
-        font-size: 1rem;
-    }
-
-    .promotion-item {
-        padding: 15px;
-    }
-
-    .promotion-item h3 {
-        font-size: 1.2rem;
-    }
-
-    .promotion-item p {
-        font-size: 1rem;
-    }
-
-    .cart h2 {
-        font-size: 1.8rem;
-    }
-
-    .cart-list li {
-        font-size: 1rem;
-    }
-
-    #checkoutButton {
-        font-size: 1rem;
-    }
 }
