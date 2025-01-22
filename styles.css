@@ -116,24 +116,31 @@ body.dark-mode #menu h2 {
 
 .carousel-buttons {
     position: absolute;
-    top: 50%;
+    top: 45%;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    transform: translateY(-50%); /* Centraliza os botões verticalmente */
+    padding: 0.5rem;
 }
 
 .carousel-button {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 10px;
+    padding: 13px;
+    font-size: large;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 0.5rem; /* Botões arredondados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona um sombreamento */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animações suaves */
 }
 
 .carousel-button:hover {
     background-color: var(--button-hover-color);
+    transform: scale(1.1); /* Aumenta levemente ao passar o mouse */
 }
+
 
 /* Botões "Adicionar" */
 .carousel-slide button {
