@@ -97,6 +97,7 @@ body.dark-mode #menu h2 {
     margin: 20px auto;
     max-width: 600px;
     overflow: hidden;
+    border-radius: 20px;
 }
 
 .carousel-track {
