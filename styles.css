@@ -96,9 +96,12 @@ body.dark-mode #menu h2 {
     position: relative;
     margin: 20px auto;
     max-width: 600px;
-    overflow: hidden;
-    border-radius: 20px;
+    overflow: hidden; /* Necessário para respeitar o border-radius */
+    border-radius: 20px; /* Arredondamento aplicado uniformemente */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+    background-color: #fff; /* Para destacar os cantos arredondados */
 }
+
 
 .carousel-track {
     display: flex;
@@ -111,11 +114,10 @@ body.dark-mode #menu h2 {
 }
 
 .carousel-slide img {
-    width: 100%;           /* Preenche a largura do container */
-    height: auto;          /* Mantém a proporção da imagem */
-    max-height: 400px;     /* Define uma altura máxima para evitar imagens muito altas */
-    object-fit: cover;     /* Corta a imagem para preencher sem distorcer */
-    border-radius: 10px;   /* Mantém o arredondamento */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0; /* Remova o border-radius das imagens para evitar conflitos */
 }
 
 
