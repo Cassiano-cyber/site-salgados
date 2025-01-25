@@ -93,23 +93,30 @@ body.dark-mode #menu h2 {
   overflow: hidden;
   width: 100%;
   max-width: 100%;
-  border-radius: 30px;
+  border-radius: 30px; /* Bordas arredondadas no contêiner principal */
+  position: relative; /* Necessário para posicionamento dos botões */
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out; /* Animação suave ao trocar slides */
 }
 
 .carousel-item {
-  flex: 0 0 100%; /* Cada imagem ocupa 100% do container */
+  flex: 0 0 100%; /* Cada slide ocupa 100% da largura */
   position: relative;
-  overflow: hidden;
-  height: 300px;
+  overflow: hidden; /* Garante que as imagens respeitem o arredondamento */
 }
 
 .carousel-item img {
-  width: 100%;       /* Ajusta a largura para ocupar todo o espaço disponível */
-  height: 100%;      /* Ocupa 100% da altura definida */
-  object-fit: cover; /* Corta e ajusta a imagem para cobrir o container */
+  width: 100%;       /* Ocupa toda a largura do contêiner */
+  height: 100%;      /* Ocupa toda a altura do contêiner */
+  object-fit: cover; /* Corta e ajusta a imagem sem distorcer */
+  border-radius: 30px; /* Bordas arredondadas nas imagens */
 }
 
 
+/* Botões de Navegação */
 .carousel-buttons {
     position: absolute;
     top: 45%;
