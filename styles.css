@@ -115,7 +115,7 @@ body.dark-mode #menu h2 {
 
 ..carousel-slide img {
     width: 100%;
-    height: auto;
+    height: 300px;
     object-fit: cover;
     border-radius: inherit; /* Herda o arredondamento do contêiner pai */
 }
