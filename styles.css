@@ -88,31 +88,37 @@ body.dark-mode #menu h2 {
     color: var(--light-text);
 }
 
+/* Carrossel */
 .carousel {
-  display: flex;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100%;
-  border-radius: 30px; /* Bordas arredondadas no contêiner principal */
-  position: relative; /* Necessário para posicionamento dos botões */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 20px auto;
+    max-width: 600px;
+    overflow: hidden;
+    border-radius: 20px; /* Arredondamento do contêiner principal */
+    background-color: #fff; /* Cor de fundo para destacar o carrossel */
 }
 
 .carousel-track {
-  display: flex;
-  transition: transform 0.3s ease-in-out; /* Animação suave ao trocar slides */
+    display: flex;
+    transition: transform 0.3s ease-in-out;
 }
 
-.carousel-item {
-  flex: 0 0 100%; /* Cada slide ocupa 100% da largura */
-  position: relative;
-  overflow: hidden; /* Garante que as imagens respeitem o arredondamento */
+.carousel-slide {
+    min-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.carousel-item img {
-  width: 100%;       /* Ocupa toda a largura do contêiner */
-  height: 100%;      /* Ocupa toda a altura do contêiner */
-  object-fit: cover; /* Corta e ajusta a imagem sem distorcer */
-  border-radius: 30px; /* Bordas arredondadas nas imagens */
+.carousel-slide img {
+    width: 100%;
+    border-radius: 10px; /* Arredondamento das imagens */
+    max-height: 400px; /* Define uma altura máxima para as imagens */
+    object-fit: cover; /* Ajusta a imagem para cobrir o espaço sem distorcer */
 }
 
 
