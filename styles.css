@@ -97,7 +97,7 @@ body.dark-mode #menu h2 {
     margin: 20px auto;
     max-width: 600px;
     overflow: hidden; /* Necessário para respeitar o border-radius */
-    border-radius: 20px; /* Arredondamento aplicado uniformemente */
+    border-radius: 30px; /* Arredondamento aplicado uniformemente */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra opcional */
     background-color: #fff; /* Para destacar os cantos arredondados */
 }
@@ -113,12 +113,13 @@ body.dark-mode #menu h2 {
     text-align: center;
 }
 
-.carousel-slide img {
+..carousel-slide img {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 0; /* Remova o border-radius das imagens para evitar conflitos */
+    border-radius: inherit; /* Herda o arredondamento do contêiner pai */
 }
+
 
 
 .carousel-buttons {
