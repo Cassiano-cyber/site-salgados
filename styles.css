@@ -113,12 +113,13 @@ body.dark-mode #menu h2 {
     text-align: center;
 }
 
-..carousel-slide img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: inherit; /* Herda o arredondamento do contêiner pai */
+.carousel-slide img {
+    width: 100%;           /* Preenche a largura do container */
+    height: auto;          /* Mantém a proporção da imagem */
+    max-height: 400px;     /* Define uma altura máxima para evitar imagens muito altas */
+    object-fit: cover;     /* Corta a imagem para preencher sem distorcer */
 }
+
 
 
 
