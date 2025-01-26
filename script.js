@@ -1,4 +1,3 @@
-
 // Inicialização do Carrossel
 function initializeCarousel() {
     const slides = document.querySelectorAll(".carousel-slide");
@@ -74,7 +73,6 @@ function updateCart() {
         const li = document.createElement("li");
         li.innerHTML = `${item.name} - R$ ${item.price.toFixed(2)} 
             <button onclick="removeItem(${index})">🗑️</button>`;
-        li.style.color = "#000"; // Força a cor do texto para preto
         cartList.appendChild(li);
     });
 
