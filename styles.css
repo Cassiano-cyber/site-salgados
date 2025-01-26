@@ -84,53 +84,74 @@ header p {
 }
 
 /* Ajuste de cores para o modo escuro */
-body.dark-mode #menu h2 {
+body.dark-mode #menu h2,
+body.dark-mode .carousel-slide h3,
+body.dark-mode .carousel-slide p {
     color: var(--light-text);
 }
 
-/* Carrossel */
+
 .carousel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     position: relative;
-    margin: 20px auto;
-    max-width: 600px;
     overflow: hidden;
-    border-radius: 20px; /* Arredondamento do contêiner principal */
-    background-color: #fff; /* Cor de fundo para destacar o carrossel */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .carousel-track {
     display: flex;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .carousel-slide {
+    width: 100%;
     min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .carousel-slide img {
     width: 100%;
-    border-radius: 10px; /* Arredondamento das imagens */
-    max-height: 400px; /* Define uma altura máxima para as imagens */
-    object-fit: cover; /* Ajusta a imagem para cobrir o espaço sem distorcer */
+    height: 400px; /* Defina a altura desejada */
+    object-fit: cover; /* Ajusta a imagem para cobrir o contêiner */
+    border-radius: 30px;
 }
+
+.carousel-slide h3 {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.carousel-slide p {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.carousel-slide button {
+    margin-top: 10px;
+    background-color: var(--button-color);
+    color: var(--light-text);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
 
 
 /* Botões de Navegação */
 .carousel-buttons {
     position: absolute;
-    top: 45%;
+    top: 43%;
     width: 100%;
     display: flex;
     justify-content: space-between;
     transform: translateY(-50%); /* Centraliza os botões verticalmente */
-    padding: 0.5rem;
+    padding: 2rem;
 }
 
 .carousel-button {
@@ -223,11 +244,12 @@ body.dark-mode #menu h2 {
     background-color: var(--background-color);
     padding: 40px 20px;
     text-align: center;
+    color: var(--primary-color);  /* Cor do texto no carrinho */
 }
 
 .cart h2 {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: var(--primary-color);  /* Cor do título */
     margin-bottom: 20px;
 }
 
@@ -242,19 +264,37 @@ body.dark-mode #menu h2 {
     margin: 10px 0;
     display: flex;
     justify-content: space-between;
+    color: var(--primary-color);  /* Cor do texto nos itens */
 }
 
 .cart-list button {
     background: transparent;
     border: none;
     font-size: 1.2rem;
-    color: var(--primary-color);
+    color: var(--primary-color);  /* Cor do botão */
     cursor: pointer;
+}
+
+/* Modo Escuro */
+body.dark-mode .cart {
+    color: var(--primary-color);  /* Cor do texto no modo escuro */
+}
+
+body.dark-mode .cart h2 {
+    color: var(--primary-color);  /* Cor do título no modo escuro */
+}
+
+body.dark-mode .cart-list li {
+    color: var(--primary-color);  /* Cor do texto nos itens no modo escuro */
+}
+
+body.dark-mode .cart-list button {
+    color: var(--primary-color);  /* Cor do botão no modo escuro */
 }
 
 #total {
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--primary-color);  /* Cor do total */
 }
 
 #checkoutButton {
