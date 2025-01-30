@@ -110,7 +110,97 @@
                 </article>
             </div>
         </section>
+<!-- Seção de Bebidas -->
+<section class="bebidas">
+    <h2>Refresque-se com Nossas Bebidas</h2>
+    <div class="bebidas-grid">
+        <!-- Bebida 1 -->
+        <article class="bebida-item">
+            <img src="https://pixabay.com/pt/photos/bebida-coca-cola-posso-2080332/" alt="Refrigerante Coca-Cola">
+            <h3>Coca-Cola Lata</h3>
+            <p>R$ 5,00</p>
+            <button class="add-to-cart" data-name="Coca-Cola Lata" data-price="5.00">Adicionar</button>
+        </article>
 
+        <!-- Bebida 2 -->
+        <article class="bebida-item">
+            <img src="https://pixabay.com/pt/photos/laranjas-suco-de-laranja-frutas-6387749/" alt="Suco Natural de Laranja">
+            <h3>Suco Natural de Laranja</h3>
+            <p>R$ 7,50</p>
+            <button class="add-to-cart" data-name="Suco Natural de Laranja" data-price="7.50">Adicionar</button>
+        </article>
+
+        <!-- Bebida 3 -->
+        <article class="bebida-item">
+            <img src="https://pixabay.com/pt/photos/bebida-vidro-lima-hortel%C3%A3-frio-1532300/" alt="Água de Coco">
+            <h3>Água saborizada</h3>
+            <p>R$ 5,00</p>
+            <button class="add-to-cart" data-name="Água saborizada" data-price="5.00">Adicionar</button>
+        </article>
+    </div>
+</section>
+
+<style>
+.bebidas {
+    text-align: center;
+    padding: 30px 20px;
+    background: #f8f8f8;
+}
+
+.bebidas h2 {
+    font-size: 2rem;
+    color: #d62828;
+    margin-bottom: 20px;
+}
+
+.bebidas-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.bebida-item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 200px;
+}
+
+.bebida-item img {
+    width: 100%;
+    border-radius: 10px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.bebida-item h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.bebida-item p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.bebida-item button {
+    background: #d62828;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.bebida-item button:hover {
+    background: #a71d1d;
+}
+</style>
         <!-- Carrinho -->
         <section id="carrinho" class="cart">
             <h2>Carrinho de Compras</h2>
