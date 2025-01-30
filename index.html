@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore nosso cardápio de salgados irresistíveis. Faça seu pedido online e aproveite os melhores sabores!">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <title>Cardápio de Salgados | Explosão Crocante</title>
 </head>
 <body>
@@ -115,6 +118,84 @@
             <p>Total: R$ <span id="total">0,00</span></p>
             <button id="checkoutButton" aria-label="Finalizar pedido">🛒 Finalizar Pedido</button>
         </section>
+        <!-- Botão do Carrinho -->
+<div class="cart-icon" onclick="toggleCart()">
+    🛒 <span id="cart-count">0</span>
+</div>
+
+<!-- Menu do Carrinho -->
+<div class="cart-menu" id="cart-menu">
+    <h2>Seu Carrinho</h2>
+    <ul id="cart-items"></ul>
+    
+    <div class="cart-options">
+        <label>
+            <input type="radio" name="delivery" value="retirar" checked> Retirar no Local
+        </label>
+        <label>
+            <input type="radio" name="delivery" value="entrega"> Entrega
+        </label>
+        <input type="text" id="address" placeholder="Digite seu endereço" disabled>
+    </div>
+
+    <p>Total: <span id="cart-total">R$ 0,00</span></p>
+    <button onclick="finalizarPedido()">Finalizar Pedido</button>
+</div>
+
+<style>
+    .cart-icon {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+    
+    .cart-menu {
+        position: fixed;
+        top: 0;
+        right: -350px;
+        width: 300px;
+        height: 100vh;
+        background: white;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        transition: right 0.3s ease-in-out;
+    }
+
+    .cart-menu.active {
+        right: 0;
+    }
+
+    .cart-options input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
+
+<script>
+    function toggleCart() {
+        document.getElementById('cart-menu').classList.toggle('active');
+    }
+
+    document.querySelectorAll('input[name="delivery"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('address').disabled = this.value !== 'entrega';
+        });
+    });
+
+    function finalizarPedido() {
+        alert('Pedido finalizado com sucesso!');
+    }
+</script>
+
     </main>
 
     <footer>
@@ -124,9 +205,55 @@
                 <li><a href="#menu">Cardápio</a></li>
                 <li><a href="#promotions">Promoções</a></li>
                 <li><a href="#carrinho">Carrinho</a></li>
+                <li>
+                    <a href="https://www.instagram.com/explosao_crocante_salgaderia/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i> Instagram
+                    
+                
+                        <style>
+                            .instagram-icon {
+                                width: 20px;
+                                height: 20px;
+                                display: block;
+                                margin: 0 auto;
+                                object-fit: cover;
+                                border-radius: 50px;
+                                background-color: (--primary-color);
+                              
+
+                            }
+                        </style>
+                        
+                        
+                    </a>
+                </li>
             </ul>
         </nav>
     </footer>
+
+    <style>
+    .footer-links {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px 0;
+    }
+
+    .footer-links li a {
+        text-decoration: none;
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .footer-links li a:hover {
+        color: var(--button-hover-color);
+    }
+    </style>
 
     <script src="script.js"></script>
 </body>
