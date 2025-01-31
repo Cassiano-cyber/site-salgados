@@ -1,6 +1,6 @@
 /* Importação da Fonte */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&display=swap');
+
 /* Variáveis de Cores */
 :root {
     --primary-color: #eb5a07;
@@ -291,11 +291,108 @@ body.dark-mode .cart-list li {
 body.dark-mode .cart-list button {
     color: var(--primary-color);  /* Cor do botão no modo escuro */
 }
+/* Seção Bebidas */
+.bebidas h2, .bebidas p {
+    color: var(--primary-color);
+}
 
+body.dark-mode .bebidas h2,
+body.dark-mode .bebidas p {
+    color: var(--primary-color);
+}
 #total {
     font-size: 1.5rem;
     color: var(--primary-color);  /* Cor do total */
 }
+
+/* Seção Bebidas */
+.bebidas {
+    text-align: center;
+    padding: 30px 20px;
+    background: #f8f8f8;
+}
+
+body.dark-mode .bebidas {
+    background: var(--wine-dark-color);
+}
+
+.bebidas h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.bebidas p {
+    color: var(--primary-color);
+}
+
+body.dark-mode .bebidas h2,
+body.dark-mode .bebidas p {
+    color: var(--secondary-color);
+}
+
+.bebidas-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-block-end: 30px;
+}
+
+.bebida-item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 200px;
+    margin: 10px;
+}
+
+body.dark-mode .bebida-item {
+    background: #600000;
+}
+
+.bebida-item img {
+    width: 100%;
+    border-radius: 10px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.bebida-item h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: var(--button-hover-color);
+    text-align: center;
+}
+
+.bebida-item p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--button-hover-color);
+    margin: 10px 0;
+    text-align: center;
+}
+
+.bebida-item button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.bebida-item button:hover {
+    background: #a71d1d;
+}
+
 
 #checkoutButton {
     background-color: var(--primary-color);
@@ -347,4 +444,19 @@ i.fab.fa-instagram:hover {
 
 .fa-whatsapp {
     margin-top: 3px;
+}
+/* Melhorias na responsividade */
+@media (max-width: 768px) {
+    .carousel-slide img {
+        height: 300px;
+    }
+    .carousel-button {
+        padding: 10px;
+        font-size: medium;
+    }
+    .botao-whatsapp {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
 }
