@@ -4,295 +4,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore nosso cardápio de salgados irresistíveis. Faça seu pedido online e aproveite os melhores sabores!">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="styles.css">
 
     <title>Cardápio de Salgados | Explosão Crocante</title>
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo ao <span class="highlight">Explosão Crocante</span></h1>
-        <p>Escolha seus favoritos e peça agora mesmo!</p>
-        <button id="toggleTheme" aria-label="Alternar entre tema claro e escuro">🌗 Alternar Tema</button>
+    <!-- Cabeçalho do Site -->
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo">Bem-vindo ao <span class="highlight">Explosão Crocante</span></h1>
+            <p class="tagline">Escolha seus favoritos e peça agora mesmo!</p>
+            <button id="toggleTheme" aria-label="Alternar entre tema claro e escuro">
+               <i class="fas fa-moon"></i> <i class="fas fa-sun"></i> Alternar Tema
+           </button>
+        </div>
     </header>
 
-    <main>
-        <!-- Carrossel de Produtos -->
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <!-- Seção do Cardápio -->
         <section id="menu" class="menu">
             <h2>Nosso Cardápio</h2>
             <div class="carousel">
                 <div class="carousel-track">
                     <!-- Produto 1 -->
-                    <article class="carousel-slide">
-                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de Costela" loading="lazy">
+                    <article class="carousel-slide product" data-name="Coxinha de Costela" data-price="7.50">
+                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de Costela" loading="lazy" width="300" height="200">
                         <h3>Coxinha de Costela</h3>
                         <p>R$ 7,50</p>
-                        <button class="add-to-cart" data-name="Coxinha de Costela" data-price="7.50" aria-label="Adicionar Coxinha de Costela ao carrinho">Adicionar</button>
+                        <button class="add-to-cart" aria-label="Adicionar Coxinha de Costela ao carrinho">Adicionar</button>
                     </article>
 
                     <!-- Produto 2 -->
-                    <article class="carousel-slide">
-                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de Frango" loading="lazy">
+                    <article class="carousel-slide product" data-name="Empada de Frango" data-price="6.00">
+                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de Frango" loading="lazy" width="300" height="200">
                         <h3>Empada de Frango</h3>
                         <p>R$ 6,00</p>
-                        <button class="add-to-cart" data-name="Empada de Frango" data-price="6.00" aria-label="Adicionar Empada de Frango ao carrinho">Adicionar</button>
+                        <button class="add-to-cart" aria-label="Adicionar Empada de Frango ao carrinho">Adicionar</button>
                     </article>
 
                     <!-- Produto 3 -->
-                    <article class="carousel-slide">
-                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de Salsicha" loading="lazy">
+                    <article class="carousel-slide product" data-name="Enroladinho de Salsicha" data-price="6.00">
+                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de Salsicha" loading="lazy" width="300" height="200">
                         <h3>Enroladinho de Salsicha</h3>
                         <p>R$ 6,00</p>
-                        <button class="add-to-cart" data-name="Enroladinho de Salsicha" data-price="6.00" aria-label="Adicionar Enroladinho de Salsicha ao carrinho">Adicionar</button>
+                       <button class="add-to-cart" aria-label="Adicionar Enroladinho de Salsicha ao carrinho">Adicionar</button>
                     </article>
 
                     <!-- Produto 4 -->
-                    <article class="carousel-slide">
-                        <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinha de Carne com Queijo" loading="lazy">
+                    <article class="carousel-slide product" data-name="Bolinha de Carne com Queijo" data-price="6.00">
+                        <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinha de Carne com Queijo" loading="lazy" width="300" height="200">
                         <h3>Bolinha de Carne com Queijo</h3>
                         <p>R$ 6,00</p>
-                        <button class="add-to-cart" data-name="Bolinha de Carne com Queijo" data-price="6.00" aria-label="Adicionar Bolinha de Carne com Queijo ao carrinho">Adicionar</button>
+                       <button class="add-to-cart" aria-label="Adicionar Bolinha de Carne com Queijo ao carrinho">Adicionar</button>
                     </article>
+                    
+                 <!-- Produto 5 -->
+                 <article class="carousel-slide product" data-name="Tortinha de Legumes" data-price="4.50">
+                    <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinha de Legumes" loading="lazy" width:"300" height="200">
+                    <h3>Tortinha de Legumes</h3>
+                    <p>R$ 4,50</p>
+                    <button class="add-to-cart" data-name="Tortinha de Legumes" data-price="4.50" aria-label="Adicionar Tortinha de Legumes ao carrinho">Adicionar</button>
+                </article>
 
-                    <!-- Produto 5 -->
-                    <article class="carousel-slide">
-                        <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinha de Legumes" loading="lazy">
-                        <h3>Tortinha de Legumes</h3>
-                        <p>R$ 4,50</p>
-                        <button class="add-to-cart" data-name="Tortinha de Legumes" data-price="4.50" aria-label="Adicionar Tortinha de Legumes ao carrinho">Adicionar</button>
-                    </article>
-
-                    <!-- Produto 6 -->
-                    <article class="carousel-slide">
-                        <img src="https://images.pexels.com/photos/1320744/pexels-photo-1320744.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Torta de Carne" loading="lazy">
-                        <h3>Torta de Carne</h3>
-                        <p>R$ 5,00</p>
-                        <button class="add-to-cart" data-name="Torta de Carne" data-price="5.00" aria-label="Adicionar Torta de Carne ao carrinho">Adicionar</button>
-                    </article>
-                </div>
-
-                <!-- Botões de navegação -->
-                <div class="carousel-buttons">
-                    <button class="carousel-button prev" aria-label="Slide anterior">&#8249;</button>
-                    <button class="carousel-button next" aria-label="Próximo slide">&#8250;</button>
+                <!-- Produto 6 -->
+                <article class="carousel-slide product" data-name="Torta de Carne" data-price="5.00">
+                    <img src="https://images.pexels.com/photos/1320744/pexels-photo-1320744.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Torta de Carne" loading="lazy" width:"300" height="200">
+                    <h3>Torta de Carne</h3>
+                    <p>R$ 5,00</p>
+                    <button class="add-to-cart" data-name="Torta de Carne" data-price="5.00" aria-label="Adicionar Torta de Carne ao carrinho">Adicionar</button>
+                </article>
+            </div>
+                 <!-- Botões de navegação do carrossel -->
+                 <div class="carousel-buttons">
+                    <button class="carousel-button prev" aria-label="Slide anterior">‹</button>
+                    <button class="carousel-button next" aria-label="Próximo slide">›</button>
                 </div>
             </div>
         </section>
 
         <!-- Seção de Promoções -->
-        <section class="promotions">
+        <section id="promotions" class="promotions">
             <h2>Promoções Especiais</h2>
             <div class="promotions-grid">
-                <!-- Promoção 1 -->
-                <article class="promotion-item">
-                    <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Combo Coxinha + Refrigerante">
-                    <h3>Combo Coxinha + Refrigerante</h3>
-                    <p><del>R$ 20,00</del> <strong>R$ 15,00</strong></p>
-                    <button class="add-to-cart" data-name="Combo Coxinha" data-price="15.00" aria-label="Adicionar Combo Coxinha ao carrinho">Adicionar</button>
-                </article>
+               <!-- Promoção 1 -->
+               <article class="promotion-item product" data-name="Combo Coxinha" data-price="15.00">
+                <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Combo Coxinha + Refrigerante" width="300" height="200">
+                <h3>Combo Coxinha + Refrigerante</h3>
+                <p class="promotion-price">
+                    De <span class="tachado old-price">R$ 20,00</span> Por <span class="new-price">R$ 15,00</span>
+                </p>
+                <button class="add-to-cart" aria-label="Adicionar Combo Coxinha ao carrinho">Adicionar</button>
+            </article>
 
-                <!-- Promoção 2 -->
-                <article class="promotion-item">
-                    <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada Gourmet com desconto especial">
-                    <h3>Empada Gourmet</h3>
-                    <p><del>R$ 15,00</del> <strong>R$ 13,50</strong></p>
-                    <button class="add-to-cart" data-name="Empada Gourmet" data-price="13.50" aria-label="Adicionar Empada Gourmet ao carrinho">Adicionar</button>
-                </article>
+               <!-- Promoção 2 -->
+               <article class="promotion-item product" data-name="Empada Gourmet" data-price="13.50">
+                <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada Gourmet com desconto especial" width="300" height="200">
+                <h3>Empada Gourmet</h3>
+                <p class="promotion-price">
+                    De <span class="tachado old-price">R$ 15,00</span> Por <span class="new-price">R$ 13,50</span>
+                </p>
+                <button class="add-to-cart" aria-label="Adicionar Empada Gourmet ao carrinho">Adicionar</button>
+            </article>
 
-                <!-- Promoção 3 -->
-                <article class="promotion-item">
-                    <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho Especial com desconto">
-                    <h3>Enroladinho Especial</h3>
-                    <p><del>R$ 10,00</del> <strong>R$ 8,50</strong></p>
-                    <button class="add-to-cart" data-name="Enroladinho Especial" data-price="8.50" aria-label="Adicionar Enroladinho Especial ao carrinho">Adicionar</button>
+              <!-- Promoção 3 -->
+              <article class="promotion-item product" data-name="Enroladinho Especial" data-price="8.50">
+                <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho Especial com desconto" width="300" height="200">
+                <h3>Enroladinho Especial</h3>
+                <p class="promotion-price">
+                    De <span class="tachado old-price">R$ 10,00</span> Por <span class="new-price">R$ 8,50</span>
+                </p>
+                <button class="add-to-cart" aria-label="Adicionar Enroladinho Especial ao carrinho">Adicionar</button>
+            </article>
+            </div>
+        </section>
+
+         <!-- Seção de Bebidas -->
+        <section id="bebidas" class="bebidas">
+            <h2>Refresque-se com Nossas Bebidas</h2>
+           <div class="bebidas-grid">
+              <!-- Bebida 1 -->
+                <article class="bebida-item product" data-name="Coca-Cola Lata" data-price="5.00">
+                   <img src="https://cdn.pixabay.com/photo/2017/02/19/17/20/drink-2080332_1280.jpg" alt="Refrigerante Coca-Cola" width="300" height="200">
+                    <h3>Coca-Cola Lata</h3>
+                    <p>R$ 5,00</p>
+                  <button class="add-to-cart" aria-label="Adicionar Coca-Cola Lata ao carrinho">Adicionar</button>
+               </article>
+               
+               <!-- Bebida 2 -->
+               <article class="bebida-item product" data-name="Suco Natural de Laranja" data-price="7.50">
+                 <img src="https://cdn.pixabay.com/photo/2021/07/04/23/01/oranges-6387749_640.jpg" alt="Suco Natural de Laranja" width="300" height="200">
+                 <h3>Suco Natural de Laranja</h3>
+                   <p>R$ 7,50</p>
+                   <button class="add-to-cart" aria-label="Adicionar Suco Natural de Laranja ao carrinho">Adicionar</button>
+                </article>
+                 
+               <!-- Bebida 3 -->
+               <article class="bebida-item product" data-name="Água saborizada" data-price="5.00">
+                 <img src="https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg" alt="Água saborizada" width="300" height="200">
+                  <h3>Água saborizada</h3>
+                   <p>R$ 5,00</p>
+                  <button class="add-to-cart" aria-label="Adicionar Água saborizada ao carrinho">Adicionar</button>
                 </article>
             </div>
         </section>
-<!-- Seção de Bebidas -->
-<section class="bebidas">
-    <h2>Refresque-se com Nossas Bebidas</h2>
-    <div class="bebidas-grid">
-        <!-- Bebida 1 -->
-        <article class="bebida-item">
-            <img src="https://cdn.pixabay.com/photo/2017/02/19/17/20/drink-2080332_1280.jpg" alt="Refrigerante Coca-Cola">
-            <h3>Coca-Cola Lata</h3>
-            <p>R$ 5,00</p>
-            <button class="add-to-cart" data-name="Coca-Cola Lata" data-price="5.00">Adicionar</button>
-        </article>
-
-        <!-- Bebida 2 -->
-        <article class="bebida-item">
-            <img src="https://cdn.pixabay.com/photo/2021/07/04/23/01/oranges-6387749_640.jpg" alt="Suco Natural de Laranja">
-            <h3>Suco Natural de Laranja</h3>
-            <p>R$ 7,50</p>
-            <button class="add-to-cart" data-name="Suco Natural de Laranja" data-price="7.50">Adicionar</button>
-        </article>
-
-        <!-- Bebida 3 -->
-        <article class="bebida-item">
-            <img src="https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg" alt="Água saborizada">
-            <h3>Água saborizada</h3>
-            <p>R$ 5,00</p>
-            <button class="add-to-cart" data-name="Água saborizada" data-price="5.00">Adicionar</button>
-        </article>
-    </div>
-</section>
-
-
-        <!-- Carrinho -->
+      
+        <!-- Seção do Carrinho -->
         <section id="carrinho" class="cart">
             <h2>Carrinho de Compras</h2>
             <ul class="cart-list" aria-live="polite"></ul>
             <p>Total: R$ <span id="total">0,00</span></p>
             <button id="checkoutButton" aria-label="Finalizar pedido">🛒 Finalizar Pedido</button>
         </section>
-        <!-- Botão do Carrinho -->
-<div class="cart-icon" onclick="toggleCart()">
-    🛒 <span id="cart-count">0</span>
-</div>
+        
+         <!-- Ícone do carrinho fixo -->
+         <div class="cart-icon" onclick="toggleCart()">
+            🛒 <span id="cart-count">0</span>
+        </div>
 
-<!-- Menu do Carrinho -->
-<div class="cart-menu" id="cart-menu">
-    <h2>Seu Carrinho</h2>
-    <ul id="cart-items"></ul>
-    
-    <div class="cart-options">
-        <label>
-            <input type="radio" name="delivery" value="retirar" checked> Retirar no Local
-        </label>
-        <label>
-            <input type="radio" name="delivery" value="entrega"> Entrega
-        </label>
-        <input type="text" id="address" placeholder="Digite seu endereço" disabled>
-    </div>
+         <!-- Menu do Carrinho -->
+         <div class="cart-menu" id="cart-menu">
+            <button class="close-cart-button" aria-label="Fechar carrinho" onclick="toggleCart()">
+                <i class="fas fa-arrow-left"></i> 
+            </button>
+            <h2>Seu Carrinho</h2>
+            <ul id="cart-items"></ul>
 
-    <p>Total: <span id="cart-total">R$ 0,00</span></p>
-    <button onclick="finalizarPedido()">Finalizar Pedido</button>
-</div>
-
-<style>
-    .cart-icon {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-color);
-        color: white;
-        padding: 10px 15px;
-        border-radius: 50px;
-        cursor: pointer;
-        font-size: 1.2rem;
-    }
-    
-    .cart-menu {
-        position: fixed;
-        top: 0;
-        right: -350px;
-        width: 300px;
-        height: 100vh;
-        background: white;
-        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        transition: right 0.3s ease-in-out;
-    }
-
-    .cart-menu.active {
-        right: 0;
-    }
-
-    .cart-options input[type="text"] {
-        width: 100%;
-        padding: 8px;
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-</style>
-
-<script>
-    function toggleCart() {
-        document.getElementById('cart-menu').classList.toggle('active');
-    }
-
-    document.querySelectorAll('input[name="delivery"]').forEach(radio => {
-        radio.addEventListener('change', function() {
-            document.getElementById('address').disabled = this.value !== 'entrega';
-        });
-    });
-
-    function finalizarPedido() {
-        alert('Pedido finalizado com sucesso!');
-    }
-</script>
-
+            <div class="cart-options">
+                <label>
+                    <input type="radio" name="delivery" value="retirar" checked> Retirar no Local
+                </label>
+                 <label>
+                    <input type="radio" name="delivery" value="entrega"> Entrega
+               </label>
+                 <input type="text" id="address" placeholder="Digite seu endereço" disabled>
+            </div>
+           
+           <p>Total: <span id="cart-total">R$ 0,00</span></p>
+          <button onclick="finalizarPedido()">Finalizar Pedido</button>
+        </div>
+        
     </main>
-
-    <footer>
-        <p>&copy; 2025 Explosão Crocante. Todos os direitos reservados.</p>
-        <nav>
-            <ul class="footer-links">
-                <li><a href="#menu">Cardápio</a></li>
-                <li><a href="#promotions">Promoções</a></li>
-                <li><a href="#carrinho">Carrinho</a></li>
-                <li>
-                    <a href="https://www.instagram.com/explosao_crocante_salgaderia/" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-instagram"></i> Instagram
-                    
-                
-                        <style>
-                            .instagram-icon {
-                                width: 20px;
-                                height: 20px;
-                                display: block;
-                                margin: 0 auto;
-                                object-fit: cover;
-                                border-radius: 50px;
-                                background-color: (--primary-color);
-                              
-
-                            }
-                        </style>
-                        
-                        
-                    </a>
-                </li>
-            </ul>
-        </nav>
+    <!-- Rodapé do Site -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 Explosão Crocante. Todos os direitos reservados.</p>
+            <nav>
+                <ul class="footer-links">
+                    <li><a href="#menu">Cardápio</a></li>
+                    <li><a href="#promotions">Promoções</a></li>
+                    <li><a href="#carrinho">Carrinho</a></li>
+                    <li>
+                         <a href="https://www.instagram.com/explosao_crocante_salgaderia/" target="_blank" rel="noopener noreferrer">
+                             <i class="fab fa-instagram"></i> Instagram
+                         </a>
+                     </li>
+                     <li>
+                         <a href="https://www.facebook.com/profile.php?id=61572630962138" target="_blank" rel="noopener noreferrer">
+                             <i class="fab fa-facebook"></i> Facebook
+                         </a>
+                </ul>
+            
+            </nav>
+        </div>
     </footer>
-
-    <style>
-    .footer-links {
-        list-style: none;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        padding: 10px 0;
-    }
-
-    .footer-links li a {
-        text-decoration: none;
-        color: var(--primary-color);
-        font-size: 1.2rem;
-        transition: color 0.3s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .footer-links li a:hover {
-        color: var(--button-hover-color);
-    }
-    </style>
- <!-- Botão do WhatsApp -->
+     <!-- Botão do WhatsApp -->
     <a href="https://wa.me/5517996780618?text=Olá,%20Eu%20gostaria%20de%20fazer%20um%20pedido." 
-       target="_blank" 
+        target="_blank" 
        class="botao-whatsapp" 
-       aria-label="Entre em contato pelo WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    </section>
+        aria-label="Entre em contato pelo WhatsApp">
+         <i class="fab fa-whatsapp"></i>
+     </a>
+    <!-- Inclusão do Script JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
