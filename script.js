@@ -1,136 +1,246 @@
-// Inicialização do Carrossel
-function initializeCarousel() {
-    const slides = document.querySelectorAll(".carousel-slide");
-    const nextButton = document.querySelector(".carousel-button.next");
-    const prevButton = document.querySelector(".carousel-button.prev");
+// ============================================================================
+// Módulo de Carrossel
+// ============================================================================
+const carouselModule = (() => {
     let currentSlide = 0;
+    let slides, nextButton, prevButton, track, carouselContainer;
+    let intervalId; // Para armazenar o ID do intervalo
+    let autoSlideActive = true; // Flag para controlar o avanço automático
 
-    if (!slides.length || !nextButton || !prevButton) {
-        console.error("Carrossel ou botões não encontrados.");
-        return;
-    }
+    const init = () => {
+        slides = document.querySelectorAll(".carousel-slide");
+        nextButton = document.querySelector(".carousel-button.next");
+        prevButton = document.querySelector(".carousel-button.prev");
+        track = document.querySelector(".carousel-track");
+        carouselContainer = document.querySelector(".carousel"); // Obtém o container do carrossel
+
+        if (!slides.length || !nextButton || !prevButton || !track || !carouselContainer) {
+            console.error("Carrossel ou elementos não encontrados.");
+            return false;
+        }
+
+        nextButton.addEventListener("click", () => {
+          stopAutoSlide();
+          showNextSlide();
+          restartAutoSlide();
+        });
+        prevButton.addEventListener("click", () => {
+          stopAutoSlide();
+          showPrevSlide();
+          restartAutoSlide();
+        });
+        showSlide(currentSlide);
+
+       // Eventos para pausar/retomar o auto slide no hover
+        carouselContainer.addEventListener("mouseenter", () => {
+          stopAutoSlide();
+        });
+
+        carouselContainer.addEventListener("mouseleave", () => {
+          if (autoSlideActive) {
+           startAutoSlide();
+           }
+        });
+
+
+        // Iniciar o avanço automático a cada 5 segundos
+        startAutoSlide();
+
+        return true;
+    };
 
     const showSlide = (index) => {
-        const track = document.querySelector(".carousel-track");
-        if (track) {
-            track.style.transform = `translateX(-${index * 100}%)`;
+        track.style.transform = `translateX(-${index * 100}%)`;
+    };
+
+    const showNextSlide = () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    };
+
+    const showPrevSlide = () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    };
+
+    const startAutoSlide = () => {
+      if (autoSlideActive) {
+        intervalId = setInterval(showNextSlide, 5000);
+      }
+    };
+
+    const stopAutoSlide = () => {
+        clearInterval(intervalId);
+    };
+
+    const restartAutoSlide = () => {
+       if(autoSlideActive){
+           stopAutoSlide();
+           startAutoSlide();
+       }
+    };
+
+    return { init, startAutoSlide, stopAutoSlide, restartAutoSlide };
+})();
+
+// ============================================================================
+// Módulo de Tema (Claro/Escuro)
+// ============================================================================
+const themeModule = (() => {
+    let toggleButton;
+
+    const init = () => {
+        toggleButton = document.getElementById("toggleTheme");
+        if (!toggleButton) {
+            console.error("O botão de tema não foi encontrado");
+            return false;
+        }
+        toggleButton.addEventListener("click", toggleTheme);
+        return true;
+    };
+
+    const toggleTheme = () => {
+        document.body.classList.toggle("dark-mode");
+        const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        localStorage.setItem("theme", theme);
+        updateThemeButton();
+    };
+
+    const initializeTheme = () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+        }
+        updateThemeButton();
+    };
+
+    const updateThemeButton = () => {
+        if (toggleButton) {
+            toggleButton.innerHTML = document.body.classList.contains("dark-mode")
+                ? '<i class="fas fa-sun"></i> Modo Claro'
+                : '<i class="fas fa-moon"></i> Modo Escuro';
         }
     };
 
-    nextButton.addEventListener("click", () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    });
+    return { init, initializeTheme, toggleTheme, updateThemeButton };
+})();
 
-    prevButton.addEventListener("click", () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    });
+// ============================================================================
+// Módulo do Carrinho
+// ============================================================================
+const cartModule = (() => {
+    let cart = [];
+    let total = 0;
+    let cartList, totalElement, cartCount, cartItemsList, cartTotalDisplay, cartMenu;
 
-    showSlide(currentSlide);
-}
+    const init = () => {
+        cartList = document.querySelector(".cart-list");
+        totalElement = document.getElementById("total");
+        cartCount = document.getElementById("cart-count");
+        cartItemsList = document.getElementById("cart-items");
+        cartTotalDisplay = document.getElementById("cart-total");
+        cartMenu = document.getElementById("cart-menu");
 
-// Alternância de Tema (Claro/Escuro)
-function toggleTheme() {
-    document.body.classList.toggle("dark-mode");
-    const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
-    localStorage.setItem("theme", theme);
-    updateThemeButton();
-}
+        if (!cartList || !totalElement || !cartCount || !cartItemsList || !cartTotalDisplay) {
+            console.error("Elementos do carrinho não encontrados.");
+            return false;
+        }
 
-function initializeTheme() {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-        document.body.classList.add("dark-mode");
-    }
-    updateThemeButton();
-}
+        cartList.addEventListener("click", handleRemoveItem);
+        cartItemsList.addEventListener("click", handleRemoveItem);
 
-function updateThemeButton() {
-    const button = document.getElementById("toggleTheme");
-    if (button) {
-        button.textContent = document.body.classList.contains("dark-mode")
-            ? "🌞 Modo Claro"
-            : "🌙 Modo Escuro";
-    }
-}
+        const cartIcon = document.querySelector(".cart-icon");
+        if (cartIcon) {
+            cartIcon.addEventListener("click", toggleCartMenu);
+        }
 
-// Funções do Carrinho
-let cart = [];
-let total = 0;
+        const closeCartButton = document.querySelector(".close-cart-button");
+        if (closeCartButton) {
+            closeCartButton.addEventListener("click", toggleCartMenu);
+        }
 
-function updateCart() {
-    const cartList = document.querySelector(".cart-list");
-    const totalElement = document.getElementById("total");
+        return true;
+    };
 
-    if (!cartList || !totalElement) {
-        console.error("Elementos do carrinho não encontrados.");
-        return;
-    }
+    const updateCartDisplay = () => {
+        cartList.innerHTML = "";
+        cartItemsList.innerHTML = "";
 
-    cartList.innerHTML = "";
-    cart.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `${item.name} - R$ ${item.price.toFixed(2)} 
-            <button onclick="removeItem(${index})">🗑️</button>`;
-        cartList.appendChild(li);
-    });
+        let totalValue = 0;
 
-    totalElement.textContent = `R$ ${total.toFixed(2)}`;
-}
+        cart.forEach((item, index) => {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
+                <span>${item.name} - R$ ${item.price.toFixed(2)}</span>
+                <button class="remove-item" data-index="${index}"><i class="fas fa-trash"></i></button>
+            `;
+            cartList.appendChild(listItem);
+            cartItemsList.appendChild(listItem.cloneNode(true));
+            totalValue += item.price;
+        });
 
-function addToCart(name, price) {
-    cart.push({ name, price });
-    total += price;
-    updateCart();
-    alert(`${name} foi adicionado ao carrinho!`);
-}
+        total = totalValue;
+        totalElement.textContent = `R$ ${total.toFixed(2)}`;
+        cartCount.textContent = cart.length;
+        cartTotalDisplay.textContent = `R$ ${total.toFixed(2)}`;
+    };
 
-function removeItem(index) {
-    total -= cart[index].price;
-    cart.splice(index, 1);
-    updateCart();
-}
+    const addItem = (name, price) => {
+        cart.push({ name, price });
+        updateCartDisplay();
+        alert(`${name} foi adicionado ao carrinho!`);
+    };
 
-function checkout() {
-    if (cart.length === 0) {
-        alert("Carrinho vazio! Adicione itens ao carrinho.");
-        return;
-    }
+    const removeItem = (index) => {
+        if (index >= 0 && index < cart.length) {
+            total -= cart[index].price;
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+    };
 
-    let orderDetails = "Pedido:\n";
-    cart.forEach((item) => {
-        orderDetails += `- ${item.name} - R$ ${item.price.toFixed(2)}\n`;
-    });
-    orderDetails += `\nTotal: R$ ${total.toFixed(2)}`;
+    const handleRemoveItem = (event) => {
+        if (event.target.closest(".remove-item")) {
+            const index = parseInt(event.target.closest(".remove-item").getAttribute("data-index"), 10);
+            removeItem(index);
+        }
+    };
 
-    const phoneNumber = "+5517996780618";
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`;
-    window.open(whatsappUrl, "_blank");
-}
+    const toggleCartMenu = () => {
+        cartMenu.classList.toggle("active");
+    };
 
+    const checkout = () => {
+        if (cart.length === 0) {
+            alert("Carrinho vazio! Adicione itens ao carrinho.");
+            return;
+        }
+        const phoneNumber = "5517996780618";
+        let orderDetails = `Pedido:\n` + cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join("\n");
+        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`, "_blank");
+    };
+
+    return { init, addItem, removeItem, checkout };
+})();
+
+// ============================================================================
 // Inicialização Geral
+// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
-    initializeTheme();
-    initializeCarousel();
+    themeModule.initializeTheme();
+    themeModule.init();
+    carouselModule.init();
+    cartModule.init();
 
-    const themeToggleButton = document.getElementById("toggleTheme");
-    if (themeToggleButton) {
-        themeToggleButton.addEventListener("click", toggleTheme);
-    }
-
-    document.querySelectorAll(".add-to-cart").forEach((button) => {
+    document.querySelectorAll(".add-to-cart").forEach(button => {
         button.addEventListener("click", () => {
-            const name = button.getAttribute("data-name");
-            const price = parseFloat(button.getAttribute("data-price"));
-            if (name && !isNaN(price)) {
-                addToCart(name, price);
-            }
+            const product = button.closest(".product");
+            const name = product.getAttribute("data-name");
+            const price = parseFloat(product.getAttribute("data-price"));
+            if (name && !isNaN(price)) cartModule.addItem(name, price);
         });
     });
 
-    const checkoutButton = document.getElementById("checkoutButton");
-    if (checkoutButton) {
-        checkoutButton.addEventListener("click", checkout);
-    }
+    document.getElementById("checkoutButton")?.addEventListener("click", cartModule.checkout);
+    cartModule.updateCartDisplay();
 });
