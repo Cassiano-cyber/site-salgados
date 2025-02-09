@@ -142,7 +142,7 @@ button:focus,
 /* Botão Alternar Tema */
 #toggleTheme {
     position: absolute;
-    top: 4px;
+    top: 2px;
     left: 20px;
     background: none;
     border: 2px solid var(--light-text);
