@@ -5,14 +5,17 @@
 :root {
     --primary-color: #eb5a07;
     --secondary-color: #ffd700;
-    --wine-dark-color: #800000;
-    --background-color: #f9f9f9;
+    --highlight-color: #ffd700;
     --dark-background: #800000;
-    --light-text: #fff;
+    --dark-mode-text: #fff;
     --text-color: #333;
+    --light-text: #fff;
     --button-color: #ffa07a;
     --button-hover-color: #ff6347;
-    --highlight-color: #ffd700;
+    --background-color: #f1cfaf;
+    --cart-background: #f9f9f9;
+    --background-light: #e2b08c;
+    --footer-background: #b93026;
 }
 
 /* Reset de Estilos */
@@ -22,20 +25,58 @@
     box-sizing: border-box;
 }
 
-/* Fonte e Estilos Gerais */
+/* Estilos Base */
 body {
     font-family: 'Dancing Script', cursive;
     background-color: var(--background-color);
     color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden; /* Garante que não haja rolagem horizontal */
 }
 
 body.dark-mode {
     background-color: var(--dark-background);
+    color: var(--dark-mode-text);
+}
+
+/* Estilos de Contêiner */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Estilos de Título */
+h1, h2, h3 {
+    font-family: 'Dancing Script', cursive;
+    font-weight: normal;
+}
+
+h1 {
+    margin-bottom: 20px;
     color: var(--light-text);
 }
 
-/* Botões Gerais */
-button {
+h2,
+h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+/* Estilos de Link */
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--highlight-color);
+}
+
+/* Estilos de Botão */
+button,
+.button {
     background-color: var(--button-color);
     color: var(--light-text);
     padding: 10px 20px;
@@ -43,35 +84,84 @@ button {
     cursor: pointer;
     border-radius: 6px;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
+button:hover,
+.button:hover {
     background-color: var(--button-hover-color);
+    transform: scale(1.05);
 }
 
-button:focus {
+button:focus,
+.button:focus {
     outline: 2px solid var(--highlight-color);
 }
 
-/* Cabeçalho */
-header {
+/* Estilos do Cabeçalho */
+.site-header {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--light-text);
+    padding: 40px 20px;
+    position: relative;
+    width: 100%;
+}
+
+.site-header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 10px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+    line-height: 1.2;
     text-align: center;
-    padding: 30px 20px;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
+.site-header h1 .highlight {
+    color: var(--secondary-color);
 }
 
-header p {
-    font-size: 1.2rem;
+.site-header p {
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 800px;
+    text-align: center;
 }
 
-/* Menu e Carrossel */
+/* Botão Alternar Tema */
+#toggleTheme {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    background: none;
+    border: 2px solid var(--light-text);
+    color: var(--light-text);
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+#toggleTheme:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* Estilos do Menu e Carrossel */
 #menu {
     padding: 40px 20px;
     text-align: center;
@@ -79,22 +169,12 @@ header p {
 
 #menu h2 {
     font-size: 2rem;
-    color: var(--primary-color);
     margin-bottom: 20px;
 }
-
-/* Ajuste de cores para o modo escuro */
-body.dark-mode #menu h2,
-body.dark-mode .carousel-slide h3,
-body.dark-mode .carousel-slide p {
-    color: var(--light-text);
-}
-
 
 .carousel {
     position: relative;
     overflow: hidden;
-    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -114,8 +194,9 @@ body.dark-mode .carousel-slide p {
 
 .carousel-slide img {
     width: 100%;
-    height: 400px; /* Defina a altura desejada */
-    object-fit: cover; /* Ajusta a imagem para cobrir o contêiner */
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
     border-radius: 30px;
 }
 
@@ -130,27 +211,19 @@ body.dark-mode .carousel-slide p {
     color: var(--primary-color);
 }
 
-.carousel-slide button {
-    margin-top: 10px;
-    background-color: var(--button-color);
-    color: var(--light-text);
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-    font-size: 1rem;
+.dark-mode .carousel-slide h3,
+.dark-mode .carousel-slide p {
+    color: var(--dark-mode-text);
 }
 
-
-
-/* Botões de Navegação */
+/* Estilos dos Botões do Carrossel */
 .carousel-buttons {
     position: absolute;
     top: 43%;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    transform: translateY(-50%); /* Centraliza os botões verticalmente */
+    transform: translateY(-50%);
     padding: 2rem;
 }
 
@@ -161,45 +234,32 @@ body.dark-mode .carousel-slide p {
     padding: 13px;
     font-size: large;
     cursor: pointer;
-    border-radius: 0.5rem; /* Botões arredondados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona um sombreamento */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Animações suaves */
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .carousel-button:hover {
     background-color: var(--button-hover-color);
-    transform: scale(1.1); /* Aumenta levemente ao passar o mouse */
-}
-
-
-/* Botões "Adicionar" */
-.carousel-slide button {
-    background-color: var(--button-color);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
+    transform: scale(1.1);
 }
 
 /* Promoções */
 .promotions {
-    background-color: #f9f9f9;
+    background-color: var(--background-color);
     padding: 40px 20px;
     text-align: center;
 }
 
 .promotions h2 {
     font-size: 2rem;
-    color: var(--primary-color);
     margin-bottom: 20px;
 }
 
 .promotions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 }
 
@@ -208,6 +268,12 @@ body.dark-mode .carousel-slide p {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px; /* Limita a largura dos itens */
+    margin: 0 10px; /* Adiciona margem horizontal */
 }
 
 .promotion-item img {
@@ -218,7 +284,6 @@ body.dark-mode .carousel-slide p {
 
 .promotion-item h3 {
     font-size: 1.5rem;
-    color: var(--primary-color);
     margin-top: 15px;
 }
 
@@ -227,16 +292,37 @@ body.dark-mode .carousel-slide p {
     color: var(--highlight-color);
 }
 
-.promotion-item button {
+.promotion-price {
+    font-size: 1.2rem;
+    color: var(--highlight-color);
+}
+
+.promotion-price .old-price {
+    color: var(--secondary-color);
+}
+
+.promotion-price .new-price {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.tachado {
+    text-decoration: line-through;
+}
+
+/* Estilo dos botões "Adicionar" */
+.promotion-item button,
+.carousel-slide button {
+    display: block;
+    margin: 10px auto;
     background-color: var(--button-color);
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-}
-
-.promotion-item button:hover {
-    background-color: var(--button-hover-color);
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
 }
 
 /* Carrinho */
@@ -244,12 +330,11 @@ body.dark-mode .carousel-slide p {
     background-color: var(--background-color);
     padding: 40px 20px;
     text-align: center;
-    color: var(--primary-color);  /* Cor do texto no carrinho */
+    color: var(--primary-color);
 }
 
 .cart h2 {
     font-size: 2rem;
-    color: var(--primary-color);  /* Cor do título */
     margin-bottom: 20px;
 }
 
@@ -264,61 +349,53 @@ body.dark-mode .carousel-slide p {
     margin: 10px 0;
     display: flex;
     justify-content: space-between;
-    color: var(--primary-color);  /* Cor do texto nos itens */
+    color: var(--primary-color);
 }
 
 .cart-list button {
     background: transparent;
     border: none;
     font-size: 1.2rem;
-    color: var(--primary-color);  /* Cor do botão */
+    color: var(--primary-color);
     cursor: pointer;
 }
 
-/* Modo Escuro */
-body.dark-mode .cart {
-    color: var(--primary-color);  /* Cor do texto no modo escuro */
+/* Estilos do Carrinho (Modo Escuro) */
+.dark-mode .cart {
+    background-color: var(--dark-background);
+    color: var(--light-text);
 }
 
-body.dark-mode .cart h2 {
-    color: var(--primary-color);  /* Cor do título no modo escuro */
+.dark-mode .cart h2 {
+    color: var(--light-text);
 }
 
-body.dark-mode .cart-list li {
-    color: var(--primary-color);  /* Cor do texto nos itens no modo escuro */
+.dark-mode .cart-list li {
+    color: var(--light-text);
 }
 
-body.dark-mode .cart-list button {
-    color: var(--primary-color);  /* Cor do botão no modo escuro */
-}
-/* Seção Bebidas */
-.bebidas h2, .bebidas p {
-    color: var(--primary-color);
+.dark-mode .cart-list button {
+    color: var(--light-text);
 }
 
-body.dark-mode .bebidas h2,
-body.dark-mode .bebidas p {
-    color: var(--primary-color);
-}
-#total {
-    font-size: 1.5rem;
-    color: var(--primary-color);  /* Cor do total */
+/* Estilo do Total no Carrinho no modo escuro */
+.dark-mode #total {
+    color: var(--light-text);
 }
 
 /* Seção Bebidas */
 .bebidas {
     text-align: center;
     padding: 30px 20px;
-    background: #f8f8f8;
+    background: var(--background-color);
 }
 
-body.dark-mode .bebidas {
-    background: var(--wine-dark-color);
+.dark-mode .bebidas {
+    background: var(--dark-background);
 }
 
 .bebidas h2 {
     font-size: 2rem;
-    color: var(--primary-color);
     margin-bottom: 30px;
     margin-top: 30px;
     text-align: center;
@@ -328,17 +405,16 @@ body.dark-mode .bebidas {
     color: var(--primary-color);
 }
 
-body.dark-mode .bebidas h2,
-body.dark-mode .bebidas p {
-    color: var(--secondary-color);
+.dark-mode .bebidas h2,
+.dark-mode .bebidas p {
+    color: var(--light-text);
 }
 
 .bebidas-grid {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap;
-    margin-block-end: 30px;
 }
 
 .bebida-item {
@@ -349,9 +425,12 @@ body.dark-mode .bebidas p {
     text-align: center;
     width: 200px;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-body.dark-mode .bebida-item {
+.dark-mode .bebida-item {
     background: #600000;
 }
 
@@ -387,13 +466,14 @@ body.dark-mode .bebida-item {
     font-size: 1rem;
     margin-top: 10px;
     transition: background 0.3s;
+    align-self: center;
 }
 
 .bebida-item button:hover {
     background: #a71d1d;
 }
 
-
+/* Estilo do botão "Finalizar Pedido" */
 #checkoutButton {
     background-color: var(--primary-color);
     color: white;
@@ -407,24 +487,26 @@ body.dark-mode .bebida-item {
 #checkoutButton:hover {
     background-color: var(--button-hover-color);
 }
+
 /* Ícone do Instagram */
 i.fab.fa-instagram {
     font-size: 24px;
-    color: #E1306C;
+    color: #ffffff;
     transition: color 0.3s;
 }
 
 i.fab.fa-instagram:hover {
     color: var(--button-hover-color);
 }
-/* Botão WhatsApp fixo */
+
+/* Botão do WhatsApp */
 .botao-whatsapp {
     position: fixed;
     width: 60px;
     height: 60px;
     bottom: 40px;
     right: 25px;
-    background-color: #25D366; /* Cor do WhatsApp */
+    background-color: #25D366;
     border-radius: 50%;
     text-align: center;
     font-size: 30px;
@@ -435,28 +517,340 @@ i.fab.fa-instagram:hover {
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
-    text-decoration: none; /* Remove o sublinhado */
+    text-decoration: none;
 }
 
 .botao-whatsapp:hover {
-    background-color: #128C7E; /* Cor de hover do WhatsApp */
+    background-color: #128C7E;
 }
 
 .fa-whatsapp {
     margin-top: 3px;
 }
-/* Melhorias na responsividade */
+
+/* Estilos do Carrinho de Compras (Cart Icon) */
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 100;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cart-icon:hover {
+    background-color: var(--button-hover-color);
+    transform: scale(1.1);
+}
+
+/* Estilos do Menu do Carrinho */
+.cart-menu {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 101;
+}
+
+.dark-mode .cart-menu {
+    background: var(--dark-background);
+}
+
+.cart-menu.active {
+    right: 0;
+}
+
+.cart-menu h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.dark-mode .cart-menu h2 {
+    color: var(--light-text);
+}
+
+/* Estilo da Lista de Itens no Menu do Carrinho */
+#cart-items {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+#cart-items li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.dark-mode #cart-items li {
+    border-bottom: 1px solid #555;
+}
+
+#cart-items li:last-child {
+    border-bottom: none;
+}
+
+#cart-items li span {
+    color: var(--text-color);
+}
+
+.dark-mode #cart-items li span {
+    color: var(--dark-mode-text);
+}
+
+#cart-items li button {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0;
+}
+
+#cart-items li button:hover {
+    opacity: 0.7;
+}
+
+/* Estilo das Opções de Entrega no Menu do Carrinho */
+.cart-options {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.cart-options label {
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.dark-mode .cart-options label {
+    color: var(--dark-mode-text);
+}
+
+.cart-options input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.dark-mode .cart-options input[type="text"] {
+    background-color: var(--dark-background);
+    color: var(--dark-mode-text);
+    border: 1px solid #555;
+}
+
+/* Estilo do Total no Menu do Carrinho */
+#cart-total {
+    font-weight: bold;
+    margin: 15px 0;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.dark-mode #cart-total {
+    color: var(--dark-mode-text);
+}
+
+/* Estilo dos Botões no Menu do Carrinho */
+.cart-menu button {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.cart-menu button:hover {
+    background-color: var(--button-hover-color);
+}
+
+ /* Estilos do Rodapé */
+.site-footer {
+    background-color: var(--footer-background);
+    padding: 20px 0;
+    text-align: center;
+}
+
+ .site-footer .container {
+        display: flex;
+       justify-content: space-between;
+     align-items: center;
+       flex-wrap: wrap;
+ }
+
+
+.site-footer p {
+   margin-bottom: 10px;
+    color: var(--light-text);
+}
+.dark-mode .site-footer p {
+   color: var(--dark-mode-text);
+ }
+.footer-links {
+    list-style: none;
+    display: flex;
+     justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+    margin: 0;
+}
+ .footer-links li a {
+    text-decoration: none;
+   color: var(--light-text);
+     font-size: 1.2rem;
+    transition: color 0.3s;
+     display: flex;
+     align-items: center;
+      gap: 8px;
+}
+
+ .footer-links li a:hover {
+  color: var(--button-hover-color);
+}
+
+/* Melhorias na Responsividade */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
     .carousel-slide img {
-        height: 300px;
+      height: 300px;
     }
-    .carousel-button {
-        padding: 10px;
-        font-size: medium;
-    }
-    .botao-whatsapp {
-        width: 50px;
-        height: 50px;
+      .carousel-button {
+      padding: 10px;
+         font-size: medium;
+      }
+
+      .botao-whatsapp {
+          width: 50px;
+           height: 50px;
         font-size: 24px;
     }
+      /* Ajustes para telas menores */
+    .container{
+     padding: 0 10px;
+      }
+      .site-header .container {
+        flex-direction: column;
+        align-items: center; /* Alinhar no centro */
+      }
+
+      .site-header h1, .site-header p, .site-header button{
+        margin: 10px 0;
+       
+      }
+        .promotions-grid, .bebidas-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajuste no tamanho mínimo das colunas */
+      }
+       .bebida-item{
+           width: 100%; /* Aumente o espaçamento entre os elementos */
+         
+        }
+        .cart, #carrinho {
+            transition: background-color 0.3s ease, color 0.3s ease; /* Ajuste a transição para cada um */
+            }
+}
+
+/*Estilos adicionais*/
+.bebidas-grid,
+.promotions-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* IMAGENS RESPONSIVAS */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Evita espaços extras abaixo da imagem */
+}
+
+/* PROMOTION ITEMS */
+.promotion-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px; /* Limita a largura dos itens */
+    margin: 0 10px; /* Adiciona margem horizontal */
+}
+
+/* GRIDS */
+.bebidas-grid,
+.promotions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+/* Evita rolagem horizontal */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Garante que todos os elementos se ajustem ao tamanho da tela */
+* {
+    max-width: 100%;
+}
+
+/* Ajusta a posição do carrinho em dispositivos móveis */
+@media (max-width: 768px) {
+    .cart-menu {
+        width: 100%;
+        right: -100%;
+    }
+
+    .cart-menu.active {
+        right: 0;
+    }
+}
+
+/* Estilos do botão "Fechar Carrinho" (com a seta) */
+.close-cart-button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #777;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 0;
+    width: auto;
+    height: auto;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.close-cart-button:hover {
+    color: var(--text-color);
+}
+
+.close-cart-button i {
+    font-size: 1.5em;
 }
