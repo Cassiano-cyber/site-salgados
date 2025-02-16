@@ -3,19 +3,32 @@
 
 /* Variáveis de Cores */
 :root {
+    /* Cores da Marca */
     --primary-color: #eb5a07;
     --secondary-color: #ffd700;
     --highlight-color: #ffd700;
+
+    /* Cores para CTAs (Laranja Forte com Texto Branco) */
+    --button-cta: #f07400; /* Cor do botão de chamada para ação (Laranja Forte) */
+    --button-cta-hover: #d96500; /* Cor do botão de chamada para ação ao passar o mouse (Laranja Escuro) */
+
+    /* Cores de Texto */
     --dark-background: #800000;
     --dark-mode-text: #fff;
-    --text-color: #333;
+    --text-color: #555;
     --light-text: #fff;
-    --button-color: #ffa07a;
+
+    /* Cores de Botões */
+    --button-color: #f56a34;
     --button-hover-color: #ff6347;
+    --button-dark: #f53c2f;
+
+    /* Cores de Fundo */
     --background-color: #f1cfaf;
     --cart-background: #f9f9f9;
     --background-light: #e2b08c;
     --footer-background: #b93026;
+    
 }
 
 /* Reset de Estilos */
@@ -23,7 +36,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    max-width: 100%; /* Garante que nenhum elemento ultrapasse a largura */
+    max-width: 100%;
 }
 
 /* Estilos Base */
@@ -32,7 +45,8 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
-    overflow-x: hidden; /* Garante que não haja rolagem horizontal */
+    overflow-x: hidden;
+    line-height: 1.5;
 }
 
 body.dark-mode {
@@ -76,6 +90,7 @@ a:hover {
 }
 
 /* Estilos de Botão */
+/* Estilos de Botão */
 button,
 .button {
     background-color: var(--button-color);
@@ -86,6 +101,7 @@ button,
     border-radius: 6px;
     font-size: 1rem;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: Dancing Script;
 }
 
 button:hover,
@@ -99,6 +115,12 @@ button:focus,
     outline: 2px solid var(--highlight-color);
 }
 
+/* Estilos de Botão no Modo Escuro (Sobrescreve apenas as cores) */
+body.dark-mode button,
+body.dark-mode .button {
+    background-color: var(--button-dark);
+    color: var(--dark-mode-text);
+}
 /* Estilos do Cabeçalho */
 .site-header {
     background-color: var(--primary-color);
@@ -154,6 +176,7 @@ button:focus,
     font-size: 1rem;
     transition: all 0.3s ease;
     opacity: 0.8;
+    font-family: Dancing Script;
 }
 
 #toggleTheme:hover {
@@ -171,6 +194,13 @@ button:focus,
 #menu h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: var(--primary-color); /* Cor padrão do título */
+}
+
+/* Estilos para o modo escuro, para o carrossel */
+body.dark-mode #menu h2 {
+    color: var(--light-text); /* Cor do título no modo escuro */
+    font-weight: bold;
 }
 
 .carousel {
@@ -237,7 +267,8 @@ button:focus,
     cursor: pointer;
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    font: 1.2em sans-serif;
 }
 
 .carousel-button:hover {
@@ -252,11 +283,21 @@ button:focus,
     text-align: center;
 }
 
+body.dark-mode .promotions {
+    background-color: var(--dark-background);
+    
+}
+
 .promotions h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: var(--primary-color);
 }
-
+/* Estilos para o modo escuro, para as promoções */
+body.dark-mode .promotions h2 {
+    color: var(--light-text); /* Cor do título no modo escuro */
+    font-weight: bold;
+}
 .promotions-grid {
     display: flex;
     flex-wrap: wrap;
@@ -273,8 +314,8 @@ button:focus,
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    max-width: 400px; /* Limita a largura dos itens */
-    margin: 0 10px; /* Adiciona margem horizontal */
+    max-width: 400px;
+    margin: 0 10px;
 }
 
 .promotion-item img {
@@ -311,20 +352,34 @@ button:focus,
     text-decoration: line-through;
 }
 
-/* Estilo dos botões "Adicionar" */
+/* Estilo dos botões "Adicionar" - Adicionado ícone do carrinho e cor do texto branco */
 .promotion-item button,
-.carousel-slide button {
-    display: block;
+.carousel-slide button,
+.bebida-item button {
+    display: inline-flex;             /* Alinha o texto e o ícone horizontalmente */
+    align-items: center;            /* Alinha verticalmente no centro */
+    justify-content: center;       /* Espaça o texto e o ícone */
+    gap: 0.5em;                   /* Espaçamento entre texto e ícone */
     margin: 10px auto;
     background-color: var(--button-color);
-    color: white;
+    color: var(--light-text);           /* Cor do texto branca */
     padding: 10px 20px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     font-size: 1rem;
     cursor: pointer;
     border: none;
 }
+
+/* Estilo específico para botões de CTA (Ícone do carrinho) */
+.promotion-item button::before,   
+.carousel-slide button::before,
+.bebida-item button::before {  /* Removido espaço extra */
+   content: "\f07a";                 
+   font-family: "Font Awesome 6 Free";  
+   font-weight: 900;
+}
+
 
 /* Carrinho */
 .cart {
@@ -893,3 +948,14 @@ body {
 .close-cart-button i {
     font-size: 1.5em;
 }
+.visually-hidden {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
