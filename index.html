@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore nosso cardápio de salgados irresistíveis. Faça seu pedido online e aproveite os melhores sabores!">
 
+    <!-- Metadados para Redes Sociais (SEO) -->
+    <meta property="og:image" content="https://www.instagram.com/qr/"> 
+    <meta property="og:description" content="Descubra a Explosão Crocante: salgados deliciosos e promoções imperdíveis!"> <!-- Descrição mais atraente -->
+
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -25,9 +29,13 @@
         <div class="container">
             <h1 class="logo">Bem-vindo ao <span class="highlight">Explosão Crocante</span></h1>
             <p class="tagline">Escolha seus favoritos e peça agora mesmo!</p>
-            <button id="toggleTheme" aria-label="Alternar entre tema claro e escuro">
-               <i class="fas fa-moon"></i> <i class="fas fa-sun"></i> Alternar Tema
-           </button>
+            <nav>  <!-- Envolvendo o botão de tema em um <nav> -->
+              <button id="toggleTheme" aria-label="Alternar entre tema claro e escuro">
+                  <i class="fas fa-moon" aria-hidden="true"></i>  <!-- aria-hidden adicionado -->
+                  <i class="fas fa-sun" aria-hidden="true"></i>  <!-- aria-hidden adicionado -->
+                  Alternar Tema
+              </button>
+            </nav>
         </div>
     </header>
 
@@ -36,60 +44,66 @@
         <!-- Seção do Cardápio -->
         <section id="menu" class="menu">
             <h2>Nosso Cardápio</h2>
-            <div class="carousel">
-                <div class="carousel-track">
+            <div class="carousel" role="list"> <!-- role="list" adicionado -->
+                <div class="carousel-track" id="carousel-track"> <!-- Adicionado um ID para aria-controls -->
                     <!-- Produto 1 -->
-                    <article class="carousel-slide product" data-name="Coxinha de Costela" data-price="7.50">
-                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de Costela" loading="lazy" width="300" height="200">
+                    <article class="carousel-slide product" data-name="Coxinha de Costela" data-price="7.50" role="listitem"> <!-- role="listitem" adicionado -->
+                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de costela suculenta e crocante" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
                         <h3>Coxinha de Costela</h3>
                         <p>R$ 7,50</p>
-                        <button class="add-to-cart" aria-label="Adicionar Coxinha de Costela ao carrinho">Adicionar</button>
+                        <button class="add-to-cart cta" aria-labelledby="coxinha-costela-label">Adicionar</button> <!-- Classe cta adicionada -->
+                        <span id="coxinha-costela-label" class="visually-hidden">Coxinha de Costela</span> <!-- Elemento escondido para aria-labelledby -->
                     </article>
 
                     <!-- Produto 2 -->
-                    <article class="carousel-slide product" data-name="Empada de Frango" data-price="6.00">
-                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de Frango" loading="lazy" width="300" height="200">
+                    <article class="carousel-slide product" data-name="Empada de Frango" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
+                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de frango cremosa e saborosa" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
                         <h3>Empada de Frango</h3>
                         <p>R$ 6,00</p>
-                        <button class="add-to-cart" aria-label="Adicionar Empada de Frango ao carrinho">Adicionar</button>
+                        <button class="add-to-cart cta" aria-labelledby="empada-frango-label">Adicionar</button> <!-- Classe cta adicionada -->
+                        <span id="empada-frango-label" class="visually-hidden">Empada de Frango</span> <!-- Elemento escondido para aria-labelledby -->
                     </article>
 
                     <!-- Produto 3 -->
-                    <article class="carousel-slide product" data-name="Enroladinho de Salsicha" data-price="6.00">
-                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de Salsicha" loading="lazy" width="300" height="200">
+                    <article class="carousel-slide product" data-name="Enroladinho de Salsicha" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
+                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de salsicha macio e delicioso" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
                         <h3>Enroladinho de Salsicha</h3>
                         <p>R$ 6,00</p>
-                       <button class="add-to-cart" aria-label="Adicionar Enroladinho de Salsicha ao carrinho">Adicionar</button>
+                       <button class="add-to-cart cta" aria-labelledby="enroladinho-salsicha-label">Adicionar</button> <!-- Classe cta adicionada -->
+                       <span id="enroladinho-salsicha-label" class="visually-hidden">Enroladinho de Salsicha</span> <!-- Elemento escondido para aria-labelledby -->
                     </article>
 
                     <!-- Produto 4 -->
-                    <article class="carousel-slide product" data-name="Bolinha de Carne com Queijo" data-price="6.00">
-                        <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinha de Carne com Queijo" loading="lazy" width="300" height="200">
+                    <article class="carousel-slide product" data-name="Bolinha de Carne com Queijo" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
+                        <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinha de carne recheada com queijo derretido" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
                         <h3>Bolinha de Carne com Queijo</h3>
                         <p>R$ 6,00</p>
-                       <button class="add-to-cart" aria-label="Adicionar Bolinha de Carne com Queijo ao carrinho">Adicionar</button>
+                       <button class="add-to-cart cta" aria-labelledby="bolinha-carne-queijo-label">Adicionar</button> <!-- Classe cta adicionada -->
+                       <span id="bolinha-carne-queijo-label" class="visually-hidden">Bolinha de Carne com Queijo</span> <!-- Elemento escondido para aria-labelledby -->
                     </article>
-                    
+
                  <!-- Produto 5 -->
-                 <article class="carousel-slide product" data-name="Tortinha de Legumes" data-price="4.50">
-                    <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinha de Legumes" loading="lazy" width:"300" height="200">
+                 <article class="carousel-slide product" data-name="Tortinha de Legumes" data-price="4.50" role="listitem"> <!-- role="listitem" adicionado -->
+                    <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinha de legumes fresquinha e nutritiva" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
                     <h3>Tortinha de Legumes</h3>
                     <p>R$ 4,50</p>
-                    <button class="add-to-cart" data-name="Tortinha de Legumes" data-price="4.50" aria-label="Adicionar Tortinha de Legumes ao carrinho">Adicionar</button>
+                    <button class="add-to-cart cta" data-name="Tortinha de Legumes" data-price="4.50" aria-labelledby="tortinha-legumes-label">Adicionar</button> <!-- Classe cta adicionada -->
+                     <span id="tortinha-legumes-label" class="visually-hidden">Tortinha de Legumes</span> <!-- Elemento escondido para aria-labelledby -->
                 </article>
 
                 <!-- Produto 6 -->
-                <article class="carousel-slide product" data-name="Torta de Carne" data-price="5.00">
-                    <img src="https://images.pexels.com/photos/1320744/pexels-photo-1320744.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Torta de Carne" loading="lazy" width:"300" height="200">
+                <article class="carousel-slide product" data-name="Torta de Carne" data-price="5.00" role="listitem"> <!-- role="listitem" adicionado -->
+                    <img src="https://images.pexels.com/photos/1320744/pexels-photo-1320744.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Torta de carne suculenta com massa crocante" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
                     <h3>Torta de Carne</h3>
                     <p>R$ 5,00</p>
-                    <button class="add-to-cart" data-name="Torta de Carne" data-price="5.00" aria-label="Adicionar Torta de Carne ao carrinho">Adicionar</button>
+                    <button class="add-to-cart cta" data-name="Torta de Carne" data-price="5.00" aria-labelledby="torta-carne-label">Adicionar</button> <!-- Classe cta adicionada -->
+                    <span id="torta-carne-label" class="visually-hidden">Torta de Carne</span> <!-- Elemento escondido para aria-labelledby -->
                 </article>
             </div>
                  <!-- Botões de navegação do carrossel -->
                  <div class="carousel-buttons">
-                    <button class="carousel-button prev" aria-label="Slide anterior">‹</button>
-                    <button class="carousel-button next" aria-label="Próximo slide">›</button>
+                    <button class="carousel-button prev" aria-label="Slide anterior" aria-controls="carousel-track">‹</button> <!-- aria-controls adicionado -->
+                    <button class="carousel-button next" aria-label="Próximo slide" aria-controls="carousel-track">›</button> <!-- aria-controls adicionado -->
                 </div>
             </div>
         </section>
@@ -100,32 +114,35 @@
             <div class="promotions-grid">
                <!-- Promoção 1 -->
                <article class="promotion-item product" data-name="Combo Coxinha" data-price="15.00">
-                <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Combo Coxinha + Refrigerante" width="300" height="200">
+                <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Combo de coxinha e refrigerante com preço especial" width="300" height="200"> <!-- Alt mais descritivo -->
                 <h3>Combo Coxinha + Refrigerante</h3>
                 <p class="promotion-price">
                     De <span class="tachado old-price">R$ 20,00</span> Por <span class="new-price">R$ 15,00</span>
                 </p>
-                <button class="add-to-cart" aria-label="Adicionar Combo Coxinha ao carrinho">Adicionar</button>
+                <button class="add-to-cart cta" aria-labelledby="combo-coxinha-label">Adicionar</button> <!-- Classe cta adicionada -->
+                <span id="combo-coxinha-label" class="visually-hidden">Combo Coxinha + Refrigerante</span> <!-- Elemento escondido para aria-labelledby -->
             </article>
 
                <!-- Promoção 2 -->
                <article class="promotion-item product" data-name="Empada Gourmet" data-price="13.50">
-                <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada Gourmet com desconto especial" width="300" height="200">
+                <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada gourmet com ingredientes selecionados e desconto" width="300" height="200"> <!-- Alt mais descritivo -->
                 <h3>Empada Gourmet</h3>
                 <p class="promotion-price">
                     De <span class="tachado old-price">R$ 15,00</span> Por <span class="new-price">R$ 13,50</span>
                 </p>
-                <button class="add-to-cart" aria-label="Adicionar Empada Gourmet ao carrinho">Adicionar</button>
+                <button class="add-to-cart cta" aria-labelledby="empada-gourmet-label">Adicionar</button> <!-- Classe cta adicionada -->
+                <span id="empada-gourmet-label" class="visually-hidden">Empada Gourmet</span> <!-- Elemento escondido para aria-labelledby -->
             </article>
 
               <!-- Promoção 3 -->
               <article class="promotion-item product" data-name="Enroladinho Especial" data-price="8.50">
-                <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho Especial com desconto" width="300" height="200">
+                <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho especial com receita exclusiva e preço promocional" width="300" height="200"> <!-- Alt mais descritivo -->
                 <h3>Enroladinho Especial</h3>
                 <p class="promotion-price">
                     De <span class="tachado old-price">R$ 10,00</span> Por <span class="new-price">R$ 8,50</span>
                 </p>
-                <button class="add-to-cart" aria-label="Adicionar Enroladinho Especial ao carrinho">Adicionar</button>
+                <button class="add-to-cart cta" aria-labelledby="enroladinho-especial-label">Adicionar</button> <!-- Classe cta adicionada -->
+                 <span id="enroladinho-especial-label" class="visually-hidden">Enroladinho Especial</span> <!-- Elemento escondido para aria-labelledby -->
             </article>
             </div>
         </section>
@@ -136,38 +153,78 @@
            <div class="bebidas-grid">
               <!-- Bebida 1 -->
                 <article class="bebida-item product" data-name="Coca-Cola Lata" data-price="5.00">
-                   <img src="https://cdn.pixabay.com/photo/2017/02/19/17/20/drink-2080332_1280.jpg" alt="Refrigerante Coca-Cola" width="300" height="200">
+                   <img src="https://cdn.pixabay.com/photo/2017/02/19/17/20/drink-2080332_1280.jpg" alt="Refrigerante Coca-Cola gelada em lata" width="300" height="200"> <!-- Alt mais descritivo -->
                     <h3>Coca-Cola Lata</h3>
                     <p>R$ 5,00</p>
-                  <button class="add-to-cart" aria-label="Adicionar Coca-Cola Lata ao carrinho">Adicionar</button>
+                  <button class="add-to-cart cta" aria-labelledby="coca-cola-lata-label">Adicionar</button> <!-- Classe cta adicionada -->
+                  <span id="coca-cola-lata-label" class="visually-hidden">Coca-Cola Lata</span> <!-- Elemento escondido para aria-labelledby -->
                </article>
-               
+
                <!-- Bebida 2 -->
                <article class="bebida-item product" data-name="Suco Natural de Laranja" data-price="7.50">
-                 <img src="https://cdn.pixabay.com/photo/2021/07/04/23/01/oranges-6387749_640.jpg" alt="Suco Natural de Laranja" width="300" height="200">
+                 <img src="https://cdn.pixabay.com/photo/2021/07/04/23/01/oranges-6387749_640.jpg" alt="Suco natural de laranja espremido na hora" width="300" height="200"> <!-- Alt mais descritivo -->
                  <h3>Suco Natural de Laranja</h3>
                    <p>R$ 7,50</p>
-                   <button class="add-to-cart" aria-label="Adicionar Suco Natural de Laranja ao carrinho">Adicionar</button>
+                   <button class="add-to-cart cta" aria-labelledby="suco-laranja-label">Adicionar</button> <!-- Classe cta adicionada -->
+                    <span id="suco-laranja-label" class="visually-hidden">Suco Natural de Laranja</span> <!-- Elemento escondido para aria-labelledby -->
                 </article>
-                 
+
                <!-- Bebida 3 -->
                <article class="bebida-item product" data-name="Água saborizada" data-price="5.00">
-                 <img src="https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg" alt="Água saborizada" width="300" height="200">
+                 <img src="https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg" alt="Água saborizada refrescante com frutas" width="300" height="200"> <!-- Alt mais descritivo -->
                   <h3>Água saborizada</h3>
                    <p>R$ 5,00</p>
-                  <button class="add-to-cart" aria-label="Adicionar Água saborizada ao carrinho">Adicionar</button>
+                  <button class="add-to-cart cta" aria-labelledby="agua-saborizada-label">Adicionar</button> <!-- Classe cta adicionada -->
+                  <span id="agua-saborizada-label" class="visually-hidden">Água saborizada</span> <!-- Elemento escondido para aria-labelledby -->
                 </article>
             </div>
         </section>
-      
+
         <!-- Seção do Carrinho -->
         <section id="carrinho" class="cart">
             <h2>Carrinho de Compras</h2>
             <ul class="cart-list" aria-live="polite"></ul>
-            <p>Total: R$ <span id="total">0,00</span></p>
-            <button id="checkoutButton" aria-label="Finalizar pedido">🛒 Finalizar Pedido</button>
+            <p>Total: R$ <span id="total" aria-live="polite">0,00</span></p>
+
+            <!-- Opções de Entrega e Endereço (na seção principal do carrinho) -->
+            <div class="cart-options">
+                <label>
+                    <input type="radio" id="retirar-principal" name="delivery-principal" value="retirar" checked> Retirar no Local
+                </label>
+                <label>
+                    <input type="radio" id="entrega-principal" name="delivery-principal" value="entrega"> Entrega
+                </label>
+                <div id="endereco-container-principal">
+                    <label for="cep-principal">CEP:</label>
+                    <input type="text" id="cep-principal" placeholder="Digite seu CEP" maxlength="9">
+                    <button id="buscar-endereco-principal" class="button">Buscar Endereço</button>
+
+                    <div id="endereco-completo-principal" style="display: none;">
+                        <label for="rua-principal">Rua:</label>
+                        <input type="text" id="rua-principal" placeholder="Rua" readonly>
+
+                        <label for="numero-principal">Número:</label>
+                        <input type="text" id="numero-principal" placeholder="Número">
+
+                        <label for="complemento-principal">Complemento:</label>
+                        <input type="text" id="complemento-principal" placeholder="Complemento">
+
+                        <label for="bairro-principal">Bairro:</label>
+                        <input type="text" id="bairro-principal" placeholder="Bairro" readonly>
+
+                        <label for="cidade-principal">Cidade:</label>
+                        <input type="text" id="cidade-principal" placeholder="Cidade" readonly>
+
+                        <label for="estado-principal">Estado:</label>
+                        <input type="text" id="estado-principal" placeholder="Estado" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <button id="checkoutButton" class="cta" aria-label="Finalizar pedido">🛒 Finalizar Pedido</button>
         </section>
-        
+        </section>
+
          <!-- Ícone do carrinho fixo -->
          <div class="cart-icon" onclick="toggleCart()">
             🛒 <span id="cart-count">0</span>
@@ -176,25 +233,49 @@
          <!-- Menu do Carrinho -->
          <div class="cart-menu" id="cart-menu">
             <button class="close-cart-button" aria-label="Fechar carrinho" onclick="toggleCart()">
-                <i class="fas fa-arrow-left"></i> 
+                <i class="fas fa-arrow-left"></i>
             </button>
             <h2>Seu Carrinho</h2>
             <ul id="cart-items"></ul>
 
             <div class="cart-options">
                 <label>
-                    <input type="radio" name="delivery" value="retirar" checked> Retirar no Local
+                    <input type="radio" id="retirar" name="delivery" value="retirar" checked> Retirar no Local
                 </label>
                  <label>
-                    <input type="radio" name="delivery" value="entrega"> Entrega
+                    <input type="radio" id="entrega" name="delivery" value="entrega"> Entrega
                </label>
-                 <input type="text" id="address" placeholder="Digite seu endereço" disabled>
+                <div id="endereco-container">
+                   <label for="cep">CEP:</label>
+                    <input type="text" id="cep" placeholder="Digite seu CEP" maxlength="9">
+                    <button id="buscar-endereco" class="button">Buscar Endereço</button>
+
+                    <div id="endereco-completo" style="display: none;">
+                        <label for="rua">Rua:</label>
+                        <input type="text" id="rua" placeholder="Rua" readonly>
+
+                        <label for="numero">Número:</label>
+                        <input type="text" id="numero" placeholder="Número">
+
+                        <label for="complemento">Complemento:</label>
+                        <input type="text" id="complemento" placeholder="Complemento">
+
+                        <label for="bairro">Bairro:</label>
+                        <input type="text" id="bairro" placeholder="Bairro" readonly>
+
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" id="cidade" placeholder="Cidade" readonly>
+
+                        <label for="estado">Estado:</label>
+                        <input type="text" id="estado" placeholder="Estado" readonly>
+                    </div>
+                </div>
             </div>
-           
-           <p>Total: <span id="cart-total">R$ 0,00</span></p>
-          <button onclick="finalizarPedido()">Finalizar Pedido</button>
+
+           <p>Total: <span id="cart-total" aria-live="polite">R$ 0,00</span></p>
+          <button class="button" onclick="finalizarPedido()">Finalizar Pedido</button>
         </div>
-        
+
     </main>
     <!-- Rodapé do Site -->
     <footer class="site-footer">
@@ -215,14 +296,14 @@
                              <i class="fab fa-facebook"></i> Facebook
                          </a>
                 </ul>
-            
+
             </nav>
         </div>
     </footer>
      <!-- Botão do WhatsApp -->
-    <a href="https://wa.me/5517996780618?text=Olá,%20Eu%20gostaria%20de%20fazer%20um%20pedido." 
-        target="_blank" 
-       class="botao-whatsapp" 
+    <a href="https://wa.me/5517996780618?text=Olá,%20Eu%20gostaria%20de%20fazer%20um%20pedido."
+        target="_blank"
+       class="botao-whatsapp"
         aria-label="Entre em contato pelo WhatsApp">
          <i class="fab fa-whatsapp"></i>
      </a>
