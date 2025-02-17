@@ -244,3 +244,97 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("checkoutButton")?.addEventListener("click", cartModule.checkout);
     cartModule.updateCartDisplay();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Elementos do formulário principal
+    const retirarRadioPrincipal = document.getElementById('retirar-principal');
+    const entregaRadioPrincipal = document.getElementById('entrega-principal');
+    const enderecoContainerPrincipal = document.getElementById('endereco-container-principal');
+    const cepInputPrincipal = document.getElementById('cep-principal');
+    const buscarEnderecoButtonPrincipal = document.getElementById('buscar-endereco-principal');
+    const ruaInputPrincipal = document.getElementById('rua-principal');
+    const numeroInputPrincipal = document.getElementById('numero-principal');
+    const complementoInputPrincipal = document.getElementById('complemento-principal');
+    const bairroInputPrincipal = document.getElementById('bairro-principal');
+    const cidadeInputPrincipal = document.getElementById('cidade-principal');
+    const estadoInputPrincipal = document.getElementById('estado-principal');
+
+    // Elementos do formulário secundário
+    const retirarRadio = document.getElementById('retirar');
+    const entregaRadio = document.getElementById('entrega');
+    const enderecoContainer = document.getElementById('endereco-container');
+    const cepInput = document.getElementById('cep');
+    const buscarEnderecoButton = document.getElementById('buscar-endereco');
+    const ruaInput = document.getElementById('rua');
+    const numeroInput = document.getElementById('numero');
+    const complementoInput = document.getElementById('complemento');
+    const bairroInput = document.getElementById('bairro');
+    const cidadeInput = document.getElementById('cidade');
+    const estadoInput = document.getElementById('estado');
+
+    // Função para buscar endereço pelo CEP
+    const buscarEndereco = (cep, ruaInput, bairroInput, cidadeInput, estadoInput, enderecoCompletoId) => {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.erro) {
+                    alert('CEP não encontrado.');
+                    return;
+                }
+                ruaInput.value = data.logradouro;
+                bairroInput.value = data.bairro;
+                cidadeInput.value = data.localidade;
+                estadoInput.value = data.uf;
+                document.getElementById(enderecoCompletoId).style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o CEP:', error);
+                alert('Erro ao buscar o CEP. Tente novamente.');
+            });
+    };
+
+    // Função para atualizar a visibilidade do contêiner de endereço
+    const updateEnderecoContainerVisibility = (radio, container) => {
+        container.style.display = radio.checked ? 'block' : 'none';
+    };
+
+    // Inicializar a visibilidade do contêiner de endereço
+    updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal);
+    updateEnderecoContainerVisibility(entregaRadio, enderecoContainer);
+
+    // Eventos para o formulário principal
+    entregaRadioPrincipal.addEventListener('change', function() {
+        updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal);
+    });
+
+    retirarRadioPrincipal.addEventListener('change', function() {
+        updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal);
+    });
+
+    buscarEnderecoButtonPrincipal.addEventListener('click', function() {
+        const cep = cepInputPrincipal.value.replace(/\D/g, '');
+        if (cep.length !== 8) {
+            alert('CEP inválido. Digite um CEP com 8 dígitos.');
+            return;
+        }
+        buscarEndereco(cep, ruaInputPrincipal, bairroInputPrincipal, cidadeInputPrincipal, estadoInputPrincipal, 'endereco-completo-principal');
+    });
+
+    // Eventos para o formulário secundário
+    entregaRadio.addEventListener('change', function() {
+        updateEnderecoContainerVisibility(entregaRadio, enderecoContainer);
+    });
+
+    retirarRadio.addEventListener('change', function() {
+        updateEnderecoContainerVisibility(entregaRadio, enderecoContainer);
+    });
+
+    buscarEnderecoButton.addEventListener('click', function() {
+        const cep = cepInput.value.replace(/\D/g, '');
+        if (cep.length !== 8) {
+            alert('CEP inválido. Digite um CEP com 8 dígitos.');
+            return;
+        }
+        buscarEndereco(cep, ruaInput, bairroInput, cidadeInput, estadoInput, 'endereco-completo');
+    });
+});
