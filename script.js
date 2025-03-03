@@ -83,7 +83,7 @@ const carouselModule = (() => {
     return { init, startAutoSlide, stopAutoSlide, restartAutoSlide };
 })();
 
-// ============================================================================
+/// ============================================================================
 // Módulo de Tema (Claro/Escuro)
 // ============================================================================
 const themeModule = (() => {
@@ -96,6 +96,7 @@ const themeModule = (() => {
             return false;
         }
         toggleButton.addEventListener("click", toggleTheme);
+        initializeTheme(); // Inicializa o tema ao carregar a página
         return true;
     };
 
@@ -124,6 +125,7 @@ const themeModule = (() => {
 
     return { init, initializeTheme, toggleTheme, updateThemeButton };
 })();
+
 
 // ============================================================================
 // Módulo do Carrinho
@@ -215,19 +217,19 @@ const cartModule = (() => {
             alert("Carrinho vazio! Adicione itens ao carrinho.");
             return;
         }
-        const phoneNumber = "5517996780618";
-        let orderDetails = `Pedido:\n` + cart.map(item => `${item.name} - R$ ${item.price.toFixed(2)}`).join("\n");
-        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderDetails)}`, "_blank");
+        showAddressForms(); // Exibe os formulários de endereço
     };
 
-    return { init, addItem, removeItem, checkout };
+    return { init, addItem, removeItem, checkout, updateCartDisplay };
 })();
 
+function showAddressForms() {
+  document.getElementById('address-forms-container').style.display = 'block';
+}
 // ============================================================================
 // Inicialização Geral
 // ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
-    themeModule.initializeTheme();
     themeModule.init();
     carouselModule.init();
     cartModule.init();
