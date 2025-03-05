@@ -3,40 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore nosso cardápio de salgados irresistíveis. Faça seu pedido online e aproveite os melhores sabores!">
+    <meta name="description" content="Explore o melhor cardápio de salgados artesanais! Faça seu pedido online e saboreie nossas delícias crocantes.">
+    <meta name="keywords" content="salgados, coxinha, esfirra, lanches, delivery de salgados, quitutes">
+    <meta name="author" content="Explosão Crocante">
 
-    <!-- Metadados para Redes Sociais (SEO) -->
-    <meta property="og:image" content="https://www.instagram.com/qr/"> 
-    <meta property="og:description" content="Descubra a Explosão Crocante: salgados deliciosos e promoções imperdíveis!"> <!-- Descrição mais atraente -->
+    <!-- Metadados para Redes Sociais -->
+    <meta property="og:title" content="Cardápio de Salgados | Explosão Crocante">
+    <meta property="og:description" content="Salgados crocantes e irresistíveis. Faça seu pedido e aproveite!">
+    <meta property="og:image" content="https://cdn.pixabay.com/photo/2016/11/29/08/24/bakery-1868396_1280.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cassiano-cyber.github.io/site-salgados/">
 
-    <!-- Favicon -->
+    <!-- Ícone da Página -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- Google Fonts -->
+    <!-- Fonte Google Otimizada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <!-- CSS Principal -->
+    <!-- Estilos CSS -->
     <link rel="stylesheet" href="styles.css">
 
     <title>Cardápio de Salgados | Explosão Crocante</title>
 </head>
 <body>
     <!-- Cabeçalho do Site -->
-    <header class="site-header">
-        <div class="container">
+    <header class="site-header hero-header">
+        <div class="hero-content container">
             <h1 class="logo">Bem-vindo ao <span class="highlight">Explosão Crocante</span></h1>
-            <p class="tagline">Escolha seus favoritos e peça agora mesmo!</p>
-            <nav>  <!-- Envolvendo o botão de tema em um <nav> -->
-              <button id="toggleTheme" aria-label="Alternar entre tema claro e escuro">
-                  <i class="fas fa-moon" aria-hidden="true"></i>  <!-- aria-hidden adicionado -->
-                  <i class="fas fa-sun" aria-hidden="true"></i>  <!-- aria-hidden adicionado -->
-                  Alternar Tema
-              </button>
+            <p class="tagline">Veja nossos métodos de preparo!</p>
+            <nav class="theme-nav">
+                <button id="toggleTheme" aria-label="Alternar entre tema claro e escuro">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <i class="fas fa-sun" aria-hidden="true"></i>
+                    Alternar Tema
+                </button>
             </nav>
         </div>
+        <video autoplay loop muted playsinline poster="https://cdn.pixabay.com/photo/2016/11/29/08/24/bakery-1868396_1280.jpg">
+            <source src="https://cdn.pixabay.com/video/2017/08/25/11563-231234701_large.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
     </header>
 
     <!-- Conteúdo Principal -->
@@ -56,15 +67,6 @@
                     </article>
 
                     <!-- Produto 2 -->
-                    <article class="carousel-slide product" data-name="Empada de Frango" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
-                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de frango cremosa e saborosa" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
-                        <h3>Empada de Frango</h3>
-                        <p>R$ 6,00</p>
-                        <button class="add-to-cart cta" aria-labelledby="empada-frango-label">Adicionar</button> <!-- Classe cta adicionada -->
-                        <span id="empada-frango-label" class="visually-hidden">Empada de Frango</span> <!-- Elemento escondido para aria-labelledby -->
-                    </article>
-
-                    <!-- Produto 3 -->
                     <article class="carousel-slide product" data-name="Enroladinho de Salsicha" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
                         <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de salsicha macio e delicioso" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
                         <h3>Enroladinho de Salsicha</h3>
@@ -73,7 +75,7 @@
                        <span id="enroladinho-salsicha-label" class="visually-hidden">Enroladinho de Salsicha</span> <!-- Elemento escondido para aria-labelledby -->
                     </article>
 
-                    <!-- Produto 4 -->
+                    <!-- Produto 3 -->
                     <article class="carousel-slide product" data-name="Bolinha de Carne com Queijo" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
                         <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinha de carne recheada com queijo derretido" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
                         <h3>Bolinha de Carne com Queijo</h3>
@@ -82,6 +84,15 @@
                        <span id="bolinha-carne-queijo-label" class="visually-hidden">Bolinha de Carne com Queijo</span> <!-- Elemento escondido para aria-labelledby -->
                     </article>
 
+                    <!-- Produto 4 -->
+                    <article class="carousel-slide product" data-name="Empada de Frango" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
+                       <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de frango cremosa e saborosa" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
+                       <h3>Empada de Frango</h3>
+                       <p>R$ 6,00</p>
+                      <button class="add-to-cart cta" aria-labelledby="empada-frango-label">Adicionar</button> <!-- Classe cta adicionada -->
+                      <span id="empada-frango-label" class="visually-hidden">Empada de Frango</span> <!-- Elemento escondido para aria-labelledby -->
+                    </article>
+                    
                  <!-- Produto 5 -->
                  <article class="carousel-slide product" data-name="Tortinha de Legumes" data-price="4.50" role="listitem"> <!-- role="listitem" adicionado -->
                     <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinha de legumes fresquinha e nutritiva" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
@@ -223,15 +234,14 @@
 
             <button id="checkoutButton" class="cta" aria-label="Finalizar pedido">🛒 Finalizar Pedido</button>
         </section>
-        </section>
 
-         <!-- Ícone do carrinho fixo -->
-         <div class="cart-icon" onclick="toggleCart()">
+        <!-- Ícone do carrinho fixo -->
+        <div class="cart-icon" onclick="toggleCart()">
             🛒 <span id="cart-count">0</span>
         </div>
 
-         <!-- Menu do Carrinho -->
-         <div class="cart-menu" id="cart-menu">
+        <!-- Menu do Carrinho -->
+        <div class="cart-menu" id="cart-menu">
             <button class="close-cart-button" aria-label="Fechar carrinho" onclick="toggleCart()">
                 <i class="fas fa-arrow-left"></i>
             </button>
@@ -242,11 +252,11 @@
                 <label>
                     <input type="radio" id="retirar" name="delivery" value="retirar" checked> Retirar no Local
                 </label>
-                 <label>
+                <label>
                     <input type="radio" id="entrega" name="delivery" value="entrega"> Entrega
-               </label>
+                </label>
                 <div id="endereco-container">
-                   <label for="cep">CEP:</label>
+                    <label for="cep">CEP:</label>
                     <input type="text" id="cep" placeholder="Digite seu CEP" maxlength="9">
                     <button id="buscar-endereco" class="button">Buscar Endereço</button>
 
@@ -272,10 +282,13 @@
                 </div>
             </div>
 
-           <p>Total: <span id="cart-total" aria-live="polite">R$ 0,00</span></p>
-          <button class="button" onclick="finalizarPedido()">Finalizar Pedido</button>
+            <div class="cart-total-container">
+               <p>Total: <span id="cart-total" aria-live="polite">R$ 0,00</span></p>
+            </div>
+            <div class="checkout-container">
+                <button class="button" onclick="finalizarPedido()">Finalizar Pedido</button>
+            </div>
         </div>
-
     </main>
     <!-- Rodapé do Site -->
     <footer class="site-footer">
@@ -307,7 +320,7 @@
         aria-label="Entre em contato pelo WhatsApp">
          <i class="fab fa-whatsapp"></i>
      </a>
-    <!-- Inclusão do Script JavaScript -->
+     
     <script src="script.js"></script>
 </body>
 </html>
