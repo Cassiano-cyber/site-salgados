@@ -20,28 +20,27 @@ const carouselModule = (() => {
         }
 
         nextButton.addEventListener("click", () => {
-          stopAutoSlide();
-          showNextSlide();
-          restartAutoSlide();
+            stopAutoSlide();
+            showNextSlide();
+            restartAutoSlide();
         });
         prevButton.addEventListener("click", () => {
-          stopAutoSlide();
-          showPrevSlide();
-          restartAutoSlide();
+            stopAutoSlide();
+            showPrevSlide();
+            restartAutoSlide();
         });
         showSlide(currentSlide);
 
-       // Eventos para pausar/retomar o auto slide no hover
+        // Eventos para pausar/retomar o auto slide no hover
         carouselContainer.addEventListener("mouseenter", () => {
-          stopAutoSlide();
+            stopAutoSlide();
         });
 
         carouselContainer.addEventListener("mouseleave", () => {
-          if (autoSlideActive) {
-           startAutoSlide();
-           }
+            if (autoSlideActive) {
+                startAutoSlide();
+            }
         });
-
 
         // Iniciar o avanço automático a cada 5 segundos
         startAutoSlide();
@@ -64,9 +63,9 @@ const carouselModule = (() => {
     };
 
     const startAutoSlide = () => {
-      if (autoSlideActive) {
-        intervalId = setInterval(showNextSlide, 5000);
-      }
+        if (autoSlideActive) {
+            intervalId = setInterval(showNextSlide, 5000);
+        }
     };
 
     const stopAutoSlide = () => {
@@ -74,10 +73,10 @@ const carouselModule = (() => {
     };
 
     const restartAutoSlide = () => {
-       if(autoSlideActive){
-           stopAutoSlide();
-           startAutoSlide();
-       }
+        if (autoSlideActive) {
+            stopAutoSlide();
+            startAutoSlide();
+        }
     };
 
     return { init, startAutoSlide, stopAutoSlide, restartAutoSlide };
@@ -126,7 +125,6 @@ const themeModule = (() => {
     return { init, initializeTheme, toggleTheme, updateThemeButton };
 })();
 
-
 // ============================================================================
 // Módulo do Carrinho
 // ============================================================================
@@ -134,6 +132,7 @@ const cartModule = (() => {
     let cart = [];
     let total = 0;
     let cartList, totalElement, cartCount, cartItemsList, cartTotalDisplay, cartMenu;
+    let isPrincipalCheckout = false;
 
     const init = () => {
         cartList = document.querySelector(".cart-list");
@@ -212,20 +211,70 @@ const cartModule = (() => {
         cartMenu.classList.toggle("active");
     };
 
-    const checkout = () => {
+    const checkout = (principal) => {
+        isPrincipalCheckout = principal;
         if (cart.length === 0) {
             alert("Carrinho vazio! Adicione itens ao carrinho.");
             return;
         }
-        showAddressForms(); // Exibe os formulários de endereço
+
+        // Coletar dados do endereço
+        let deliveryOption, addressData;
+
+        if (isPrincipalCheckout) {
+            deliveryOption = document.querySelector('input[name="delivery-principal"]:checked').value;
+            if (deliveryOption === 'entrega') {
+                addressData = {
+                    cep: document.getElementById('cep-principal').value,
+                    rua: document.getElementById('rua-principal').value,
+                    numero: document.getElementById('numero-principal').value,
+                    complemento: document.getElementById('complemento-principal').value,
+                    bairro: document.getElementById('bairro-principal').value,
+                    cidade: document.getElementById('cidade-principal').value,
+                    estado: document.getElementById('estado-principal').value,
+                };
+            }
+        } else {
+            deliveryOption = document.querySelector('input[name="delivery"]:checked').value;
+            if (deliveryOption === 'entrega') {
+                addressData = {
+                    cep: document.getElementById('cep').value,
+                    rua: document.getElementById('rua').value,
+                    numero: document.getElementById('numero').value,
+                    complemento: document.getElementById('complemento').value,
+                    bairro: document.getElementById('bairro').value,
+                    cidade: document.getElementById('cidade').value,
+                    estado: document.getElementById('estado').value,
+                };
+            }
+        }
+        if (deliveryOption === 'entrega' && !addressData.numero) {
+            alert("Por favor, insira o número da casa.");
+            return;
+        }
+        
+        // Formatar a mensagem do WhatsApp
+        let message = "Novo pedido:\n\n";
+        cart.forEach(item => {
+            message += `${item.name} - R$ ${item.price.toFixed(2)}\n`;
+        });
+        message += `\nTotal: R$ ${total.toFixed(2)}\n`;
+
+        if (deliveryOption === 'entrega') {
+            message += `\nEndereço:\nCEP: ${addressData.cep}\nRua: ${addressData.rua}, ${addressData.numero} ${addressData.complemento}\nBairro: ${addressData.bairro}\nCidade: ${addressData.cidade}, ${addressData.estado}\n`;
+        } else {
+            message += "\nRetirar no local.\n";
+        }
+
+        // Enviar mensagem via WhatsApp
+        const phoneNumber = "5517996780618";
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
     };
 
     return { init, addItem, removeItem, checkout, updateCartDisplay };
 })();
 
-function showAddressForms() {
-  document.getElementById('address-forms-container').style.display = 'block';
-}
 // ============================================================================
 // Inicialização Geral
 // ============================================================================
@@ -243,10 +292,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    document.getElementById("checkoutButton")?.addEventListener("click", cartModule.checkout);
+    document.getElementById("checkoutButton")?.addEventListener("click", () => cartModule.checkout(true));
+    document.querySelector(".checkout-container button")?.addEventListener("click", () => cartModule.checkout(false));
     cartModule.updateCartDisplay();
 });
-
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos do formulário principal
     const retirarRadioPrincipal = document.getElementById('retirar-principal');
