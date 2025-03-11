@@ -1202,3 +1202,11 @@ body {
         text-shadow: 0 0 20px #ff6600, 0 0 30px #ffcc00, 0 0 40px #ff3300;
     }
 }
+.separator-img {
+  width: 100%;
+  height: auto; /* Ajuste a altura conforme necessário */
+  display: block;
+  margin-top: 50px; /* Espaçamento superior */
+  margin-bottom: 50px; /* Espaçamento inferior */
+}
+
