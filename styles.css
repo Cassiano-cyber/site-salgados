@@ -1203,10 +1203,12 @@ body {
     }
 }
 .separator-img {
-  width: 100%;
-  height: auto; /* Ajuste a altura conforme necessário */
-  display: block;
-  margin-top: 50px; /* Espaçamento superior */
-  margin-bottom: 50px; /* Espaçamento inferior */
+  width: 100%; /* Isso vai fazer a imagem ocupar toda a largura do container */
+  max-width: 800px; /* Limita a largura máxima */
+  height: auto; /* Mantém as proporções da imagem */
+  display: block; /* Remove o espaço extra abaixo da imagem */
+  margin-top: 50px; /* Espaço superior */
+  margin-bottom: 50px; /* Espaço inferior */
+  object-fit: cover; /* A imagem vai cobrir a área sem distorcer */
 }
 
