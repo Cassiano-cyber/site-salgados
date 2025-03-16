@@ -52,146 +52,164 @@
 
     <!-- Conteúdo Principal -->
     <main class="container">
-        <!-- Seção do Cardápio -->
-        <section id="menu" class="menu">
+        <section id="tipos" class="menu">
+         <!-- Imagem Decorativa -->
+  <div class="decorative-image">
+    <img src="imagens/linha-removebg-preview.png" alt="Imagem decorativa de trigo e elementos ornamentais" width="100%" height="auto">
+    <div class="overlay"></div>
+</div>
             <h2>Nosso Cardápio</h2>
-           <img fetchpriority="high" decoding="async" width="2048" height="54" src="https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-2048x54.png" class="attachment-2048x2048 size-2048x2048 wp-image-10599" alt="" srcset="https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-2048x54.png 2048w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-300x8.png 300w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-1024x27.png 1024w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-768x20.png 768w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-1536x41.png 1536w" sizes="(max-width: 2048px) 100vw, 2048px">
-            <div class="carousel" role="list"> <!-- role="list" adicionado -->
-                <div class="carousel-track" id="carousel-track"> <!-- Adicionado um ID para aria-controls -->
-                    <!-- Produto 1 -->
-                    <article class="carousel-slide product" data-name="Coxinha de Costela" data-price="7.50" role="listitem"> <!-- role="listitem" adicionado -->
-                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinha de costela suculenta e crocante" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
-                        <h3>Coxinha de Costela</h3>
-                        <p>R$ 7,50</p>
-                        <button class="add-to-cart cta" aria-labelledby="coxinha-costela-label">Adicionar</button> <!-- Classe cta adicionada -->
-                        <span id="coxinha-costela-label" class="visually-hidden">Coxinha de Costela</span> <!-- Elemento escondido para aria-labelledby -->
+            <h3>Tipos de Salgado</h3>
+            <div class="carousel" id="tipos-salgado" role="list">
+                <div class="carousel-track" id="carousel-track-tipos">
+                    <article class="carousel-slide product" data-tipo="coxinha" role="listitem" aria-labelledby="coxinha-tipo-label">
+                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinhas suculentas e crocantes" loading="lazy" width="300" height="200">
+                        <h3>Coxinhas</h3>
+                        <span id="coxinha-tipo-label" class="visually-hidden">Coxinhas</span>
+                        <button class="select-type cta" data-tipo="coxinha">Selecionar</button>
                     </article>
 
-                    <!-- Produto 2 -->
-                    <article class="carousel-slide product" data-name="Enroladinho de Salsicha" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
-                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinho de salsicha macio e delicioso" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
-                        <h3>Enroladinho de Salsicha</h3>
-                        <p>R$ 6,00</p>
-                       <button class="add-to-cart cta" aria-labelledby="enroladinho-salsicha-label">Adicionar</button> <!-- Classe cta adicionada -->
-                       <span id="enroladinho-salsicha-label" class="visually-hidden">Enroladinho de Salsicha</span> <!-- Elemento escondido para aria-labelledby -->
+                    <article class="carousel-slide product" data-tipo="enroladinho" role="listitem" aria-labelledby="enroladinho-tipo-label">
+                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinhos macios e deliciosos" loading="lazy" width="300" height="200">
+                        <h3>Enroladinhos</h3>
+                        <span id="enroladinho-tipo-label" class="visually-hidden">Enroladinhos</span>
+                         <button class="select-type cta"  data-tipo="enroladinho">Selecionar</button>
                     </article>
 
-                    <!-- Produto 3 -->
-                    <article class="carousel-slide product" data-name="Bolinha de Carne com Queijo" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
-                        <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinha de carne recheada com queijo derretido" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
-                        <h3>Bolinha de Carne com Queijo</h3>
-                        <p>R$ 6,00</p>
-                       <button class="add-to-cart cta" aria-labelledby="bolinha-carne-queijo-label">Adicionar</button> <!-- Classe cta adicionada -->
-                       <span id="bolinha-carne-queijo-label" class="visually-hidden">Bolinha de Carne com Queijo</span> <!-- Elemento escondido para aria-labelledby -->
+                    <article class="carousel-slide product" data-tipo="bolinha" role="listitem" aria-labelledby="bolinha-tipo-label">
+                        <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinhas recheadas" loading="lazy" width="300" height="200">
+                        <h3>Bolinhas</h3>
+                        <span id="bolinha-tipo-label" class="visually-hidden">Bolinhas</span>
+                        <button class="select-type cta"  data-tipo="bolinha">Selecionar</button>
                     </article>
 
-                    <!-- Produto 4 -->
-                    <article class="carousel-slide product" data-name="Empada de Frango" data-price="6.00" role="listitem"> <!-- role="listitem" adicionado -->
-                       <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empada de frango cremosa e saborosa" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
-                       <h3>Empada de Frango</h3>
-                       <p>R$ 6,00</p>
-                      <button class="add-to-cart cta" aria-labelledby="empada-frango-label">Adicionar</button> <!-- Classe cta adicionada -->
-                      <span id="empada-frango-label" class="visually-hidden">Empada de Frango</span> <!-- Elemento escondido para aria-labelledby -->
+                    <article class="carousel-slide product" data-tipo="empada" role="listitem" aria-labelledby="empada-tipo-label">
+                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empadas cremosas e saborosas" loading="lazy" width="300" height="200">
+                        <h3>Empadas</h3>
+                        <span id="empada-tipo-label" class="visually-hidden">Empadas</span>
+                         <button class="select-type cta"  data-tipo="empada">Selecionar</button>
                     </article>
-                    
-                 <!-- Produto 5 -->
-                 <article class="carousel-slide product" data-name="Tortinha de Legumes" data-price="4.50" role="listitem"> <!-- role="listitem" adicionado -->
-                    <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinha de legumes fresquinha e nutritiva" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
-                    <h3>Tortinha de Legumes</h3>
-                    <p>R$ 4,50</p>
-                    <button class="add-to-cart cta" data-name="Tortinha de Legumes" data-price="4.50" aria-labelledby="tortinha-legumes-label">Adicionar</button> <!-- Classe cta adicionada -->
-                     <span id="tortinha-legumes-label" class="visually-hidden">Tortinha de Legumes</span> <!-- Elemento escondido para aria-labelledby -->
-                </article>
 
-                <!-- Produto 6 -->
-                <article class="carousel-slide product" data-name="Torta de Carne" data-price="5.00" role="listitem"> <!-- role="listitem" adicionado -->
-                    <img src="https://images.pexels.com/photos/1320744/pexels-photo-1320744.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Torta de carne suculenta com massa crocante" loading="lazy" width="300" height="200"> <!-- Alt mais descritivo -->
-                    <h3>Torta de Carne</h3>
-                    <p>R$ 5,00</p>
-                    <button class="add-to-cart cta" data-name="Torta de Carne" data-price="5.00" aria-labelledby="torta-carne-label">Adicionar</button> <!-- Classe cta adicionada -->
-                    <span id="torta-carne-label" class="visually-hidden">Torta de Carne</span> <!-- Elemento escondido para aria-labelledby -->
-                </article>
-            </div>
-                 <!-- Botões de navegação do carrossel -->
-                 <div class="carousel-buttons">
-                    <button class="carousel-button prev" aria-label="Slide anterior" aria-controls="carousel-track">‹</button> <!-- aria-controls adicionado -->
-                    <button class="carousel-button next" aria-label="Próximo slide" aria-controls="carousel-track">›</button> <!-- aria-controls adicionado -->
+                    <article class="carousel-slide product" data-tipo="tortinha" role="listitem" aria-labelledby="tortinha-tipo-label">
+                        <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinhas fresquinhas e nutritivas" loading="lazy" width="300" height="200">
+                        <h3>Tortinhas</h3>
+                        <span id="tortinha-tipo-label" class="visually-hidden">Tortinhas</span>
+                         <button class="select-type cta"  data-tipo="tortinha">Selecionar</button>
+                    </article>
+
+                    <article class="carousel-slide product" data-tipo="torta" role="listitem" aria-labelledby="torta-tipo-label">
+                        <img src="https://images.pexels.com/photos/1320744/pexels-photo-1320744.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Tortas suculentas com massa crocante" loading="lazy" width="300" height="200">
+                        <h3>Tortas (pedaço)</h3>
+                        <span id="torta-tipo-label" class="visually-hidden">Tortas</span>
+                         <button class="select-type cta" data-tipo="torta">Selecionar</button>
+                    </article>
+                </div>
+                <!-- Botões de navegação do carrossel -->
+                <div class="carousel-buttons">
+                    <button class="carousel-button prev" aria-label="Slide anterior" aria-controls="carousel-track-tipos">‹</button>
+                    <button class="carousel-button next" aria-label="Próximo slide" aria-controls="carousel-track-tipos">›</button>
                 </div>
             </div>
         </section>
-         <img fetchpriority="high" decoding="async" width="2048" height="54" src="https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-2048x54.png" class="attachment-2048x2048 size-2048x2048 wp-image-10599" alt="" srcset="https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-2048x54.png 2048w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-300x8.png 300w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-1024x27.png 1024w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-768x20.png 768w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-1536x41.png 1536w" sizes="(max-width: 2048px) 100vw, 2048px">
+
+        <section id="sabores-section" class="menu">
+            <h2>Sabores</h2>
+            <div class="carousel" id="sabores" role="list">
+                <div class="carousel-track" id="carousel-track-sabores">
+                    <!-- Os sabores serão inseridos dinamicamente via JavaScript -->
+                </div>
+                <div class="carousel-buttons">
+                    <button class="carousel-button prev" aria-label="Slide anterior" aria-controls="carousel-track-sabores">‹</button>
+                    <button class="carousel-button next" aria-label="Próximo slide" aria-controls="carousel-track-sabores">›</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção "Comanda"  (Posicionada após os sabores) -->
+        <section id="selecao" class="selecao">
+            <h2>Comanda:</h2>
+            <p>Tipo selecionado: <span id="tipo-selecionado">Nenhum</span></p>
+            <p>Sabor selecionado: <span id="sabor-selecionado">Nenhum</span></p>
+        </section>
+  <!-- Imagem Decorativa -->
+  <div class="decorative-image">
+    <img src="imagens/linha-removebg-preview.png" alt="Imagem decorativa de trigo e elementos ornamentais" width="100%" height="auto">
+    <div class="overlay"></div>
+</div>
         <!-- Seção de Promoções -->
         <section id="promotions" class="promotions">
             <h2>Promoções Especiais</h2>
             <div class="promotions-grid">
                <!-- Promoção 1 -->
                <article class="promotion-item product" data-name="Combo Coxinha" data-price="15.00">
-                <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Combo de coxinha e refrigerante com preço especial" width="300" height="200"> <!-- Alt mais descritivo -->
+                <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Combo de coxinha e refrigerante com preço especial" width="300" height="200">
                 <h3>Combo Coxinha + Refrigerante</h3>
                 <p class="promotion-price">
                     De <span class="tachado old-price">R$ 20,00</span> Por <span class="new-price">R$ 15,00</span>
                 </p>
-                <button class="add-to-cart cta" aria-labelledby="combo-coxinha-label">Adicionar</button> <!-- Classe cta adicionada -->
-                <span id="combo-coxinha-label" class="visually-hidden">Combo Coxinha + Refrigerante</span> <!-- Elemento escondido para aria-labelledby -->
+                <button class="add-to-cart cta" data-name="Combo Coxinha" data-price="15.00">Adicionar</button>
             </article>
 
                <!-- Promoção 2 -->
                <article class="promotion-item product" data-name="Empada Gourmet" data-price="13.50">
-                <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada gourmet com ingredientes selecionados e desconto" width="300" height="200"> <!-- Alt mais descritivo -->
+                <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada gourmet com ingredientes selecionados e desconto" width="300" height="200">
                 <h3>Empada Gourmet</h3>
                 <p class="promotion-price">
                     De <span class="tachado old-price">R$ 15,00</span> Por <span class="new-price">R$ 13,50</span>
                 </p>
-                <button class="add-to-cart cta" aria-labelledby="empada-gourmet-label">Adicionar</button> <!-- Classe cta adicionada -->
-                <span id="empada-gourmet-label" class="visually-hidden">Empada Gourmet</span> <!-- Elemento escondido para aria-labelledby -->
+                <button class="add-to-cart cta" data-name="Empada Gourmet" data-price="13.50">Adicionar</button>
             </article>
 
               <!-- Promoção 3 -->
               <article class="promotion-item product" data-name="Enroladinho Especial" data-price="8.50">
-                <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho especial com receita exclusiva e preço promocional" width="300" height="200"> <!-- Alt mais descritivo -->
+                <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho especial com receita exclusiva e preço promocional" width="300" height="200">
                 <h3>Enroladinho Especial</h3>
                 <p class="promotion-price">
                     De <span class="tachado old-price">R$ 10,00</span> Por <span class="new-price">R$ 8,50</span>
                 </p>
-                <button class="add-to-cart cta" aria-labelledby="enroladinho-especial-label">Adicionar</button> <!-- Classe cta adicionada -->
-                 <span id="enroladinho-especial-label" class="visually-hidden">Enroladinho Especial</span> <!-- Elemento escondido para aria-labelledby -->
+                <button class="add-to-cart cta" data-name="Enroladinho Especial" data-price="8.50">Adicionar</button>
             </article>
             </div>
         </section>
- <img fetchpriority="high" decoding="async" width="2048" height="54" src="https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-2048x54.png" class="attachment-2048x2048 size-2048x2048 wp-image-10599" alt="" srcset="https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-2048x54.png 2048w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-300x8.png 300w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-1024x27.png 1024w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-768x20.png 768w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-1536x41.png 1536w" sizes="(max-width: 2048px) 100vw, 2048px">
+  <!-- Imagem Decorativa -->
+  <div class="decorative-image">
+    <img src="imagens/linha-removebg-preview.png" alt="Imagem decorativa de trigo e elementos ornamentais" width="100%" height="auto">
+    <div class="overlay"></div>
+</div>
          <!-- Seção de Bebidas -->
         <section id="bebidas" class="bebidas">
             <h2>Refresque-se com Nossas Bebidas</h2>
            <div class="bebidas-grid">
               <!-- Bebida 1 -->
                 <article class="bebida-item product" data-name="Coca-Cola Lata" data-price="5.00">
-                   <img src="https://cdn.pixabay.com/photo/2017/02/19/17/20/drink-2080332_1280.jpg" alt="Refrigerante Coca-Cola gelada em lata" width="300" height="200"> <!-- Alt mais descritivo -->
+                   <img src="https://cdn.pixabay.com/photo/2017/02/19/17/20/drink-2080332_1280.jpg" alt="Refrigerante Coca-Cola gelada em lata" width="300" height="200">
                     <h3>Coca-Cola Lata</h3>
                     <p>R$ 5,00</p>
-                  <button class="add-to-cart cta" aria-labelledby="coca-cola-lata-label">Adicionar</button> <!-- Classe cta adicionada -->
-                  <span id="coca-cola-lata-label" class="visually-hidden">Coca-Cola Lata</span> <!-- Elemento escondido para aria-labelledby -->
+                   <button class="add-to-cart cta" data-name="Coca-Cola Lata" data-price="5.00">Adicionar</button>
                </article>
 
                <!-- Bebida 2 -->
                <article class="bebida-item product" data-name="Suco Natural de Laranja" data-price="7.50">
-                 <img src="https://cdn.pixabay.com/photo/2021/07/04/23/01/oranges-6387749_640.jpg" alt="Suco natural de laranja espremido na hora" width="300" height="200"> <!-- Alt mais descritivo -->
+                 <img src="https://cdn.pixabay.com/photo/2021/07/04/23/01/oranges-6387749_640.jpg" alt="Suco natural de laranja espremido na hora" width="300" height="200">
                  <h3>Suco Natural de Laranja</h3>
                    <p>R$ 7,50</p>
-                   <button class="add-to-cart cta" aria-labelledby="suco-laranja-label">Adicionar</button> <!-- Classe cta adicionada -->
-                    <span id="suco-laranja-label" class="visually-hidden">Suco Natural de Laranja</span> <!-- Elemento escondido para aria-labelledby -->
+                   <button class="add-to-cart cta" data-name="Suco Natural de Laranja" data-price="7.50">Adicionar</button>
                 </article>
 
                <!-- Bebida 3 -->
                <article class="bebida-item product" data-name="Água saborizada" data-price="5.00">
-                 <img src="https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg" alt="Água saborizada refrescante com frutas" width="300" height="200"> <!-- Alt mais descritivo -->
+                 <img src="https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg" alt="Água saborizada refrescante com frutas" width="300" height="200">
                   <h3>Água saborizada</h3>
                    <p>R$ 5,00</p>
-                  <button class="add-to-cart cta" aria-labelledby="agua-saborizada-label">Adicionar</button> <!-- Classe cta adicionada -->
-                  <span id="agua-saborizada-label" class="visually-hidden">Água saborizada</span> <!-- Elemento escondido para aria-labelledby -->
+                  <button class="add-to-cart cta" data-name="Água saborizada" data-price="5.00">Adicionar</button>
                 </article>
             </div>
         </section>
-   <img fetchpriority="high" decoding="async" width="2048" height="54" src="https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-2048x54.png" class="attachment-2048x2048 size-2048x2048 wp-image-10599" alt="" srcset="https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-2048x54.png 2048w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-300x8.png 300w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-1024x27.png 1024w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-768x20.png 768w, https://familiabraz.com.br/wp-content/uploads/2024/08/braz-pizzaria__separator-1536x41.png 1536w" sizes="(max-width: 2048px) 100vw, 2048px">
+  <!-- Imagem Decorativa -->
+  <div class="decorative-image">
+    <img src="imagens/linha-removebg-preview.png" alt="Imagem decorativa de trigo e elementos ornamentais" width="100%" height="auto">
+    <div class="overlay"></div>
+</div>
         <!-- Seção do Carrinho -->
         <section id="carrinho" class="cart">
             <h2>Carrinho de Compras</h2>
@@ -297,7 +315,7 @@
             <p>© 2025 Explosão Crocante. Todos os direitos reservados.</p>
             <nav>
                 <ul class="footer-links">
-                    <li><a href="#menu">Cardápio</a></li>
+                    <li><a href="#tipos">Cardápio</a></li>
                     <li><a href="#promotions">Promoções</a></li>
                     <li><a href="#carrinho">Carrinho</a></li>
                     <li>
@@ -321,7 +339,7 @@
         aria-label="Entre em contato pelo WhatsApp">
          <i class="fab fa-whatsapp"></i>
      </a>
-     
+
     <script src="script.js"></script>
 </body>
 </html>
