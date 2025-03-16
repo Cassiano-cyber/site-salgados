@@ -1202,13 +1202,30 @@ body {
         text-shadow: 0 0 20px #ff6600, 0 0 30px #ffcc00, 0 0 40px #ff3300;
     }
 }
-.separator-img {
-  width: 100%; /* Isso vai fazer a imagem ocupar toda a largura do container */
-  max-width: 300px; /* Limita a largura máxima */
-  height: auto; /* Mantém as proporções da imagem */
-  display: block; /* Remove o espaço extra abaixo da imagem */
-  margin-top: 30px; /* Espaço superior */
-  margin-bottom: 30px; /* Espaço inferior */
-  object-fit: cover; /* A imagem vai cobrir a área sem distorcer */
+.decorative-image {
+    position: relative;
+    width: 100%;
+    margin: 20px 0; /* Espaçamento entre seções */
+    text-align: center;
 }
 
+.decorative-image img {
+    width: 100%;
+    max-height: 200px; /* Ajusta a altura sem cortar */
+    height: auto; /* Mantém as proporções originais */
+    display: block;
+    opacity: 0.8; /* Suaviza um pouco */
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+    .decorative-image img {
+        max-height: 150px; /* Ajusta a altura para telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .decorative-image img {
+        max-height: 100px; /* Ajusta a altura para telas muito pequenas */
+    }
+}
