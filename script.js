@@ -1,101 +1,105 @@
-// ============================================================================
-// Módulo de Carrossel
-// ============================================================================
 const carouselModule = (() => {
-    let currentSlide = 0;
-    let slides, nextButton, prevButton, track, carouselContainer;
-    let intervalId; // Para armazenar o ID do intervalo
-    let autoSlideActive = true; // Flag para controlar o avanço automático
+    const carousels = {};
 
-    const init = () => {
-        slides = document.querySelectorAll(".carousel-slide");
-        nextButton = document.querySelector(".carousel-button.next");
-        prevButton = document.querySelector(".carousel-button.prev");
-        track = document.querySelector(".carousel-track");
-        carouselContainer = document.querySelector(".carousel"); // Obtém o container do carrossel
-
-        if (!slides.length || !nextButton || !prevButton || !track || !carouselContainer) {
-            console.error("Carrossel ou elementos não encontrados.");
+    const init = (carouselId) => {
+        const carouselContainer = document.getElementById(carouselId);
+        if (!carouselContainer) {
+            console.error(`Carousel with ID "${carouselId}" not found.`);
             return false;
         }
 
+        const slides = carouselContainer.querySelectorAll(".carousel-slide");
+        const nextButton = carouselContainer.querySelector(".carousel-button.next");
+        const prevButton = carouselContainer.querySelector(".carousel-button.prev");
+        const track = carouselContainer.querySelector(".carousel-track");
+
+        if (!slides.length || !nextButton || !prevButton || !track) {
+            console.error(`Carousel elements "${carouselId}" not found.`);
+            return false;
+        }
+
+        carousels[carouselId] = {
+            currentSlide: 0,
+            slides: slides,
+            nextButton: nextButton,
+            prevButton: prevButton,
+            track: track,
+            intervalId: null,
+            autoSlideActive: true
+        };
+
         nextButton.addEventListener("click", () => {
-            stopAutoSlide();
-            showNextSlide();
-            restartAutoSlide();
+            stopAutoSlide(carouselId);
+            showNextSlide(carouselId);
+            restartAutoSlide(carouselId);
         });
         prevButton.addEventListener("click", () => {
-            stopAutoSlide();
-            showPrevSlide();
-            restartAutoSlide();
-        });
-        showSlide(currentSlide);
-
-        // Eventos para pausar/retomar o auto slide no hover
-        carouselContainer.addEventListener("mouseenter", () => {
-            stopAutoSlide();
+            stopAutoSlide(carouselId);
+            showPrevSlide(carouselId);
+            restartAutoSlide(carouselId);
         });
 
+        carouselContainer.addEventListener("mouseenter", () => stopAutoSlide(carouselId));
         carouselContainer.addEventListener("mouseleave", () => {
-            if (autoSlideActive) {
-                startAutoSlide();
+            if (carousels[carouselId].autoSlideActive) {
+                startAutoSlide(carouselId);
             }
         });
 
-        // Iniciar o avanço automático a cada 5 segundos
-        startAutoSlide();
+        showSlide(carouselId, 0);
+        startAutoSlide(carouselId);
 
         return true;
     };
 
-    const showSlide = (index) => {
-        track.style.transform = `translateX(-${index * 100}%)`;
+    const showSlide = (carouselId, index) => {
+        const carousel = carousels[carouselId];
+        carousel.track.style.transform = `translateX(-${index * 100}%)`;
     };
 
-    const showNextSlide = () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+    const showNextSlide = (carouselId) => {
+        const carousel = carousels[carouselId];
+        carousel.currentSlide = (carousel.currentSlide + 1) % carousel.slides.length;
+        showSlide(carouselId, carousel.currentSlide);
     };
 
-    const showPrevSlide = () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
+    const showPrevSlide = (carouselId) => {
+        const carousel = carousels[carouselId];
+        carousel.currentSlide = (carousel.currentSlide - 1 + carousel.slides.length) % carousel.slides.length;
+        showSlide(carouselId, carousel.currentSlide);
     };
 
-    const startAutoSlide = () => {
-        if (autoSlideActive) {
-            intervalId = setInterval(showNextSlide, 5000);
+    const startAutoSlide = (carouselId) => {
+        const carousel = carousels[carouselId];
+        if (carousel.autoSlideActive) {
+            carousel.intervalId = setInterval(() => showNextSlide(carouselId), 5000);
         }
     };
 
-    const stopAutoSlide = () => {
-        clearInterval(intervalId);
+    const stopAutoSlide = (carouselId) => {
+        const carousel = carousels[carouselId];
+        clearInterval(carousel.intervalId);
     };
 
-    const restartAutoSlide = () => {
-        if (autoSlideActive) {
-            stopAutoSlide();
-            startAutoSlide();
-        }
+    const restartAutoSlide = (carouselId) => {
+        stopAutoSlide(carouselId);
+        startAutoSlide(carouselId);
     };
 
-    return { init, startAutoSlide, stopAutoSlide, restartAutoSlide };
+    return { init };
 })();
 
-/// ============================================================================
-// Módulo de Tema (Claro/Escuro)
-// ============================================================================
 const themeModule = (() => {
     let toggleButton;
 
     const init = () => {
         toggleButton = document.getElementById("toggleTheme");
         if (!toggleButton) {
-            console.error("O botão de tema não foi encontrado");
+            console.error("Theme button not found");
             return false;
         }
         toggleButton.addEventListener("click", toggleTheme);
-        initializeTheme(); // Inicializa o tema ao carregar a página
+        initializeTheme();
         return true;
     };
 
@@ -117,17 +121,14 @@ const themeModule = (() => {
     const updateThemeButton = () => {
         if (toggleButton) {
             toggleButton.innerHTML = document.body.classList.contains("dark-mode")
-                ? '<i class="fas fa-sun"></i> Modo Claro'
-                : '<i class="fas fa-moon"></i> Modo Escuro';
+                ? '<i class="fas fa-sun"></i> Light Mode'
+                : '<i class="fas fa-moon"></i> Dark Mode';
         }
     };
 
     return { init, initializeTheme, toggleTheme, updateThemeButton };
 })();
 
-// ============================================================================
-// Módulo do Carrinho
-// ============================================================================
 const cartModule = (() => {
     let cart = [];
     let total = 0;
@@ -143,7 +144,7 @@ const cartModule = (() => {
         cartMenu = document.getElementById("cart-menu");
 
         if (!cartList || !totalElement || !cartCount || !cartItemsList || !cartTotalDisplay) {
-            console.error("Elementos do carrinho não encontrados.");
+            console.error("Cart elements not found.");
             return false;
         }
 
@@ -159,6 +160,17 @@ const cartModule = (() => {
         if (closeCartButton) {
             closeCartButton.addEventListener("click", toggleCartMenu);
         }
+
+        // Event listener para os botões "Adicionar" das promoções, bebidas e sabores.
+        document.body.addEventListener('click', function(event) {
+            if (event.target.classList.contains('add-to-cart')) {
+                const name = event.target.dataset.name;
+                const price = parseFloat(event.target.dataset.price);
+                if (name && !isNaN(price)) {
+                    addItem(name, price);
+                }
+            }
+        });
 
         return true;
     };
@@ -214,11 +226,10 @@ const cartModule = (() => {
     const checkout = (principal) => {
         isPrincipalCheckout = principal;
         if (cart.length === 0) {
-            alert("Carrinho vazio! Adicione itens ao carrinho.");
+            alert("Empty cart! Add items to cart.");
             return;
         }
 
-        // Coletar dados do endereço
         let deliveryOption, addressData;
 
         if (isPrincipalCheckout) {
@@ -249,24 +260,22 @@ const cartModule = (() => {
             }
         }
         if (deliveryOption === 'entrega' && !addressData.numero) {
-            alert("Por favor, insira o número da casa.");
+            alert("Please enter the house number.");
             return;
         }
-        
-        // Formatar a mensagem do WhatsApp
-        let message = "Novo pedido:\n\n";
+
+        let message = "New order:\n\n";
         cart.forEach(item => {
             message += `${item.name} - R$ ${item.price.toFixed(2)}\n`;
         });
         message += `\nTotal: R$ ${total.toFixed(2)}\n`;
 
         if (deliveryOption === 'entrega') {
-            message += `\nEndereço:\nCEP: ${addressData.cep}\nRua: ${addressData.rua}, ${addressData.numero} ${addressData.complemento}\nBairro: ${addressData.bairro}\nCidade: ${addressData.cidade}, ${addressData.estado}\n`;
+            message += `\nAddress:\nCEP: ${addressData.cep}\nRua: ${addressData.rua}, ${addressData.numero} ${addressData.complemento}\nBairro: ${addressData.bairro}\nCidade: ${addressData.cidade}, ${addressData.estado}\n`;
         } else {
-            message += "\nRetirar no local.\n";
+            message += "\nPick up on site.\n";
         }
 
-        // Enviar mensagem via WhatsApp
         const phoneNumber = "5517996780618";
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
@@ -275,29 +284,123 @@ const cartModule = (() => {
     return { init, addItem, removeItem, checkout, updateCartDisplay };
 })();
 
-// ============================================================================
-// Inicialização Geral
-// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
     themeModule.init();
-    carouselModule.init();
     cartModule.init();
 
-    document.querySelectorAll(".add-to-cart").forEach(button => {
-        button.addEventListener("click", () => {
-            const product = button.closest(".product");
-            const name = product.getAttribute("data-name");
-            const price = parseFloat(product.getAttribute("data-price"));
-            if (name && !isNaN(price)) cartModule.addItem(name, price);
-        });
+    // Inicializa os carrosséis
+    carouselModule.init('tipos-salgado');
+    carouselModule.init('sabores');
+
+    const tiposCarrossel = document.getElementById('tipos-salgado');
+    const saboresCarrossel = document.getElementById('sabores');
+    const saboresTrack = document.getElementById('carousel-track-sabores');
+    const tipoSelecionadoSpan = document.getElementById('tipo-selecionado');
+    const saborSelecionadoSpan = document.getElementById('sabor-selecionado');
+    const adicionarAoCarrinhoButton = document.getElementById('adicionar-ao-carrinho');
+    const selecaoSection = document.getElementById('selecao'); // Adicionado
+
+    let tipoSelecionado = null;
+    let saborSelecionado = null;
+    let saboresDisponiveis = []; // Agora armazena os dados dos sabores
+
+    tiposCarrossel.addEventListener('click', function(event) {
+        if (event.target.classList.contains('select-type')) {
+            tipoSelecionado = event.target.dataset.tipo;
+            tipoSelecionadoSpan.textContent = tipoSelecionado;
+            atualizarSabores(tipoSelecionado);
+            saborSelecionado = null;
+            saborSelecionadoSpan.textContent = 'Nenhum';
+            adicionarAoCarrinhoButton.disabled = true;
+        }
     });
 
-    document.getElementById("checkoutButton")?.addEventListener("click", () => cartModule.checkout(true));
-    document.querySelector(".checkout-container button")?.addEventListener("click", () => cartModule.checkout(false));
-    cartModule.updateCartDisplay();
-});
-document.addEventListener('DOMContentLoaded', function() {
-    // Elementos do formulário principal
+    // Evento de clique nos sabores (para ativar o botão "Adicionar") - CORRIGIDO
+    saboresCarrossel.addEventListener('click', function(event) {
+        // Garante que o clique ocorreu em um elemento product dentro do carrossel
+        if (event.target.closest('.carousel-slide.product')) {
+            // Encontra o elemento product clicado
+            const saborElemento = event.target.closest('.carousel-slide.product');
+            if (saborElemento) {
+                saborSelecionado = saborElemento.dataset.sabor; // Define o sabor selecionado
+
+                // Atualiza o texto na "Comanda"
+                const saborNome = saboresDisponiveis.find(s => s.sabor === saborSelecionado)?.nome || 'Nenhum';
+                saborSelecionadoSpan.textContent = saborNome;
+
+                adicionarAoCarrinhoButton.disabled = false;
+            }
+        }
+    });
+
+    // Função para atualizar o carrossel de sabores
+    function atualizarSabores(tipo) {
+        saboresTrack.innerHTML = '';
+        saboresDisponiveis = []; // Limpa os sabores disponíveis
+
+        switch (tipo) {
+            case 'coxinha':
+                saboresDisponiveis = [
+                    { nome: 'Frango', preco: 7.50, imagem: 'https://images.pexels.com/photos/12361995/pexels-photo-12361995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'frango' },
+                    { nome: 'Costela', preco: 8.00, imagem: 'https://images.pexels.com/photos/8964567/pexels-photo-8964567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'costela' },
+                    { nome: 'Calabresa com Cheddar', preco: 7.50, imagem: 'https://images.pexels.com/photos/17402718/pexels-photo-17402718/free-photo-of-comida-alimento-refeicao-pizza.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'calabresa-com-cheddar' }
+                ];
+                break;
+            case 'enroladinho':
+                saboresDisponiveis = [
+                    { nome: 'Salsicha', preco: 6.00, imagem: 'https://images.pexels.com/photos/357576/pexels-photo-357576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'enroladinho', sabor: 'salsicha' },
+                    { nome: 'Queijo e Presunto', preco: 6.50, imagem: 'https://images.pexels.com/photos/9615585/pexels-photo-9615585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'enroladinho', sabor: 'queijo-e-presunto' }
+                ];
+                break;
+            case 'bolinha':
+                saboresDisponiveis = [
+                    { nome: 'Carne com Queijo', preco: 6.00, imagem: 'https://cdn.pixabay.com/photo/2019/10/13/02/18/tomato-meat-sauce-4545230_1280.jpg', tipo: 'bolinha', sabor: 'carne-com-queijo' },
+                    { nome: 'Calabresa', preco: 6.00, imagem: 'https://images.pexels.com/photos/6004718/pexels-photo-6004718.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'bolinha', sabor: 'calabresa' }
+                ];
+                break;
+            case 'empada':
+                saboresDisponiveis = [
+                    { nome: 'Frango', preco: 6.00, imagem: 'https://images.pexels.com/photos/8679380/pexels-photo-8679380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'empada', sabor: 'frango' },
+                    { nome: 'Palmito', preco: 6.50, imagem: 'https://images.pexels.com/photos/8679380/pexels-photo-8679380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'empada', sabor: 'palmito' },
+                     { nome: 'Queijo', preco: 6.50, imagem: 'https://cdn.pixabay.com/photo/2017/01/11/19/56/cheese-1972744_1280.jpg', tipo: 'empada', sabor: 'queijo' }
+                ];
+                break;
+            case 'tortinha':
+                saboresDisponiveis = [
+                    { nome: 'Legumes', preco: 4.50, imagem: 'https://images.pexels.com/photos/4577379/pexels-photo-4577379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'tortinha', sabor: 'legumes' },
+                    { nome: 'Frango', preco: 4.50, imagem: 'https://images.pexels.com/photos/4577379/pexels-photo-4577379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'tortinha', sabor: 'frango' }
+                ];
+                break;
+            case 'torta':
+                saboresDisponiveis = [
+                    { nome: 'Frango com Catupiry', preco: 5.00, imagem: 'https://receitasdepesos.com.br/wp-content/uploads/2024/09/file-de-frango-com-catupiry.jpeg.webp', tipo: 'torta', sabor: 'frango-com-catupiry' },
+                    { nome: 'Calabresa com Queijo', preco: 5.00, imagem: 'https://cdn.pixabay.com/photo/2021/10/16/12/50/fire-chicken-6714952_1280.jpg', tipo: 'torta', sabor: 'calabresa-com-queijo' }
+                ];
+                break;
+            default:
+                saboresTrack.innerHTML = '<p>Nenhum sabor disponível para este tipo de salgado.</p>';
+                return;
+        }
+
+        saboresDisponiveis.forEach(function(sabor) {
+            const slide = document.createElement('article');
+            slide.classList.add('carousel-slide', 'product');
+            slide.dataset.sabor = sabor.sabor; // Armazena o nome do sabor
+            slide.dataset.preco = sabor.preco.toFixed(2);
+            slide.innerHTML = `
+                <img src="${sabor.imagem}" alt="Sabor ${sabor.nome}" loading="lazy" width="300" height="200">
+                <h3>${sabor.nome}</h3>
+                <button class="add-to-cart cta" data-name="${tipoSelecionado} de ${sabor.nome}" data-price="${sabor.preco.toFixed(2)}">Adicionar</button>
+            `;
+            saboresTrack.appendChild(slide);
+        });
+
+        // Inicialize o carrossel de sabores após adicionar os slides
+        carouselModule.init('sabores');
+    }
+
+    // Adicionar ao Carrinho (após selecionar tipo e sabor) - REMOVIDO - Já está no body event listener
+
     const retirarRadioPrincipal = document.getElementById('retirar-principal');
     const entregaRadioPrincipal = document.getElementById('entrega-principal');
     const enderecoContainerPrincipal = document.getElementById('endereco-container-principal');
@@ -310,7 +413,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const cidadeInputPrincipal = document.getElementById('cidade-principal');
     const estadoInputPrincipal = document.getElementById('estado-principal');
 
-    // Elementos do formulário secundário
     const retirarRadio = document.getElementById('retirar');
     const entregaRadio = document.getElementById('entrega');
     const enderecoContainer = document.getElementById('endereco-container');
@@ -323,7 +425,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const cidadeInput = document.getElementById('cidade');
     const estadoInput = document.getElementById('estado');
 
-    // Função para buscar endereço pelo CEP
     const buscarEndereco = (cep, ruaInput, bairroInput, cidadeInput, estadoInput, enderecoCompletoId) => {
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
             .then(response => response.json())
@@ -344,16 +445,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     };
 
-    // Função para atualizar a visibilidade do contêiner de endereço
     const updateEnderecoContainerVisibility = (radio, container) => {
         container.style.display = radio.checked ? 'block' : 'none';
     };
 
-    // Inicializar a visibilidade do contêiner de endereço
     updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal);
     updateEnderecoContainerVisibility(entregaRadio, enderecoContainer);
 
-    // Eventos para o formulário principal
     entregaRadioPrincipal.addEventListener('change', function() {
         updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal);
     });
@@ -371,7 +469,6 @@ document.addEventListener('DOMContentLoaded', function() {
         buscarEndereco(cep, ruaInputPrincipal, bairroInputPrincipal, cidadeInputPrincipal, estadoInputPrincipal, 'endereco-completo-principal');
     });
 
-    // Eventos para o formulário secundário
     entregaRadio.addEventListener('change', function() {
         updateEnderecoContainerVisibility(entregaRadio, enderecoContainer);
     });
