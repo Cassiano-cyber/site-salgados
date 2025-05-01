@@ -1,0 +1,66 @@
+/* Animações */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-32px) scale(0.98);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(8px) scale(1.02);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animação para itens de promoção (salgados) */
+.promotion-item,
+.salgado-item {
+    animation: fadeInUp 1s cubic-bezier(.22,1,.36,1) both;
+    will-change: opacity, transform;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.98);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.02);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animação de "sugar" para o carrinho */
+.product-clone {
+    position: absolute;
+    z-index: 1000;
+    transition: all 0.8s cubic-bezier(.4,1.6,.6,1);
+    transform-origin: center;
+    will-change: transform, opacity;
+    /* Pequeno efeito de bounce ao chegar */
+}
+
+@keyframes popButton {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    70% { transform: scale(0.97); }
+    100% { transform: scale(1); }
+}
+
+/* Use em botões de ação para efeito pop mais suave */
+.promotion-item button:active,
+.salgado-item button:active,
+.bebida-item button:active {
+    animation: popButton 0.35s cubic-bezier(.22,1,.36,1);
+}
+
+/* Efeito de pulso no ícone do carrinho - Já definida em buttons.css */
+
+/* Efeito de brilho no título das promoções - Já definida em typography.css */

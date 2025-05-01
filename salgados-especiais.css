@@ -1,0 +1,199 @@
+#salgados-especiais {
+  padding: 32px 10px 32px 10px;
+  text-align: center;
+  background: linear-gradient(120deg, #fffde7 70%, #fffbe5 100%);
+  border-radius: 18px;
+  margin: 32px auto 32px auto;
+  box-shadow: 0 6px 32px #b9302622, 0 0 0 4px #ffd70033 inset;
+  max-width: 1200px;
+}
+
+#salgados-especiais h2 {
+  font-size: 2.3rem;
+  color: #b93026;
+  font-family: var(--dancing), cursive;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #ffd70033, 0 0 12px #fff8;
+  position: relative;
+  display: inline-block;
+}
+
+.salgados-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 20px;
+}
+
+.salgado-item {
+  background: linear-gradient(120deg, #fff 80%, #ffe5b5 100%);
+  border: 2.5px solid #ffd700;
+  border-radius: 16px;
+  padding: 22px 18px 18px 18px;
+  width: 320px;
+  box-shadow: 0 6px 24px #b9302622, 0 0 0 4px #ffd70022 inset;
+  position: relative;
+  transition: transform 0.18s, box-shadow 0.18s;
+  overflow: visible;
+}
+
+.salgado-item:hover {
+  transform: scale(1.045) translateY(-6px);
+  box-shadow: 0 12px 32px #b9302644, 0 0 0 6px #ffd70044 inset;
+  z-index: 2;
+}
+
+/* Selo de destaque */
+.salgado-item::before {
+  content: "Mais Vendido";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    #ffd700 0%,
+    #ffd700 33%,
+    #ffb347 55%,
+    #ff7f50 80%,
+    #b93026 100%
+  );
+  color: #fff;
+  font-family: var(--dancing), cursive;
+  font-size: 1.05rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  border-radius: 32px;
+  box-shadow: 0 2px 8px #ffd70055, 0 1px 0 #fff inset;
+  padding: 0.3em 1.5em;
+  border: 2px solid #b93026;
+  z-index: 10;
+  display: block;
+  pointer-events: none;
+  text-shadow: 0 1px 4px #b9302622;
+}
+
+.salgado-item img {
+  display: block;
+  margin: 0 auto 12px auto;
+  max-width: 220px;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #ffd70033;
+  border: 2px solid #ffd70044;
+}
+
+.salgado-item h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.6em;
+  color: #b93026;
+  font-family: var(--dancing), cursive;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 8px #ffd70033, 0 0 12px #fff8;
+}
+
+.salgado-item p {
+  font-size: 1.08em;
+  color: #a13c00;
+  margin-bottom: 8px;
+  font-weight: 500;
+  background: linear-gradient(90deg, #fffbe5 70%, #ffe5b5 100%);
+  border-radius: 8px;
+  padding: 0.2em 0.7em;
+  display: inline-block;
+  box-shadow: 0 1px 4px #ffd70011;
+}
+
+.salgado-item p strong {
+  color: #b93026;
+  font-size: 1.15em;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* Botão vermelho só na seção salgados especiais */
+.salgado-item button {
+  margin-top: 10px;
+  font-size: 1.1em;
+  font-family: var(--dancing), cursive;
+  font-weight: bold;
+  background: linear-gradient(90deg, #b93026 60%, #ff7f50 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 28px;
+  box-shadow: 0 2px 8px #ffd70033;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+
+.salgado-item button:hover,
+.salgado-item button:focus {
+  background: linear-gradient(90deg, #ff7f50 40%, #b93026 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px #ffd70055;
+  transform: scale(1.07);
+  outline: none;
+}
+
+/* Modo escuro para salgados especiais */
+body.dark-mode #salgados-especiais,
+.theme-dark #salgados-especiais {
+  background: linear-gradient(120deg, #2d1810 70%, #4d2323 100%);
+  box-shadow: 0 6px 32px #0006, 0 0 0 4px #b9302622 inset;
+}
+
+body.dark-mode #salgados-especiais h2,
+.theme-dark #salgados-especiais h2 {
+  color: #ffd700;
+  text-shadow: 0 2px 8px #000a, 0 0 12px #fff2;
+}
+
+body.dark-mode .salgado-item,
+.theme-dark .salgado-item {
+  background: linear-gradient(120deg, #3a2323 80%, #5a2e2e 100%);
+  border-color: #ffd70055;
+  box-shadow: 0 6px 24px #0008, 0 0 0 4px #ffd70022 inset;
+}
+
+body.dark-mode .salgado-item h3,
+.theme-dark .salgado-item h3 {
+  color: #ffd700;
+  text-shadow: 0 2px 8px #000a, 0 0 12px #fff2;
+}
+
+body.dark-mode .salgado-item p,
+.theme-dark .salgado-item p {
+  background: linear-gradient(90deg, #4d2323 70%, #3a2323 100%);
+  color: #ffd700;
+}
+
+body.dark-mode .salgado-item button,
+.theme-dark .salgado-item button {
+  background: linear-gradient(90deg, #b93026 60%, #ff7f50 100%);
+  color: #fff;
+}
+
+body.dark-mode .salgado-item button:hover,
+body.dark-mode .salgado-item button:focus,
+.theme-dark .salgado-item button:hover,
+.theme-dark .salgado-item button:focus {
+  background: linear-gradient(90deg, #ff7f50 40%, #b93026 100%);
+  color: #fff;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .salgados-container {
+    gap: 18px;
+  }
+  .salgado-item {
+    width: 95vw;
+    max-width: 370px;
+  }
+}

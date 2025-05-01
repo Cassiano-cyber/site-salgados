@@ -1,0 +1,181 @@
+/* Estilos para a seção Comanda */
+.selecao {
+    /* Estilos base - Atualizados */
+    background-color: var(--background-color); /* Fundo igual ao do site */
+    color: var(--primary-color);
+    padding: 25px 20px; /* Aumenta padding vertical */
+    margin-bottom: 20px;
+    border-radius: 12px; /* Suaviza bordas */
+    box-shadow: none; /* Remove sombra */
+    text-align: center;
+    position: relative; /* Para pseudo-elementos */
+    overflow: hidden; /* Para pseudo-elementos */
+    border: none; /* Remove borda vermelha */
+    transition: background 0.4s ease-out, border-color 0.4s ease-out; /* Transição suave */
+    min-height: 160px; /* Garante altura mínima */
+    background-blend-mode: multiply;
+    /* Efeito de vidro fosco moderno */
+    -webkit-backdrop-filter: blur(2.5px) brightness(1.08); /* Safari support */
+    backdrop-filter: blur(2.5px) brightness(1.08);
+}
+
+
+/* Efeito de brilho/pulso sutil */
+@keyframes comandaPulse {
+    0% { filter: blur(1px) brightness(1); }
+    100% { filter: blur(2.5px) brightness(1.09); }
+}
+
+/* --- Estilos do Conteúdo Interno --- */
+
+.selecao h2 {
+    font-size: 2.7rem; /* Aumenta o tamanho */
+    font-weight: 700;   /* Mais grosso */
+    color: var(--primary-color);
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+    font-family: var(--dancing), cursive;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #ffd70033, 0 0 12px #fff8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    background: rgba(255,255,255,0.13);
+    border-radius: 8px;
+    padding: 0.2em 0.8em;
+    box-shadow: 0 1px 8px #ffd70011;
+}
+
+/* Badge flutuante para o tipo selecionado */
+.comanda-badge {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #ffd700 60%, #ffe0b2 100%);
+    color: #a13c00;
+    font-family: var(--dancing), cursive;
+    font-size: 1.25rem;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    border-radius: 32px;
+    box-shadow: 0 4px 16px #ffd70055, 0 1px 0 #fff inset;
+    padding: 0.5em 2.2em 0.5em 2.2em;
+    border: 2.5px solid #e69900;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    min-height: 48px;
+    min-width: 120px;
+    animation: badgePop 0.5s cubic-bezier(.22,1,.36,1);
+    pointer-events: none;
+}
+.comanda-badge .badge-emoji {
+    font-size: 2.1em;
+    margin-right: 0.2em;
+    filter: drop-shadow(0 2px 4px #fff8);
+}
+
+@keyframes badgePop {
+    0% { transform: translateX(-50%) scale(0.7); opacity: 0; }
+    80% { transform: translateX(-50%) scale(1.08); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* Realce do container da comanda */
+.comanda-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5em;
+    position: relative; /* Garante que fique acima dos pseudo-elementos */
+    z-index: 2;
+    background: rgba(255,255,255,0.98); /* Fundo levemente transparente */
+    padding: 18px 0 12px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px #ffd70022, 0 0 0 4px #fffbe5cc inset;
+    border: 2.5px solid var(--highlight-color);
+}
+
+.comanda-container p {
+    font-size: 1.22rem; /* Levemente maior */
+    font-weight: 600;
+    color: #a13c00;
+    background: linear-gradient(90deg, #fffbe5 70%, #ffe5b5 100%);
+    border-radius: 8px;
+    padding: 0.3em 1em;
+    margin: 10px 0 8px 0;
+    box-shadow: 0 1px 4px #ffd70011;
+    font-family: var(--dancing), cursive; /* Usa a variável de fonte */
+    letter-spacing: 0.2px;
+    text-shadow: 0 1px 2px #fff8;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.comanda-container span {
+    font-size: 1.22em;
+    font-weight: bold;
+    color: #a13c00;
+    /* Removido o fundo e a borda amarela */
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin: 0 6px;
+    position: relative;
+    z-index: 2;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    animation: none;
+    text-shadow: 0 1px 4px #fff8;
+    letter-spacing: 0.04em;
+    padding: 4px 18px;
+}
+
+/* Foco visível para acessibilidade */
+.comanda-container span:focus {
+    outline: 2px solid #e69900;
+    outline-offset: 2px;
+    background: #ffe0b2;
+    color: #a13c00;
+    box-shadow: 0 0 0 3px #ffd70088;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .selecao {
+        padding: 10px;
+        min-height: 90px;
+    }
+    .selecao h2 {
+        font-size: 1.2rem;
+        padding: 0.1em 0.3em;
+    }
+    .comanda-container p {
+        font-size: 1rem;
+    }
+    .comanda-container span {
+        font-size: 1rem;
+        padding: 2px 6px;
+    }
+    .selecao::before, .selecao::after { /* Esconde ou reduz imagens de fundo em mobile */
+        opacity: 0.08;
+        width: 40px;
+        height: 40px;
+    }
+    .comanda-badge {
+        font-size: 1rem;
+        min-width: 90px;
+        min-height: 36px;
+        padding: 0.3em 1.2em;
+    }
+    .comanda-badge .badge-emoji {
+        font-size: 1.3em;
+    }
+    .comanda-container {
+        margin-top: 2em;
+    }
+}

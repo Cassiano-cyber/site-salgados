@@ -1,0 +1,244 @@
+/* Promoções */
+.promotions {
+    background: #f5e4c3;
+    /* cor de areia sólida para máxima compatibilidade */
+    padding: 48px 0 38px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+/* Título com ícone de holofote */
+.promotions h2 {
+    font-size: 2.7rem;
+    margin-bottom: 18px;
+    color: #a71d1d;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 16px #ffe5ec, 1px 1px 2px #a71d1d80;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.promotions h2::before {
+    content: "\f02b"; /* Ícone de tag/desconto Font Awesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #e85d04;
+    font-size: 2rem;
+    margin-right: 6px;
+    filter: drop-shadow(0 2px 6px #ffe5ec);
+}
+
+.promotions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 22px;
+    justify-content: center;
+    align-items: stretch;
+    margin: 0 auto;
+    padding: 0 3vw;
+    position: relative;
+    z-index: 1;
+}
+
+.promotion-item {
+    background: rgba(255,255,255,0.93);
+    backdrop-filter: blur(7px);
+    border-radius: 16px;
+    box-shadow: 0 10px 32px rgba(167,29,29,0.10), 0 2px 8px #ffe5ec;
+    padding: 22px 18px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.22s cubic-bezier(.22,1,.36,1), box-shadow 0.22s;
+    overflow: hidden;
+    border: 1.5px solid #ffe5ec;
+    min-height: 340px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    animation: promoFadeInUp 0.7s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.promotion-item:nth-child(1) { animation-delay: 0.08s; }
+.promotion-item:nth-child(2) { animation-delay: 0.20s; }
+.promotion-item:nth-child(3) { animation-delay: 0.32s; }
+.promotion-item:nth-child(4) { animation-delay: 0.44s; }
+.promotion-item:nth-child(5) { animation-delay: 0.56s; }
+.promotion-item:nth-child(6) { animation-delay: 0.68s; }
+
+.promotion-item:hover {
+    transform: translateY(-12px) scale(1.025);
+    box-shadow: 0 18px 40px #a71d1d22, 0 4px 16px #ffe5ec;
+}
+
+.promotion-item img {
+    width: 100%;
+    max-width: 320px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 18px #ffe5ecb0;
+    transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
+}
+
+.promotion-item img:hover {
+    transform: scale(1.07) rotate(-2deg);
+    box-shadow: 0 8px 32px #a71d1d33;
+}
+
+.promotion-item h3 {
+    font-size: 1.08rem;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+.promotion-price .old-price,
+.promotion-price .tachado {
+    color: #b0a99a;
+    text-decoration: line-through;
+    font-size: 1.02rem;
+    margin-right: 8px;
+    opacity: 0.85;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+}
+
+.promotion-price .new-price {
+    font-weight: 900;
+    color: #d7263d;
+    font-size: 2.1rem;
+    text-shadow:
+        0 0 32px #ffb347,
+        0 0 48px #ffb347,
+        0 0 24px #ffb347,
+        0 0 8px #ffb347,
+        0 0 2px #fff,
+        0 0 1px #fff;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 4px;
+    line-height: 1.1;
+}
+
+.promotion-price {
+    margin: 0 0 6px 0;
+    padding: 0;
+    font-size: 1.08rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    transition: color 0.3s;
+}
+
+/* Estilos do botão dentro do promotion-item (sobrescreve buttons.css se necessário) */
+.promotion-item button.add-to-cart {
+    background: linear-gradient(45deg, #ff7f32, #ff914d);
+    color: #fff;
+    padding: 12px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 18px #ff914d33, 0 1.5px 6px #ff7f3233;
+    transition: background 0.3s, transform 0.18s, box-shadow 0.18s;
+    outline: none;
+}
+
+.promotion-item button.add-to-cart::before {
+    content: "\f07a";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 1.1em;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.promotion-item button.add-to-cart:hover,
+.promotion-item button.add-to-cart:focus {
+    background: linear-gradient(45deg, #ff914d, #ff7f32);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 28px #ff914d44, 0 2px 8px #ff7f3244;
+}
+
+/* GRIDS */
+.promotions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* PROMOTION ITEMS */
+.promotion-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 10px;
+}
+
+.promotion-item img:hover,
+.salgado-item img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+#promocoes h2 {
+    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ff6600;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ff6600;
+    }
+    to {
+        text-shadow: 0 0 20px #ff6600, 0 0 30px #ffcc00, 0 0 40px #ff3300;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.98);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.02);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Corrige cor do texto "De" e "Por" no modo escuro das promoções */
+body.dark-mode .promotion-price {
+    color: #222; /* Ou a mesma cor usada no modo claro, ajuste se necessário */
+}

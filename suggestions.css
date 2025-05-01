@@ -1,0 +1,63 @@
+/* Estilos para a seção de sugestões */
+#sugestoes {
+    background-color: var(--background-color); /* Cor de fundo padrão das seções */
+    color: var(--primary-color); /* Cor do texto laranja */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra escura */
+    text-align: center; /* Centraliza o conteúdo se necessário */
+}
+
+#sugestoes h2 {
+    color: var(--primary-color); /* Garante que o título seja laranja */
+    margin-bottom: 15px;
+    font-size: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#sugestoes-produtos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+#sugestoes .promotion-item {
+    width: 100%;
+    max-width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#sugestoes .promotion-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#sugestoes .promotion-item p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Adaptações para o tema escuro */
+body.dark-mode #sugestoes {
+    background-color: var(--dark-background);
+}
+
+body.dark-mode #sugestoes h2,
+body.dark-mode #sugestoes .promotion-item h3,
+body.dark-mode #sugestoes .promotion-item p {
+    color: var(--light-text);
+    text-shadow: none;
+}
+
+#sugestoes p {
+    color: var(--primary-color);
+}

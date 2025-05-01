@@ -1,0 +1,212 @@
+body.dark-mode {
+    background-color: var(--dark-background);
+    color: var(--dark-mode-text);
+   }
+   
+   body.dark-mode button,
+   body.dark-mode .button {
+    background-color: var(--button-dark);
+    color: var(--dark-mode-text);
+   }
+   
+   body.dark-mode #menu h2,
+   body.dark-mode #tipos h2,
+   body.dark-mode #tipos h3,
+   body.dark-mode #sabores-section h2,
+   body.dark-mode #selecao h2,
+   body.dark-mode .promotions h2 {
+    color: var(--light-text);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .promotions {
+    background-color: var(--dark-background);
+   }
+   
+   .dark-mode .carousel-slide h3,
+   .dark-mode .carousel-slide p {
+    color: var(--dark-mode-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .cart {
+    background-color: var(--dark-background);
+    color: var(--light-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .cart h2 {
+    color: var(--light-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .cart-list li {
+    color: var(--light-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .cart-list button {
+    color: var(--light-text);
+   }
+   
+   .dark-mode #total {
+    color: var(--light-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .bebidas {
+    background: var(--dark-background);
+   }
+   
+   .dark-mode .bebidas h2,
+   .dark-mode .bebidas p {
+    color: var(--light-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .bebida-item {
+    background: #600000;
+   }
+   
+   .dark-mode .cart-menu {
+    background: var(--dark-background);
+   }
+   
+   .dark-mode .cart-menu h2 {
+    color: var(--light-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode #cart-items li {
+    border-bottom: 1px solid #555;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode #cart-items li span {
+    color: var(--dark-mode-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .cart-options label {
+    color: var(--dark-mode-text);
+   }
+   
+   .dark-mode .cart-options input {
+    background-color: var(--dark-background);
+    color: var(--dark-mode-text);
+    border: 1px solid #555;
+   }
+   
+   .dark-mode #cart-total {
+    color: var(--dark-mode-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+   
+   .dark-mode .site-footer p {
+    color: var(--dark-mode-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+   }
+
+   .dark-mode .cart-menu #endereco-container label[for="cep"] {
+       color: var(--dark-mode-text);
+   }
+
+   .dark-mode #selecao {
+       background-color: var(--dark-background);
+   }
+
+   .dark-mode .cart-menu .cart-total-container,
+   .dark-mode .cart-menu .checkout-container { /* Added .checkout-container */
+       background-color: var(--dark-background);
+       color: var(--dark-mode-text);
+   }
+
+/* Estilos específicos para a seção Comanda no modo escuro */
+.theme-dark .selecao {
+    color: var(--white-color, #fff); /* Define a cor do texto como branco */
+    background-color: var(--dark-background-alt, #444); /* Opcional: Ajusta o fundo se necessário */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Opcional: Ajusta a sombra para o modo escuro */
+}
+
+/* Garante que os elementos filhos também herdem ou tenham a cor branca */
+.theme-dark .selecao h2,
+.theme-dark .selecao p {
+    color: var(--white-color, #fff);
+}
+
+/* Ajusta a cor do span se necessário para contraste */
+.theme-dark .selecao span {
+     color: var(--highlight-color, #E5C07B); /* Exemplo: usar cor de destaque */
+}
+
+/* Garante que as labels "CEP:" no carrinho sejam brancas no modo escuro */
+.theme-dark #carrinho label[for="cep-principal"],
+.theme-dark #cart-menu label[for="cep"] {
+    color: var(--white-color, #fff);
+}
+
+body.dark-mode .selecao,
+.theme-dark .selecao {
+    background-color: var(--dark-background);
+    color: var(--light-text);
+}
+
+body.dark-mode .selecao span,
+.theme-dark .selecao span {
+    color: var(--highlight-color);
+    background: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .footer-links li a:focus {
+    outline: 2px solid var(--highlight-color);
+    color: var(--highlight-color);
+}
+
+/* --- AJUSTES PARA COMANDA (SELECAO) NO DARK MODE --- */
+body.dark-mode .selecao,
+.theme-dark .selecao {
+    background: linear-gradient(135deg, #d41e1e 60%, #b93026 100%);
+    color: #fff;
+}
+
+body.dark-mode .selecao h2,
+body.dark-mode .selecao p,
+body.dark-mode .selecao .comanda-badge,
+body.dark-mode .selecao span {
+    color: #fff !important;
+    text-shadow: 1px 1px 2px #000a;
+}
+
+body.dark-mode .selecao .comanda-container,
+.theme-dark .selecao .comanda-container {
+    background: rgba(83, 8, 8, 0.92); /* fundo escuro, sem branco */
+    border-color: #7f1d16;
+    box-shadow: 0 4px 24px #c42116c6, 0 0 0 4px #b93026cc inset;
+}
+
+body.dark-mode .selecao .comanda-container p {
+    background: linear-gradient(90deg, #682626 40%, #b930266a 100%);
+    color: #fff !important;
+    text-shadow: 1px 1px 2px #000a;
+}
+
+body.dark-mode .selecao .comanda-container span {
+    background: none !important;
+    color: #fff !important;
+    text-shadow: 1px 1px 2px #000a;
+}
+
+/* Badge flutuante da comanda */
+body.dark-mode .selecao .comanda-badge {
+    background: linear-gradient(90deg, #1c0301 60%, #800000 100%);
+    border-color: #fff;
+    color: #fff !important;
+    text-shadow: 1px 1px 2px #000a;
+}
+
+/* --- AJUSTE CARRINHO: letras dos produtos pretas no dark mode --- */
+body.dark-mode #cart-items li span {
+    color: #111 !important;
+    text-shadow: none !important;
+}

@@ -1,0 +1,105 @@
+/* Seção Bebidas */
+.bebidas {
+    text-align: center;
+    padding: 40px 10px 50px 10px;
+    background: #f5e4c3; /* tom de areia sólido */
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(212,163,115,0.10);
+    margin: 0 auto 40px auto;
+    max-width: 1200px;
+}
+.bebidas h2 {
+    font-size: 2.2rem;
+    margin-bottom: 32px;
+    margin-top: 0;
+    text-align: center;
+    color: #ff7f32;
+    text-shadow: 0 2px 8px #ff914d44;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+.bebidas p {
+    color: #ff7f32;
+    text-shadow: 1px 1px 2px #ff914d44;
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+}
+.bebidas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px 24px;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+.bebida-item {
+    background: #fff8ed;
+    padding: 18px 12px 20px 12px;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(212,163,115,0.10);
+    text-align: center;
+    width: 220px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.18s;
+    border: 2px solid #ff914d;
+}
+.bebida-item:hover {
+    box-shadow: 0 6px 24px #ff914d33, 0 2px 12px #ff7f3233;
+    transform: translateY(-4px) scale(1.025);
+    z-index: 2;
+}
+.bebida-item img {
+    width: 100%;
+    border-radius: 10px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #ff914d;
+    box-shadow: 0 2px 8px #ff914d33;
+}
+.bebida-item h3 {
+    font-size: 1.18rem;
+    margin: 10px 0 6px 0;
+    color: #ff7f32;
+    text-align: center;
+    text-shadow: 1px 1px 2px #ff914d44;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.bebida-item p {
+    font-size: 1.08rem;
+    font-weight: bold;
+    color: #ff7f32;
+    margin: 8px 0 12px 0;
+    text-align: center;
+    text-shadow: 1px 1px 2px #ff914d33;
+}
+.bebida-item button {
+    background: linear-gradient(45deg, #ff7f32, #ff914d);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background 0.3s, box-shadow 0.2s;
+    align-self: center;
+    font-weight: 500;
+    box-shadow: 0 1px 4px rgba(212,163,115,0.10);
+}
+.bebida-item button:hover {
+    background: linear-gradient(45deg, #ff914d, #ff7f32);
+    box-shadow: 0 2px 8px #ff914d44;
+}
+.bebida-info {
+    font-size: 0.97rem;
+    color: #ff7f32;
+    margin-bottom: 8px;
+    text-align: center;
+}
