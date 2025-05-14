@@ -1,10 +1,14 @@
-/* Seção Bebidas - Visual Moderno e Melhorado */
+/* Seção Bebidas - Tema totalmente vermelho com luzes nos cantos */
 .bebidas {
     text-align: center;
     padding: 56px 4vw 72px 4vw;
-    background: linear-gradient(120deg, #fff8edcc 60%, #ffe0a3cc 100%);
+    /* Luzes brancas nas laterais, centro sem luz */
+    background:
+        radial-gradient(ellipse at 0% 50%, #fff3 0%, transparent 70%),
+        radial-gradient(ellipse at 100% 50%, #fff3 0%, transparent 70%),
+        linear-gradient(0deg, #b93026 40%, #730000 100%);
     border-radius: 32px;
-    box-shadow: 0 12px 40px 0 #d4a37333, 0 2px 16px #b9302622;
+    box-shadow: 0 0 80px 0 #b9302633, 0 12px 40px 0 #b9302644, 0 2px 16px #b9302622;
     margin: 0 auto 56px auto;
     max-width: 1280px;
     border: none;
@@ -12,46 +16,57 @@
     overflow: visible;
     transition: box-shadow 0.3s;
     backdrop-filter: blur(2px);
+    color: #fff;
 }
 .bebidas::before,
 .bebidas::after {
     content: "";
     display: block;
     position: absolute;
-    width: 100px;
-    height: 100px;
-    opacity: 0.13;
+    width: 120px;
+    height: 120px;
+    opacity: 0.18;
     z-index: 0;
     pointer-events: none;
 }
 .bebidas::before {
-    left: 36px;
-    top: -48px;
-    background: url('https://img.icons8.com/fluency/96/cocktail.png') no-repeat center/contain;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background:
+        radial-gradient(circle at 50% 50%, #fff 0%, #ffb3b3 60%, transparent 100%),
+        url('https://img.icons8.com/fluency/96/cocktail.png') no-repeat center/70%;
 }
 .bebidas::after {
-    right: 36px;
-    bottom: -48px;
-    background: url('https://img.icons8.com/fluency/96/sparkling-water.png') no-repeat center/contain;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background:
+        radial-gradient(circle at 50% 50%, #fff 0%, #b93026 60%, transparent 100%),
+        url('https://img.icons8.com/fluency/96/sparkling-water.png') no-repeat center/70%;
+}
+.bebidas::rightlight {
+    /*Removendo a luz lateral*/
+    display: none;
 }
 .bebidas h2 {
     font-size: 2.7rem;
     margin-bottom: 32px;
     margin-top: 0;
-    color: #b93026;
-    text-shadow: 0 3px 18px #d4a37355, 0 1px 0 #fff;
+    color: #fff;
+    text-shadow: 0 3px 18px #b93026cc, 0 1px 0 #fff;
     letter-spacing: 2px;
     font-weight: 900;
     font-family: 'Dancing Script', cursive;
     position: relative;
     z-index: 1;
-    background: linear-gradient(90deg, #b93026 60%, #d4a373 100%);
+    background: linear-gradient(90deg, #fff 40%, #b93026 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 .bebidas p {
-    color: #b93026;
-    text-shadow: 1px 1px 3px #d4a37344;
+    color: #fff;
+    text-shadow: 0 2px 8px #b93026cc, 0 1px 0 #fff1;
     font-size: 1.18rem;
     margin-bottom: 22px;
     font-family: 'Playwrite CU', serif;
@@ -69,10 +84,10 @@
     position: relative;
 }
 .bebida-item {
-    background: rgba(255, 255, 255, 0.55);
+    background: #b93026;
     padding: 28px 18px 30px 18px;
     border-radius: 28px;
-    box-shadow: 0 8px 32px 0 rgba(212,163,115,0.18), 0 2px 12px #b9302622;
+    box-shadow: 0 8px 32px 0 #b9302622, 0 2px 12px #fff2, 0 0 24px 0 #b9302622;
     text-align: center;
     width: 260px;
     margin: 0;
@@ -87,26 +102,17 @@
     -webkit-backdrop-filter: blur(8px) saturate(120%);
     z-index: 1;
     cursor: pointer;
+    outline: none;
 }
 .bebida-item::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 28px;
-    pointer-events: none;
-    background: linear-gradient(120deg, #ffe0a3 0%, #fffbe8 100%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 1;
+    display: none;
 }
 .bebida-item:hover, .bebida-item:focus-within {
-    box-shadow: 0 16px 48px #d4a37355, 0 4px 18px #b9302633;
-    transform: translateY(-10px) scale(1.055);
-    background: rgba(255, 255, 255, 0.72);
-    filter: brightness(1.07) saturate(1.15);
-}
-.bebida-item:hover::after, .bebida-item:focus-within::after {
-    opacity: 0.18;
+    box-shadow: 0 0 32px 8px #fff4, 0 0 48px 8px #b9302633, 0 16px 48px #b9302622;
+    transform: translateY(-10px) scale(1.045);
+    background: #ffb3b3;
+    filter: brightness(1.03) saturate(1.1);
+    outline: 2.5px solid #fff;
 }
 .bebida-item img {
     width: 100%;
@@ -115,20 +121,20 @@
     object-fit: cover;
     margin-bottom: 16px;
     border: none;
-    box-shadow: 0 4px 18px #d4a37333;
+    box-shadow: 0 4px 18px #fff2, 0 0 24px #b9302622;
     background: #fff;
     transition: box-shadow 0.2s, border-color 0.2s;
 }
 .bebida-item:hover img, .bebida-item:focus-within img {
-    box-shadow: 0 8px 32px #b9302633;
-    filter: brightness(1.08) saturate(1.1);
+    box-shadow: 0 8px 32px #fff4, 0 0 32px #b9302633;
+    filter: brightness(1.04) saturate(1.05);
 }
 .bebida-item h3 {
     font-size: 1.35rem;
     margin: 14px 0 10px 0;
-    color: #b93026;
+    color: #fff;
     text-align: center;
-    text-shadow: 0 2px 8px #ffe0a3cc, 0 1px 0 #fff;
+    text-shadow: 0 2px 8px #b93026cc, 0 1px 0 #fff1;
     font-weight: 800;
     letter-spacing: 1px;
     font-family: 'Dancing Script', cursive;
@@ -136,15 +142,15 @@
 .bebida-item p {
     font-size: 1.13rem;
     font-weight: bold;
-    color: #b93026;
+    color: #fff;
     margin: 10px 0 18px 0;
     text-align: center;
-    text-shadow: 0 1px 4px #ffe0a3cc;
+    text-shadow: 0 1px 4px #b93026cc;
     font-family: 'Playwrite CU', serif;
 }
 .bebida-item button {
-    background: linear-gradient(90deg, #d4a373 60%, #b93026 100%);
-    color: #fff;
+    background: #fff;
+    color: #b93026;
     border: none;
     padding: 12px 22px;
     border-radius: 10px;
@@ -154,20 +160,20 @@
     transition: background 0.3s, box-shadow 0.2s, color 0.2s, transform 0.15s;
     align-self: center;
     font-weight: 700;
-    box-shadow: 0 2px 12px #d4a37333;
+    box-shadow: 0 2px 12px #fff2, 0 0 8px #b9302622;
     letter-spacing: 0.7px;
     outline: none;
 }
 .bebida-item button:hover, .bebida-item button:focus {
-    background: linear-gradient(90deg, #b93026 60%, #d4a373 100%);
-    color: #fffbe8;
-    box-shadow: 0 8px 28px #b9302633, 0 0 8px #ffe0a3cc;
+    background: #b93026;
+    color: #fff;
+    box-shadow: 0 8px 28px #fff4, 0 0 16px #b9302633;
     transform: scale(1.06);
-    filter: brightness(1.12);
+    filter: brightness(1.08);
 }
 .bebida-info {
     font-size: 1.05rem;
-    color: #b93026;
+    color: #fff;
     margin-bottom: 10px;
     text-align: center;
     font-family: 'Playwrite CU', serif;
@@ -176,11 +182,13 @@
 
 /* Destaque para item selecionado */
 .bebida-item.selecionado {
-    box-shadow: 0 0 24px 6px #ffecb3cc, 0 16px 48px #d4a37355;
-    background: rgba(255, 250, 220, 0.85);
-    filter: brightness(1.08) saturate(1.2);
+    outline: 2.5px solid #fff;
+    outline-offset: -6px;
+    background: #ffb3b3;
+    filter: brightness(1.13) saturate(1.18);
+    box-shadow: 0 0 32px 8px #fff4, 0 0 48px 8px #b9302633, 0 8px 32px 0 #ffb3b322;
     border: none;
-    transition: box-shadow 0.2s, background 0.2s, filter 0.2s;
+    transition: box-shadow 0.2s, background 0.2s, filter 0.2s, outline 0.2s;
 }
 
 /* Animação de entrada */
@@ -224,6 +232,10 @@
     }
     .bebida-item img {
         height: 90px;
+    }
+    /* Removendo a luz lateral*/
+    .bebidas::rightlight {
+       display: none;
     }
 }
 @media (max-width: 480px) {
