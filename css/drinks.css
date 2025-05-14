@@ -1,105 +1,182 @@
 /* Seção Bebidas */
 .bebidas {
     text-align: center;
-    padding: 40px 10px 50px 10px;
-    background: #f5e4c3; /* tom de areia sólido */
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(212,163,115,0.10);
-    margin: 0 auto 40px auto;
+    padding: 48px 10px 60px 10px;
+    background: linear-gradient(135deg, #fff8ed 70%, #f5e4c3 100%);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(212,163,115,0.18), 0 2px 12px #d4a37322;
+    margin: 0 auto 48px auto;
     max-width: 1200px;
+    border: 3px solid #d4a373;
+    position: relative;
+    overflow: visible;
+}
+.bebidas::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 30px;
+    top: -36px;
+    width: 80px;
+    height: 80px;
+    background: url('https://img.icons8.com/fluency/96/cocktail.png') no-repeat center/contain;
+    opacity: 0.18;
+    z-index: 0;
+    pointer-events: none;
+}
+.bebidas::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 30px;
+    bottom: -36px;
+    width: 80px;
+    height: 80px;
+    background: url('https://img.icons8.com/fluency/96/sparkling-water.png') no-repeat center/contain;
+    opacity: 0.18;
+    z-index: 0;
+    pointer-events: none;
 }
 .bebidas h2 {
-    font-size: 2.2rem;
-    margin-bottom: 32px;
+    font-size: 2.3rem;
+    margin-bottom: 28px;
     margin-top: 0;
     text-align: center;
-    color: #ff7f32;
-    text-shadow: 0 2px 8px #ff914d44;
-    letter-spacing: 1px;
-    font-weight: 700;
+    color: #b93026;
+    text-shadow: 0 2px 12px #d4a37344, 0 1px 0 #fff;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    font-family: 'Dancing Script', cursive;
+    position: relative;
+    z-index: 1;
 }
 .bebidas p {
-    color: #ff7f32;
-    text-shadow: 1px 1px 2px #ff914d44;
-    font-size: 1.05rem;
+    color: #b93026;
+    text-shadow: 1px 1px 2px #d4a37344;
+    font-size: 1.08rem;
     margin-bottom: 18px;
+    font-family: 'Playwrite CU', serif;
+    font-weight: 500;
 }
 .bebidas-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 28px 24px;
+    gap: 36px 32px;
     margin: 0 auto;
     max-width: 1000px;
+    z-index: 1;
+    position: relative;
 }
 .bebida-item {
-    background: #fff8ed;
-    padding: 18px 12px 20px 12px;
-    border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(212,163,115,0.10);
+    background: linear-gradient(120deg, #fff8ed 80%, #f5e4c3 100%);
+    padding: 22px 16px 24px 16px;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px #d4a37322, 0 1px 8px #b9302612;
     text-align: center;
-    width: 220px;
+    width: 240px;
     margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     overflow: hidden;
-    transition: box-shadow 0.25s, transform 0.18s;
-    border: 2px solid #ff914d;
+    transition: box-shadow 0.25s, transform 0.18s, border-color 0.2s;
+    border: 2.5px solid #d4a373;
+    z-index: 1;
 }
 .bebida-item:hover {
-    box-shadow: 0 6px 24px #ff914d33, 0 2px 12px #ff7f3233;
-    transform: translateY(-4px) scale(1.025);
+    box-shadow: 0 8px 32px #d4a37344, 0 2px 12px #b9302633;
+    transform: translateY(-6px) scale(1.035);
+    border-color: #b93026;
     z-index: 2;
 }
 .bebida-item img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 12px;
     height: 150px;
     object-fit: cover;
-    margin-bottom: 10px;
-    border: 2px solid #ff914d;
-    box-shadow: 0 2px 8px #ff914d33;
+    margin-bottom: 12px;
+    border: 2px solid #d4a373;
+    box-shadow: 0 2px 8px #d4a37333;
+    background: #fff;
 }
 .bebida-item h3 {
-    font-size: 1.18rem;
-    margin: 10px 0 6px 0;
-    color: #ff7f32;
+    font-size: 1.22rem;
+    margin: 12px 0 8px 0;
+    color: #b93026;
     text-align: center;
-    text-shadow: 1px 1px 2px #ff914d44;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px #d4a37344, 0 1px 0 #fff;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    font-family: 'Dancing Script', cursive;
 }
 .bebida-item p {
-    font-size: 1.08rem;
+    font-size: 1.10rem;
     font-weight: bold;
-    color: #ff7f32;
-    margin: 8px 0 12px 0;
+    color: #b93026;
+    margin: 8px 0 14px 0;
     text-align: center;
-    text-shadow: 1px 1px 2px #ff914d33;
+    text-shadow: 1px 1px 2px #d4a37333;
+    font-family: 'Playwrite CU', serif;
 }
 .bebida-item button {
-    background: linear-gradient(45deg, #ff7f32, #ff914d);
-    color: white;
+    background: linear-gradient(90deg, #d4a373 60%, #b93026 100%);
+    color: #fff;
     border: none;
-    padding: 9px 16px;
-    border-radius: 6px;
+    padding: 10px 18px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.08rem;
     margin-top: 10px;
-    transition: background 0.3s, box-shadow 0.2s;
+    transition: background 0.3s, box-shadow 0.2s, color 0.2s;
     align-self: center;
-    font-weight: 500;
-    box-shadow: 0 1px 4px rgba(212,163,115,0.10);
+    font-weight: 600;
+    box-shadow: 0 2px 8px #d4a37322;
+    letter-spacing: 0.5px;
 }
 .bebida-item button:hover {
-    background: linear-gradient(45deg, #ff914d, #ff7f32);
-    box-shadow: 0 2px 8px #ff914d44;
+    background: linear-gradient(90deg, #b93026 60%, #d4a373 100%);
+    color: #fffbe8;
+    box-shadow: 0 4px 16px #b9302633;
 }
 .bebida-info {
-    font-size: 0.97rem;
-    color: #ff7f32;
+    font-size: 0.99rem;
+    color: #b93026;
     margin-bottom: 8px;
     text-align: center;
+    font-family: 'Playwrite CU', serif;
+}
+@media (max-width: 900px) {
+    .bebidas-grid {
+        gap: 24px 12px;
+    }
+    .bebida-item {
+        width: 180px;
+        padding: 14px 6px 16px 6px;
+    }
+    .bebida-item img {
+        height: 110px;
+    }
+}
+@media (max-width: 600px) {
+    .bebidas {
+        padding: 24px 2vw 32px 2vw;
+        border-radius: 12px;
+    }
+    .bebidas h2 {
+        font-size: 1.5rem;
+    }
+    .bebidas-grid {
+        gap: 16px 4px;
+    }
+    .bebida-item {
+        width: 98vw;
+        max-width: 320px;
+        min-width: 0;
+        padding: 10px 2vw 12px 2vw;
+    }
+    .bebida-item img {
+        height: 80px;
+    }
 }
