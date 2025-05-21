@@ -54,10 +54,10 @@
 
 .bebida-item img {
     width: 100%;
-    max-height: 170px;
-    object-fit: contain;
+    height: 170px;
+    object-fit: cover; /* Preenche o espaço, cortando se necessário */
     border-radius: 16px;
-    background: #fff;
+    background: #000; /* Garante que o fundo seja preenchido */
     margin-bottom: 14px;
     box-shadow: 0 4px 18px #fff2;
 }
@@ -100,19 +100,30 @@
     box-shadow: 0 0 16px #fff4;
 }
 
-/* Ícone decorativo reposicionado - branco com iluminação no canto inferior direito */
+/* Ícone decorativo reposicionado - dourado com iluminação neon */
 .bebidas::after {
     content: "";
     display: block;
     position: absolute;
     bottom: -40px;
-    right: -40px;
+    left: -40px; /* Move para a esquerda */
+    right: auto; /* Remove o posicionamento à direita */
     width: 96px;
     height: 96px;
-    background: url('https://img.icons8.com/ios-filled/100/ffffff/cocktail.png') no-repeat center center/contain;
+    background: url('https://img.icons8.com/ios-filled/100/e5c07b/cocktail.png') no-repeat center center/contain; /* Dourado */
     opacity: 0.95;
-    filter: drop-shadow(0 0 8px #fff8);
+    filter: drop-shadow(0 0 12px #e5c07bff) drop-shadow(0 0 24px #fff); /* Neon dourado e branco */
     pointer-events: none;
+    animation: neonShine 3s infinite alternate; /* Animação de brilho */
+}
+
+@keyframes neonShine {
+    from {
+        filter: drop-shadow(0 0 8px #e5c07b88) drop-shadow(0 0 16px #fff8);
+    }
+    to {
+        filter: drop-shadow(0 0 16px #e5c07bff) drop-shadow(0 0 32px #fff);
+    }
 }
 
 @media (max-width: 700px) {
@@ -125,7 +136,8 @@
     }
     .bebidas::after {
         bottom: -30px;
-        right: -30px;
+        left: -30px; /* Ajusta para telas menores */
+        right: auto;
         width: 80px;
         height: 80px;
     }
