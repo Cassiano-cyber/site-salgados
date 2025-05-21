@@ -1,7 +1,5 @@
 const carouselModule = (() => {
     const carousels = {};
-    const AUTO_SLIDE_INTERVAL = 8000; // 8 segundos
-    const AUTO_SLIDE_RESUME_DELAY = 15000; // 15 segundos
 
     const init = (carouselId) => {
         const carouselContainer = document.getElementById(carouselId);
@@ -29,28 +27,18 @@ const carouselModule = (() => {
             intervalId: null,
             autoSlideActive: true,
             startX: 0,
-            endX: 0,
-            resumeTimeout: null
+            endX: 0
         };
 
-        // Função para parar e retomar auto-slide após delay
-        function pauseAndResumeAutoSlide() {
-            stopAutoSlide(carouselId);
-            clearTimeout(carousels[carouselId].resumeTimeout);
-            carousels[carouselId].resumeTimeout = setTimeout(() => {
-                if (carousels[carouselId].autoSlideActive) {
-                    startAutoSlide(carouselId);
-                }
-            }, AUTO_SLIDE_RESUME_DELAY);
-        }
-
         nextButton.addEventListener("click", () => {
-            pauseAndResumeAutoSlide();
+            stopAutoSlide(carouselId);
             showNextSlide(carouselId);
+            restartAutoSlide(carouselId);
         });
         prevButton.addEventListener("click", () => {
-            pauseAndResumeAutoSlide();
+            stopAutoSlide(carouselId);
             showPrevSlide(carouselId);
+            restartAutoSlide(carouselId);
         });
 
         carouselContainer.addEventListener("mouseenter", () => stopAutoSlide(carouselId));
@@ -90,9 +78,8 @@ const carouselModule = (() => {
 
     const startAutoSlide = (carouselId) => {
         const carousel = carousels[carouselId];
-        stopAutoSlide(carouselId); // Garante que não há múltiplos intervalos
         if (carousel.autoSlideActive) {
-            carousel.intervalId = setInterval(() => showNextSlide(carouselId), AUTO_SLIDE_INTERVAL);
+            carousel.intervalId = setInterval(() => showNextSlide(carouselId), 5000);
         }
     };
 
@@ -128,26 +115,11 @@ const carouselModule = (() => {
             } else {
                 showPrevSlide(carouselId); // Swipe para a direita
             }
-            // Retoma auto-slide após delay
-            clearTimeout(carousel.resumeTimeout);
-            carousel.resumeTimeout = setTimeout(() => {
-                if (carousel.autoSlideActive) {
-                    startAutoSlide(carouselId);
-                }
-            }, AUTO_SLIDE_RESUME_DELAY);
+            restartAutoSlide(carouselId);
         }
     };
 
-    // Permite parar o auto-slide externamente (ex: ao selecionar tipo de salgado)
-    const stopAutoSlideExternally = (carouselId) => {
-        if (carousels[carouselId]) {
-            carousels[carouselId].autoSlideActive = false;
-            stopAutoSlide(carouselId);
-            clearTimeout(carousels[carouselId].resumeTimeout);
-        }
-    };
-
-    return { init, stopAutoSlideExternally };
+    return { init };
 })();
 
 const themeModule = (() => {
@@ -438,8 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
             atualizarSabores(tipoSelecionado);
             saborSelecionado = null;
             saborSelecionadoSpan.textContent = 'Nenhum';
-            // Parar o carrossel de tipos ao selecionar
-            carouselModule.stopAutoSlideExternally('tipos-salgado');
+            // if (adicionarAoCarrinhoButton) adicionarAoCarrinhoButton.disabled = true; // Reavaliar
         }
     });
 
@@ -489,14 +460,14 @@ document.addEventListener("DOMContentLoaded", () => {
             case 'empada':
                 saboresDisponiveis = [
                     { nome: 'Frango', preco: 6.00, imagem: 'https://images.pexels.com/photos/8679380/pexels-photo-8679380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'empada', sabor: 'frango' },
-                    { nome: 'Palmito', preco: 6.50, imagem: 'https://cdn.pixabay.com/photo/2017/01/11/19/56/cheese-1972744_1280.jpg', tipo: 'empada', sabor: 'palmito' }, // Corrigido: imagem de queijo para palmito
-                    { nome: 'Queijo', preco: 6.50, imagem: 'https://cdn.pixabay.com/photo/2017/01/11/19/56/cheese-1972744_1280.jpg', tipo: 'empada', sabor: 'queijo' }
+                    { nome: 'Palmito', preco: 6.50, imagem: 'https://images.pexels.com/photos/8679380/pexels-photo-8679380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'empada', sabor: 'palmito' },
+                     { nome: 'Queijo', preco: 6.50, imagem: 'https://cdn.pixabay.com/photo/2017/01/11/19/56/cheese-1972744_1280.jpg', tipo: 'empada', sabor: 'queijo' }
                 ];
                 break;
             case 'tortinha':
                 saboresDisponiveis = [
                     { nome: 'Legumes', preco: 4.50, imagem: 'https://images.pexels.com/photos/4577379/pexels-photo-4577379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'tortinha', sabor: 'legumes' },
-                    { nome: 'Frango', preco: 4.50, imagem: 'https://cdn.pixabay.com/photo/2017/02/20/15/28/chicken-2085633_1280.jpg', tipo: 'tortinha', sabor: 'frango' } // Corrigido: imagem de frango para tortinha de frango
+                    { nome: 'Frango', preco: 4.50, imagem: 'https://images.pexels.com/photos/4577379/pexels-photo-4577379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'tortinha', sabor: 'frango' }
                 ];
                 break;
             case 'torta':
@@ -526,6 +497,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Inicialize o carrossel de sabores após adicionar os slides
         carouselModule.init('sabores');
     }
+
+    // Adicionar ao Carrinho (após selecionar tipo e sabor) - REMOVIDO - Já está no body event listener
 
     const retirarRadioPrincipal = document.getElementById('retirar-principal');
     const entregaRadioPrincipal = document.getElementById('entrega-principal');
