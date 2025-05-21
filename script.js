@@ -27,18 +27,20 @@ const carouselModule = (() => {
             intervalId: null,
             autoSlideActive: true,
             startX: 0,
-            endX: 0
+            endX: 0,
+            autoSlideInterval: 8000, // Aumenta o tempo para 8 segundos
+            manualSlideInterval: 12000 // Tempo maior após interação manual (12 segundos)
         };
 
         nextButton.addEventListener("click", () => {
             stopAutoSlide(carouselId);
             showNextSlide(carouselId);
-            restartAutoSlide(carouselId);
+            restartAutoSlide(carouselId, true); // Passa true para indicar interação manual
         });
         prevButton.addEventListener("click", () => {
             stopAutoSlide(carouselId);
             showPrevSlide(carouselId);
-            restartAutoSlide(carouselId);
+            restartAutoSlide(carouselId, true); // Passa true para indicar interação manual
         });
 
         carouselContainer.addEventListener("mouseenter", () => stopAutoSlide(carouselId));
@@ -76,10 +78,11 @@ const carouselModule = (() => {
         showSlide(carouselId, carousel.currentSlide);
     };
 
-    const startAutoSlide = (carouselId) => {
+    const startAutoSlide = (carouselId, isManual = false) => {
         const carousel = carousels[carouselId];
         if (carousel.autoSlideActive) {
-            carousel.intervalId = setInterval(() => showNextSlide(carouselId), 5000);
+            const interval = isManual ? carousel.manualSlideInterval : carousel.autoSlideInterval;
+            carousel.intervalId = setInterval(() => showNextSlide(carouselId), interval);
         }
     };
 
@@ -88,9 +91,9 @@ const carouselModule = (() => {
         clearInterval(carousel.intervalId);
     };
 
-    const restartAutoSlide = (carouselId) => {
+    const restartAutoSlide = (carouselId, isManual = false) => {
         stopAutoSlide(carouselId);
-        startAutoSlide(carouselId);
+        startAutoSlide(carouselId, isManual);
     };
 
     // Funções para suporte a gestos de deslizar (swipe)
@@ -411,6 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
             saborSelecionado = null;
             saborSelecionadoSpan.textContent = 'Nenhum';
             // if (adicionarAoCarrinhoButton) adicionarAoCarrinhoButton.disabled = true; // Reavaliar
+            carouselModule.stopAutoSlide('tipos-salgado'); // Para o carrossel ao selecionar o tipo
         }
     });
 
@@ -460,13 +464,13 @@ document.addEventListener("DOMContentLoaded", () => {
             case 'empada':
                 saboresDisponiveis = [
                     { nome: 'Frango', preco: 6.00, imagem: 'https://images.pexels.com/photos/8679380/pexels-photo-8679380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'empada', sabor: 'frango' },
-                    { nome: 'Palmito', preco: 6.50, imagem: 'https://images.pexels.com/photos/8679380/pexels-photo-8679380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'empada', sabor: 'palmito' },
+                    { nome: 'Palmito', preco: 6.50, imagem: 'https://static.itdg.com.br/images/recipes/000/174/419/358715/358715_original.jpg', tipo: 'empada', sabor: 'palmito' },
                      { nome: 'Queijo', preco: 6.50, imagem: 'https://cdn.pixabay.com/photo/2017/01/11/19/56/cheese-1972744_1280.jpg', tipo: 'empada', sabor: 'queijo' }
                 ];
                 break;
             case 'tortinha':
                 saboresDisponiveis = [
-                    { nome: 'Legumes', preco: 4.50, imagem: 'https://images.pexels.com/photos/4577379/pexels-photo-4577379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'tortinha', sabor: 'legumes' },
+                    { nome: 'Legumes', preco: 4.50, imagem: 'https://anamariabroga.com.br/wp-content/uploads/2023/02/tortinha-de-frango-e-legumes-1200x900.jpg', tipo: 'tortinha', sabor: 'legumes' },
                     { nome: 'Frango', preco: 4.50, imagem: 'https://images.pexels.com/photos/4577379/pexels-photo-4577379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'tortinha', sabor: 'frango' }
                 ];
                 break;
