@@ -433,7 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Função para atualizar o carrossel de sabores
-    function atualizarSabores(tipo) {
+   function atualizarSabores(tipo) {
         saboresTrack.innerHTML = '';
         saboresDisponiveis = []; // Limpa os sabores disponíveis
 
