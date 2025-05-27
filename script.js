@@ -482,6 +482,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Impede swipe/touchmove no carrossel de sabores se estiver travado (mobile)
+    saboresCarrossel.addEventListener('touchstart', function(e) {
+        if (carouselModule && carouselModule.saboresLocked) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    saboresCarrossel.addEventListener('touchmove', function(e) {
+        if (carouselModule && carouselModule.saboresLocked) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
     // Função para atualizar o carrossel de sabores
    function atualizarSabores(tipo) {
         saboresTrack.innerHTML = '';
