@@ -30,40 +30,51 @@ const carouselModule = (() => {
             autoSlideActive: true,
             startX: 0,
             endX: 0,
-            resumeTimeout: null
+            resumeTimeout: null,
+            locked: false // trava para impedir navegação após seleção
         };
 
-        // Função para parar e retomar auto-slide após delay
         function pauseAndResumeAutoSlide() {
             stopAutoSlide(carouselId);
             clearTimeout(carousels[carouselId].resumeTimeout);
             carousels[carouselId].resumeTimeout = setTimeout(() => {
-                if (carousels[carouselId].autoSlideActive) {
+                if (carousels[carouselId].autoSlideActive && !carousels[carouselId].locked) {
                     startAutoSlide(carouselId);
                 }
             }, AUTO_SLIDE_RESUME_DELAY);
         }
 
         nextButton.addEventListener("click", () => {
+            if (carousels[carouselId].locked) return;
             pauseAndResumeAutoSlide();
             showNextSlide(carouselId);
         });
         prevButton.addEventListener("click", () => {
+            if (carousels[carouselId].locked) return;
             pauseAndResumeAutoSlide();
             showPrevSlide(carouselId);
         });
 
         carouselContainer.addEventListener("mouseenter", () => stopAutoSlide(carouselId));
         carouselContainer.addEventListener("mouseleave", () => {
-            if (carousels[carouselId].autoSlideActive) {
+            if (carousels[carouselId].autoSlideActive && !carousels[carouselId].locked) {
                 startAutoSlide(carouselId);
             }
         });
 
         // Adiciona suporte a gestos de deslizar (swipe)
-        carouselContainer.addEventListener("touchstart", (e) => handleTouchStart(e, carouselId));
-        carouselContainer.addEventListener("touchmove", (e) => handleTouchMove(e, carouselId));
-        carouselContainer.addEventListener("touchend", () => handleTouchEnd(carouselId));
+        carouselContainer.addEventListener("touchstart", (e) => {
+            if (carousels[carouselId].locked) return;
+            handleTouchStart(e, carouselId);
+        });
+        carouselContainer.addEventListener("touchmove", (e) => {
+            if (carousels[carouselId].locked) return;
+            handleTouchMove(e, carouselId);
+        });
+        carouselContainer.addEventListener("touchend", () => {
+            if (carousels[carouselId].locked) return;
+            handleTouchEnd(carouselId);
+        });
 
         showSlide(carouselId, 0);
         startAutoSlide(carouselId);
@@ -78,12 +89,14 @@ const carouselModule = (() => {
 
     const showNextSlide = (carouselId) => {
         const carousel = carousels[carouselId];
+        if (carousel.locked) return;
         carousel.currentSlide = (carousel.currentSlide + 1) % carousel.slides.length;
         showSlide(carouselId, carousel.currentSlide);
     };
 
     const showPrevSlide = (carouselId) => {
         const carousel = carousels[carouselId];
+        if (carousel.locked) return;
         carousel.currentSlide = (carousel.currentSlide - 1 + carousel.slides.length) % carousel.slides.length;
         showSlide(carouselId, carousel.currentSlide);
     };
@@ -91,7 +104,7 @@ const carouselModule = (() => {
     const startAutoSlide = (carouselId) => {
         const carousel = carousels[carouselId];
         stopAutoSlide(carouselId); // Garante que não há múltiplos intervalos
-        if (carousel.autoSlideActive) {
+        if (carousel.autoSlideActive && !carousel.locked) {
             carousel.intervalId = setInterval(() => showNextSlide(carouselId), AUTO_SLIDE_INTERVAL);
         }
     };
@@ -107,6 +120,20 @@ const carouselModule = (() => {
             carousels[carouselId].autoSlideActive = false;
             stopAutoSlide(carouselId);
             clearTimeout(carousels[carouselId].resumeTimeout);
+        }
+    };
+
+    // Trava o carrossel no slide atual (impede navegação e auto-slide)
+    const lockCarousel = (carouselId, slideIndex) => {
+        if (carousels[carouselId]) {
+            carousels[carouselId].locked = true;
+            carousels[carouselId].autoSlideActive = false;
+            stopAutoSlide(carouselId);
+            clearTimeout(carousels[carouselId].resumeTimeout);
+            if (typeof slideIndex === "number") {
+                carousels[carouselId].currentSlide = slideIndex;
+                showSlide(carouselId, slideIndex);
+            }
         }
     };
 
@@ -134,14 +161,14 @@ const carouselModule = (() => {
             }
             clearTimeout(carousel.resumeTimeout);
             carousel.resumeTimeout = setTimeout(() => {
-                if (carousel.autoSlideActive) {
+                if (carousel.autoSlideActive && !carousel.locked) {
                     startAutoSlide(carouselId);
                 }
             }, AUTO_SLIDE_RESUME_DELAY);
         }
     };
 
-    return { init, stopAutoSlideExternally };
+    return { init, stopAutoSlideExternally, lockCarousel };
 })();
 
 const themeModule = (() => {
@@ -427,7 +454,6 @@ document.addEventListener("DOMContentLoaded", () => {
     tiposCarrossel.addEventListener('click', function(event) {
         if (event.target.classList.contains('select-type')) {
             tipoSelecionado = event.target.dataset.tipo;
-            // Atualiza o texto exibido com a primeira letra maiúscula
             tipoSelecionadoSpan.textContent = tipoSelecionado.charAt(0).toUpperCase() + tipoSelecionado.slice(1);
             atualizarSabores(tipoSelecionado);
             saborSelecionado = null;
@@ -440,17 +466,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Evento de clique nos sabores (para ativar o botão "Adicionar") - CORRIGIDO
     saboresCarrossel.addEventListener('click', function(event) {
         // Garante que o clique ocorreu em um elemento product dentro do carrossel
-        if (event.target.closest('.carousel-slide.product')) {
-            // Encontra o elemento product clicado
-            const saborElemento = event.target.closest('.carousel-slide.product');
-            if (saborElemento) {
-                saborSelecionado = saborElemento.dataset.sabor; // Define o sabor selecionado
+        const productSlide = event.target.closest('.carousel-slide.product');
+        if (productSlide) {
+            saborSelecionado = productSlide.dataset.sabor;
+            const saborNome = saboresDisponiveis.find(s => s.sabor === saborSelecionado)?.nome || 'Nenhum';
+            saborSelecionadoSpan.textContent = saborNome;
+            adicionarAoCarrinhoButton.disabled = false;
 
-                // Atualiza o texto na "Comanda"
-                const saborNome = saboresDisponiveis.find(s => s.sabor === saborSelecionado)?.nome || 'Nenhum';
-                saborSelecionadoSpan.textContent = saborNome;
-
-                adicionarAoCarrinhoButton.disabled = false;
+            // Trava o carrossel no produto selecionado (funciona em todos os dispositivos)
+            const slides = Array.from(saboresCarrossel.querySelectorAll('.carousel-slide.product'));
+            const slideIndex = slides.indexOf(productSlide);
+            if (slideIndex !== -1) {
+                carouselModule.lockCarousel('sabores', slideIndex);
             }
         }
     });
