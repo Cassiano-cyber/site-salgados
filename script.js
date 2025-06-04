@@ -463,15 +463,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Evento de clique nos sabores (para ativar o botão "Adicionar") - CORRIGIDO
+    // Evento de clique nos sabores (para ativar o botão "Adicionar") - corrigido erro de variável
     saboresCarrossel.addEventListener('click', function(event) {
-        // Garante que o clique ocorreu em um elemento product dentro do carrossel
         const productSlide = event.target.closest('.carousel-slide.product');
         if (productSlide) {
             saborSelecionado = productSlide.dataset.sabor;
             const saborNome = saboresDisponiveis.find(s => s.sabor === saborSelecionado)?.nome || 'Nenhum';
             saborSelecionadoSpan.textContent = saborNome;
-            adicionarAoCarrinhoButton.disabled = false;
 
             // Trava o carrossel no produto selecionado (funciona em todos os dispositivos)
             const slides = Array.from(saboresCarrossel.querySelectorAll('.carousel-slide.product'));
@@ -481,18 +479,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-
-    // Impede swipe/touchmove no carrossel de sabores se estiver travado (mobile)
-    saboresCarrossel.addEventListener('touchstart', function(e) {
-        if (carouselModule && carouselModule.saboresLocked) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-    saboresCarrossel.addEventListener('touchmove', function(e) {
-        if (carouselModule && carouselModule.saboresLocked) {
-            e.preventDefault();
-        }
-    }, { passive: false });
 
     // Função para atualizar o carrossel de sabores
    function atualizarSabores(tipo) {
@@ -504,7 +490,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 saboresDisponiveis = [
                     { nome: 'Frango', preco: 7.50, imagem: 'https://images.pexels.com/photos/12361995/pexels-photo-12361995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'frango' },
                     { nome: 'Costela', preco: 8.00, imagem: 'https://images.pexels.com/photos/8964567/pexels-photo-8964567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'costela' },
-                    { nome: 'Calabresa com Cheddar', preco: 7.50, imagem: 'https://images.pexels.com/photos/17402718/pexels-photo-17402718/free-photo-of-comida-alimento-refeicao-pizza.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'calabresa-com-cheddar' }
+                    { nome: 'Calabresa com Cheddar', preco: 7.50, imagem: 'https://images.pexels.com/photos/17402718/pexels-photo-17402718/free-photo-of-comida-alimento-refeicao-pizza.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'calabresa-com-cheddar' },
+                    // Sabores doces adicionados
+                    { nome: 'Chocolate com Café', preco: 9.00, imagem: 'https://sdmntprwestus2.oaiusercontent.com/files/00000000-840c-61f8-b132-f311d7200bda/raw?se=2025-06-04T22%3A43%3A12Z&sp=r&sv=2024-08-04&sr=b&scid=956d9c0c-69e7-5d9c-8210-0d9568b91e97&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-04T12%3A32%3A00Z&ske=2025-06-05T12%3A32%3A00Z&sks=b&skv=2024-08-04&sig=6hdapey6oPMaxnqXPJ005/ouzX7POwii5CKEh6VYKSI%3D', tipo: 'coxinha', sabor: 'chocolate-com-cafe' },
+                    { nome: 'Sorvete', preco: 9.50, imagem: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-ed7c-61f7-94b3-63f4718007b4/raw?se=2025-06-04T22%3A45%3A16Z&sp=r&sv=2024-08-04&sr=b&scid=51aa4862-45ce-583b-8117-378e25c5acbc&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-04T11%3A10%3A36Z&ske=2025-06-05T11%3A10%3A36Z&sks=b&skv=2024-08-04&sig=XK/Kf5ymReZZQNh%2BmnSRk61fCz0%2BZEihVWJf3EwW/uo%3D', tipo: 'coxinha', sabor: 'sorvete' }
                 ];
                 break;
             case 'enroladinho':
@@ -559,8 +548,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Inicialize o carrossel de sabores após adicionar os slides
         carouselModule.init('sabores');
     }
-
-    // Adicionar ao Carrinho (após selecionar tipo e sabor) - REMOVIDO - Já está no body event listener
 
     const retirarRadioPrincipal = document.getElementById('retirar-principal');
     const entregaRadioPrincipal = document.getElementById('entrega-principal');
@@ -888,34 +875,40 @@ function toggleCart() {
     cartMenu.classList.toggle('open'); // Alterna a classe 'open' para mostrar/ocultar o carrinho
 }
 
-document.getElementById('form-fidelidade').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const nome = document.getElementById('nome-fidelidade').value;
-    const telefone = document.getElementById('telefone-fidelidade').value;
+// --- Correção para formulário de fidelidade e carteira digital ---
+const fidelidadeForm = document.getElementById('form-fidelidade');
+if (fidelidadeForm) {
+    fidelidadeForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nome = document.getElementById('nome-fidelidade').value;
+        const telefone = document.getElementById('telefone-fidelidade').value;
 
-    const response = await fetch('/api/fidelidade/cadastrar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, telefone }),
+        const response = await fetch('/api/fidelidade/cadastrar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, telefone }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            document.getElementById('nome-cliente').textContent = data.nome;
+            document.getElementById('pontos-cliente').textContent = data.pontos;
+            document.getElementById('cadastro-fidelidade').style.display = 'none';
+            document.getElementById('carteira-digital').style.display = 'block';
+        } else {
+            alert('Erro ao cadastrar. Tente novamente.');
+        }
     });
-
-    if (response.ok) {
-        const data = await response.json();
-        document.getElementById('nome-cliente').textContent = data.nome;
-        document.getElementById('pontos-cliente').textContent = data.pontos;
-        document.getElementById('cadastro-fidelidade').style.display = 'none';
-        document.getElementById('carteira-digital').style.display = 'block';
-    } else {
-        alert('Erro ao cadastrar. Tente novamente.');
-    }
-});
+}
 
 async function atualizarCarteira() {
+    const pontosCliente = document.getElementById('pontos-cliente');
+    const historico = document.getElementById('historico-transacoes');
+    if (!pontosCliente || !historico) return;
     const response = await fetch('/api/fidelidade/saldo');
     if (response.ok) {
         const data = await response.json();
-        document.getElementById('pontos-cliente').textContent = data.pontos;
-        const historico = document.getElementById('historico-transacoes');
+        pontosCliente.textContent = data.pontos;
         historico.innerHTML = '';
         data.historico.forEach((transacao) => {
             const li = document.createElement('li');
@@ -925,20 +918,23 @@ async function atualizarCarteira() {
     }
 }
 
-document.querySelectorAll('#carteira-digital button').forEach((button) => {
-    button.addEventListener('click', async () => {
-        const pontos = button.getAttribute('data-pontos');
-        const response = await fetch('/api/fidelidade/resgatar', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ pontos }),
-        });
+const carteiraDigital = document.getElementById('carteira-digital');
+if (carteiraDigital) {
+    carteiraDigital.querySelectorAll('button').forEach((button) => {
+        button.addEventListener('click', async () => {
+            const pontos = button.getAttribute('data-pontos');
+            const response = await fetch('/api/fidelidade/resgatar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pontos }),
+            });
 
-        if (response.ok) {
-            alert('Recompensa resgatada com sucesso!');
-            atualizarCarteira();
-        } else {
-            alert('Erro ao resgatar recompensa. Verifique seus pontos.');
-        }
+            if (response.ok) {
+                alert('Recompensa resgatada com sucesso!');
+                atualizarCarteira();
+            } else {
+                alert('Erro ao resgatar recompensa. Verifique seus pontos.');
+            }
+        });
     });
-});
+}
