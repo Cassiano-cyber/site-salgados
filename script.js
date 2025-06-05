@@ -491,10 +491,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     { nome: 'Frango', preco: 7.50, imagem: 'https://images.pexels.com/photos/12361995/pexels-photo-12361995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'frango' },
                     { nome: 'Costela', preco: 8.00, imagem: 'https://images.pexels.com/photos/8964567/pexels-photo-8964567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'costela' },
                     { nome: 'Calabresa com Cheddar', preco: 7.50, imagem: 'https://images.pexels.com/photos/17402718/pexels-photo-17402718/free-photo-of-comida-alimento-refeicao-pizza.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'calabresa-com-cheddar' },
-                    // Sabores doces adicionados
-                    { nome: 'Chocolate com Café', preco: 9.00, imagem: 'https://sdmntprwestus2.oaiusercontent.com/files/00000000-840c-61f8-b132-f311d7200bda/raw?se=2025-06-04T22%3A43%3A12Z&sp=r&sv=2024-08-04&sr=b&scid=956d9c0c-69e7-5d9c-8210-0d9568b91e97&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-04T12%3A32%3A00Z&ske=2025-06-05T12%3A32%3A00Z&sks=b&skv=2024-08-04&sig=6hdapey6oPMaxnqXPJ005/ouzX7POwii5CKEh6VYKSI%3D', tipo: 'coxinha', sabor: 'chocolate-com-cafe' },
-                    { nome: 'Sorvete', preco: 9.50, imagem: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-ed7c-61f7-94b3-63f4718007b4/raw?se=2025-06-04T22%3A45%3A16Z&sp=r&sv=2024-08-04&sr=b&scid=51aa4862-45ce-583b-8117-378e25c5acbc&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-04T11%3A10%3A36Z&ske=2025-06-05T11%3A10%3A36Z&sks=b&skv=2024-08-04&sig=XK/Kf5ymReZZQNh%2BmnSRk61fCz0%2BZEihVWJf3EwW/uo%3D', tipo: 'coxinha', sabor: 'sorvete' }
+                   // Sabores doces adicionados
+                    { nome: 'Chocolate com Café', preco: 9.00, imagem: '/imagens/chocolate-com-cafe.png', tipo: 'coxinha', sabor: 'chocolate-com-cafe'},
+                    { nome: 'Sorvete', preco: 9.50, imagem: '/imagens/coxinha-sorvete.png', tipo: 'coxinha', sabor: 'sorvete'}
                 ];
+
                 break;
             case 'enroladinho':
                 saboresDisponiveis = [
