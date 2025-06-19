@@ -269,6 +269,130 @@ header, footer {
   background: #fff;
 }
 
+/* Estilos para a nova seção "Onde estamos?" */
+.onde-estamos {
+  background: var(--background-color);
+  border-top: 2px solid var(--highlight-color);
+  border-bottom: 2px solid var(--highlight-color);
+  padding: 48px 0 36px 0;
+  margin-top: 32px;
+}
+
+.onde-estamos h2 {
+  color: var(--primary-color);
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 24px;
+  font-family: var(--dancing), cursive;
+  text-shadow: 0 2px 8px #ffd70022;
+}
+
+.onde-estamos-conteudo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.onde-estamos-info {
+  flex: 1.2;
+  min-width: 260px;
+  font-size: 1.13rem;
+  color: var(--text-color);
+  line-height: 1.7;
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #b5542d11;
+  padding: 28px 24px 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.onde-icone {
+  color: var(--primary-color);
+  margin-right: 7px;
+  font-size: 1.1em;
+}
+
+.horario-dia {
+  font-weight: 600;
+}
+.horario-hora {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.fechado {
+  color: #b5542d99;
+  text-decoration: line-through;
+}
+
+.onde-estamos-chamada {
+  margin-top: 18px;
+  background: var(--primary-color);
+  border-left: 4px solid var(--highlight-color);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 1.08rem;
+  color: var(--highlight-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--dancing), cursive;
+}
+
+.onde-estamos-mapa {
+  flex: 1.5;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.onde-mapa-card {
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #b5542d22;
+  padding: 18px 18px 12px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+}
+
+.onde-mapa-card iframe {
+  width: 100%;
+  min-height: 220px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  border: none;
+}
+
+.onde-mapa-legenda {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #7a4a13; /* cor mais escura para melhor contraste */
+  font-weight: 600;
+  font-size: 1.08rem;
+  text-shadow: 0 1px 2px #fff8;
+}
+
+.onde-mapa-foto {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 14px;
+  margin-top: 8px;
+  box-shadow: 0 2px 12px #b5542d22;
+  object-fit: cover;
+}
+
 @media (max-width: 900px) {
   .loja-imagens-grid {
     flex-direction: column;
@@ -285,5 +409,32 @@ header, footer {
   }
   .quem-somos-imagem img {
     max-width: 90vw;
+  }
+  .onde-estamos-conteudo {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+  .onde-estamos-info, .onde-estamos-mapa {
+    min-width: 0;
+    width: 100%;
+    max-width: 98vw;
+    padding: 0;
+  }
+  .onde-mapa-card {
+    max-width: 98vw;
+    padding: 10px 2vw 10px 2vw;
+  }
+  .onde-mapa-foto {
+    max-width: 95vw;
+  }
+}
+  }
+  .onde-mapa-card {
+    max-width: 98vw;
+    padding: 10px 2vw 10px 2vw;
+  }
+  .onde-mapa-foto {
+    max-width: 95vw;
   }
 }
