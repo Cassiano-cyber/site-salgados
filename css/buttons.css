@@ -1,8 +1,8 @@
 /* Estilos de Botão */
 button,
 .button {
- background-color: var(--button-color);
- color: var(--light-text);
+ background-color: var(--primary-color); /* Laranja queimado */
+ color: #FFF;
  padding: 10px 20px;
  border: none;
  cursor: pointer;
@@ -14,7 +14,7 @@ button,
 
 button:hover,
 .button:hover {
- background-color: var(--button-hover-color);
+ background-color: var(--highlight-color); /* Terracota */
  transform: scale(1.05);
 }
 

@@ -1,10 +1,10 @@
 /* Carrinho */
 .cart {
-    background-color: var(--background-light);
+    background-color: var(--background-color);
 
     padding: 40px 20px;
     text-align: center;
-    color: var(--primary-color);
+    color: var(--text-color);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -45,7 +45,7 @@
     width: 340px;
     max-width: 100vw;
     height: 100%;
-    background: linear-gradient(135deg, var(--background-light) 80%, #fff8f2 100%);
+    background: linear-gradient(135deg, var(--background-color) 80%, #fff8f2 100%);
     box-shadow: -4px 0 24px 0 rgba(0,0,0,0.18), -1px 0 0 #e2b08c;
     padding: 32px 20px 24px 20px;
     transition: right 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
@@ -87,12 +87,12 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 14px;
-    background: #fff;
+    background: var(--card-bg);
+    color: var(--text-color);
     border-radius: 8px;
     box-shadow: 0 2px 8px #0001;
     padding: 10px 14px;
     font-size: 1.08rem;
-    color: var(--primary-color);
     transition: box-shadow 0.2s;
 }
 
@@ -103,7 +103,7 @@
 #cart-items li button {
     background: none;
     border: none;
-    color: #ff4d4d;
+    color: var(--highlight-color);
     cursor: pointer;
     font-size: 1.3rem;
     margin-left: 8px;
@@ -142,7 +142,7 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 8px;
-    border: 1px solid #e2b08c;
+    border: 1px solid var(--card-border);
     border-radius: 5px;
     font-size: 1rem;
     background: #fff;
@@ -172,7 +172,7 @@
 .cart-menu .checkout-container {
     position: sticky;
     bottom: 0;
-    background: #fff8f2e6;
+    background: var(--card-bg);
     padding: 14px 0 10px 0;
     box-shadow: 0 -2px 10px #0001;
     z-index: 10;
@@ -201,7 +201,7 @@
     width: 100%;
     padding: 15px;
     font-size: 1.18rem;
-    background: linear-gradient(90deg, var(--primary-color) 80%, var(--button-hover-color) 100%);
+    background: linear-gradient(90deg, var(--primary-color) 80%, var(--highlight-color) 100%);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -217,10 +217,10 @@
 .cart-menu .checkout-container button:hover,
 #checkoutButton:hover,
 .cart-menu .checkout-container button:focus {
-    background: linear-gradient(90deg, var(--button-hover-color) 60%, var(--primary-color) 100%);
+    background: linear-gradient(90deg, var(--highlight-color) 60%, var(--primary-color) 100%);
+    color: #fff;
     box-shadow: 0 4px 16px #d1000055;
     transform: scale(1.03);
-    color: #fff;
 }
 
 /* Responsividade do Container de Endereço */
@@ -306,10 +306,10 @@
 /* Estilos do botão "Fechar Carrinho" */
 .close-cart-button {
     background: #fff;
+    color: var(--primary-color);
     border: none;
     font-size: 1.7em;
     cursor: pointer;
-    color: var(--primary-color);
     position: absolute;
     top: 14px;
     left: 14px;
@@ -328,7 +328,7 @@
 .close-cart-button:hover,
 .close-cart-button:focus {
     background: var(--highlight-color);
-    color: var(--primary-color);
+    color: #fff;
     box-shadow: 0 4px 16px #ffd70044;
     outline: none;
 }

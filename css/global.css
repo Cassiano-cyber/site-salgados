@@ -1,6 +1,20 @@
 /* Importação da Fonte */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
+/* Paleta de Cores Principal */
+:root {
+  --background-color: #F8E8D1;      /* Areia quente */
+  --text-color: #3A1E10;            /* Marrom escuro */
+  --primary-color: #DA7635;         /* Laranja queimado */
+  --highlight-color: #B5542D;       /* Terracota */
+  --card-bg: #F5D7A0;               /* Creme dourado */
+  --card-border: #DA7635;           /* Laranja queimado */
+  --header-footer-bg: #B5542D;      /* Terracota */
+  --header-footer-text: #F8E8D1;    /* Areia quente */
+  --dark-background: #3A1E10;       /* Marrom escuro para modo escuro */
+  --dark-mode-text: #F8E8D1;        /* Areia quente para modo escuro */
+}
+
 /* Reset de Estilos */
 * {
  margin: 0;
@@ -34,7 +48,7 @@ body.dark-mode {
 /* Estilos de Link */
 a {
  text-decoration: none;
- color: inherit;
+ color: var(--primary-color);
  transition: color 0.3s ease;
 }
 
@@ -45,6 +59,11 @@ a:hover {
 a:focus {
     outline: 2px solid var(--highlight-color);
     color: var(--highlight-color);
+}
+
+/* Títulos */
+h1, h2, h3 {
+  color: var(--text-color);
 }
 
 /* IMAGENS RESPONSIVAS */
@@ -136,7 +155,15 @@ body {
     margin-bottom: 10px;
 }
 
-.comentario p {
-    font-size: 1.1em;
-    margin-bottom: 10px;
+/* Cards genéricos */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+}
+
+/* Cabeçalho e rodapé */
+header, footer {
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-text);
 }
