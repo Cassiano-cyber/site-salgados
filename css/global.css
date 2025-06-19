@@ -217,6 +217,58 @@ header, footer {
   box-shadow: 0 8px 32px #b5542d44, 0 4px 16px #ffd70044;
 }
 
+/* Estilos para a nova seção "Quem somos?" */
+.quem-somos {
+  background: var(--card-bg);
+  border-top: 2px solid var(--highlight-color);
+  border-bottom: 2px solid var(--highlight-color);
+  padding: 48px 0 36px 0;
+  margin-top: 32px;
+}
+
+.quem-somos h2 {
+  color: var(--primary-color);
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 24px;
+  font-family: var(--dancing), cursive;
+  text-shadow: 0 2px 8px #ffd70022;
+}
+
+.quem-somos-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.quem-somos-texto {
+  flex: 2;
+  font-size: 1.18rem;
+  color: var(--text-color);
+  line-height: 1.7;
+  min-width: 260px;
+}
+
+.quem-somos-imagem {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quem-somos-imagem img {
+  max-width: 320px;
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #b5542d22, 0 2px 8px #ffd70033;
+  background: #fff;
+}
+
 @media (max-width: 900px) {
   .loja-imagens-grid {
     flex-direction: column;
@@ -225,5 +277,13 @@ header, footer {
   }
   .loja-imagens-grid img {
     max-width: 95vw;
+  }
+  .quem-somos-conteudo {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  .quem-somos-imagem img {
+    max-width: 90vw;
   }
 }
