@@ -201,7 +201,7 @@
     width: 100%;
     padding: 15px;
     font-size: 1.18rem;
-    background: linear-gradient(90deg, var(--primary-color) 80%, var(--highlight-color) 100%);
+    background: var(--primary-color); /* Alterado para cor sólida */
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -217,7 +217,7 @@
 .cart-menu .checkout-container button:hover,
 #checkoutButton:hover,
 .cart-menu .checkout-container button:focus {
-    background: linear-gradient(90deg, var(--highlight-color) 60%, var(--primary-color) 100%);
+    background: var(--highlight-color); /* Cor sólida no hover/focus */
     color: #fff;
     box-shadow: 0 4px 16px #d1000055;
     transform: scale(1.03);
