@@ -167,3 +167,63 @@ header, footer {
   background-color: var(--header-footer-bg);
   color: var(--header-footer-text);
 }
+
+/* Estilos para a nova seção institucional */
+.loja-posicionamento {
+  background: var(--background-color);
+  padding: 56px 0 36px 0;
+  border-bottom: 1.5px solid var(--highlight-color);
+}
+
+.loja-posicionamento h2 {
+  color: var(--primary-color);
+  font-size: 2.4rem;
+  font-family: var(--dancing), cursive;
+  margin-bottom: 18px;
+  text-align: center;
+  text-shadow: 0 2px 8px #ffd70033, 0 0 12px #fff8;
+}
+
+.loja-posicionamento p {
+  color: var(--text-color);
+  font-size: 1.18rem;
+  max-width: 700px;
+  margin: 0 auto 32px auto;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.loja-imagens-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.loja-imagens-grid img {
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #b5542d22, 0 2px 8px #ffd70033;
+  max-width: 340px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.loja-imagens-grid img:hover {
+  transform: scale(1.03) rotate(-1deg);
+  box-shadow: 0 8px 32px #b5542d44, 0 4px 16px #ffd70044;
+}
+
+@media (max-width: 900px) {
+  .loja-imagens-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .loja-imagens-grid img {
+    max-width: 95vw;
+  }
+}
