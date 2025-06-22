@@ -494,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
                    // Sabores doces adicionados
                     { nome: 'Chocolate com Café', preco: 7.00, imagem: '/site-salgados/imagens/chocolate-com-cafe.png', tipo: 'coxinha', sabor: 'chocolate-com-cafe'},
                     { nome: 'Sorvete', preco: 7.50, imagem: '/site-salgados/imagens/coxinha-sorvete.png', tipo: 'coxinha', sabor: 'sorvete'},
-                    { nome: 'Doce de leite' preco: 7.50, imagem: '/site-salgados/imagens/Doce-de-leite.png', tipo: 'coxinha', sabor: 'doce-de-leite'}
+                    { nome: 'Doce de leite', preco: 7.50, imagem: '/site-salgados/imagens/Doce-de-leite.png', tipo: 'coxinha', sabor: 'doce-de-leite'}
                 ];
 
                 break;
