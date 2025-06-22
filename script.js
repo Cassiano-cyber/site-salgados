@@ -273,14 +273,323 @@ const carouselModule = (() => {
     return { init, stopAutoSlideExternally, lockCarousel };
 })();
 
-// ---- RESTANTE DOS SEUS MÓDULOS E INITIALIZAÇÃO DO DOM ----
+/**
+ * Módulo para gerenciar o tema da aplicação (claro/escuro).
+ */
+const themeModule = (() => {
+    let toggleButton;
+    const THEME_STORAGE_KEY = "theme";
 
-// Módulos `themeModule`, `cartModule`, `loyaltyModule`, `suggestionModule` (e suas funções auxiliares)
-// ... (cole aqui o restante do seu código dos outros módulos e do DOMContentLoaded) ...
-// Certifique-se de que o `carouselModule` seja o único declarado.
+    const init = () => {
+        toggleButton = document.getElementById("toggleTheme");
+        if (!toggleButton) {
+            console.error("Theme toggle button with ID 'toggleTheme' not found.");
+            return false;
+        }
+        toggleButton.addEventListener("click", toggleTheme);
+        initializeTheme();
+        console.log("Theme module initialized.");
+        return true;
+    };
 
-// --- Exemplo de como o final ficaria após colar os outros módulos ---
-// ... (themeModule, cartModule, loyaltyModule, suggestionModule) ...
+    const toggleTheme = () => {
+        document.body.classList.toggle("dark-mode");
+        const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+        updateThemeButton();
+    };
+
+    const initializeTheme = () => {
+        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+            document.body.classList.add("dark-mode");
+        } else {
+            document.body.classList.remove("dark-mode");
+        }
+        updateThemeButton();
+    };
+
+    const updateThemeButton = () => {
+        if (!toggleButton) return;
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        toggleButton.innerHTML = isDarkMode
+            ? '<i class="fas fa-sun"></i> Light Mode'
+            : '<i class="fas fa-moon"></i> Dark Mode';
+    };
+
+    return { init, initializeTheme, toggleTheme, updateThemeButton };
+})();
+
+/**
+ * Módulo para gerenciar o carrinho de compras.
+ */
+const cartModule = (() => {
+    const cart = [];
+    const cartMenu = document.getElementById('cart-menu');
+    const cartItemsList = document.getElementById('cart-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotalDisplay = document.getElementById('cart-total');
+
+    if (!cartMenu || !cartItemsList || !cartCount || !cartTotalDisplay) {
+        console.error("One or more essential cart elements not found.");
+        return { init: () => false, addItem: () => {}, removeItem: () => {}, cart: [], total: () => 0 };
+    }
+
+    const updateCartDisplay = () => {
+        cartItemsList.innerHTML = '';
+        let totalValue = 0;
+
+        cart.forEach((item, index) => {
+            const listItem = document.createElement('li');
+            listItem.className = 'cart-item';
+            listItem.innerHTML = `
+                <span>${item.name} - R$ ${item.price.toFixed(2)}</span>
+                <button class="remove-item" data-index="${index}" aria-label="Remover ${item.name} do carrinho">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            cartItemsList.appendChild(listItem);
+            totalValue += item.price;
+        });
+
+        cartCount.textContent = cart.length;
+        cartTotalDisplay.textContent = `R$ ${totalValue.toFixed(2)}`;
+    };
+
+    const addItem = (name, price) => {
+        cart.push({ name, price });
+        updateCartDisplay();
+    };
+
+    const removeItem = (index) => {
+        if (index >= 0 && index < cart.length) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+    };
+
+    document.body.addEventListener('click', (event) => {
+        if (event.target.classList.contains('add-to-cart')) {
+            const button = event.target;
+            const name = button.dataset.name;
+            const price = parseFloat(button.dataset.price);
+
+            if (isNaN(price)) {
+                console.error(`Invalid price for item "${name}": ${button.dataset.price}`);
+                return;
+            }
+            addItem(name, price);
+            animateItemToCart(button);
+        }
+
+        if (event.target.closest('.remove-item')) {
+            const index = parseInt(event.target.closest('.remove-item').dataset.index, 10);
+            if (!isNaN(index)) {
+                removeItem(index);
+            }
+        }
+    });
+
+    const animateItemToCart = (button) => {
+        let productCard = button.closest('.product');
+        if (!productCard) {
+            productCard = button.closest('.salgado-item');
+        }
+
+        if (!productCard) {
+            console.warn("Could not find product card for animation.");
+            return;
+        }
+
+        const cartIcon = document.querySelector('.cart-icon');
+        const img = productCard.querySelector('img');
+
+        if (!img || !cartIcon) {
+            console.warn("Image or cart icon not found for animation.");
+            return;
+        }
+
+        const clone = img.cloneNode(true);
+        clone.classList.add('product-clone-animation');
+        const rect = img.getBoundingClientRect();
+
+        clone.style.position = 'fixed';
+        clone.style.top = `${rect.top}px`;
+        clone.style.left = `${rect.left}px`;
+        clone.style.width = `${rect.width}px`;
+        clone.style.height = `${rect.height}px`;
+        clone.style.borderRadius = '50%';
+        clone.style.objectFit = 'cover';
+        clone.style.transition = 'all 0.8s cubic-bezier(.4,2,.6,1)';
+        clone.style.zIndex = '9999';
+        clone.style.pointerEvents = 'none';
+        document.body.appendChild(clone);
+
+        const cartRect = cartIcon.getBoundingClientRect();
+        const cartCenterX = cartRect.left + cartRect.width / 2;
+        const cartCenterY = cartRect.top + cartRect.height / 2;
+        const finalCloneWidth = rect.width * 0.2;
+        const finalCloneHeight = rect.height * 0.2;
+
+        setTimeout(() => {
+            clone.style.top = `${cartCenterY - finalCloneHeight / 2}px`;
+            clone.style.left = `${cartCenterX - finalCloneWidth / 2}px`;
+            clone.style.width = `${finalCloneWidth}px`;
+            clone.style.height = `${finalCloneHeight}px`;
+            clone.style.opacity = '0.4';
+        }, 20);
+
+        setTimeout(() => {
+            if (clone.parentNode) {
+                clone.parentNode.removeChild(clone);
+            }
+        }, 850);
+    };
+
+    return { init, addItem, removeItem, cart, total: () => cart.reduce((sum, item) => sum + item.price, 0) };
+})();
+
+/**
+ * Módulo de Fidelidade do Cliente.
+ */
+const loyaltyModule = (() => {
+    let clienteCadastrado = null;
+    const CLIENT_STORAGE_KEY = "cliente";
+
+    const init = () => {
+        clienteCadastrado = JSON.parse(localStorage.getItem(CLIENT_STORAGE_KEY)) || null;
+
+        const cadastrarButton = document.getElementById("cadastrar-fidelidade");
+        const resgatarButton = document.getElementById("resgatar-desconto"); // Not used in current logic, but checked
+        const cadastroDiv = document.getElementById("cadastro-fidelidade");
+        const carteiraDiv = document.getElementById("carteira-digital");
+
+        if (!cadastrarButton || !resgatarButton || !cadastroDiv || !carteiraDiv) {
+            console.error("One or more essential loyalty elements not found.");
+            return false;
+        }
+
+        cadastrarButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            const nomeInput = document.getElementById("nome-fidelidade");
+            const telefoneInput = document.getElementById("telefone-fidelidade");
+            const nome = nomeInput.value.trim();
+            const telefone = telefoneInput.value.trim();
+
+            if (nome && telefone) {
+                clienteCadastrado = { nome, telefone, pontos: 0, historicoPedidos: [] };
+                localStorage.setItem(CLIENT_STORAGE_KEY, JSON.stringify(clienteCadastrado));
+                exibirCarteiraDigital();
+                console.log(`Cliente "${nome}" cadastrado com sucesso.`);
+            } else {
+                alert("Por favor, preencha todos os campos para o cadastro.");
+            }
+        });
+
+        if (clienteCadastrado) {
+            exibirCarteiraDigital();
+        }
+        console.log("Loyalty module initialized.");
+        return true;
+    };
+
+    const exibirCarteiraDigital = () => {
+        const cadastroDiv = document.getElementById("cadastro-fidelidade");
+        const carteiraDiv = document.getElementById("carteira-digital");
+        const nomeClienteSpan = document.getElementById("nome-cliente");
+        const pontosClienteSpan = document.getElementById("pontos-cliente");
+
+        if (!cadastroDiv || !carteiraDiv || !nomeClienteSpan || !pontosClienteSpan) return;
+
+        cadastroDiv.style.display = "none";
+        carteiraDiv.style.display = "block";
+
+        nomeClienteSpan.textContent = clienteCadastrado.nome;
+        pontosClienteSpan.textContent = clienteCadastrado.pontos;
+    };
+
+    const adicionarPontos = (valorCompra) => {
+        if (!clienteCadastrado) return;
+
+        const pontosGanhos = Math.floor(valorCompra / 10); // 1 ponto a cada R$ 10
+        if (pontosGanhos > 0) {
+            clienteCadastrado.pontos += pontosGanhos;
+            localStorage.setItem(CLIENT_STORAGE_KEY, JSON.stringify(clienteCadastrado));
+            exibirCarteiraDigital(); // Atualiza a UI
+            console.log(`Adicionados ${pontosGanhos} pontos para ${clienteCadastrado.nome}. Total: ${clienteCadastrado.pontos}`);
+        }
+    };
+
+    const getCliente = () => {
+        return clienteCadastrado;
+    };
+
+    return { init, adicionarPontos, getCliente };
+})();
+
+/**
+ * Módulo de Sugestões Personalizadas.
+ */
+const suggestionModule = (() => {
+    const produtos = [
+        { id: 1, nome: "Coxinha de Frango", preco: 3.50, tipo: "salgado" },
+        { id: 2, nome: "Enroladinho de Salsicha", preco: 4.00, tipo: "salgado" },
+        { id: 3, nome: "Combo Coxinha de Frango", preco: 15.00, tipo: "combo" },
+        { id: 4, nome: "Coxinha de Costela", preco: 7.50, tipo: "salgado" },
+        { id: 5, nome: "Bolinha de Queijo", preco: 5.00, tipo: "salgado" },
+        { id: 6, nome: "Empada de Frango", preco: 6.00, tipo: "salgado" },
+    ];
+
+    const exibirSugestoesPersonalizadas = () => {
+        const sugestoesContainer = document.getElementById("sugestoes-produtos");
+        if (!sugestoesContainer) {
+            console.error("Suggestions container 'sugestoes-produtos' not found.");
+            return;
+        }
+        sugestoesContainer.innerHTML = "";
+
+        const cliente = loyaltyModule.getCliente();
+
+        if (cliente && cliente.historicoPedidos && cliente.historicoPedidos.length > 0) {
+            const ultimoPedido = cliente.historicoPedidos[cliente.historicoPedidos.length - 1];
+            const produtosSugeridos = produtos.filter(p => p.tipo === ultimoPedido.tipo && p.id !== ultimoPedido.id);
+
+            if (produtosSugeridos.length > 0) {
+                produtosSugeridos.forEach(produto => {
+                    const card = createSuggestionCard(produto, `Que tal experimentar este?`);
+                    sugestoesContainer.appendChild(card);
+                });
+            } else {
+                exibirSugestaoPadrao(sugestoesContainer);
+            }
+        } else {
+            exibirSugestaoPadrao(sugestoesContainer);
+        }
+    };
+
+    const createSuggestionCard = (produto, mensagem) => {
+        const card = document.createElement("article");
+        card.className = "promotion-item";
+        card.innerHTML = `
+            <h3>${produto.nome}</h3>
+            <p>${mensagem}</p>
+            <button class="add-to-cart button" data-name="${produto.nome}" data-price="${produto.preco.toFixed(2)}">Adicionar ao Carrinho</button>
+        `;
+        return card;
+    };
+
+    const exibirSugestaoPadrao = (container) => {
+        const sugestaoPadrao = produtos.find(p => p.id === 1) || produtos[0];
+        if (sugestaoPadrao) {
+            const card = createSuggestionCard(sugestaoPadrao, "Experimente o nosso carro-chefe!");
+            container.appendChild(card);
+        }
+    };
+
+    return { exibirSugestoesPersonalizadas };
+})();
 
 /**
  * Função auxiliar para capitalizar a primeira letra de uma string.
@@ -299,12 +608,12 @@ document.addEventListener("DOMContentLoaded", () => {
     loyaltyModule.init();
 
     // Inicializa os carrosséis da página
-    carouselModule.init('tipos-salgado'); // VERIFIQUE SE ESTE ID ESTÁ CORRETO NO SEU HTML
-    carouselModule.init('sabores');      // VERIFIQUE SE ESTE ID ESTÁ CORRETO NO SEU HTML
+    const tiposInitialized = carouselModule.init('tipos-salgado');
+    const saboresInitialized = carouselModule.init('sabores');
 
     const tiposCarrossel = document.getElementById('tipos-salgado');
     const saboresCarrossel = document.getElementById('sabores');
-    const saboresTrack = document.getElementById('carousel-track-sabores'); // VERIFIQUE SE ESTE ID ESTÁ CORRETO NO SEU HTML
+    const saboresTrack = document.getElementById('carousel-track-sabores');
     const tipoSelecionadoSpan = document.getElementById('tipo-selecionado');
     const saborSelecionadoSpan = document.getElementById('sabor-selecionado');
 
@@ -312,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let saborSelecionado = null;
     let saboresDisponiveis = [];
 
-    if (tiposCarrossel) { // Verifica se o carrossel de tipos existe
+    if (tiposCarrossel && tiposInitialized) { // Verifica se o carrossel de tipos existe e foi inicializado
         tiposCarrossel.addEventListener('click', function(event) {
             if (event.target.classList.contains('select-type')) {
                 const selectedTypeElement = event.target;
@@ -327,12 +636,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 carouselModule.stopAutoSlideExternally('tipos-salgado');
             }
         });
-    } else {
+    } else if (!tiposCarrossel) {
         console.warn("Element with ID 'tipos-salgado' not found. Carousel for types will not function.");
+    } else if (!tiposInitialized) {
+        console.warn("Carousel 'tipos-salgado' failed to initialize.");
     }
 
-
-    if (saboresCarrossel) { // Verifica se o carrossel de sabores existe
+    if (saboresCarrossel && saboresInitialized) { // Verifica se o carrossel de sabores existe e foi inicializado
         saboresCarrossel.addEventListener('click', function(event) {
             const productSlide = event.target.closest('.carousel-slide.product');
             if (productSlide) {
@@ -347,8 +657,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         });
-    } else {
+    } else if (!saboresCarrossel) {
         console.warn("Element with ID 'sabores' not found. Carousel for flavors will not function.");
+    } else if (!saboresInitialized) {
+        console.warn("Carousel 'sabores' failed to initialize.");
     }
 
 
@@ -357,8 +669,8 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Element with ID 'carousel-track-sabores' not found. Cannot update flavors.");
             return;
         }
-        saboresTrack.innerHTML = '';
-        saboresDisponiveis = [];
+        saboresTrack.innerHTML = ''; // Limpa os slides anteriores
+        saboresDisponiveis = []; // Reseta o array
 
         switch (tipo) {
             case 'coxinha':
@@ -421,7 +733,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Re-inicializa o carrossel de sabores APÓS adicionar os novos slides.
-        // Isso é CRUCIAL para que o carrossel de sabores reconheça os elementos criados.
+        // Isso é CRUCIAL para que o carrossel reconheça os elementos criados.
         carouselModule.init('sabores');
     }
 
@@ -458,11 +770,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert('CEP não encontrado.');
                     return;
                 }
-                ruaInputRef.value = data.logradouro || '';
-                bairroInputRef.value = data.bairro || '';
-                cidadeInputRef.value = data.localidade || '';
-                estadoInputRef.value = data.uf || '';
-                document.getElementById(enderecoCompletoId).style.display = 'block';
+                if (ruaInputRef) ruaInputRef.value = data.logradouro || '';
+                if (bairroInputRef) bairroInputRef.value = data.bairro || '';
+                if (cidadeInputRef) cidadeInputRef.value = data.localidade || '';
+                if (estadoInputRef) estadoInputRef.value = data.uf || '';
+                const enderecoContainerRef = document.getElementById(enderecoCompletoId);
+                if(enderecoContainerRef) enderecoContainerRef.style.display = 'block';
             })
             .catch(error => {
                 console.error('Erro ao buscar o CEP:', error);
@@ -538,12 +851,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         alert(`Pedido finalizado com sucesso! Valor total: R$ ${totalCompra.toFixed(2)}`);
 
-        cartModule.cart.length = 0;
-        cartModule.updateCartDisplay();
+        cartModule.cart.length = 0; // Esvazia o array do carrinho
+        cartModule.updateCartDisplay(); // Atualiza a UI
 
         const resetAddressFields = (cepInputRef, ruaInputRef, numeroInputRef, complementoInputRef, bairroInputRef, cidadeInputRef, estadoInputRef, enderecoContainerRef) => {
-            cepInputRef.value = ''; ruaInputRef.value = ''; numeroInputRef.value = ''; complementoInputRef.value = '';
-            bairroInputRef.value = ''; cidadeInputRef.value = ''; estadoInputRef.value = '';
+            if(cepInputRef) cepInputRef.value = '';
+            if(ruaInputRef) ruaInputRef.value = '';
+            if(numeroInputRef) numeroInputRef.value = '';
+            if(complementoInputRef) complementoInputRef.value = '';
+            if(bairroInputRef) bairroInputRef.value = '';
+            if(cidadeInputRef) cidadeInputRef.value = '';
+            if(estadoInputRef) estadoInputRef.value = '';
             if(enderecoContainerRef) enderecoContainerRef.style.display = 'none';
         };
 
@@ -569,7 +887,9 @@ document.addEventListener("DOMContentLoaded", () => {
     suggestionModule.exibirSugestoesPersonalizadas();
 });
 
-// --- Animações de Scroll (Mantenha este bloco separado se não fez alterações nele) ---
+/**
+ * Configuração de animações e interações visuais com scroll.
+ */
 document.addEventListener("DOMContentLoaded", function () {
     const containerCoxinhas = document.querySelector('.container-coxinhas');
     const coxinhas = [
@@ -582,9 +902,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const comentarios = document.querySelectorAll('.comentario');
     let comentarioAtual = 0;
 
+    // Verifica se todos os elementos essenciais para a animação existem
     if (!containerCoxinhas || comentarios.length === 0 || coxinhas.some(c => !c)) {
         console.warn("Alguns elementos para animação de scroll não foram encontrados. Animações de scroll desativadas.");
-        return;
+        return; // Sai se os elementos essenciais não existirem
     }
 
     function renderizarEstrelas(ratingContainer) {
@@ -612,7 +933,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     comentarios.forEach((comentario, index) => {
-        comentario.style.display = index === 0 ? 'block' : 'none';
+        comentario.style.display = index === 0 ? 'block' : 'none'; // Mostra apenas o primeiro
         const ratingContainer = comentario.querySelector('[data-rating]');
         if (ratingContainer) {
             renderizarEstrelas(ratingContainer);
@@ -634,15 +955,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const containerTop = containerCoxinhas.offsetTop;
         const windowHeight = window.innerHeight;
 
+        // Verifica se o container está visível na viewport
         if (scrollY > containerTop - windowHeight && scrollY < containerTop + containerCoxinhas.offsetHeight) {
             let relativeScroll = scrollY - (containerTop - windowHeight);
 
+            // Aplica transformações às coxinhas
             coxinhas[0].style.transform = `translateY(${relativeScroll * 0.08}px) translateX(${Math.sin(relativeScroll * 0.01) * 10}px) rotate(${relativeScroll * 0.01 - 5}deg)`;
             coxinhas[1].style.transform = `translateY(${relativeScroll * 0.08}px) translateX(${Math.cos(relativeScroll * 0.01) * 10}px) rotate(${relativeScroll * -0.01 + 175}deg)`;
             coxinhas[2].style.transform = `translateY(${relativeScroll * 0.08}px) translateX(${Math.sin(relativeScroll * 0.01) * -10}px) rotate(${relativeScroll * 0.01 + 5}deg)`;
             coxinhas[3].style.transform = `translateY(${relativeScroll * 0.08}px) translateX(${Math.cos(relativeScroll * 0.01) * -10}px) rotate(${relativeScroll * -0.01 - 3}deg)`;
 
-            const blurValues = [0, 1, 3, 5];
+            const blurValues = [0, 1, 3, 5]; // Intensidades de blur
 
             coxinhas.forEach((coxinha, index) => {
                 const coxinhaRect = coxinha.getBoundingClientRect();
@@ -668,6 +991,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         } else {
+            // Reseta transformações e blur quando fora da viewport
             coxinhas.forEach((coxinha, index) => {
                 coxinha.style.transform = 'none';
                 coxinha.style.filter = 'none';
