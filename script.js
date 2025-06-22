@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     { nome: 'Calabresa com Cheddar', preco: 7.50, imagem: 'https://images.pexels.com/photos/17402718/pexels-photo-17402718/free-photo-of-comida-alimento-refeicao-pizza.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'calabresa-com-cheddar' },
                    // Sabores doces adicionados
                     { nome: 'Chocolate com Café', preco: 7.00, imagem: '/site-salgados/imagens/chocolate-com-cafe.png', tipo: 'coxinha', sabor: 'chocolate-com-cafe'},
-                    { nome: 'Sorvete', preco: 7.50, imagem: '/site-salgados/imagens/coxinha-sorvete.png', tipo: 'coxinha', sabor: 'sorvete'}
+                    { nome: 'Sorvete', preco: 7.50, imagem: '/site-salgados/imagens/coxinha-sorvete.png', tipo: 'coxinha', sabor: 'sorvete'},
                     { nome: 'Doce de leite' preco: 7.50, imagem: '/site-salgados/imagens/Doce-de-leite.png', tipo: 'coxinha', sabor: 'doce-de-leite'}
                 ];
 
