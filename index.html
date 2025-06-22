@@ -1,106 +1,195 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Explore o melhor cardápio de salgados artesanais! Faça seu pedido online e saboreie nossas delícias crocantes.">
+
     <meta name="keywords" content="salgados, coxinha, esfirra, lanches, delivery de salgados, quitutes">
+
     <meta name="author" content="Explosão Crocante">
+
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
 
-    <!-- Open Graph (para compartilhamento em redes sociais) -->
+
     <meta property="og:title" content="Cardápio de Salgados | Explosão Crocante">
+
     <meta property="og:description" content="Salgados crocantes e irresistíveis. Faça seu pedido e aproveite!">
+
     <meta property="og:image" content="https://cdn.pixabay.com/photo/2016/11/29/08/24/bakery-1868396_1280.jpg">
+
     <meta property="og:type" content="website">
+
     <meta property="og:url" content="https://cassiano-cyber.github.io/site-salgados/">
 
-    <!-- Fontes e Ícones -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <!-- Folhas de Estilo -->
+
+
     <link rel="stylesheet" href="css/global.css">
+
     <link rel="stylesheet" href="css/variables.css">
+
     <link rel="stylesheet" href="css/typography.css">
+
     <link rel="stylesheet" href="css/buttons.css">
+
     <link rel="stylesheet" href="css/header.css">
+
     <link rel="stylesheet" href="css/menu.css">
+
     <link rel="stylesheet" href="css/promotions.css">
+
     <link rel="stylesheet" href="css/cart.css">
+
     <link rel="stylesheet" href="css/drinks.css">
+
     <link rel="stylesheet" href="css/social.css">
+
     <link rel="stylesheet" href="css/comanda.css"> 
+
     <link rel="stylesheet" href="css/responsive.css">
+
     <link rel="stylesheet" href="css/animations.css">
+
     <link rel="stylesheet" href="css/decorative.css">
+
     <link rel="stylesheet" href="css/fidelity.css">
+
     <link rel="stylesheet" href="css/suggestions.css">
+
     <link rel="stylesheet" href="css/footer.css">
+
     <link rel="stylesheet" href="css/theme-dark.css">
+
     <link rel="stylesheet" href="css/salgados-especiais.css">
 
     <title>Cardápio de Salgados | Explosão Crocante</title>
+
 </head>
+
 <body>
 
-    <div class="cart-icon cart-icon-left" onclick="toggleCart()" tabindex="0" aria-label="Abrir carrinho de compras" title="Ver carrinho">
-        <i class="fas fa-shopping-cart" aria-hidden="true"></i> <span id="cart-count">0</span>
+    <!-- Botão do carrinho à esquerda -->
+
+    <div class="cart-icon cart-icon-left" onclick="toggleCart()" tabindex="0" aria-label="Abrir carrinho" title="Ver carrinho">
+
+        🛒 <span id="cart-count">0</span>
+
     </div>
+
+
+
+    <!-- Botão de alternar tema à direita -->
 
     <div class="theme-toggle-floating theme-toggle-right">
-        <button id="toggleTheme" aria-label="Alternar tema da página" title="Alternar tema" tabindex="0">
+
+        <button id="toggleTheme" aria-label="Alternar entre tema claro e escuro" tabindex="0">
+
             <i class="fas fa-moon" aria-hidden="true"></i>
+
             <i class="fas fa-sun" aria-hidden="true"></i>
+
         </button>
+
     </div>
 
-    <header class="site-header" id="inicio">
+
+
+    <header class="site-header">
+
         <div class="header-nav-wrapper">
+
             <div class="top-bar">
+
                 <div class="logo-container">
-                    <a href="#inicio" aria-label="Voltar ao topo da página">
-                        <img src="https://img.freepik.com/vetores-gratis/comida-de-coxinha-desenhada-a-mao_23-2148690785.jpg" alt="Logo da Explosão Crocante, uma coxinha estilizada." class="logo">
+
+                    <a href="#inicio" tabindex="0">
+
+                        <img src="https://img.freepik.com/vetores-gratis/comida-de-coxinha-desenhada-a-mao_23-2148690785.jpg" alt="Logo Explosão Crocante" class="logo">
+
                     </a>
+
                     <div class="header-title">
+
                         <h1>Explosão Crocante</h1>
-                        <p class="header-subtitle">Salgados Artesanais & Delivery</p> <!-- MUDANÇA: 'p' é mais semântico que 'span' para um subtítulo -->
+
+                        <span class="header-subtitle">Salgados Artesanais &amp; Delivery</span>
+
                     </div>
+
                 </div>
-                <button class="mobile-menu-toggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="main-nav-links">
+
+                <button class="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false" tabindex="0">
+
                     <i class="fas fa-bars" aria-hidden="true"></i>
+
                 </button>
+
             </div>
+
             <nav class="main-nav" aria-label="Navegação principal">
-                <ul class="nav-links main-nav-links" id="main-nav-links">
-                    <li><a href="#tipos">Cardápio</a></li>
-                    <li><a href="#promotions">Promoções</a></li>
-                    <li><a href="#fidelidade">Fidelidade</a></li>
-                    <li><a href="#sugestoes">Sugestões</a></li>
-                    <li><a href="#" onclick="toggleCart();return false;">Carrinho</a></li>
+
+                <ul class="nav-links main-nav-links">
+
+                    <li><a href="#tipos" tabindex="0">Cardápio</a></li>
+
+                    <li><a href="#promotions" tabindex="0">Promoções</a></li>
+
+                    <li><a href="#" onclick="toggleCart();return false;" tabindex="0">Carrinho</a></li>
+
+                    <li><a href="#fidelidade" tabindex="0">Fidelidade</a></li>
+
+                    <li><a href="#sugestoes" tabindex="0">Sugestões</a></li>
+
                 </ul>
+
             </nav>
+
         </div>
-        <div class="hero-section">
+
+        <div class="hero-section" id="inicio">
+
             <div class="hero-overlay"></div>
-            <video autoplay loop muted playsinline class="hero-video" title="Vídeo de fundo mostrando salgados sendo preparados.">
+
+            <video autoplay loop muted playsinline class="hero-video">
+
                 <source src="https://cdn.pixabay.com/video/2017/08/25/11563-231234701_large.mp4" type="video/mp4">
+
                 Seu navegador não suporta vídeos. Por favor, atualize seu navegador.
+
             </video>
+
             <div class="hero-content">
-                <h2>O sabor que conquista seu paladar!</h2>
-                <a href="#tipos" class="button cta">Ver Cardápio</a>
+
+                <h1>Explosão Crocante</h1>
+
+                <p>O sabor que conquista seu paladar!</p>
+
             </div>
+
         </div>
+
     </header>
 
+    <!-- Seção de Posicionamento de Marca -->
     <section class="loja-posicionamento">
         <div class="container">
             <h2>Nossos valores</h2>
@@ -108,343 +197,747 @@
                 Na Explosão Crocante, acreditamos que cada salgado é uma experiência única. Nossa missão é proporcionar momentos de alegria e sabor, unindo tradição artesanal, ingredientes selecionados e atendimento acolhedor. Valorizamos a qualidade em cada detalhe, desde a cozinha até a entrega, para que você sinta o carinho em cada mordida.
             </p>
             <div class="loja-imagens-grid">
-                <img src="imagens/Cozinha-artesanal.png" alt="Equipe sorridente na cozinha preparando salgados artesanais.">
-                <img src="imagens/Interior.png" alt="Interior acolhedor da loja Explosão Crocante com mesas e cadeiras.">
+                <img src="imagens/Cozinha-artesanal.png"
+                     alt="Equipe na cozinha preparando salgados artesanais">
+                <img src="imagens/Interior.png"
+                     alt="Interior acolhedor da loja Explosão Crocante">
             </div>
         </div>
     </section>
 
     <main>
+
         <section id="tipos" class="menu">
-            <svg class="decorative-line" width="100%" height="50" viewBox="0 0 1000 50" aria-hidden="true">
-                <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
-                <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-                <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-            </svg>
+
+         <!-- Linha Decorativa -->
+
+         <svg width="100%" height="50" viewBox="0 0 1000 50" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+            <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
+
+            <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
+            <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
+        </svg>
+
             <h2>Nosso Cardápio</h2>
+
             <h3>Escolha seu tipo favorito</h3>
-            <div class="carousel" id="tipos-salgado" aria-label="Carrossel de tipos de salgado">
+
+            <div class="carousel" id="tipos-salgado" role="list">
+
                 <div class="carousel-track" id="carousel-track-tipos">
-                    <article class="carousel-slide product" data-tipo="coxinha" aria-label="Tipo: Coxinhas">
-                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Prato com várias coxinhas douradas e crocantes." loading="lazy" width="300" height="200">
+
+                    <article class="carousel-slide product" data-tipo="coxinha" role="listitem" aria-labelledby="coxinha-tipo-label">
+
+                        <img src="https://cdn.pixabay.com/photo/2019/04/27/23/07/coxinha-4161592_1280.jpg" alt="Coxinhas suculentas e crocantes" loading="lazy" width="300" height="200">
+
                         <h3>Coxinhas</h3>
+
+                        <span id="coxinha-tipo-label" class="visually-hidden">Coxinhas</span>
+
                         <button class="select-type cta" data-tipo="coxinha">Selecionar</button>
+
                     </article>
 
-                    <article class="carousel-slide product" data-tipo="enroladinho" aria-label="Tipo: Enroladinhos">
-                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinhos de salsicha assados e dourados em uma travessa." loading="lazy" width="300" height="200">
+
+
+                    <article class="carousel-slide product" data-tipo="enroladinho" role="listitem" aria-labelledby="enroladinho-tipo-label">
+
+                        <img src="https://cdn.pixabay.com/photo/2017/02/27/14/20/salted-2103324_960_720.jpg" alt="Enroladinhos macios e deliciosos" loading="lazy" width="300" height="200">
+
                         <h3>Enroladinhos</h3>
-                        <button class="select-type cta" data-tipo="enroladinho">Selecionar</button>
+
+                        <span id="enroladinho-tipo-label" class="visually-hidden">Enroladinhos</span>
+
+                         <button class="select-type cta"  data-tipo="enroladinho">Selecionar</button>
+
                     </article>
 
-                    <article class="carousel-slide product" data-tipo="bolinha" aria-label="Tipo: Bolinhas">
-                        <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinhas de queijo douradas e empilhadas." loading="lazy" width="300" height="200">
+
+
+                    <article class="carousel-slide product" data-tipo="bolinha" role="listitem" aria-labelledby="bolinha-tipo-label">
+
+                        <img src="https://cdn.pixabay.com/photo/2021/03/29/17/11/chili-6134690_960_720.jpg" alt="Bolinhas recheadas" loading="lazy" width="300" height="200">
+
                         <h3>Bolinhas</h3>
-                        <button class="select-type cta" data-tipo="bolinha">Selecionar</button>
+
+                        <span id="bolinha-tipo-label" class="visually-hidden">Bolinhas</span>
+
+                        <button class="select-type cta"  data-tipo="bolinha">Selecionar</button>
+
                     </article>
 
-                    <article class="carousel-slide product" data-tipo="empada" aria-label="Tipo: Empadas">
-                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empadas de massa podre com recheio cremoso e douradas." loading="lazy" width="300" height="200">
+
+
+                    <article class="carousel-slide product" data-tipo="empada" role="listitem" aria-labelledby="empada-tipo-label">
+
+                        <img src="https://cdn.pixabay.com/photo/2019/07/28/05/00/sweets-4367939_1280.jpg" alt="Empadas cremosas e saborosas" loading="lazy" width="300" height="200">
+
                         <h3>Empadas</h3>
-                        <button class="select-type cta" data-tipo="empada">Selecionar</button>
+
+                        <span id="empada-tipo-label" class="visually-hidden">Empadas</span>
+
+                         <button class="select-type cta"  data-tipo="empada">Selecionar</button>
+
                     </article>
 
-                    <article class="carousel-slide product" data-tipo="tortinha" aria-label="Tipo: Tortinhas">
-                        <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinhas individuais de legumes com massa folhada." loading="lazy" width="300" height="200">
+
+
+                    <article class="carousel-slide product" data-tipo="tortinha" role="listitem" aria-labelledby="tortinha-tipo-label">
+
+                        <img src="https://images.pexels.com/photos/10885316/pexels-photo-10885316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tortinhas fresquinhas e nutritivas" loading="lazy" width="300" height="200">
+
                         <h3>Tortinhas</h3>
-                        <button class="select-type cta" data-tipo="tortinha">Selecionar</button>
+
+                        <span id="tortinha-tipo-label" class="visually-hidden">Tortinhas</span>
+
+                         <button class="select-type cta"  data-tipo="tortinha">Selecionar</button>
+
                     </article>
 
-                    <article class="carousel-slide product" data-tipo="torta" aria-label="Tipo: Tortas (pedaço)">
-                        <img src="https://images.pexels.com/photos/1320744/pexels-photo-1320744.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Pedaço de torta salgada com recheio visível e massa crocante." loading="lazy" width="300" height="200">
+
+
+                    <article class="carousel-slide product" data-tipo="torta" role="listitem" aria-labelledby="torta-tipo-label">
+
+                        <img src="https://images.pexels.com/photos/1320744/pexels-photo-1320744.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Tortas suculentas com massa crocante" loading="lazy" width="300" height="200">
+
                         <h3>Tortas (pedaço)</h3>
-                        <button class="select-type cta" data-tipo="torta">Selecionar</button>
+
+                        <span id="torta-tipo-label" class="visually-hidden">Tortas</span>
+
+                         <button class="select-type cta" data-tipo="torta">Selecionar</button>
+
                     </article>
+
                 </div>
+
+                <!-- Botões de navegação do carrossel -->
+
                 <div class="carousel-buttons">
-                    <button class="carousel-button prev" aria-label="Ver tipo de salgado anterior">‹</button>
-                    <button class="carousel-button next" aria-label="Ver próximo tipo de salgado">›</button>
+
+                    <button class="carousel-button prev" aria-label="Slide anterior" aria-controls="carousel-track-tipos" tabindex="0">‹</button>
+
+                    <button class="carousel-button next" aria-label="Próximo slide" aria-controls="carousel-track-tipos" tabindex="0">›</button>
+
                 </div>
+
             </div>
+
         </section>
+
+
 
         <section id="sabores-section" class="menu">
+
             <h2>Sabores</h2>
-            <div class="carousel" id="sabores" aria-label="Carrossel de sabores disponíveis">
+
+            <div class="carousel" id="sabores" role="list">
+
                 <div class="carousel-track" id="carousel-track-sabores">
-                    <!-- Sabores inseridos via JS -->
-                    <p class="placeholder-text">Selecione um tipo de salgado acima para ver os sabores.</p>
+
+                    <!-- Os sabores serão inseridos dinamicamente via JavaScript -->
+
                 </div>
+
                 <div class="carousel-buttons">
-                    <button class="carousel-button prev" aria-label="Ver sabor anterior">‹</button>
-                    <button class="carousel-button next" aria-label="Ver próximo sabor">›</button>
+
+                    <button class="carousel-button prev" aria-label="Slide anterior" aria-controls="carousel-track-sabores" tabindex="0">‹</button>
+
+                    <button class="carousel-button next" aria-label="Próximo slide" aria-controls="carousel-track-sabores" tabindex="0">›</button>
+
                 </div>
+
             </div>
+
         </section>
 
-        <section id="selecao" class="selecao" aria-live="polite">
-            <h2>Sua Comanda</h2>
+        <section id="selecao" class="selecao">
+
+            <h2>Comanda:</h2>
+
             <div class="comanda-container">
-                <p>Tipo selecionado: <strong id="tipo-selecionado">Nenhum</strong></p>
-                <p>Sabor selecionado: <strong id="sabor-selecionado">Nenhum</strong></p>
+
+                <p>Tipo selecionado: <span id="tipo-selecionado">Nenhum</span></p>
+
+                <p>Sabor selecionado: <span id="sabor-selecionado">Nenhum</span></p>
+
                 <p>Os itens escolhidos são adicionados automaticamente ao carrinho!</p>
+
             </div>
+
         </section>
-        
-        <svg class="decorative-line" width="100%" height="50" viewBox="0 0 1000 50" aria-hidden="true">
+
+        <!-- Linha Decorativa -->
+
+        <svg width="100%" height="50" viewBox="0 0 1000 50" xmlns="http://www.w3.org/2000/svg" fill="none">
+
             <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
+
             <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
             <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
         </svg>
+
+        <!-- Seção de Salgados Especiais -->
 
         <section id="salgados-especiais">
-            <h2>Salgados Especiais</h2>
-            <div class="salgados-container">
-                <article class="salgado-item">
-                    <img src="imagens/Coxinha vulcânica.jpeg" alt="Coxinha vulcânica com recheio cremoso e picante escorrendo.">
-                    <h3>Coxinha Vulcânica</h3>
-                    <p>Uma explosão de sabor! Casquinha crocante e recheio cremoso.</p>
-                    <p><strong>R$ 8,00</strong></p>
-                    <button class="add-to-cart cta" data-name="Coxinha Vulcânica" data-price="8.00">Adicionar ao carrinho</button>
-                </article>
-                <article class="salgado-item">
-                    <img src="imagens/Bolinha explosiva.jpeg" alt="Bolinha de queijo com bacon, cortada ao meio mostrando o queijo derretido.">
-                    <h3>Bolinha Explosiva</h3>
-                    <p>Pequena no tamanho, gigante no sabor! Queijo e ingredientes secretos.</p>
-                    <p><strong>R$ 6,50</strong></p>
-                    <button class="add-to-cart cta" data-name="Bolinha Explosiva" data-price="6.50">Adicionar ao carrinho</button>
-                </article>
-            </div>
-        </section>
 
-        <svg class="decorative-line" width="100%" height="50" viewBox="0 0 1000 50" aria-hidden="true">
-             <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
-             <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-             <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+            <h2>Salgados Especiais</h2>
+
+            <div class="salgados-container">
+
+                <div class="salgado-item">
+
+                    <img src="imagens/Coxinha vulcânica.jpeg" alt="Coxinha Vulcânica">
+
+                    <h3>Coxinha Vulcânica</h3>
+
+                    <p>Uma explosão de sabor! Casquinha crocante e recheio cremoso e picante.</p>
+
+                    <p><strong>R$ 8,00</strong></p>
+
+                    <button class="add-to-cart cta" data-name="Coxinha Vulcânica" data-price="8.00">Adicionar ao carrinho</button>
+
+                </div>
+
+                <div class="salgado-item">
+
+                    <img src="imagens/Bolinha explosiva.jpeg" alt="Bolinha Explosiva">
+
+                    <h3>Bolinha Explosiva</h3>
+
+                    <p>Pequena no tamanho, gigante no sabor! Queijo e ingredientes secretos.</p>
+
+                    <p><strong>R$ 6,50</strong></p>
+
+                    <button class="add-to-cart cta" data-name="Bolinha Explosiva" data-price="6.50">Adicionar ao carrinho</button>
+
+                </div>
+
+            </div>
+
+            <!-- Linha Decorativa -->
+
+         <svg width="100%" height="50" viewBox="0 0 1000 50" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+            <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
+
+            <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
+            <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
         </svg>
+
+        <!-- Seção de Promoções -->
 
         <section id="promotions" class="promotions">
+
             <h2>Promoções Especiais</h2>
+
             <div class="promotions-grid">
-               <article class="promotion-item product">
-                <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Combo promocional de coxinhas com um copo de refrigerante." width="300" height="200">
+
+               <!-- Promoção 1 -->
+
+               <article class="promotion-item product" data-name="Combo Coxinha" data-price="15.00">
+
+                <img src="https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" alt="Combo de coxinha e refrigerante com preço especial" width="300" height="200">
+
                 <h3>Combo Coxinha + Refrigerante</h3>
-                <p class="promotion-price">De <s>R$ 20,00</s> Por <strong>R$ 15,00</strong></p> <!-- MUDANÇA: 's' é mais semântico para texto riscado -->
+
+                <p class="promotion-price">
+
+                    De <span class="tachado old-price">R$ 20,00</span> Por <span class="new-price">R$ 15,00</span>
+
+                </p>
+
                 <button class="add-to-cart cta" data-name="Combo Coxinha" data-price="15.00">Adicionar ao carrinho</button>
-               </article>
-               <article class="promotion-item product">
-                <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada gourmet com recheio de carne e azeitona em promoção." width="300" height="200">
+
+            </article>
+
+
+
+               <!-- Promoção 2 -->
+
+               <article class="promotion-item product" data-name="Empada Gourmet" data-price="13.50">
+
+                <img src="https://cdn.pixabay.com/photo/2017/05/23/01/15/empanadas-2335902_1280.jpg" alt="Empada gourmet com ingredientes selecionados e desconto" width="300" height="200">
+
                 <h3>Empada Gourmet</h3>
-                <p class="promotion-price">De <s>R$ 15,00</s> Por <strong>R$ 13,50</strong></p>
+
+                <p class="promotion-price">
+
+                    De <span class="tachado old-price">R$ 15,00</span> Por <span class="new-price">R$ 13,50</span>
+
+                </p>
+
                 <button class="add-to-cart cta" data-name="Empada Gourmet" data-price="13.50">Adicionar ao carrinho</button>
-               </article>
-               <article class="promotion-item product">
-                <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho de salsicha especial com massa folhada em promoção." width="300" height="200">
+
+            </article>
+
+
+
+              <!-- Promoção 3 -->
+
+              <article class="promotion-item product" data-name="Enroladinho Especial" data-price="8.50">
+
+                <img src="https://cdn.pixabay.com/photo/2017/06/29/16/19/enroladinho-2454681_1280.jpg" alt="Enroladinho especial com receita exclusiva e preço promocional" width="300" height="200">
+
                 <h3>Enroladinho Especial</h3>
-                <p class="promotion-price">De <s>R$ 10,00</s> Por <strong>R$ 8,50</strong></p>
+
+                <p class="promotion-price">
+
+                    De <span class="tachado old-price">R$ 10,00</span> Por <span class="new-price">R$ 8,50</span>
+
+                </p>
+
                 <button class="add-to-cart cta" data-name="Enroladinho Especial" data-price="8.50">Adicionar ao carrinho</button>
-               </article>
+
+            </article>
+
             </div>
+
         </section>
 
-        <svg class="decorative-line" width="100%" height="50" viewBox="0 0 1000 50" aria-hidden="true">
-            <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
-            <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-            <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-        </svg>
+  <!-- Linha Decorativa -->
+
+  <svg width="100%" height="50" viewBox="0 0 1000 50" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+    <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
+
+    <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
+    <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
+</svg>
+
+         <!-- Seção de Bebidas -->
 
         <section id="bebidas" class="bebidas">
+
             <h2>Refresque-se com Nossas Bebidas</h2>
+
            <div class="bebidas-grid">
-                <article class="bebida-item product">
-                    <img src="https://cdn.pixabay.com/photo/2020/05/26/09/38/coca-cola-5222420_1280.jpg" alt="Garrafa de vidro de Coca-Cola gelada com fundo desfocado." width="300" height="200">
+
+              <!-- Bebida 1 -->
+
+                <article class="bebida-item product" data-name="Coca-Cola Vidro" data-price="5.00">
+
+                    <img src="https://cdn.pixabay.com/photo/2020/05/26/09/38/coca-cola-5222420_1280.jpg" alt="Refrigerante Coca-Cola gelada em vidro" width="300" height="200">
+
                     <h3>Coca-Cola Vidro</h3>
-                    <p class="price">R$ 5,00</p>
+
+                    <p>R$ 5,00</p>
+
                     <button class="add-to-cart cta" data-name="Coca-Cola Vidro" data-price="5.00">Adicionar ao carrinho</button>
+
                 </article>
-                <article class="bebida-item product">
-                 <img src="https://cdn.pixabay.com/photo/2021/07/04/23/01/oranges-6387749_640.jpg" alt="Copo de suco de laranja natural e fresco, com laranjas ao lado." width="300" height="200">
+
+
+
+               <!-- Bebida 2 -->
+
+               <article class="bebida-item product" data-name="Suco Natural de Laranja" data-price="7.50">
+
+                 <img src="https://cdn.pixabay.com/photo/2021/07/04/23/01/oranges-6387749_640.jpg" alt="Suco natural de laranja espremido na hora" width="300" height="200">
+
                  <h3>Suco Natural de Laranja</h3>
-                   <p class="price">R$ 7,50</p>
+
+                   <p>R$ 7,50</p>
+
                    <button class="add-to-cart cta" data-name="Suco Natural de Laranja" data-price="7.50">Adicionar ao carrinho</button>
+
                 </article>
-                <article class="bebida-item product">
-                 <img src="https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg" alt="Garrafa de água saborizada com fatias de limão e hortelã." width="300" height="200">
+
+
+
+               <!-- Bebida 3 -->
+
+               <article class="bebida-item product" data-name="Água saborizada" data-price="5.00">
+
+                 <img src="https://cdn.pixabay.com/photo/2016/07/21/11/17/drink-1532300_1280.jpg" alt="Água saborizada refrescante com frutas" width="300" height="200">
+
                   <h3>Água saborizada</h3>
-                   <p class="price">R$ 5,00</p>
+
+                   <p>R$ 5,00</p>
+
                   <button class="add-to-cart cta" data-name="Água saborizada" data-price="5.00">Adicionar ao carrinho</button>
+
                 </article>
+
             </div>
+
         </section>
 
-        <svg class="decorative-line" width="100%" height="50" viewBox="0 0 1000 50" aria-hidden="true">
-            <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
-            <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-            <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-        </svg>
+  <!-- Linha Decorativa -->
 
-        <section id="sugestoes" class="promotions">
-            <h2>Sugestões Personalizadas</h2>
-            <div id="sugestoes-produtos" class="promotions-grid">
-                <!-- Sugestões inseridas via JS -->
-            </div>
-        </section>
+  <svg width="100%" height="50" viewBox="0 0 1000 50" xmlns="http://www.w3.org/2000/svg" fill="none">
 
-        <aside class="cart-menu" id="cart-menu" aria-modal="true" role="dialog" aria-labelledby="cart-title">
-            <header class="cart-header">
-                <h2 id="cart-title">Seu Carrinho</h2>
-                <button class="close-cart-button" aria-label="Fechar carrinho" onclick="toggleCart()">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
-            </header>
-            <div class="cart-body">
-                <ul id="cart-items"></ul>
-            </div>
-            <footer class="cart-footer">
-                <div class="cart-total-container">
-                    <strong>Total:</strong> <span id="cart-total" aria-live="polite">R$ 0,00</span>
-                </div>
-                <div class="checkout-container">
-                    <button class="button cta" id="checkoutButton">Finalizar Pedido</button>
-                </div>
-            </footer>
-        </aside>
+    <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
 
-        <section class="container-coxinhas" aria-label="Seção de avaliações de clientes">
-            <h2 class="avaliações">Avaliações</h2>
-            <div class="comentarios-container">
-                <blockquote class="comentario">
-                    <p>"Salgados sempre fresquinhos e deliciosos! Aprovadíssimo!"</p>
-                    <footer>
-                        <cite>Maria Silva</cite>
-                        <div class="rating" data-rating="4.8" aria-label="Avaliação 4.8 de 5 estrelas"></div>
-                    </footer>
-                </blockquote>
-                <blockquote class="comentario">
-                    <p>"A coxinha de vocês é a melhor que já comi! Super recomendo."</p>
-                    <footer>
-                        <cite>João Pereira</cite>
-                        <div class="rating" data-rating="4.5" aria-label="Avaliação 4.5 de 5 estrelas"></div>
-                    </footer>
-                </blockquote>
-                <blockquote class="comentario">
-                    <p>"Entrega rápida e salgados quentinhos. Perfeito para qualquer hora!"</p>
-                    <footer>
-                        <cite>Ana Clara</cite>
-                        <div class="rating" data-rating="4.3" aria-label="Avaliação 4.3 de 5 estrelas"></div>
-                    </footer>
-                </blockquote>
-            </div>
-            <!-- MUDANÇA: 'alt' vazio e 'aria-hidden' para imagens puramente decorativas -->
-            <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" alt="" id="coxinha1" class="coxinha" aria-hidden="true">
-            <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" alt="" id="coxinha2" class="coxinha" aria-hidden="true">
-            <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" alt="" id="coxinha3" class="coxinha" aria-hidden="true">
-            <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" alt="" id="coxinha4" class="coxinha" aria-hidden="true">
-        </section>
+    <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
 
-        <!-- MUDANÇA: Removido script.js duplicado daqui -->
+    <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
 
-        <section id="fidelidade" class="cart">
-            <h2>Programa de Fidelidade</h2>
-            <div id="cadastro-fidelidade">
-                <h3>Cadastre-se e ganhe pontos!</h3>
-                <form id="form-fidelidade" autocomplete="on" novalidate>
-                    <div class="form-group">
-                        <label for="nome-fidelidade">Nome completo:</label>
-                        <input type="text" id="nome-fidelidade" name="nome" placeholder="Digite seu nome completo" required autocomplete="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone-fidelidade">Telefone (WhatsApp):</label>
-                        <input type="tel" id="telefone-fidelidade" name="telefone" placeholder="(99) 99999-9999" required autocomplete="tel">
-                    </div>
-                    <button type="submit" id="cadastrar-fidelidade" class="button">Cadastrar</button>
-                </form>
-            </div>
-            <div id="carteira-digital" style="display: none;">
-                <h3>Sua Carteira Digital</h3>
-                <p>Olá, <strong id="nome-cliente"></strong>!</p>
-                <p>Seus pontos: <strong id="pontos-cliente">0</strong></p>
-                <h4>Resgate de Recompensas</h4>
-                <div class="rewards-buttons">
-                    <button id="resgatar-desconto" class="button" data-pontos="50">Resgatar R$ 5,00 (50 pts)</button>
-                    <button id="resgatar-produto" class="button" data-pontos="100">Resgatar 1 Salgado (100 pts)</button>
-                </div>
-                <h4>Histórico de Transações</h4>
-                <ul id="historico-transacoes"></ul>
-            </div>
-        </section>
+</svg>
 
-        <svg class="decorative-line" width="100%" height="50" viewBox="0 0 1000 50" aria-hidden="true">
-            <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
-            <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-            <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
-        </svg>
 
-        <section class="quem-somos">
-            <div class="container">
-                <h2>Quem Somos</h2>
-                <div class="quem-somos-conteudo">
-                    <div class="quem-somos-texto">
-                        <p>Na Explosão Crocante, nossa essência é a qualidade e o cuidado humano em cada detalhe. Trabalhamos com <strong>salgados artesanais</strong>, preparados com ingredientes selecionados e dedicação, garantindo sabor e crocância incomparáveis.</p>
-                        <p>Nosso compromisso vai além do produto: oferecemos <strong>atendimento acolhedor</strong> e um ambiente convidativo, valorizando cada cliente e nossa equipe. Acreditamos na <strong>presença digital</strong> para facilitar o contato e criar uma conexão direta, tornando sua experiência ainda mais prática e próxima.</p>
-                        <p>Valorizamos cada cliente e colaborador, pois juntos construímos uma história de confiança, sabor e carinho.</p>
-                    </div>
-                    <figure class="quem-somos-imagem">
-                        <img src="imagens/Missão.png" alt="Ilustração representando a missão da empresa com ícones de qualidade e carinho.">
-                        <figcaption>Qualidade e cuidado em cada detalhe.</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
 
-        <section class="onde-estamos" id="contato">
-            <div class="container">
-                <h2>Onde Estamos</h2>
-                <div class="onde-estamos-conteudo">
-                    <address class="onde-estamos-info">
-                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <strong>Endereço:</strong><br>Rua Exemplo, 123<br>Centro, São José do Rio Preto - SP<br>CEP: 15000-000</p>
-                        <p><i class="fas fa-phone" aria-hidden="true"></i> <strong>Telefone:</strong> <a href="tel:+5517996780618">(17) 99678-0618</a></p>
-                        <p><i class="fab fa-whatsapp" aria-hidden="true"></i> <strong>WhatsApp:</strong> <a href="https://wa.me/5517996780618" target="_blank" rel="noopener noreferrer">(17) 99678-0618</a></p>
-                        <div class="horarios">
-                            <p><i class="fas fa-clock" aria-hidden="true"></i> <strong>Horário de atendimento:</strong></p>
-                            <ul>
-                                <li><span class="horario-dia">Segunda a Sábado:</span> <span class="horario-hora">8h às 18h</span></li>
-                                <li><span class="horario-dia fechado">Domingo:</span> <span class="horario-hora fechado">Fechado</span></li>
-                            </ul>
-                        </div>
-                    </address>
-                    <figure class="onde-estamos-mapa">
-                        <iframe src="https://www.google.com/maps?q=Rua+Exemplo,+123,+São+José+do+Rio+Preto,+SP&output=embed" width="100%" height="220" style="border:0; border-radius:16px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa mostrando a localização da Explosão Crocante."></iframe>
-                        <figcaption><i class="fas fa-location-arrow" aria-hidden="true"></i> Estamos aqui! Fácil acesso e estacionamento na porta.</figcaption>
-                        <img src="imagens/Interior.png" alt="Foto do interior aconchegante da loja" class="onde-mapa-foto">
-                    </figure>
-                </div>
-            </div>
-        </section>
+<!-- Seção de Sugestões Inteligentes -->
+
+<section id="sugestoes" class="promotions">
+
+    <h2>Sugestões Personalizadas</h2>
+
+    <div id="sugestoes-produtos" class="promotions-grid">
+
+        <!-- As sugestões serão inseridas aqui via JavaScript -->
+
+    </div>
+
+</section>
+
+
+
+<!-- Menu do Carrinho Flutuante -->
+
+<div class="cart-menu" id="cart-menu" aria-modal="true" role="dialog">
+
+    <button class="close-cart-button" aria-label="Fechar carrinho" onclick="toggleCart()" tabindex="0">
+
+        <i class="fas fa-arrow-left"></i>
+
+    </button>
+
+    <h2>Seu Carrinho</h2>
+
+    <ul id="cart-items"></ul>
+
+
+
+    <div class="cart-total-container">
+
+        <p>Total: <span id="cart-total" aria-live="polite">R$ 0,00</span></p>
+
+    </div>
+
+    <div class="checkout-container">
+
+        <button class="button" onclick="finalizarPedido()" id="checkoutButton">Finalizar Pedido</button>
+
+    </div>
+
+</div>
+
+
+
+<div class="container-coxinhas" style="background: linear-gradient(135deg, #800000, #A52A2A);
+
+    color: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    font-family: var(--dancing);
+
+    font-weight: bold;
+
+    height: 300px;
+
+    transition: background 0.3s ease;">
+
+    <h2 class="avaliações" style="color: white;">Avaliações</h2>
+
+
+
+    <div class="comentarios-container">
+
+        <div class="comentario">
+
+            <p style="font-size: 1.1em; margin-bottom: 10px;">
+
+                Salgados sempre fresquinhos e deliciosos! Aprovadíssimo!
+
+            </p>
+
+            <p style="font-weight: bold; margin-bottom: 5px;">Maria Silva</p>
+
+            <div style="color: gold; font-size: 1.2em;" data-rating="4.8"></div>
+
+        </div>
+
+        <div class="comentario">
+
+            <p style="font-size: 1.1em; margin-bottom: 10px;">
+
+                A coxinha de vocês é a melhor que já comi! Super recomendo.
+
+            </p>
+
+            <p style="font-weight: bold; margin-bottom: 5px;">João Pereira</p>
+
+            <div style="color: gold; font-size: 1.2em;" data-rating="4.5"></div>
+
+        </div>
+
+        <div class="comentario">
+
+            <p style="font-size: 1.1em; margin-bottom: 10px;">
+
+                Entrega rápida e salgados quentinhos. Perfeito para qualquer hora!
+
+            </p>
+
+            <p style="font-weight: bold; margin-bottom: 5px;">Ana Clara</p>
+
+            <div style="color: gold; font-size: 1.2em;" data-rating="4.3"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" 
+
+        alt="Coxinha" id="coxinha1" class="coxinha" 
+
+        style="position: absolute; width: 130px; opacity: 0.8; left: 5%; top: 5%; transform: translateY(0) rotate(-5deg); transition: transform 0.5s ease-out;">
+
+
+
+    <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" 
+
+        alt="Coxinha" id="coxinha2" class="coxinha" 
+
+        style="position: absolute; width: 90px; opacity: 0.8; right: 5%; top: 8%; transform: translateY(0) rotate(175deg); transition: transform 0.5s ease-out;">
+
+
+
+    <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" 
+
+        alt="Coxinha" id="coxinha3" class="coxinha" 
+
+        style="position: absolute; width: 100px; opacity: 0.8; right: 10%; bottom: 30%; transform: translateY(0) rotate(5deg); transition: transform 0.5s ease-out;">
+
+
+
+    <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" 
+
+        alt="Coxinha" id="coxinha4" class="coxinha" 
+
+        style="position: absolute; width: 70px; opacity: 0.7; left: 45%; top: 62%; transform: translateY(0) rotate(-3deg); transition: transform 0.5s ease-out;">
+
+</div>
+
+ <!-- Seção de Fidelidade -->
+
+ <section id="fidelidade" class="cart">
+
+    <h2>Programa de Fidelidade</h2>
+
+    <div id="cadastro-fidelidade">
+
+        <h3>Cadastre-se e ganhe pontos!</h3>
+
+        <form id="form-fidelidade" autocomplete="on">
+
+            <label for="nome-fidelidade">Nome completo:</label>
+
+            <input type="text" id="nome-fidelidade" name="nome" placeholder="Digite seu nome completo" required autocomplete="name">
+
+
+
+            <label for="telefone-fidelidade">Telefone (WhatsApp):</label>
+
+            <input type="tel" id="telefone-fidelidade" name="telefone" placeholder="(99) 99999-9999" required autocomplete="tel">
+
+
+
+            <button type="submit" id="cadastrar-fidelidade" class="button">Cadastrar</button>
+
+        </form>
+
+    </div>
+
+
+
+    <div id="carteira-digital" style="display: none;">
+
+        <h3>Sua Carteira Digital</h3>
+
+        <p>Olá, <span id="nome-cliente"></span>!</p>
+
+        <p>Seus pontos: <span id="pontos-cliente">0</span></p>
+
+        <p>Histórico de transações:</p>
+
+        <ul id="historico-transacoes"></ul>
+
+        <h4>Resgate de Recompensas</h4>
+
+        <button id="resgatar-desconto" class="button" data-pontos="50">Resgatar R$ 5,00 de desconto (50 pontos)</button>
+
+        <button id="resgatar-produto" class="button" data-pontos="100">Resgatar 1 salgado grátis (100 pontos)</button>
+
+    </div>
+
+</section>
+
+ <!-- Linha Decorativa -->
+
+ <svg width="100%" height="50" viewBox="0 0 1000 50" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+    <path d="M0 25 Q250 -10 500 25 T1000 25" stroke="#D4A373" stroke-width="4" fill="none" />
+
+    <circle cx="0" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
+    <circle cx="1000" cy="25" r="10" fill="#E5C07B" stroke="#B88A44" stroke-width="3" />
+
+</svg>
+
     </main>
 
-    <footer class="site-footer">
+    <!-- Seção Quem Somos -->
+    <section class="quem-somos">
         <div class="container">
-            <p>© <span id="current-year">2025</span> Explosão Crocante. Todos os direitos reservados.</p>
-            <nav aria-label="Navegação do rodapé">
-                <ul class="footer-links">
-                    <li><a href="#tipos">Cardápio</a></li>
-                    <li><a href="#promotions">Promoções</a></li>
-                    <li><a href="https://www.instagram.com/explosao_crocante_salgaderia/" target="_blank" rel="noopener noreferrer" aria-label="Visite nosso Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
-                    <li><a href="https://www.facebook.com/profile.php?id=61572630962138" target="_blank" rel="noopener noreferrer" aria-label="Visite nosso Facebook"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a></li>
-                </ul>
-            </nav>
+            <h2>Quem somos?</h2>
+            <div class="quem-somos-conteudo">
+                <div class="quem-somos-texto">
+                    <p>
+                        Na Explosão Crocante, nossa essência é a qualidade e o cuidado humano em cada detalhe. Trabalhamos com <strong>salgados artesanais</strong>, preparados com ingredientes selecionados e dedicação, garantindo sabor e crocância incomparáveis.<br><br>
+                        Nosso compromisso vai além do produto: oferecemos <strong>atendimento acolhedor</strong> e um ambiente convidativo, valorizando cada cliente e nossa equipe. Acreditamos na <strong>presença digital</strong> para facilitar o contato e criar uma conexão direta, tornando sua experiência ainda mais prática e próxima.<br><br>
+                        Valorizamos cada cliente e colaborador, pois juntos construímos uma história de confiança, sabor e carinho.
+                    </p>
+                </div>
+                <div class="quem-somos-imagem">
+                    <img src="imagens/Missão.png" alt="Missão: qualidade e cuidado humano">
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- Seção Onde Estamos -->
+    <section class="onde-estamos">
+        <div class="container">
+            <h2>Onde estamos?</h2>
+            <div class="onde-estamos-conteudo">
+                <div class="onde-estamos-info">
+                    <p>
+                        <span class="onde-icone"><i class="fas fa-map-marker-alt"></i></span>
+                        <strong>Endereço:</strong><br>
+                        Rua Exemplo, 123<br>
+                        Centro, São José do Rio Preto - SP<br>
+                        CEP: 15000-000
+                    </p>
+                    <p>
+                        <span class="onde-icone"><i class="fas fa-phone"></i></span>
+                        <strong>Telefone:</strong> <a href="tel:+5517996780618">(17) 99678-0618</a><br>
+                        <span class="onde-icone"><i class="fab fa-whatsapp"></i></span>
+                        <strong>WhatsApp:</strong> <a href="https://wa.me/5517996780618" target="_blank">(17) 99678-0618</a>
+                    </p>
+                    <p>
+                        <span class="onde-icone"><i class="fas fa-clock"></i></span>
+                        <strong>Horário de atendimento:</strong><br>
+                        <span class="horario-dia">Segunda a Sábado:</span> <span class="horario-hora">8h às 18h</span><br>
+                        <span class="horario-dia fechado">Domingo:</span> <span class="horario-hora fechado">Fechado</span>
+                    </p>
+                    <div class="onde-estamos-chamada">
+                        <i class="fas fa-store-alt"></i>
+                        <span>Venha nos visitar e viva a experiência Explosão Crocante! Ambiente acolhedor, atendimento especial e o melhor salgado da cidade esperando por você.</span>
+                    </div>
+                </div>
+                <div class="onde-estamos-mapa">
+                    <div class="onde-mapa-card">
+                        <iframe
+                            src="https://www.google.com/maps?q=Rua+Exemplo,+123,+São+José+do+Rio+Preto,+SP&output=embed"
+                            width="100%" height="220" style="border:0; border-radius:16px;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade" title="Mapa da localização"></iframe>
+                        <div class="onde-mapa-legenda">
+                            <i class="fas fa-location-arrow"></i>
+                            <span>Estamos aqui! Fácil acesso e estacionamento na porta.</span>
+                        </div>
+                        <img src="imagens/Interior.png" alt="Foto do interior da loja" class="onde-mapa-foto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé do Site -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>© 2025 Explosão Crocante. Todos os direitos reservados.</p>
+
+            <nav>
+
+                <ul class="footer-links">
+
+                    <li><a href="#tipos" tabindex="0">Cardápio</a></li>
+
+                    <li><a href="#promotions" tabindex="0">Promoções</a></li>
+
+                    <li><a href="#" onclick="toggleCart();return false;" tabindex="0">Carrinho</a></li>
+
+                    <li>
+
+                         <a href="https://www.instagram.com/explosao_crocante_salgaderia/" target="_blank" rel="noopener noreferrer" tabindex="0">
+
+                             <i class="fab fa-instagram"></i> Instagram
+
+                         </a>
+
+                     </li>
+
+                     <li>
+
+                         <a href="https://www.facebook.com/profile.php?id=61572630962138" target="_blank" rel="noopener noreferrer" tabindex="0">
+
+                             <i class="fab fa-facebook"></i> Facebook
+
+                         </a>
+
+                </ul>
+
+
+
+            </nav>
+
+        </div>
+
     </footer>
 
-    <a href="https://wa.me/5517996780618?text=Olá,%20Eu%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer" class="botao-whatsapp" aria-label="Entre em contato pelo WhatsApp">
-         <i class="fab fa-whatsapp" aria-hidden="true"></i>
-    </a>
+     <!-- Botão do WhatsApp -->
 
-    <!-- MUDANÇA: 'script.js' no final do body, carregado apenas uma vez. -->
+    <a href="https://wa.me/5517996780618?text=Olá,%20Eu%20gostaria%20de%20fazer%20um%20pedido."
+
+        target="_blank"
+
+       class="botao-whatsapp"
+
+        aria-label="Entre em contato pelo WhatsApp">
+
+         <i class="fab fa-whatsapp"></i>
+
+     </a>
+
+
+
     <script src="script.js"></script>
-    <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
+
 </body>
+
 </html>
+
