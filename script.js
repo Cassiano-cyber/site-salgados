@@ -275,323 +275,12 @@ const carouselModule = (() => {
 
 // ---- RESTANTE DOS SEUS MÓDULOS E INITIALIZAÇÃO DO DOM ----
 
-/**
- * Módulo de Tema (mantido do código anterior, sem mudanças críticas)
- */
-const themeModule = (() => {
-    let toggleButton;
-    const THEME_STORAGE_KEY = "theme";
+// Módulos `themeModule`, `cartModule`, `loyaltyModule`, `suggestionModule` (e suas funções auxiliares)
+// ... (cole aqui o restante do seu código dos outros módulos e do DOMContentLoaded) ...
+// Certifique-se de que o `carouselModule` seja o único declarado.
 
-    const init = () => {
-        toggleButton = document.getElementById("toggleTheme");
-        if (!toggleButton) {
-            console.error("Theme toggle button with ID 'toggleTheme' not found.");
-            return false;
-        }
-        toggleButton.addEventListener("click", toggleTheme);
-        initializeTheme();
-        console.log("Theme module initialized.");
-        return true;
-    };
-
-    const toggleTheme = () => {
-        document.body.classList.toggle("dark-mode");
-        const theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
-        localStorage.setItem(THEME_STORAGE_KEY, theme);
-        updateThemeButton();
-    };
-
-    const initializeTheme = () => {
-        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-            document.body.classList.add("dark-mode");
-        } else {
-            document.body.classList.remove("dark-mode");
-        }
-        updateThemeButton();
-    };
-
-    const updateThemeButton = () => {
-        if (!toggleButton) return;
-        const isDarkMode = document.body.classList.contains("dark-mode");
-        toggleButton.innerHTML = isDarkMode
-            ? '<i class="fas fa-sun"></i> Light Mode'
-            : '<i class="fas fa-moon"></i> Dark Mode';
-    };
-
-    return { init, initializeTheme, toggleTheme, updateThemeButton };
-})();
-
-/**
- * Módulo para gerenciar o carrinho de compras.
- */
-const cartModule = (() => {
-    const cart = [];
-    const cartMenu = document.getElementById('cart-menu');
-    const cartItemsList = document.getElementById('cart-items');
-    const cartCount = document.getElementById('cart-count');
-    const cartTotalDisplay = document.getElementById('cart-total');
-
-    if (!cartMenu || !cartItemsList || !cartCount || !cartTotalDisplay) {
-        console.error("One or more essential cart elements not found.");
-        return { init: () => false, addItem: () => {}, removeItem: () => {}, cart: [], total: () => 0 };
-    }
-
-    const updateCartDisplay = () => {
-        cartItemsList.innerHTML = '';
-        let totalValue = 0;
-
-        cart.forEach((item, index) => {
-            const listItem = document.createElement('li');
-            listItem.className = 'cart-item';
-            listItem.innerHTML = `
-                <span>${item.name} - R$ ${item.price.toFixed(2)}</span>
-                <button class="remove-item" data-index="${index}" aria-label="Remover ${item.name} do carrinho">
-                    <i class="fas fa-trash"></i>
-                </button>
-            `;
-            cartItemsList.appendChild(listItem);
-            totalValue += item.price;
-        });
-
-        cartCount.textContent = cart.length;
-        cartTotalDisplay.textContent = `R$ ${totalValue.toFixed(2)}`;
-    };
-
-    const addItem = (name, price) => {
-        cart.push({ name, price });
-        updateCartDisplay();
-    };
-
-    const removeItem = (index) => {
-        if (index >= 0 && index < cart.length) {
-            cart.splice(index, 1);
-            updateCartDisplay();
-        }
-    };
-
-    document.body.addEventListener('click', (event) => {
-        if (event.target.classList.contains('add-to-cart')) {
-            const button = event.target;
-            const name = button.dataset.name;
-            const price = parseFloat(button.dataset.price);
-
-            if (isNaN(price)) {
-                console.error(`Invalid price for item "${name}": ${button.dataset.price}`);
-                return;
-            }
-            addItem(name, price);
-            animateItemToCart(button);
-        }
-
-        if (event.target.closest('.remove-item')) {
-            const index = parseInt(event.target.closest('.remove-item').dataset.index, 10);
-            if (!isNaN(index)) {
-                removeItem(index);
-            }
-        }
-    });
-
-    const animateItemToCart = (button) => {
-        let productCard = button.closest('.product');
-        if (!productCard) {
-            productCard = button.closest('.salgado-item');
-        }
-
-        if (!productCard) {
-            console.warn("Could not find product card for animation.");
-            return;
-        }
-
-        const cartIcon = document.querySelector('.cart-icon');
-        const img = productCard.querySelector('img');
-
-        if (!img || !cartIcon) {
-            console.warn("Image or cart icon not found for animation.");
-            return;
-        }
-
-        const clone = img.cloneNode(true);
-        clone.classList.add('product-clone-animation');
-        const rect = img.getBoundingClientRect();
-
-        clone.style.position = 'fixed';
-        clone.style.top = `${rect.top}px`;
-        clone.style.left = `${rect.left}px`;
-        clone.style.width = `${rect.width}px`;
-        clone.style.height = `${rect.height}px`;
-        clone.style.borderRadius = '50%';
-        clone.style.objectFit = 'cover';
-        clone.style.transition = 'all 0.8s cubic-bezier(.4,2,.6,1)';
-        clone.style.zIndex = '9999';
-        clone.style.pointerEvents = 'none';
-        document.body.appendChild(clone);
-
-        const cartRect = cartIcon.getBoundingClientRect();
-        const cartCenterX = cartRect.left + cartRect.width / 2;
-        const cartCenterY = cartRect.top + cartRect.height / 2;
-        const finalCloneWidth = rect.width * 0.2;
-        const finalCloneHeight = rect.height * 0.2;
-
-        setTimeout(() => {
-            clone.style.top = `${cartCenterY - finalCloneHeight / 2}px`;
-            clone.style.left = `${cartCenterX - finalCloneWidth / 2}px`;
-            clone.style.width = `${finalCloneWidth}px`;
-            clone.style.height = `${finalCloneHeight}px`;
-            clone.style.opacity = '0.4';
-        }, 20);
-
-        setTimeout(() => {
-            if (clone.parentNode) {
-                clone.parentNode.removeChild(clone);
-            }
-        }, 850);
-    };
-
-    return { init, addItem, removeItem, cart, total: () => cart.reduce((sum, item) => sum + item.price, 0) };
-})();
-
-/**
- * Módulo de Fidelidade do Cliente.
- */
-const loyaltyModule = (() => {
-    let clienteCadastrado = null;
-    const CLIENT_STORAGE_KEY = "cliente";
-
-    const init = () => {
-        clienteCadastrado = JSON.parse(localStorage.getItem(CLIENT_STORAGE_KEY)) || null;
-
-        const cadastrarButton = document.getElementById("cadastrar-fidelidade");
-        const resgatarButton = document.getElementById("resgatar-desconto");
-        const cadastroDiv = document.getElementById("cadastro-fidelidade");
-        const carteiraDiv = document.getElementById("carteira-digital");
-
-        if (!cadastrarButton || !resgatarButton || !cadastroDiv || !carteiraDiv) {
-            console.error("One or more essential loyalty elements not found.");
-            return false;
-        }
-
-        cadastrarButton.addEventListener("click", (event) => {
-            event.preventDefault();
-            const nomeInput = document.getElementById("nome-fidelidade");
-            const telefoneInput = document.getElementById("telefone-fidelidade");
-            const nome = nomeInput.value.trim();
-            const telefone = telefoneInput.value.trim();
-
-            if (nome && telefone) {
-                clienteCadastrado = { nome, telefone, pontos: 0, historicoPedidos: [] };
-                localStorage.setItem(CLIENT_STORAGE_KEY, JSON.stringify(clienteCadastrado));
-                exibirCarteiraDigital();
-                console.log(`Cliente "${nome}" cadastrado com sucesso.`);
-            } else {
-                alert("Por favor, preencha todos os campos para o cadastro.");
-            }
-        });
-
-        if (clienteCadastrado) {
-            exibirCarteiraDigital();
-        }
-        console.log("Loyalty module initialized.");
-        return true;
-    };
-
-    const exibirCarteiraDigital = () => {
-        const cadastroDiv = document.getElementById("cadastro-fidelidade");
-        const carteiraDiv = document.getElementById("carteira-digital");
-        const nomeClienteSpan = document.getElementById("nome-cliente");
-        const pontosClienteSpan = document.getElementById("pontos-cliente");
-
-        if (!cadastroDiv || !carteiraDiv || !nomeClienteSpan || !pontosClienteSpan) return;
-
-        cadastroDiv.style.display = "none";
-        carteiraDiv.style.display = "block";
-
-        nomeClienteSpan.textContent = clienteCadastrado.nome;
-        pontosClienteSpan.textContent = clienteCadastrado.pontos;
-    };
-
-    const adicionarPontos = (valorCompra) => {
-        if (!clienteCadastrado) return;
-
-        const pontosGanhos = Math.floor(valorCompra / 10);
-        if (pontosGanhos > 0) {
-            clienteCadastrado.pontos += pontosGanhos;
-            localStorage.setItem(CLIENT_STORAGE_KEY, JSON.stringify(clienteCadastrado));
-            exibirCarteiraDigital();
-            console.log(`Adicionados ${pontosGanhos} pontos para ${clienteCadastrado.nome}. Total: ${clienteCadastrado.pontos}`);
-        }
-    };
-
-    const getCliente = () => {
-        return clienteCadastrado;
-    };
-
-    return { init, adicionarPontos, getCliente };
-})();
-
-/**
- * Módulo de Sugestões Personalizadas.
- */
-const suggestionModule = (() => {
-    const produtos = [
-        { id: 1, nome: "Coxinha de Frango", preco: 3.50, tipo: "salgado" },
-        { id: 2, nome: "Enroladinho de Salsicha", preco: 4.00, tipo: "salgado" },
-        { id: 3, nome: "Combo Coxinha de Frango", preco: 15.00, tipo: "combo" },
-        { id: 4, nome: "Coxinha de Costela", preco: 7.50, tipo: "salgado" },
-        { id: 5, nome: "Bolinha de Queijo", preco: 5.00, tipo: "salgado" },
-        { id: 6, nome: "Empada de Frango", preco: 6.00, tipo: "salgado" },
-    ];
-
-    const exibirSugestoesPersonalizadas = () => {
-        const sugestoesContainer = document.getElementById("sugestoes-produtos");
-        if (!sugestoesContainer) {
-            console.error("Suggestions container 'sugestoes-produtos' not found.");
-            return;
-        }
-        sugestoesContainer.innerHTML = "";
-
-        const cliente = loyaltyModule.getCliente();
-
-        if (cliente && cliente.historicoPedidos && cliente.historicoPedidos.length > 0) {
-            const ultimoPedido = cliente.historicoPedidos[cliente.historicoPedidos.length - 1];
-            const produtosSugeridos = produtos.filter(p => p.tipo === ultimoPedido.tipo && p.id !== ultimoPedido.id);
-
-            if (produtosSugeridos.length > 0) {
-                produtosSugeridos.forEach(produto => {
-                    const card = createSuggestionCard(produto, `Que tal experimentar este?`);
-                    sugestoesContainer.appendChild(card);
-                });
-            } else {
-                exibirSugestaoPadrao(sugestoesContainer);
-            }
-        } else {
-            exibirSugestaoPadrao(sugestoesContainer);
-        }
-    };
-
-    const createSuggestionCard = (produto, mensagem) => {
-        const card = document.createElement("article");
-        card.className = "promotion-item";
-        card.innerHTML = `
-            <h3>${produto.nome}</h3>
-            <p>${mensagem}</p>
-            <button class="add-to-cart button" data-name="${produto.nome}" data-price="${produto.preco.toFixed(2)}">Adicionar ao Carrinho</button>
-        `;
-        return card;
-    };
-
-    const exibirSugestaoPadrao = (container) => {
-        const sugestaoPadrao = produtos.find(p => p.id === 1) || produtos[0];
-        if (sugestaoPadrao) {
-            const card = createSuggestionCard(sugestaoPadrao, "Experimente o nosso carro-chefe!");
-            container.appendChild(card);
-        }
-    };
-
-    return { exibirSugestoesPersonalizadas };
-})();
+// --- Exemplo de como o final ficaria após colar os outros módulos ---
+// ... (themeModule, cartModule, loyaltyModule, suggestionModule) ...
 
 /**
  * Função auxiliar para capitalizar a primeira letra de uma string.
@@ -600,7 +289,6 @@ function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
 
 /**
  * Inicializa todos os módulos da aplicação quando o DOM estiver pronto.
@@ -611,12 +299,12 @@ document.addEventListener("DOMContentLoaded", () => {
     loyaltyModule.init();
 
     // Inicializa os carrosséis da página
-    carouselModule.init('tipos-salgado');
-    carouselModule.init('sabores');
+    carouselModule.init('tipos-salgado'); // VERIFIQUE SE ESTE ID ESTÁ CORRETO NO SEU HTML
+    carouselModule.init('sabores');      // VERIFIQUE SE ESTE ID ESTÁ CORRETO NO SEU HTML
 
     const tiposCarrossel = document.getElementById('tipos-salgado');
     const saboresCarrossel = document.getElementById('sabores');
-    const saboresTrack = document.getElementById('carousel-track-sabores');
+    const saboresTrack = document.getElementById('carousel-track-sabores'); // VERIFIQUE SE ESTE ID ESTÁ CORRETO NO SEU HTML
     const tipoSelecionadoSpan = document.getElementById('tipo-selecionado');
     const saborSelecionadoSpan = document.getElementById('sabor-selecionado');
 
@@ -624,39 +312,49 @@ document.addEventListener("DOMContentLoaded", () => {
     let saborSelecionado = null;
     let saboresDisponiveis = [];
 
-    tiposCarrossel.addEventListener('click', function(event) {
-        if (event.target.classList.contains('select-type')) {
-            const selectedTypeElement = event.target;
-            tipoSelecionado = selectedTypeElement.dataset.tipo;
+    if (tiposCarrossel) { // Verifica se o carrossel de tipos existe
+        tiposCarrossel.addEventListener('click', function(event) {
+            if (event.target.classList.contains('select-type')) {
+                const selectedTypeElement = event.target;
+                tipoSelecionado = selectedTypeElement.dataset.tipo;
 
-            tipoSelecionadoSpan.textContent = capitalizeFirstLetter(tipoSelecionado);
-            atualizarSabores(tipoSelecionado);
+                if (tipoSelecionadoSpan) tipoSelecionadoSpan.textContent = capitalizeFirstLetter(tipoSelecionado);
+                atualizarSabores(tipoSelecionado); // Chama a função para atualizar os sabores
 
-            saborSelecionado = null;
-            saborSelecionadoSpan.textContent = 'Nenhum';
+                saborSelecionado = null;
+                if (saborSelecionadoSpan) saborSelecionadoSpan.textContent = 'Nenhum';
 
-            carouselModule.stopAutoSlideExternally('tipos-salgado');
-        }
-    });
-
-    saboresCarrossel.addEventListener('click', function(event) {
-        const productSlide = event.target.closest('.carousel-slide.product');
-        if (productSlide) {
-            saborSelecionado = productSlide.dataset.sabor;
-            const saborInfo = saboresDisponiveis.find(s => s.sabor === saborSelecionado);
-            saborSelecionadoSpan.textContent = saborInfo ? saborInfo.nome : 'Nenhum';
-
-            const slides = Array.from(saboresCarrossel.querySelectorAll('.carousel-slide.product'));
-            const slideIndex = slides.indexOf(productSlide);
-            if (slideIndex !== -1) {
-                carouselModule.lockCarousel('sabores', slideIndex);
+                carouselModule.stopAutoSlideExternally('tipos-salgado');
             }
-        }
-    });
+        });
+    } else {
+        console.warn("Element with ID 'tipos-salgado' not found. Carousel for types will not function.");
+    }
+
+
+    if (saboresCarrossel) { // Verifica se o carrossel de sabores existe
+        saboresCarrossel.addEventListener('click', function(event) {
+            const productSlide = event.target.closest('.carousel-slide.product');
+            if (productSlide) {
+                saborSelecionado = productSlide.dataset.sabor;
+                const saborInfo = saboresDisponiveis.find(s => s.sabor === saborSelecionado);
+                if (saborSelecionadoSpan) saborSelecionadoSpan.textContent = saborInfo ? saborInfo.nome : 'Nenhum';
+
+                const slides = Array.from(saboresCarrossel.querySelectorAll('.carousel-slide.product'));
+                const slideIndex = slides.indexOf(productSlide);
+                if (slideIndex !== -1) {
+                    carouselModule.lockCarousel('sabores', slideIndex);
+                }
+            }
+        });
+    } else {
+        console.warn("Element with ID 'sabores' not found. Carousel for flavors will not function.");
+    }
+
 
     function atualizarSabores(tipo) {
         if (!saboresTrack) {
-            console.error("Element 'carousel-track-sabores' not found for updating flavors.");
+            console.error("Element with ID 'carousel-track-sabores' not found. Cannot update flavors.");
             return;
         }
         saboresTrack.innerHTML = '';
@@ -722,7 +420,9 @@ document.addEventListener("DOMContentLoaded", () => {
             saboresTrack.appendChild(slide);
         });
 
-        carouselModule.init('sabores'); // RE-INICIALIZA o carrossel de sabores
+        // Re-inicializa o carrossel de sabores APÓS adicionar os novos slides.
+        // Isso é CRUCIAL para que o carrossel de sabores reconheça os elementos criados.
+        carouselModule.init('sabores');
     }
 
     // --- Configuração de Endereço e Checkout ---
@@ -771,16 +471,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const updateEnderecoContainerVisibility = (radio, container) => {
-        container.style.display = radio.checked ? 'block' : 'none';
+        if (radio && container) {
+            container.style.display = radio.checked ? 'block' : 'none';
+        }
     };
 
-    updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal);
-    updateEnderecoContainerVisibility(entregaRadio, enderecoContainer);
+    if(entregaRadioPrincipal && enderecoContainerPrincipal) updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal);
+    if(entregaRadio && enderecoContainer) updateEnderecoContainerVisibility(entregaRadio, enderecoContainer);
 
-    entregaRadioPrincipal.addEventListener('change', () => updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal));
-    retiradaRadioPrincipal.addEventListener('change', () => updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal));
+    if(entregaRadioPrincipal) entregaRadioPrincipal.addEventListener('change', () => updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal));
+    if(retiradaRadioPrincipal) retiradaRadioPrincipal.addEventListener('change', () => updateEnderecoContainerVisibility(entregaRadioPrincipal, enderecoContainerPrincipal));
 
-    buscarEnderecoButtonPrincipal.addEventListener('click', () => {
+    if(buscarEnderecoButtonPrincipal && cepInputPrincipal) buscarEnderecoButtonPrincipal.addEventListener('click', () => {
         const cep = cepInputPrincipal.value.replace(/\D/g, '');
         if (cep.length !== 8) {
             alert('CEP inválido. Digite um CEP com 8 dígitos.');
@@ -789,10 +491,10 @@ document.addEventListener("DOMContentLoaded", () => {
         buscarEndereco(cep, ruaInputPrincipal, bairroInputPrincipal, cidadeInputPrincipal, estadoInputPrincipal, 'endereco-completo-principal');
     });
 
-    entregaRadio.addEventListener('change', () => updateEnderecoContainerVisibility(entregaRadio, enderecoContainer));
-    retiradaRadio.addEventListener('change', () => updateEnderecoContainerVisibility(entregaRadio, enderecoContainer));
+    if(entregaRadio) entregaRadio.addEventListener('change', () => updateEnderecoContainerVisibility(entregaRadio, enderecoContainer));
+    if(retiradaRadio) retiradaRadio.addEventListener('change', () => updateEnderecoContainerVisibility(entregaRadio, enderecoContainer));
 
-    buscarEnderecoButton.addEventListener('click', () => {
+    if(buscarEnderecoButton && cepInput) buscarEnderecoButton.addEventListener('click', () => {
         const cep = cepInput.value.replace(/\D/g, '');
         if (cep.length !== 8) {
             alert('CEP inválido. Digite um CEP com 8 dígitos.');
@@ -842,25 +544,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const resetAddressFields = (cepInputRef, ruaInputRef, numeroInputRef, complementoInputRef, bairroInputRef, cidadeInputRef, estadoInputRef, enderecoContainerRef) => {
             cepInputRef.value = ''; ruaInputRef.value = ''; numeroInputRef.value = ''; complementoInputRef.value = '';
             bairroInputRef.value = ''; cidadeInputRef.value = ''; estadoInputRef.value = '';
-            enderecoContainerRef.style.display = 'none';
+            if(enderecoContainerRef) enderecoContainerRef.style.display = 'none';
         };
 
         if (isPrincipalCheckout) {
             resetAddressFields(cepInputPrincipal, ruaInputPrincipal, numeroInputPrincipal, complementoInputPrincipal, bairroInputPrincipal, cidadeInputPrincipal, estadoInputPrincipal, enderecoContainerPrincipal);
-            retiradaRadioPrincipal.checked = true;
+            if(retiradaRadioPrincipal) retiradaRadioPrincipal.checked = true;
         } else {
             resetAddressFields(cepInput, ruaInput, numeroInput, complementoInput, bairroInput, cidadeInput, estadoInput, enderecoContainer);
-            retiradaRadio.checked = true;
+            if(retiradaRadio) retiradaRadio.checked = true;
         }
 
         tipoSelecionado = null;
         saborSelecionado = null;
-        tipoSelecionadoSpan.textContent = 'Nenhum';
-        saborSelecionadoSpan.textContent = 'Nenhum';
-
-        // Se for necessário resetar completamente os carrosséis, você pode re-inicializá-los
-        // carouselModule.init('tipos-salgado');
-        // carouselModule.init('sabores');
+        if(tipoSelecionadoSpan) tipoSelecionadoSpan.textContent = 'Nenhum';
+        if(saborSelecionadoSpan) saborSelecionadoSpan.textContent = 'Nenhum';
     };
 
     const checkoutButton = document.getElementById('checkoutButton');
@@ -871,9 +569,7 @@ document.addEventListener("DOMContentLoaded", () => {
     suggestionModule.exibirSugestoesPersonalizadas();
 });
 
-/**
- * Configuração de animações e interações visuais com scroll.
- */
+// --- Animações de Scroll (Mantenha este bloco separado se não fez alterações nele) ---
 document.addEventListener("DOMContentLoaded", function () {
     const containerCoxinhas = document.querySelector('.container-coxinhas');
     const coxinhas = [
@@ -980,7 +676,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// --- Configuração de Navegação Mobile e Tema ---
+// --- Navegação Mobile e Tema ---
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const mainNav = document.querySelector('.main-nav');
 const toggleThemeButton = document.getElementById('toggleTheme');
@@ -1037,7 +733,7 @@ function toggleCart() {
     }
 }
 
-// --- Correções e Melhorias para Módulos de Fidelidade e API ---
+// --- Fidelidade e API ---
 const fidelidadeForm = document.getElementById('form-fidelidade');
 if (fidelidadeForm) {
     fidelidadeForm.addEventListener('submit', async (e) => {
