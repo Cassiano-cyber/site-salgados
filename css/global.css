@@ -1,440 +1,310 @@
-/* Importação da Fonte */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+/* Importação das Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Dancing+Script:wght@400;700&display=swap');
 
-/* Paleta de Cores Principal */
+/* Variáveis Globais (Paleta de Cores e Fontes) */
 :root {
-  --background-color: #F8E8D1;      /* Areia quente */
-  --text-color: #3A1E10;            /* Marrom escuro */
-  --primary-color: #DA7635;         /* Laranja queimado */
-  --highlight-color: #B5542D;       /* Terracota */
-  --card-bg: #F5D7A0;               /* Creme dourado */
-  --card-border: #DA7635;           /* Laranja queimado */
-  --header-footer-bg: #B5542D;      /* Terracota */
-  --header-footer-text: #F8E8D1;    /* Areia quente */
-  --dark-background: #3A1E10;       /* Marrom escuro para modo escuro */
-  --dark-mode-text: #F8E8D1;        /* Areia quente para modo escuro */
+  /* Fontes */
+  --font-primary: 'Roboto', sans-serif;
+  --font-accent: 'Dancing Script', cursive;
+
+  /* Paleta de Cores Principal */
+  --background-color: #FDF6E3;      /* Creme suave (um pouco mais claro) */
+  --text-color: #4A2E1E;            /* Marrom escuro (um pouco mais suave) */
+  --primary-color: #E67E22;         /* Laranja cenoura vibrante */
+  --highlight-color: #D35400;       /* Laranja queimado mais intenso */
+  --card-bg: #FFFBF2;               /* Fundo de card quase branco */
+  --card-border: #F39C12;           /* Dourado/Amarelo para bordas */
+  --header-footer-bg: #4A2E1E;      /* Marrom escuro para contraste */
+  --header-footer-text: #FDF6E3;    /* Creme suave */
+  
+  /* Cores para Modo Escuro */
+  --dark-background: #2C1D12;       /* Fundo escuro terroso */
+  --dark-text-color: #EAE0D5;       /* Texto claro para modo escuro */
+  --dark-card-bg: #3E2C1E;          /* Fundo de card escuro */
+  --dark-card-border: #F39C12;      /* Dourado/Amarelo (mantido para destaque) */
 }
 
-/* Reset de Estilos */
-* {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- max-width: 100%;
+/* Reset e Padrões Globais */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Estilos Base */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
- font-family: 'Dancing Script', cursive;
- background-color: var(--background-color);
- color: var(--text-color);
- transition: background-color 0.3s ease, color 0.3s ease;
- overflow-x: hidden;
- line-height: 1.5;
+  font-family: var(--font-primary);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
+/* Estilos do Modo Escuro */
 body.dark-mode {
- background-color: var(--dark-background);
- color: var(--dark-mode-text);
+  --background-color: var(--dark-background);
+  --text-color: var(--dark-text-color);
+  --card-bg: var(--dark-card-bg);
+  --card-border: var(--dark-card-border);
+  /* Outras variáveis podem ser sobrescritas aqui se necessário */
 }
 
-/* Estilos de Contêiner */
+/* Contêiner Principal */
 .container {
- max-width: 1200px;
- margin: 0 auto;
- padding: 0 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* Estilos de Link */
 a {
- text-decoration: none;
- color: var(--primary-color);
- transition: color 0.3s ease;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.2s ease;
 }
 
-a:hover {
- color: var(--highlight-color);
+a:hover, a:focus {
+  color: var(--highlight-color);
 }
 
-a:focus {
-    outline: 2px solid var(--highlight-color);
-    color: var(--highlight-color);
+/* Melhorando acessibilidade do foco */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Títulos */
 h1, h2, h3 {
+  font-family: var(--font-accent);
   color: var(--text-color);
+  line-height: 1.2;
 }
 
-/* IMAGENS RESPONSIVAS */
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.5rem; }
+
+/* Imagens Responsivas */
 img {
- max-width: 100%;
- height: auto;
- display: block;
- /* Evita espaços extras abaixo da imagem */
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* Evita rolagem horizontal */
-html,
-body {
- overflow-x: hidden;
-}
-
-/* Estilos do botão "Fechar Carrinho" (com a seta) */
-.close-cart-button {
- background: none;
- border: none;
- font-size: 1.5em;
- cursor: pointer;
- color: #777;
- position: absolute;
- top: 10px;
- left: 10px;
- padding: 0;
- width: auto;
- height: auto;
- line-height: 1;
- transition: color 0.3s ease;
-}
-
-.close-cart-button:hover {
- color: var(--text-color);
-}
-
-.close-cart-button i {
- font-size: 1.5em;
-}
-
+/* Utilitário para Esconder Visualmente (Acessibilidade) */
 .visually-hidden {
- position: absolute !important;
- width: 1px !important;
- height: 1px !important;
- padding: 0 !important;
- margin: -1px !important;
- overflow: hidden !important;
- clip: rect(0, 0, 0, 0) !important;
- white-space: nowrap !important;
- border: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
-/* Estilos para o carrossel de comentários */
-.comentarios-container {
+/* --- SEÇÃO DE AVALIAÇÕES / COMENTÁRIOS --- */
+.container-coxinhas {
+    background: linear-gradient(135deg, var(--highlight-color), var(--primary-color));
+    color: var(--header-footer-text);
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    text-align: center;
     position: relative;
-    z-index: 2;
-    transition: background-color 0.3s ease;
-    height: 150px; /* Altura fixa para o container */
-    overflow: hidden; /* Esconde os comentários que estão fora da área visível */
+    overflow: hidden; /* Importante para as coxinhas não saírem */
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container-coxinhas .avaliações {
+    color: white; /* Garante que o título seja branco */
+    margin-bottom: 1rem;
+}
+
+/* CORREÇÃO E MELHORIA: Carrossel de Comentários */
+.comentarios-container {
+    position: relative; /* Essencial para posicionar os filhos */
+    z-index: 2; /* Fica na frente das coxinhas */
+    min-height: 120px; /* Evita que o container "pule" de tamanho */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .comentario {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: absolute; /* Posiciona todos no mesmo lugar, no centro do container */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
-    padding: 20px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    background-color: rgba(231, 219, 219, 0.179);
-    transition: opacity 0.5s ease-in-out;
-    opacity: 1;
+    opacity: 0; /* Começa invisível */
+    transition: opacity 0.5s ease-in-out; /* Transição suave */
+    pointer-events: none; /* Não interfere com o mouse quando invisível */
 }
 
-.comentario:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.comentario:nth-child(2) {
-    animation-delay: 5s;
-}
-
-.comentario:nth-child(3) {
-    animation-delay: 10s;
+.comentario.active {
+    opacity: 1; /* Torna o comentário ativo visível */
+    pointer-events: auto;
 }
 
 .comentario p {
     font-size: 1.1em;
     margin-bottom: 10px;
+    font-family: var(--font-primary); /* Usa a fonte primária para melhor legibilidade */
 }
 
-/* Cards genéricos */
-.card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
-  color: var(--text-color);
+.comentario cite {
+    font-style: normal;
+    font-weight: bold;
+    font-family: var(--font-accent);
+    font-size: 1.2em;
+    display: block;
+    margin-top: 0.5rem;
 }
 
-/* Cabeçalho e rodapé */
-header, footer {
-  background-color: var(--header-footer-bg);
-  color: var(--header-footer-text);
+.comentario .rating {
+    color: #FFD700; /* Dourado para as estrelas */
+    font-size: 1.2rem;
+    margin-top: 0.25rem;
 }
 
-/* Estilos para a nova seção institucional */
-.loja-posicionamento {
-  background: var(--background-color);
-  padding: 56px 0 36px 0;
-  border-bottom: 1.5px solid var(--highlight-color);
+/* Coxinhas flutuantes (decorativas) */
+.coxinha {
+    position: absolute;
+    z-index: 1; /* Fica atrás dos comentários */
+    opacity: 0.7;
+    transition: transform 0.5s ease-out;
+}
+#coxinha1 { width: 130px; left: 5%; top: 5%; }
+#coxinha2 { width: 90px; right: 5%; top: 8%; }
+#coxinha3 { width: 100px; right: 10%; bottom: 10%; }
+#coxinha4 { width: 70px; left: 15%; bottom: 15%; }
+
+
+/* Seções Institucionais */
+.loja-posicionamento,
+.quem-somos,
+.onde-estamos {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--card-border);
 }
 
-.loja-posicionamento h2 {
-  color: var(--primary-color);
-  font-size: 2.4rem;
-  font-family: var(--dancing), cursive;
-  margin-bottom: 18px;
-  text-align: center;
-  text-shadow: 0 2px 8px #ffd70033, 0 0 12px #fff8;
+.loja-posicionamento h2,
+.quem-somos h2,
+.onde-estamos h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .loja-posicionamento p {
-  color: var(--text-color);
-  font-size: 1.18rem;
   max-width: 700px;
-  margin: 0 auto 32px auto;
+  margin: 0 auto 2rem auto;
   text-align: center;
-  line-height: 1.6;
 }
 
 .loja-imagens-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 28px;
+  gap: 1.5rem;
   justify-content: center;
-  align-items: flex-start;
 }
 
 .loja-imagens-grid img {
-  background: var(--card-bg);
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #b5542d22, 0 2px 8px #ffd70033;
-  max-width: 340px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   width: 100%;
+  max-width: 340px;
   height: auto;
   object-fit: cover;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .loja-imagens-grid img:hover {
-  transform: scale(1.03) rotate(-1deg);
-  box-shadow: 0 8px 32px #b5542d44, 0 4px 16px #ffd70044;
+  transform: scale(1.04);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilos para a nova seção "Quem somos?" */
-.quem-somos {
-  background: var(--card-bg);
-  border-top: 2px solid var(--highlight-color);
-  border-bottom: 2px solid var(--highlight-color);
-  padding: 48px 0 36px 0;
-  margin-top: 32px;
-}
-
-.quem-somos h2 {
-  color: var(--primary-color);
-  font-size: 2.2rem;
-  text-align: center;
-  margin-bottom: 24px;
-  font-family: var(--dancing), cursive;
-  text-shadow: 0 2px 8px #ffd70022;
-}
-
-.quem-somos-conteudo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  max-width: 950px;
-  margin: 0 auto;
-}
-
-.quem-somos-texto {
-  flex: 2;
-  font-size: 1.18rem;
-  color: var(--text-color);
-  line-height: 1.7;
-  min-width: 260px;
-}
-
-.quem-somos-imagem {
-  flex: 1;
-  min-width: 220px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.quem-somos-imagem img {
-  max-width: 320px;
-  width: 100%;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #b5542d22, 0 2px 8px #ffd70033;
-  background: #fff;
-}
-
-/* Estilos para a nova seção "Onde estamos?" */
-.onde-estamos {
-  background: var(--background-color);
-  border-top: 2px solid var(--highlight-color);
-  border-bottom: 2px solid var(--highlight-color);
-  padding: 48px 0 36px 0;
-  margin-top: 32px;
-}
-
-.onde-estamos h2 {
-  color: var(--primary-color);
-  font-size: 2.2rem;
-  text-align: center;
-  margin-bottom: 24px;
-  font-family: var(--dancing), cursive;
-  text-shadow: 0 2px 8px #ffd70022;
-}
-
+.quem-somos-conteudo,
 .onde-estamos-conteudo {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 2.5rem;
   flex-wrap: wrap;
-  max-width: 1100px;
-  margin: 0 auto;
+}
+
+.quem-somos-texto,
+.onde-estamos-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.quem-somos-imagem,
+.onde-estamos-mapa {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
 }
 
 .onde-estamos-info {
-  flex: 1.2;
-  min-width: 260px;
-  font-size: 1.13rem;
-  color: var(--text-color);
-  line-height: 1.7;
   background: var(--card-bg);
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #b5542d11;
-  padding: 28px 24px 18px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.onde-estamos-info p {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .onde-icone {
   color: var(--primary-color);
-  margin-right: 7px;
-  font-size: 1.1em;
+  font-size: 1.2rem;
+  width: 20px; /* Alinhamento */
+  text-align: center;
 }
 
-.horario-dia {
-  font-weight: 600;
-}
-.horario-hora {
-  color: var(--primary-color);
-  font-weight: 500;
-}
-.fechado {
-  color: #b5542d99;
-  text-decoration: line-through;
-}
-
-.onde-estamos-chamada {
-  margin-top: 18px;
-  background: var(--primary-color);
-  border-left: 4px solid var(--highlight-color);
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 1.08rem;
-  color: var(--highlight-color);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--dancing), cursive;
-}
-
-.onde-estamos-mapa {
-  flex: 1.5;
-  min-width: 320px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.onde-mapa-card {
-  background: var(--card-bg);
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #b5542d22;
-  padding: 18px 18px 12px 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  max-width: 420px;
-}
-
-.onde-mapa-card iframe {
-  width: 100%;
-  min-height: 220px;
-  border-radius: 16px;
-  margin-bottom: 10px;
-  border: none;
-}
-
-.onde-mapa-legenda {
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #7a4a13; /* cor mais escura para melhor contraste */
-  font-weight: 600;
-  font-size: 1.08rem;
-  text-shadow: 0 1px 2px #fff8;
-}
-
-.onde-mapa-foto {
-  width: 100%;
-  max-width: 340px;
-  border-radius: 14px;
-  margin-top: 8px;
-  box-shadow: 0 2px 12px #b5542d22;
-  object-fit: cover;
-}
-
-@media (max-width: 900px) {
-  .loja-imagens-grid {
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-  }
-  .loja-imagens-grid img {
-    max-width: 95vw;
-  }
-  .quem-somos-conteudo {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-  .quem-somos-imagem img {
-    max-width: 90vw;
-  }
-  .onde-estamos-conteudo {
-    flex-direction: column;
-    gap: 24px;
-    text-align: center;
-  }
-  .onde-estamos-info, .onde-estamos-mapa {
-    min-width: 0;
+.onde-estamos-mapa iframe {
     width: 100%;
-    max-width: 98vw;
-    padding: 0;
-  }
-  .onde-mapa-card {
-    max-width: 98vw;
-    padding: 10px 2vw 10px 2vw;
-  }
-  .onde-mapa-foto {
-    max-width: 95vw;
-  }
+    border-radius: 12px;
 }
-  }
-  .onde-mapa-card {
-    max-width: 98vw;
-    padding: 10px 2vw 10px 2vw;
-  }
-  .onde-mapa-foto {
-    max-width: 95vw;
-  }
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.3rem; }
+
+    .quem-somos-conteudo,
+    .onde-estamos-conteudo {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .onde-estamos-info p {
+        justify-content: center;
+    }
 }
