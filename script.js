@@ -1,22 +1,18 @@
 /**
- * Módulo para gerenciar carrosséis de forma interativa e responsiva.
- * Suporta navegação por botões, auto-slide, e gestos de toque (swipe).
- * Foi aprimorado para evitar a reinicialização e a duplicação de eventos.
+ * Módulo para gerenciar carrosséis.
+ * CORREÇÃO: Usa 'var' e verificação para evitar erro de redeclaração.
  */
-const carouselModule = (() => {
-    const carousels = {}; // Armazena o estado de cada carrossel por seu ID
+var carouselModule = carouselModule || (() => {
+    const carousels = {};
     const AUTO_SLIDE_INTERVAL = 8000;
     const AUTO_SLIDE_RESUME_DELAY = 15000;
     const SWIPE_THRESHOLD = 50;
 
     const init = (carouselId) => {
-        if (carousels[carouselId]) return true; // Previne reinicialização
+        if (carousels[carouselId]) return true;
 
         const carouselContainer = document.getElementById(carouselId);
-        if (!carouselContainer) {
-            console.error(`Carousel container with ID "${carouselId}" not found.`);
-            return false;
-        }
+        if (!carouselContainer) return false;
 
         const slides = carouselContainer.querySelectorAll(".carousel-slide");
         const nextButton = carouselContainer.querySelector(".carousel-button.next");
@@ -24,25 +20,14 @@ const carouselModule = (() => {
         const track = carouselContainer.querySelector(".carousel-track");
 
         if (slides.length === 0 || !nextButton || !prevButton || !track) {
-            if (carouselId !== 'sabores') { // O carrossel 'sabores' pode começar vazio, então não logamos erro.
-                console.warn(`Carousel elements for "${carouselId}" not found. It might be initialized later.`);
-            }
+            if (carouselId !== 'sabores') console.warn(`Carousel elements for "${carouselId}" incomplete.`);
             return false;
         }
 
         carousels[carouselId] = {
-            container: carouselContainer,
-            currentSlide: 0,
-            slides: Array.from(slides),
-            nextButton,
-            prevButton,
-            track,
-            intervalId: null,
-            autoSlideActive: true,
-            startX: 0,
-            endX: 0,
-            resumeTimeout: null,
-            locked: false,
+            container: carouselContainer, track, nextButton, prevButton,
+            slides: Array.from(slides), currentSlide: 0, intervalId: null,
+            autoSlideActive: true, locked: false, startX: 0, endX: 0, resumeTimeout: null,
         };
 
         setupEventListeners(carouselId);
@@ -53,9 +38,7 @@ const carouselModule = (() => {
 
     const update = (carouselId) => {
         const carousel = carousels[carouselId];
-        if (!carousel) {
-            return init(carouselId);
-        }
+        if (!carousel) return init(carouselId);
 
         const newSlides = carousel.container.querySelectorAll(".carousel-slide");
         carousel.slides = Array.from(newSlides);
@@ -78,9 +61,7 @@ const carouselModule = (() => {
             action();
             clearTimeout(carousel.resumeTimeout);
             carousel.resumeTimeout = setTimeout(() => {
-                if (carousel.autoSlideActive && !carousel.locked) {
-                    startAutoSlide(carouselId);
-                }
+                if (carousel.autoSlideActive && !carousel.locked) startAutoSlide(carouselId);
             }, AUTO_SLIDE_RESUME_DELAY);
         };
 
@@ -173,16 +154,14 @@ const carouselModule = (() => {
     return { init, update, stopAutoSlideExternally, lockCarousel };
 })();
 
-const themeModule = (() => {
+
+var themeModule = themeModule || (() => {
     let toggleButton;
     const THEME_STORAGE_KEY = "theme";
 
     const init = () => {
         toggleButton = document.getElementById("toggleTheme");
-        if (!toggleButton) {
-            console.error("Theme button not found.");
-            return false;
-        }
+        if (!toggleButton) return false;
         toggleButton.addEventListener("click", toggleTheme);
         initializeTheme();
         return true;
@@ -216,7 +195,7 @@ const themeModule = (() => {
     return { init };
 })();
 
-const cartModule = (() => {
+var cartModule = cartModule || (() => {
     const cart = [];
     let cartMenu, cartItemsList, cartCount, cartTotalDisplay;
 
@@ -225,11 +204,7 @@ const cartModule = (() => {
         cartItemsList = document.getElementById('cart-items');
         cartCount = document.getElementById('cart-count');
         cartTotalDisplay = document.getElementById('cart-total');
-
-        if (!cartMenu || !cartItemsList || !cartCount || !cartTotalDisplay) {
-            console.error("One or more cart elements not found.");
-            return false;
-        }
+        if (!cartMenu || !cartItemsList || !cartCount || !cartTotalDisplay) return false;
         document.body.addEventListener('click', handleBodyClick);
         updateCartDisplay();
         return true;
@@ -238,16 +213,11 @@ const cartModule = (() => {
     const updateCartDisplay = () => {
         cartItemsList.innerHTML = '';
         const totalValue = cart.reduce((sum, item) => sum + item.price, 0);
-
         cart.forEach((item, index) => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = `
-                <span>${item.name} - R$ ${item.price.toFixed(2)}</span>
-                <button class="remove-item" data-index="${index}" aria-label="Remover ${item.name}"><i class="fas fa-trash"></i></button>
-            `;
+            listItem.innerHTML = `<span>${item.name} - R$ ${item.price.toFixed(2)}</span><button class="remove-item" data-index="${index}" aria-label="Remover ${item.name}"><i class="fas fa-trash"></i></button>`;
             cartItemsList.appendChild(listItem);
         });
-
         cartCount.textContent = cart.length;
         cartTotalDisplay.textContent = `R$ ${totalValue.toFixed(2)}`;
     };
@@ -274,7 +244,6 @@ const cartModule = (() => {
                 animateItemToCart(addToCartButton);
             }
         }
-
         const removeItemButton = event.target.closest('.remove-item');
         if (removeItemButton) {
             const index = parseInt(removeItemButton.dataset.index, 10);
@@ -285,29 +254,24 @@ const cartModule = (() => {
     const animateItemToCart = (button) => {
         const productCard = button.closest('.product, .salgado-item, .bebida-item, .promotion-item');
         if (!productCard) return;
-
         const cartIcon = document.querySelector('.cart-icon');
         const img = productCard.querySelector('img');
         if (!img || !cartIcon) return;
 
         const clone = img.cloneNode(true);
         const rect = img.getBoundingClientRect();
-
         Object.assign(clone.style, {
-            position: 'fixed',
-            top: `${rect.top}px`, left: `${rect.left}px`,
+            position: 'fixed', top: `${rect.top}px`, left: `${rect.left}px`,
             width: `${rect.width}px`, height: `${rect.height}px`,
             borderRadius: '50%', objectFit: 'cover',
             transition: 'all 0.8s cubic-bezier(.4,2,.6,1)',
             zIndex: '9999', pointerEvents: 'none',
         });
         document.body.appendChild(clone);
-
         const cartRect = cartIcon.getBoundingClientRect();
         const cartCenterX = cartRect.left + cartRect.width / 2;
         const cartCenterY = cartRect.top + cartRect.height / 2;
-        const cloneFinalWidth = Math.min(rect.width * 0.2, 30); // Tamanho final do clone
-
+        const cloneFinalWidth = Math.min(rect.width * 0.2, 30);
         setTimeout(() => {
             Object.assign(clone.style, {
                 top: `${cartCenterY - (cloneFinalWidth / 2)}px`,
@@ -316,14 +280,13 @@ const cartModule = (() => {
                 opacity: '0.4',
             });
         }, 20);
-
         setTimeout(() => clone.remove(), 850);
     };
 
     return { init, cart, total: () => cart.reduce((sum, item) => sum + item.price, 0), updateCartDisplay };
 })();
 
-const loyaltyModule = (() => {
+var loyaltyModule = loyaltyModule || (() => {
     let clienteCadastrado = null;
     const CLIENT_STORAGE_KEY = "cliente";
 
@@ -331,17 +294,11 @@ const loyaltyModule = (() => {
         try {
             clienteCadastrado = JSON.parse(localStorage.getItem(CLIENT_STORAGE_KEY)) || null;
         } catch (e) {
-            console.error("Failed to parse loyalty data from localStorage.", e);
             clienteCadastrado = null;
         }
-
         const cadastrarButton = document.getElementById("cadastrar-fidelidade");
-        if (cadastrarButton) {
-            cadastrarButton.addEventListener("click", handleCadastro);
-        }
-        if (clienteCadastrado) {
-            exibirCarteiraDigital();
-        }
+        if (cadastrarButton) cadastrarButton.addEventListener("click", handleCadastro);
+        if (clienteCadastrado) exibirCarteiraDigital();
         return true;
     };
 
@@ -351,7 +308,6 @@ const loyaltyModule = (() => {
         const carteiraDiv = document.getElementById("carteira-digital");
         const nomeClienteSpan = document.getElementById("nome-cliente");
         const pontosClienteSpan = document.getElementById("pontos-cliente");
-
         if (cadastroDiv) cadastroDiv.style.display = "none";
         if (carteiraDiv) carteiraDiv.style.display = "block";
         if (nomeClienteSpan) nomeClienteSpan.textContent = clienteCadastrado.nome;
@@ -362,9 +318,8 @@ const loyaltyModule = (() => {
         event.preventDefault();
         const nomeInput = document.getElementById("nome-fidelidade");
         const telefoneInput = document.getElementById("telefone-fidelidade");
-
         if (nomeInput && telefoneInput && nomeInput.value.trim() && telefoneInput.value.trim()) {
-            clienteCadastrado = { nome: nomeInput.value, telefone: telefoneInput.value, pontos: 0, historicoPedidos: [] };
+            clienteCadastrado = { nome: nomeInput.value.trim(), telefone: telefoneInput.value.trim(), pontos: 0, historicoPedidos: [] };
             localStorage.setItem(CLIENT_STORAGE_KEY, JSON.stringify(clienteCadastrado));
             exibirCarteiraDigital();
         } else {
@@ -391,39 +346,29 @@ const loyaltyModule = (() => {
     return { init, adicionarPontos, getCliente: () => clienteCadastrado };
 })();
 
-const suggestionModule = (() => {
+var suggestionModule = suggestionModule || (() => {
     const produtos = [
         { id: 1, nome: "Coxinha de Frango", preco: 7.50, tipo: "salgado", imagem: "https://images.pexels.com/photos/12361995/pexels-photo-12361995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
         { id: 2, nome: "Enroladinho de Salsicha", preco: 6.00, tipo: "salgado", imagem: "https://images.pexels.com/photos/357576/pexels-photo-357576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-        { id: 3, nome: "Coca-Cola", preco: 5.00, tipo: "bebida", imagem: "https://cdn.pixabay.com/photo/2020/05/26/09/38/coca-cola-5222420_1280.jpg" },
+        { id: 3, nome: "Coca-Cola Lata", preco: 5.00, tipo: "bebida", imagem: "https://cdn.pixabay.com/photo/2020/05/26/09/38/coca-cola-5222420_1280.jpg" },
         { id: 4, nome: "Combo Coxinha de Frango", preco: 15.00, tipo: "combo", imagem: "https://cdn.pixabay.com/photo/2019/04/27/23/13/coxinha-4161606_1280.jpg" },
     ];
 
-    const init = () => {
-        exibirSugestoesPersonalizadas();
-    };
+    const init = () => exibirSugestoesPersonalizadas();
 
     const exibirSugestoesPersonalizadas = () => {
         const sugestoesContainer = document.getElementById("sugestoes-produtos");
         if (!sugestoesContainer) return;
-
         sugestoesContainer.innerHTML = "";
         const cliente = loyaltyModule.getCliente();
         const createSuggestionCard = (produto, mensagem) => {
             const card = document.createElement("article");
-            card.className = "promotion-item product"; // Classe 'product' para animação
-            card.innerHTML = `
-                <img src="${produto.imagem}" alt="${produto.nome}" loading="lazy" width="300" height="200">
-                <h3>${produto.nome}</h3>
-                <p>${mensagem}</p>
-                <button class="add-to-cart button" data-name="${produto.nome}" data-price="${produto.preco}">Adicionar</button>
-            `;
+            card.className = "promotion-item product";
+            card.innerHTML = `<img src="${produto.imagem}" alt="${produto.nome}" loading="lazy" width="300" height="200"><h3>${produto.nome}</h3><p>${mensagem}</p><button class="add-to-cart button" data-name="${produto.nome}" data-price="${produto.preco}">Adicionar</button>`;
             return card;
         };
-
-        let sugestao = produtos[0]; // Sugestão padrão
+        let sugestao = produtos[0];
         if (cliente && cliente.historicoPedidos.length > 0) {
-            // Lógica simples: sugere algo diferente do que já comprou
             const idsComprados = new Set(cliente.historicoPedidos.map(p => p.id));
             const sugestaoNaoComprada = produtos.find(p => !idsComprados.has(p.id) && p.tipo === "salgado");
             if (sugestaoNaoComprada) {
@@ -441,7 +386,6 @@ const suggestionModule = (() => {
 
 // --- LÓGICA PRINCIPAL DA APLICAÇÃO ---
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicialização dos módulos principais
     themeModule.init();
     cartModule.init();
     loyaltyModule.init();
@@ -449,19 +393,17 @@ document.addEventListener("DOMContentLoaded", () => {
     carouselModule.init('sabores');
     suggestionModule.init();
 
-    // Elementos do DOM
     const tiposCarrossel = document.getElementById('tipos-salgado');
     const saboresCarrossel = document.getElementById('sabores');
     const saboresTrack = document.getElementById('carousel-track-sabores');
     const tipoSelecionadoSpan = document.getElementById('tipo-selecionado');
     const saborSelecionadoSpan = document.getElementById('sabor-selecionado');
     const checkoutButton = document.getElementById('checkoutButton');
+    const entregaRadio = document.getElementById('entrega');
 
-    // Estado da Aplicação
     let tipoSelecionado = null;
     let saboresDisponiveis = [];
 
-    // Funções de Lógica
     const capitalizeFirstLetter = (string) => string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
 
     const atualizarSabores = (tipo) => {
@@ -482,6 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
             saboresDisponiveis.forEach(sabor => {
                 const slide = document.createElement('article');
                 slide.className = 'carousel-slide product';
+                slide.dataset.sabor = sabor.sabor;
                 slide.innerHTML = `<img src="${sabor.imagem}" alt="Sabor ${sabor.nome}" loading="lazy" width="300" height="200"><h3>${sabor.nome}</h3><button class="add-to-cart cta" data-name="${capitalizeFirstLetter(tipo)} de ${sabor.nome}" data-price="${sabor.preco.toFixed(2)}">Adicionar</button>`;
                 saboresTrack.appendChild(slide);
             });
@@ -489,7 +432,25 @@ document.addEventListener("DOMContentLoaded", () => {
         carouselModule.update('sabores');
     };
 
-    // Event Listeners
+    const finalizarPedido = () => {
+        if (cartModule.cart.length === 0) {
+            alert("Seu carrinho está vazio!");
+            return;
+        }
+        if (entregaRadio && entregaRadio.checked) {
+            if (!document.getElementById('cep').value.trim() || !document.getElementById('rua').value.trim() || !document.getElementById('numero').value.trim()) {
+                alert('Por favor, preencha o endereço completo para entrega.');
+                return;
+            }
+        }
+        const totalCompra = cartModule.total();
+        loyaltyModule.adicionarPontos(totalCompra);
+        alert('Pedido finalizado com sucesso!');
+        cartModule.cart.length = 0;
+        cartModule.updateCartDisplay();
+        suggestionModule.exibirSugestoesPersonalizadas();
+    };
+
     if (tiposCarrossel) {
         tiposCarrossel.addEventListener('click', (event) => {
             const selectButton = event.target.closest('.select-type');
@@ -517,38 +478,57 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (checkoutButton) {
-        checkoutButton.addEventListener('click', () => {
-            if (cartModule.cart.length === 0) {
-                alert("Seu carrinho está vazio!");
-                return;
-            }
-            const totalCompra = cartModule.total();
-            loyaltyModule.adicionarPontos(totalCompra);
-            alert('Pedido finalizado com sucesso!');
-            cartModule.cart.length = 0;
-            cartModule.updateCartDisplay();
-            suggestionModule.exibirSugestoesPersonalizadas();
-        });
-    }
+    if (checkoutButton) checkoutButton.addEventListener('click', finalizarPedido);
 });
 
-// Animações de Scroll
+// Animações de Scroll e Comentários
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector('.container-coxinhas');
     if (!container) return;
     const coxinhas = Array.from(container.querySelectorAll('.coxinha'));
+    const comentarios = Array.from(container.querySelectorAll('.comentario'));
+    let comentarioAtual = 0;
+
+    const renderizarEstrelas = (ratingContainer) => {
+        if (!ratingContainer) return;
+        const rating = parseFloat(ratingContainer.dataset.rating);
+        if (isNaN(rating)) return;
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 !== 0;
+        let starsHTML = '';
+        for (let i = 0; i < fullStars; i++) starsHTML += '<i class="fas fa-star"></i>';
+        if (hasHalfStar) starsHTML += '<i class="fas fa-star-half-alt"></i>';
+        const emptyStars = 5 - Math.ceil(rating);
+        for (let i = 0; i < emptyStars; i++) starsHTML += '<i class="far fa-star"></i>';
+        ratingContainer.innerHTML = `${starsHTML} ${rating.toFixed(1)}`;
+    };
+
+    if (comentarios.length > 0) {
+        // CORREÇÃO: Lógica para mostrar/esconder comentários
+        const mostrarProximoComentario = () => {
+            comentarios.forEach((com, index) => {
+                com.classList.remove('active'); // Remove a classe de todos
+            });
+            comentarioAtual = (comentarioAtual + 1) % comentarios.length;
+            comentarios[comentarioAtual].classList.add('active'); // Adiciona a classe apenas ao atual
+        };
+        comentarios.forEach(com => renderizarEstrelas(com.querySelector('[data-rating]')));
+        comentarios[0].classList.add('active'); // Mostra o primeiro
+        setInterval(mostrarProximoComentario, 5000);
+    }
+
     window.addEventListener('scroll', () => {
         let scrollY = window.scrollY;
         let containerTop = container.offsetTop;
         let windowHeight = window.innerHeight;
-
         if (scrollY > containerTop - windowHeight && scrollY < containerTop + container.offsetHeight) {
             let relativeScroll = scrollY - (containerTop - windowHeight);
-            if (coxinhas[0]) coxinhas[0].style.transform = `translateY(${relativeScroll*0.08}px) translateX(${Math.sin(relativeScroll*0.01)*10}px) rotate(${relativeScroll*0.01-5}deg)`;
-            if (coxinhas[1]) coxinhas[1].style.transform = `translateY(${relativeScroll*0.08}px) translateX(${Math.cos(relativeScroll*0.01)*10}px) rotate(${relativeScroll*-0.01+175}deg)`;
-            if (coxinhas[2]) coxinhas[2].style.transform = `translateY(${relativeScroll*0.08}px) translateX(${Math.sin(relativeScroll*0.01)*-10}px) rotate(${relativeScroll*0.01+5}deg)`;
-            if (coxinhas[3]) coxinhas[3].style.transform = `translateY(${relativeScroll*0.08}px) translateX(${Math.cos(relativeScroll*0.01)*-10}px) rotate(${relativeScroll*-0.01-3}deg)`;
+            if (coxinhas.length > 0) {
+                if(coxinhas[0]) coxinhas[0].style.transform = `translateY(${relativeScroll*0.08}px) translateX(${Math.sin(relativeScroll*0.01)*10}px) rotate(${relativeScroll*0.01-5}deg)`;
+                if(coxinhas[1]) coxinhas[1].style.transform = `translateY(${relativeScroll*0.08}px) translateX(${Math.cos(relativeScroll*0.01)*10}px) rotate(${relativeScroll*-0.01+175}deg)`;
+                if(coxinhas[2]) coxinhas[2].style.transform = `translateY(${relativeScroll*0.08}px) translateX(${Math.sin(relativeScroll*0.01)*-10}px) rotate(${relativeScroll*0.01+5}deg)`;
+                if(coxinhas[3]) coxinhas[3].style.transform = `translateY(${relativeScroll*0.08}px) translateX(${Math.cos(relativeScroll*0.01)*-10}px) rotate(${relativeScroll*-0.01-3}deg)`;
+            }
         }
     }, { passive: true });
 });
