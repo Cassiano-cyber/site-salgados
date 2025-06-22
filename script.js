@@ -492,15 +492,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     { nome: 'Costela', preco: 8.00, imagem: 'https://images.pexels.com/photos/8964567/pexels-photo-8964567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'costela' },
                     { nome: 'Calabresa com Cheddar', preco: 7.50, imagem: 'https://images.pexels.com/photos/17402718/pexels-photo-17402718/free-photo-of-comida-alimento-refeicao-pizza.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'coxinha', sabor: 'calabresa-com-cheddar' },
                    // Sabores doces adicionados
-                    { nome: 'Chocolate com Café', preco: 9.00, imagem: '/site-salgados/imagens/chocolate-com-cafe.png', tipo: 'coxinha', sabor: 'chocolate-com-cafe'},
-                    { nome: 'Sorvete', preco: 9.50, imagem: '/site-salgados/imagens/coxinha-sorvete.png', tipo: 'coxinha', sabor: 'sorvete'}
+                    { nome: 'Chocolate com Café', preco: 7.00, imagem: '/site-salgados/imagens/chocolate-com-cafe.png', tipo: 'coxinha', sabor: 'chocolate-com-cafe'},
+                    { nome: 'Sorvete', preco: 7.50, imagem: '/site-salgados/imagens/coxinha-sorvete.png', tipo: 'coxinha', sabor: 'sorvete'}
+                    { nome: 'Doce de leite' preco: 7.50, imagem: '/site-salgados/imagens/Doce-de-leite.png', tipo: 'coxinha', sabor: 'doce-de-leite'}
                 ];
 
                 break;
             case 'enroladinho':
                 saboresDisponiveis = [
                     { nome: 'Salsicha', preco: 6.00, imagem: 'https://images.pexels.com/photos/357576/pexels-photo-357576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'enroladinho', sabor: 'salsicha' },
-                    { nome: 'Queijo e Presunto', preco: 6.50, imagem: 'https://images.pexels.com/photos/9615585/pexels-photo-9615585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'enroladinho', sabor: 'queijo-e-presunto' }
+                    { nome: 'Presunto e queijo', preco: 6.50, imagem: 'https://images.pexels.com/photos/9615585/pexels-photo-9615585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', tipo: 'enroladinho', sabor: 'presunto-e-queijo' }
                 ];
                 break;
             case 'bolinha':
