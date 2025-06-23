@@ -401,16 +401,26 @@
 </div>
 
 <!-- Avaliações com fundo personalizado -->
-<div class="container-coxinhas" style="background: linear-gradient(135deg, var(--highlight-color), var(--primary-color)); color: var(--header-footer-text); padding: 20px; border-radius: 10px; text-align: center; position: relative; overflow: hidden; font-family: var(--dancing); font-weight: bold; min-height: 300px; transition: background 0.3s ease;">
-    <h2 class="avaliações" style="color: var(--header-footer-text);">Avaliações</h2>
+<div class="container-coxinhas" style="background: linear-gradient(135deg, #800000, #A52A2A); color: white; padding: 20px; border-radius: 10px; text-align: center; position: relative; overflow: hidden; font-family: var(--dancing); font-weight: bold; height: 300px; transition: background 0.3s ease;">
+    <h2 class="avaliações" style="color: white;">Avaliações</h2>
     <div class="comentarios-container">
-      <form id="form-comentario" style="display:flex;flex-direction:column;gap:8px;max-width:400px;margin:0 auto;">
-        <input type="text" id="nome-comentario" placeholder="Seu nome" required style="padding:8px; border-radius:6px; border:1px solid var(--card-border);">
-        <textarea id="texto-comentario" placeholder="Deixe seu comentário (após análise será publicado)" required style="padding:8px; border-radius:6px; border:1px solid var(--card-border);"></textarea>
-        <button type="submit" style="background:var(--primary-color); color:var(--header-footer-text); border:none; border-radius:6px; padding:8px; font-weight:bold; cursor:pointer;">Enviar comentário</button>
-        <div id="msg-comentario" style="color:var(--primary-color); margin-top:8px; display:none;">Comentário enviado para análise!</div>
-      </form>
+        <div class="comentario">
+            <p style="font-size: 1.1em; margin-bottom: 10px;">Salgados sempre fresquinhos e deliciosos! Aprovadíssimo!</p>
+            <p style="font-weight: bold; margin-bottom: 5px;">Maria Silva</p>
+            <div style="color: gold; font-size: 1.2em;" data-rating="4.8" aria-label="Avaliação: 4.8 de 5 estrelas"></div>
+        </div>
+        <div class="comentario">
+            <p style="font-size: 1.1em; margin-bottom: 10px;">A coxinha de vocês é a melhor que já comi! Super recomendo.</p>
+            <p style="font-weight: bold; margin-bottom: 5px;">João Pereira</p>
+            <div style="color: gold; font-size: 1.2em;" data-rating="4.5" aria-label="Avaliação: 4.5 de 5 estrelas"></div>
+        </div>
+        <div class="comentario">
+            <p style="font-size: 1.1em; margin-bottom: 10px;">Entrega rápida e salgados quentinhos. Perfeito para qualquer hora!</p>
+            <p style="font-weight: bold; margin-bottom: 5px;">Ana Clara</p>
+            <div style="color: gold; font-size: 1.2em;" data-rating="4.3" aria-label="Avaliação: 4.3 de 5 estrelas"></div>
+        </div>
     </div>
+
     <!-- Coxinhas animadas no fundo -->
     <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" alt="Ilustração de coxinha decorativa" id="coxinha1" class="coxinha" loading="lazy"
         style="position: absolute; width: 130px; opacity: 0.8; left: 5%; top: 5%; transform: translateY(0) rotate(-5deg); transition: transform 0.5s ease-out;">
@@ -483,35 +493,6 @@
     </div>
 </section>
 
-<!-- Pop-up de inscrição -->
-<div id="popup-inscricao" style="display:none; position:fixed; bottom:30px; right:30px; background:#fff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.15); padding:24px; z-index:9999; min-width:280px; max-width:90vw;">
-  <button onclick="document.getElementById('popup-inscricao').style.display='none'" style="position:absolute; top:8px; right:12px; background:none; border:none; font-size:1.2em; cursor:pointer;">×</button>
-  <h3>Seja o primeiro a saber da inauguração!</h3>
-  <form id="form-inscricao" style="display:flex; flex-direction:column; gap:8px;">
-    <input type="text" name="contato" placeholder="Seu e-mail ou WhatsApp" required style="padding:8px; border-radius:6px; border:1px solid #ccc;">
-    <button type="submit" style="background:#D4A373; color:#fff; border:none; border-radius:6px; padding:8px; font-weight:bold; cursor:pointer;">Quero ser avisado!</button>
-  </form>
-  <div id="popup-msg" style="color:green; margin-top:8px; display:none;">Inscrição realizada!</div>
-</div>
-
-<script>
-// Exibe o pop-up após 5 segundos
-setTimeout(() => {
-  if (!localStorage.getItem('popupInscricaoFechado')) {
-    document.getElementById('popup-inscricao').style.display = 'block';
-  }
-}, 5000);
-
-document.getElementById('form-inscricao').addEventListener('submit', function(e) {
-  e.preventDefault();
-  document.getElementById('popup-msg').style.display = 'block';
-  setTimeout(() => {
-    document.getElementById('popup-inscricao').style.display = 'none';
-    localStorage.setItem('popupInscricaoFechado', '1');
-  }, 1500);
-});
-</script>
-
 <!-- Seção Onde Estamos -->
 <section class="onde-estamos">
     <div class="container">
@@ -542,6 +523,7 @@ document.getElementById('form-inscricao').addEventListener('submit', function(e)
                     <span>Venha nos visitar e viva a experiência Explosão Crocante! Ambiente acolhedor, atendimento especial e o melhor salgado da cidade esperando por você.</span>
                 </div>
             </div>
+
             <div class="onde-estamos-mapa">
                 <div class="onde-mapa-card">
                     <iframe
@@ -585,300 +567,39 @@ document.getElementById('form-inscricao').addEventListener('submit', function(e)
 </footer>
 
 <!-- Botão do WhatsApp -->
-<a href="https://wa.me/5517996780618?text=Ol%C3%A1,%20Eu%20gostaria%20de%20fazer%20um%20pedido."
+<a href="https://wa.me/5517996780618?text=Olá,%20Eu%20gostaria%20de%20fazer%20um%20pedido."
    target="_blank"
    class="botao-whatsapp"
    aria-label="Fale conosco no WhatsApp">
     <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- Firebase App (modular) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<!-- Scripts -->
+<script src="script.js" defer></script>
 <script>
-// Configuração do Firebase do sistema de comentários
-const firebaseConfig = {
-  apiKey: "AIzaSyCYI7gTLvDZRC2yI3mXJRhMTUyUyzerWL8",
-  authDomain: "sistema-de-comentarios-972e6.firebaseapp.com",
-  projectId: "sistema-de-comentarios-972e6",
-  storageBucket: "sistema-de-comentarios-972e6.appspot.com",
-  messagingSenderId: "872216046988",
-  appId: "1:872216046988:web:xxxxxxx" // Substitua pelo appId correto se necessário
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-
-// Login Google
-function loginGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).then(result => {
-    const user = result.user;
-    document.getElementById('perfil-nome').textContent = user.displayName;
-    localStorage.setItem('user', JSON.stringify({nome: user.displayName, email: user.email}));
-    mostrarConta();
-  });
-}
-// Login WhatsApp (simples, só coleta número)
-function loginWhatsApp() {
-  const numero = prompt('Digite seu WhatsApp:');
-  if (numero) {
-    document.getElementById('perfil-nome').textContent = numero;
-    localStorage.setItem('user', JSON.stringify({nome: numero, whatsapp: numero}));
-    mostrarConta();
-  }
-}
-// Exibe conta se logado
-function mostrarConta() {
-  document.getElementById('conta-perfil').style.display = 'block';
-  // Carrega histórico real
-  const pedidos = JSON.parse(localStorage.getItem('pedidos')||'[]');
-  const ul = document.getElementById('perfil-historico');
-  ul.innerHTML = '';
-  pedidos.forEach(p => {
-    const li = document.createElement('li');
-    li.textContent = `${p.data} - ${p.itens} - ${p.total}`;
-    ul.appendChild(li);
-  });
-}
-// Salva pedido ao finalizar
+// Função para montar e enviar o pedido via WhatsApp
 function finalizarPedido() {
-  const cartItems = document.querySelectorAll('#cart-items li');
-  if (cartItems.length === 0) {
-    alert('Seu carrinho está vazio!');
-    return;
-  }
-  let itens = [];
-  cartItems.forEach(item => {
-    itens.push(item.textContent.replace('Remover', '').trim());
-  });
-  const total = document.getElementById('cart-total').textContent.trim();
-  const pedidos = JSON.parse(localStorage.getItem('pedidos')||'[]');
-  pedidos.push({
-    data: new Date().toLocaleString(),
-    itens: itens.join(', '),
-    total
-  });
-  localStorage.setItem('pedidos', JSON.stringify(pedidos));
-  // WhatsApp
-  let mensagem = '*Pedido Explosão Crocante*%0AItens:%0A';
-  itens.forEach(i => mensagem += '- ' + i + '%0A');
-  mensagem += '%0ATotal: ' + total + '%0AQuero finalizar meu pedido!';
-  const numero = '5517996780618';
-  const url = `https://wa.me/${numero}?text=${mensagem}`;
-  window.open(url, '_blank');
-}
-// Validação visual de formulário
-['form-inscricao','form-fidelidade'].forEach(id => {
-  const f = document.getElementById(id);
-  if(f) f.addEventListener('submit', function(e) {
-    const input = f.querySelector('input');
-    if(!input.value) {
-      input.style.borderColor = 'red';
-      input.setCustomValidity('Preencha este campo!');
-      input.reportValidity();
-      e.preventDefault();
-    } else {
-      input.style.borderColor = '#ccc';
-      input.setCustomValidity('');
+    // Obtenha os itens do carrinho
+    const cartItems = document.querySelectorAll('#cart-items li');
+    if (cartItems.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
     }
-  });
-});
-// Push notification (básico)
-if ('Notification' in window && Notification.permission !== 'denied') {
-  Notification.requestPermission();
-}
-function enviarNotificacao(msg) {
-  if (Notification.permission === 'granted') {
-    new Notification('Explosão Crocante', {body: msg});
-  }
-}
-// Exemplo: enviarNotificacao('Promoção: Coxinha em dobro hoje!');
-// Dark mode automático já está no CSS
-// Foco visível já está no CSS
+    let mensagem = '*Pedido Explosão Crocante*%0A';
+    mensagem += 'Itens:%0A';
+    cartItems.forEach(item => {
+        mensagem += '- ' + item.textContent.replace('Remover', '').trim() + '%0A';
+    });
+    const total = document.getElementById('cart-total').textContent.trim();
+    mensagem += '%0ATotal: ' + total + '%0A';
+    mensagem += '%0AQuero finalizar meu pedido!';
 
-// Função toggleCart global para evitar erro de referência
-function toggleCart() {
-  const cartMenu = document.getElementById('cart-menu');
-  if (cartMenu) {
-    cartMenu.style.display = cartMenu.style.display === 'block' ? 'none' : 'block';
-    if (cartMenu.style.display === 'block') {
-      cartMenu.setAttribute('aria-modal', 'true');
-      cartMenu.setAttribute('role', 'dialog');
-      cartMenu.focus && cartMenu.focus();
-    }
-  }
-}
-
-// --- COMENTÁRIOS FIREBASE: apenas envio, sem leitura automática ---
-(function(){
-  const form = document.getElementById('form-comentario');
-  if (!form) return;
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    const nome = document.getElementById('nome-comentario').value.trim();
-    const texto = document.getElementById('texto-comentario').value.trim();
-    if (!nome || !texto) return;
-    try {
-      await db.collection('comentarios').add({
-        nome,
-        texto,
-        data: new Date().toISOString(),
-        aprovado: false // só será exibido após aprovação manual
-      });
-      document.getElementById('msg-comentario').style.display = 'block';
-      form.reset();
-      setTimeout(()=>{
-        document.getElementById('msg-comentario').style.display = 'none';
-      }, 2000);
-    } catch (err) {
-      alert('Erro ao enviar comentário. Tente novamente mais tarde.');
-    }
-  });
-})();
-</script>
-
-<!-- Dados Estruturados: Produtos -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "Coxinha Vulcânica",
-    "image": "imagens/Coxinha vulcânica.jpeg",
-    "description": "Uma explosão de sabor! Casquinha crocante e recheio cremoso e picante.",
-    "offers": {
-      "@type": "Offer",
-      "price": "8.00",
-      "priceCurrency": "BRL",
-      "availability": "https://schema.org/InStock"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "Bolinha Explosiva",
-    "image": "imagens/Bolinha explosiva.jpeg",
-    "description": "Pequena no tamanho, gigante no sabor! Queijo e ingredientes secretos.",
-    "offers": {
-      "@type": "Offer",
-      "price": "6.50",
-      "priceCurrency": "BRL",
-      "availability": "https://schema.org/InStock"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "Coca-Cola Vidro",
-    "image": "https://cdn.pixabay.com/photo/2020/05/26/09/38/coca-cola-5222420_1280.jpg",
-    "description": "Garrafa de Coca-Cola gelada no formato de vidro.",
-    "offers": {
-      "@type": "Offer",
-      "price": "5.00",
-      "priceCurrency": "BRL",
-      "availability": "https://schema.org/InStock"
-    }
-  }
-  </script>
-  <!-- Dados Estruturados: Programa de Fidelidade -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "LoyaltyProgram",
-    "name": "Programa de Fidelidade Explosão Crocante",
-    "description": "Ganhe pontos a cada compra e troque por descontos ou produtos.",
-    "brand": {
-      "@type": "Brand",
-      "name": "Explosão Crocante"
-    },
-    "url": "https://cassiano-cyber.github.io/site-salgados/",
-    "reward": [
-      "R$ 5,00 de desconto a cada 50 pontos",
-      "1 salgado grátis a cada 100 pontos"
-    ]
-  }
-  </script>
-
-<!-- Recomendações de performance: -->
-<!--
-- Todas as imagens já usam loading="lazy". Para compressão, utilize TinyPNG, Squoosh ou WebP.
-- Imagens grandes: considere gerar versões menores para mobile.
-- Use CDN para imagens externas sempre que possível.
-- Minifique CSS/JS em produção.
-- Use Lighthouse no Chrome DevTools para relatórios detalhados.
--->
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('service-worker.js');
-  });
+    // Número do WhatsApp (com DDI e DDD)
+    const numero = '5517996780618';
+    const url = `https://wa.me/${numero}?text=${mensagem}`;
+    window.open(url, '_blank');
 }
 </script>
 
-<!-- Seção de Comentários -->
-<section id="comentarios-site" class="comentarios-site" style="max-width:600px;margin:40px auto 0;background:#fff8f0;border-radius:12px;box-shadow:0 2px 12px #0001;padding:24px;">
-  <h2>Comentários dos clientes</h2>
-  <form id="form-comentario" style="display:flex;flex-direction:column;gap:8px;">
-    <input type="text" id="nome-comentario" placeholder="Seu nome" required style="padding:8px;border-radius:6px;border:1px solid #ccc;">
-    <textarea id="texto-comentario" placeholder="Deixe seu comentário" required style="padding:8px;border-radius:6px;border:1px solid #ccc;"></textarea>
-    <button type="submit" class="button">Enviar comentário</button>
-    <div id="msg-comentario" style="color:green;display:none;">Comentário enviado!</div>
-  </form>
-  <ul id="lista-comentarios" style="margin-top:20px;list-style:none;padding:0;"></ul>
-</section>
-
-<!-- Firebase App e Firestore para comentários -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script>
-// Configuração do Firebase para comentários
-const firebaseConfigComentarios = {
-  apiKey: "AIzaSyCYI7gTLvDZRC2yI3mXJRhMTUyUyzerWL8",
-  authDomain: "sistema-de-comentarios-972e6.firebaseapp.com",
-  projectId: "sistema-de-comentarios-972e6",
-};
-const appComentarios = firebase.initializeApp(firebaseConfigComentarios, 'comentariosApp');
-const dbComentarios = appComentarios.firestore();
-
-// Enviar comentário
-const formComentario = document.getElementById('form-comentario');
-formComentario.addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const nome = document.getElementById('nome-comentario').value.trim();
-  const texto = document.getElementById('texto-comentario').value.trim();
-  if (!nome || !texto) return;
-  await dbComentarios.collection('comentarios').add({
-    nome,
-    texto,
-    data: new Date().toISOString()
-  });
-  document.getElementById('msg-comentario').style.display = 'block';
-  formComentario.reset();
-  setTimeout(()=>{document.getElementById('msg-comentario').style.display='none';},1500);
-  carregarComentarios();
-});
-
-// Carregar comentários
-async function carregarComentarios() {
-  const lista = document.getElementById('lista-comentarios');
-  lista.innerHTML = '<li>Carregando...</li>';
-  const snap = await dbComentarios.collection('comentarios').orderBy('data','desc').limit(10).get();
-  lista.innerHTML = '';
-  snap.forEach(doc => {
-    const c = doc.data();
-    const li = document.createElement('li');
-    li.style.marginBottom = '16px';
-    li.innerHTML = `<strong>${c.nome}</strong> <span style='color:#888;font-size:0.9em;'>${new Date(c.data).toLocaleString()}</span><br>${c.texto}`;
-    lista.appendChild(li);
-  });
-}
-carregarComentarios();
-</script>
 </body>
 </html>

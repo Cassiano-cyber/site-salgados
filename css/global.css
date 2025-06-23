@@ -3,16 +3,16 @@
 
 /* Paleta de Cores Principal */
 :root {
-  --background-color: #F8E8D1;
-  --text-color: #3A1E10;
-  --primary-color: #DA7635;
-  --highlight-color: #B5542D;
-  --card-bg: #F5D7A0;
-  --card-border: #DA7635;
-  --header-footer-bg: #B5542D;
-  --header-footer-text: #F8E8D1;
-  --dark-background: #3A1E10;
-  --dark-mode-text: #F8E8D1;
+  --background-color: #F8E8D1;      /* Areia quente */
+  --text-color: #3A1E10;            /* Marrom escuro */
+  --primary-color: #DA7635;         /* Laranja queimado */
+  --highlight-color: #B5542D;       /* Terracota */
+  --card-bg: #F5D7A0;               /* Creme dourado */
+  --card-border: #DA7635;           /* Laranja queimado */
+  --header-footer-bg: #B5542D;      /* Terracota */
+  --header-footer-text: #F8E8D1;    /* Areia quente */
+  --dark-background: #3A1E10;       /* Marrom escuro para modo escuro */
+  --dark-mode-text: #F8E8D1;        /* Areia quente para modo escuro */
 }
 
 /* Reset de Estilos */
@@ -52,8 +52,13 @@ a {
  transition: color 0.3s ease;
 }
 
-a:hover, a:focus {
+a:hover {
  color: var(--highlight-color);
+}
+
+a:focus {
+    outline: 2px solid var(--highlight-color);
+    color: var(--highlight-color);
 }
 
 /* Títulos */
@@ -93,7 +98,7 @@ body {
 }
 
 .close-cart-button:hover {
- color: var(--primary-color);
+ color: var(--text-color);
 }
 
 .close-cart-button i {
@@ -472,40 +477,4 @@ header, footer {
   .onde-mapa-foto {
     max-width: 95vw;
   }
-}
-
-/* Scroll suave */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Foco visível */
-:focus {
-  outline: 2px solid #D4A373;
-  outline-offset: 2px;
-}
-
-/* Dark mode automático */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #181818;
-    color: #f5f5f5;
-  }
-  .site-header, .cart-menu, .container-coxinhas, .site-footer {
-    background: #222 !important;
-    color: #f5f5f5 !important;
-  }
-  .button, button, .cta {
-    background: #D4A373 !important;
-    color: #fff !important;
-  }
-}
-
-/* Animações suaves */
-.button, .cta, .cart-menu, .carousel-slide, .promotion-item, .bebida-item {
-  transition: all 0.3s cubic-bezier(.4,0,.2,1);
-}
-
-.button:active, .cta:active {
-  transform: scale(0.97);
 }
