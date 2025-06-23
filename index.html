@@ -401,26 +401,16 @@
 </div>
 
 <!-- Avaliações com fundo personalizado -->
-<div class="container-coxinhas" style="background: linear-gradient(135deg, #800000, #A52A2A); color: white; padding: 20px; border-radius: 10px; text-align: center; position: relative; overflow: hidden; font-family: var(--dancing); font-weight: bold; height: 300px; transition: background 0.3s ease;">
-    <h2 class="avaliações" style="color: white;">Avaliações</h2>
+<div class="container-coxinhas" style="background: linear-gradient(135deg, var(--highlight-color), var(--primary-color)); color: var(--header-footer-text); padding: 20px; border-radius: 10px; text-align: center; position: relative; overflow: hidden; font-family: var(--dancing); font-weight: bold; min-height: 300px; transition: background 0.3s ease;">
+    <h2 class="avaliações" style="color: var(--header-footer-text);">Avaliações</h2>
     <div class="comentarios-container">
-        <div class="comentario">
-            <p style="font-size: 1.1em; margin-bottom: 10px;">Salgados sempre fresquinhos e deliciosos! Aprovadíssimo!</p>
-            <p style="font-weight: bold; margin-bottom: 5px;">Maria Silva</p>
-            <div style="color: gold; font-size: 1.2em;" data-rating="4.8" aria-label="Avaliação: 4.8 de 5 estrelas"></div>
-        </div>
-        <div class="comentario">
-            <p style="font-size: 1.1em; margin-bottom: 10px;">A coxinha de vocês é a melhor que já comi! Super recomendo.</p>
-            <p style="font-weight: bold; margin-bottom: 5px;">João Pereira</p>
-            <div style="color: gold; font-size: 1.2em;" data-rating="4.5" aria-label="Avaliação: 4.5 de 5 estrelas"></div>
-        </div>
-        <div class="comentario">
-            <p style="font-size: 1.1em; margin-bottom: 10px;">Entrega rápida e salgados quentinhos. Perfeito para qualquer hora!</p>
-            <p style="font-weight: bold; margin-bottom: 5px;">Ana Clara</p>
-            <div style="color: gold; font-size: 1.2em;" data-rating="4.3" aria-label="Avaliação: 4.3 de 5 estrelas"></div>
-        </div>
+      <form id="form-comentario" style="display:flex;flex-direction:column;gap:8px;max-width:400px;margin:0 auto;">
+        <input type="text" id="nome-comentario" placeholder="Seu nome" required style="padding:8px; border-radius:6px; border:1px solid var(--card-border);">
+        <textarea id="texto-comentario" placeholder="Deixe seu comentário (após análise será publicado)" required style="padding:8px; border-radius:6px; border:1px solid var(--card-border);"></textarea>
+        <button type="submit" style="background:var(--primary-color); color:var(--header-footer-text); border:none; border-radius:6px; padding:8px; font-weight:bold; cursor:pointer;">Enviar comentário</button>
+        <div id="msg-comentario" style="color:var(--primary-color); margin-top:8px; display:none;">Comentário enviado para análise!</div>
+      </form>
     </div>
-
     <!-- Coxinhas animadas no fundo -->
     <img src="https://supresalgados.com.br/wp-content/uploads/2024/11/coxinha1500px3-1024x1024.png" alt="Ilustração de coxinha decorativa" id="coxinha1" class="coxinha" loading="lazy"
         style="position: absolute; width: 130px; opacity: 0.8; left: 5%; top: 5%; transform: translateY(0) rotate(-5deg); transition: transform 0.5s ease-out;">
@@ -709,77 +699,46 @@ function enviarNotificacao(msg) {
 // Dark mode automático já está no CSS
 // Foco visível já está no CSS
 
-// --- COMENTÁRIOS FIREBASE ---
-// Adiciona formulário e lista de comentários na seção de avaliações
-(function(){
-  // Cria formulário se não existir
-  let container = document.querySelector('.comentarios-container');
-  if (!document.getElementById('form-comentario')) {
-    const form = document.createElement('form');
-    form.id = 'form-comentario';
-    form.innerHTML = `
-      <input type="text" id="nome-comentario" placeholder="Seu nome" required style="margin:4px;padding:6px;border-radius:6px;border:1px solid #ccc;">
-      <textarea id="texto-comentario" placeholder="Deixe seu comentário" required style="margin:4px;padding:6px;border-radius:6px;border:1px solid #ccc;"></textarea>
-      <button type="submit" style="background:#D4A373;color:#fff;border:none;border-radius:6px;padding:8px 16px;font-weight:bold;cursor:pointer;">Enviar comentário</button>
-      <div id="msg-comentario" style="color:green;display:none;margin-top:6px;">Comentário enviado!</div>
-    `;
-    container.appendChild(form);
-    // Lista de comentários
-    const ul = document.createElement('ul');
-    ul.id = 'lista-comentarios';
-    ul.style = 'list-style:none;padding:0;margin-top:12px;text-align:left;max-width:500px;margin-left:auto;margin-right:auto;';
-    container.appendChild(ul);
+// Função toggleCart global para evitar erro de referência
+function toggleCart() {
+  const cartMenu = document.getElementById('cart-menu');
+  if (cartMenu) {
+    cartMenu.style.display = cartMenu.style.display === 'block' ? 'none' : 'block';
+    if (cartMenu.style.display === 'block') {
+      cartMenu.setAttribute('aria-modal', 'true');
+      cartMenu.setAttribute('role', 'dialog');
+      cartMenu.focus && cartMenu.focus();
+    }
   }
+}
 
-  // Envio do comentário
-  document.getElementById('form-comentario').addEventListener('submit', async function(e){
+// --- COMENTÁRIOS FIREBASE: apenas envio, sem leitura automática ---
+(function(){
+  const form = document.getElementById('form-comentario');
+  if (!form) return;
+  form.addEventListener('submit', async function(e){
     e.preventDefault();
     const nome = document.getElementById('nome-comentario').value.trim();
     const texto = document.getElementById('texto-comentario').value.trim();
     if (!nome || !texto) return;
-    await db.collection('comentarios').add({
-      nome,
-      texto,
-      data: new Date().toISOString()
-    });
-    document.getElementById('msg-comentario').style.display = 'block';
-    this.reset();
-    setTimeout(()=>{
-      document.getElementById('msg-comentario').style.display = 'none';
-    }, 1500);
-    carregarComentarios();
+    try {
+      await db.collection('comentarios').add({
+        nome,
+        texto,
+        data: new Date().toISOString(),
+        aprovado: false // só será exibido após aprovação manual
+      });
+      document.getElementById('msg-comentario').style.display = 'block';
+      form.reset();
+      setTimeout(()=>{
+        document.getElementById('msg-comentario').style.display = 'none';
+      }, 2000);
+    } catch (err) {
+      alert('Erro ao enviar comentário. Tente novamente mais tarde.');
+    }
   });
-
-  // Carregar últimos comentários
-  async function carregarComentarios() {
-    const ul = document.getElementById('lista-comentarios');
-    ul.innerHTML = '<li>Carregando comentários...</li>';
-    const snap = await db.collection('comentarios').orderBy('data','desc').limit(5).get();
-    ul.innerHTML = '';
-    snap.forEach(doc => {
-      const c = doc.data();
-      const li = document.createElement('li');
-      li.style = 'background:#fff3e6;border-radius:8px;padding:10px 14px;margin-bottom:8px;box-shadow:0 1px 4px #0001;';
-      li.innerHTML = `<strong>${c.nome}</strong> <span style='color:#888;font-size:0.9em;'>${new Date(c.data).toLocaleString('pt-BR')}</span><br>${c.texto}`;
-      ul.appendChild(li);
-    });
-    if (ul.innerHTML === '') ul.innerHTML = '<li>Seja o primeiro a comentar!</li>';
-  }
-  carregarComentarios();
 })();
 </script>
-
-<!-- Botões de login social -->
-<section id="conta-perfil" class="cart" style="display:none;">
-  <h2>Minha Conta</h2>
-  <button onclick="loginGoogle()" class="button" aria-label="Entrar com Google"><i class="fab fa-google"></i> Entrar com Google</button>
-  <button onclick="loginWhatsApp()" class="button" aria-label="Entrar com WhatsApp"><i class="fab fa-whatsapp"></i> Entrar com WhatsApp</button>
-  <div id="perfil-info">
-    <p>Nome: <span id="perfil-nome">Visitante</span></p>
-    <h3>Histórico de Pedidos</h3>
-    <ul id="perfil-historico"></ul>
-  </div>
-</section>
 
 <!-- Dados Estruturados: Produtos -->
   <script type="application/ld+json">

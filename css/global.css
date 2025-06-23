@@ -3,16 +3,16 @@
 
 /* Paleta de Cores Principal */
 :root {
-  --background-color: #F8E8D1;      /* Areia quente */
-  --text-color: #3A1E10;            /* Marrom escuro */
-  --primary-color: #DA7635;         /* Laranja queimado */
-  --highlight-color: #B5542D;       /* Terracota */
-  --card-bg: #F5D7A0;               /* Creme dourado */
-  --card-border: #DA7635;           /* Laranja queimado */
-  --header-footer-bg: #B5542D;      /* Terracota */
-  --header-footer-text: #F8E8D1;    /* Areia quente */
-  --dark-background: #3A1E10;       /* Marrom escuro para modo escuro */
-  --dark-mode-text: #F8E8D1;        /* Areia quente para modo escuro */
+  --background-color: #F8E8D1;
+  --text-color: #3A1E10;
+  --primary-color: #DA7635;
+  --highlight-color: #B5542D;
+  --card-bg: #F5D7A0;
+  --card-border: #DA7635;
+  --header-footer-bg: #B5542D;
+  --header-footer-text: #F8E8D1;
+  --dark-background: #3A1E10;
+  --dark-mode-text: #F8E8D1;
 }
 
 /* Reset de Estilos */
@@ -52,13 +52,8 @@ a {
  transition: color 0.3s ease;
 }
 
-a:hover {
+a:hover, a:focus {
  color: var(--highlight-color);
-}
-
-a:focus {
-    outline: 2px solid var(--highlight-color);
-    color: var(--highlight-color);
 }
 
 /* Títulos */
@@ -98,7 +93,7 @@ body {
 }
 
 .close-cart-button:hover {
- color: var(--text-color);
+ color: var(--primary-color);
 }
 
 .close-cart-button i {
