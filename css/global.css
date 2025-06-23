@@ -478,8 +478,39 @@ header, footer {
     max-width: 95vw;
   }
 }
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Foco visível */
+:focus {
+  outline: 2px solid #D4A373;
+  outline-offset: 2px;
+}
+
+/* Dark mode automático */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #181818;
+    color: #f5f5f5;
   }
-  .onde-mapa-foto {
-    max-width: 95vw;
+  .site-header, .cart-menu, .container-coxinhas, .site-footer {
+    background: #222 !important;
+    color: #f5f5f5 !important;
   }
+  .button, button, .cta {
+    background: #D4A373 !important;
+    color: #fff !important;
+  }
+}
+
+/* Animações suaves */
+.button, .cta, .cart-menu, .carousel-slide, .promotion-item, .bebida-item {
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+.button:active, .cta:active {
+  transform: scale(0.97);
 }
