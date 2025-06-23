@@ -85,7 +85,8 @@
       <nav class="main-nav" aria-label="Navegação principal">
         <ul class="nav-links main-nav-links">
           <li><a href="#tipos" tabindex="0" title="Ver cardápio completo">Cardápio</a></li>
-          <li><a href="#promotions" tabindex="0" title="Ver promoções">Promoções</a></li>
+          <li><a href="#promotions" tabindex="0" title="Ver promoções">Promoções</a>
+          </li>
           <li><a href="#" onclick="toggleCart();return false;" tabindex="0" title="Abrir carrinho">Carrinho</a></li>
           <li><a href="#fidelidade" tabindex="0" title="Ver programa de fidelidade">Fidelidade</a></li>
           <li><a href="#sugestoes" tabindex="0" title="Enviar sugestões">Sugestões</a></li>
@@ -575,6 +576,30 @@
 
 <!-- Scripts -->
 <script src="script.js" defer></script>
+<script>
+// Função para montar e enviar o pedido via WhatsApp
+function finalizarPedido() {
+    // Obtenha os itens do carrinho
+    const cartItems = document.querySelectorAll('#cart-items li');
+    if (cartItems.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
+    }
+    let mensagem = '*Pedido Explosão Crocante*%0A';
+    mensagem += 'Itens:%0A';
+    cartItems.forEach(item => {
+        mensagem += '- ' + item.textContent.replace('Remover', '').trim() + '%0A';
+    });
+    const total = document.getElementById('cart-total').textContent.trim();
+    mensagem += '%0ATotal: ' + total + '%0A';
+    mensagem += '%0AQuero finalizar meu pedido!';
+
+    // Número do WhatsApp (com DDI e DDD)
+    const numero = '5517996780618';
+    const url = `https://wa.me/${numero}?text=${mensagem}`;
+    window.open(url, '_blank');
+}
+</script>
 
 </body>
 </html>
