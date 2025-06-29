@@ -432,23 +432,34 @@ document.addEventListener("DOMContentLoaded", () => {
         carouselModule.update('sabores');
     };
 
-    const finalizarPedido = () => {
+    const finalizarPedido = async () => {
         if (cartModule.cart.length === 0) {
             alert("Seu carrinho está vazio!");
             return;
         }
-        if (entregaRadio && entregaRadio.checked) {
-            if (!document.getElementById('cep').value.trim() || !document.getElementById('rua').value.trim() || !document.getElementById('numero').value.trim()) {
-                alert('Por favor, preencha o endereço completo para entrega.');
-                return;
+        // Monta o objeto do pedido
+        const pedido = {
+            itens: cartModule.cart.map(item => ({ nome: item.name, preco: item.price })),
+            total: cartModule.total(),
+            data: new Date().toISOString()
+        };
+        try {
+            const response = await fetch('http://localhost:3000/api/pedidos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(pedido)
+            });
+            if (response.ok) {
+                alert('Pedido enviado com sucesso!');
+                cartModule.cart.length = 0;
+                cartModule.updateCartDisplay();
+                suggestionModule.exibirSugestoesPersonalizadas();
+            } else {
+                alert('Erro ao enviar pedido. Tente novamente.');
             }
+        } catch (error) {
+            alert('Erro de conexão com o servidor.');
         }
-        const totalCompra = cartModule.total();
-        loyaltyModule.adicionarPontos(totalCompra);
-        alert('Pedido finalizado com sucesso!');
-        cartModule.cart.length = 0;
-        cartModule.updateCartDisplay();
-        suggestionModule.exibirSugestoesPersonalizadas();
     };
 
     if (tiposCarrossel) {

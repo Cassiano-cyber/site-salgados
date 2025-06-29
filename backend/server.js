@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
+const db = require('./firebase');
+
 let clientes = [];
 let transacoes = [];
 
@@ -27,6 +29,19 @@ app.post('/api/fidelidade/resgatar', (req, res) => {
         res.json({ sucesso: true });
     } else {
         res.status(400).json({ erro: 'Pontos insuficientes' });
+    }
+});
+
+app.post('/api/pedidos', async (req, res) => {
+    try {
+        const pedido = req.body;
+        const docRef = await db.collection('pedidos').add({
+            ...pedido,
+            criadoEm: new Date()
+        });
+        res.status(201).json({ id: docRef.id, ...pedido });
+    } catch (error) {
+        res.status(500).json({ erro: 'Erro ao registrar pedido', detalhes: error.message });
     }
 });
 
