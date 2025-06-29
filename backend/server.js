@@ -1,5 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+app.use(cors({
+  origin: 'https://cassiano-cyber.github.io'
+}));
 app.use(express.json());
 
 const db = require('./firebase');
